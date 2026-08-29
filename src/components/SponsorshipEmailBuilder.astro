@@ -1,0 +1,432 @@
+---
+// Component: SponsorshipEmailBuilder.astro
+// Interactive email generator & copyable template for CNCF Peshawar sponsors
+---
+
+<section id="email-builder" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__num">03 // INTAKE & CONTACT</span>
+      <h2 class="section-header__title">Sponsorship Inquiry Generator.</h2>
+      <p class="section-header__desc">
+        Fill out the details below to generate a pre-formatted sponsorship proposal, or copy the template directly into your email client.
+      </p>
+    </div>
+
+    <div class="builder-grid">
+      <!-- Form Controls -->
+      <div class="builder-form-card">
+        <h3 class="card-title">1. Organization & Tier Details</h3>
+        
+        <form id="sponsor-form" class="form-stack" onsubmit="return false;">
+          <div class="form-group">
+            <label for="org-name">Organization / Company Name <span class="required">*</span></label>
+            <input 
+              type="text" 
+              id="org-name" 
+              placeholder="e.g. Acme Cloud Corp / Peshawar University" 
+              class="form-input" 
+              required 
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact-name">Contact Person & Role <span class="required">*</span></label>
+              <input 
+                type="text" 
+                id="contact-name" 
+                placeholder="e.g. John Doe, VP Engineering" 
+                class="form-input" 
+                required 
+              />
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Work Email <span class="required">*</span></label>
+              <input 
+                type="email" 
+                id="contact-email" 
+                placeholder="e.g. contact@acme.com" 
+                class="form-input" 
+                required 
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tier-select">Preferred Sponsorship Tier <span class="required">*</span></label>
+              <select id="tier-select" class="form-select">
+                <option value="Venue Host Partner (In-Kind / Logistics)">Venue Host Partner (In-Kind / Logistics)</option>
+                <option value="Refreshment Partner (Community Hospitality)" selected>Refreshment Partner (Community Hospitality)</option>
+                <option value="Community Swag Partner (Merchandise / Vouchers)">Community Swag Partner (Merchandise / Vouchers)</option>
+                <option value="Annual Ecosystem Partner (Strategic Year-Round)">Annual Ecosystem Partner (Strategic Year-Round)</option>
+                <option value="Custom In-Kind / Technical Partner">Custom In-Kind / Technical Partner</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="timeline-select">Target Meetup / Timing <span class="required">*</span></label>
+              <select id="timeline-select" class="form-select">
+                <option value="CNCF Peshawar Genesis (Sep 4, 2026)">CNCF Peshawar Genesis (Sep 4, 2026)</option>
+                <option value="Upcoming 2026 Meetup Series">Upcoming 2026 Meetup Series</option>
+                <option value="Annual 2026-2027 Ongoing Partnership">Annual 2026-2027 Ongoing Partnership</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="org-website">Website & Logo Asset URL</label>
+            <input 
+              type="url" 
+              id="org-website" 
+              placeholder="e.g. https://acme.com (or logo asset link)" 
+              class="form-input" 
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="scope-notes">Partnership Scope / Special Requests</label>
+            <textarea 
+              id="scope-notes" 
+              rows="3" 
+              placeholder="e.g. We would like to provide venue space for 150 attendees and have a small networking table at the entrance."
+              class="form-textarea"
+            ></textarea>
+          </div>
+        </form>
+      </div>
+
+      <!-- Live Email Structure Preview -->
+      <div class="builder-preview-card">
+        <div class="preview-header">
+          <div class="preview-title-box">
+            <span class="preview-dot"></span>
+            <span class="preview-label">Live Email Structure Preview</span>
+          </div>
+          <span class="recipient-tag">To: cncfpeshawar@gmail.com</span>
+        </div>
+
+        <div class="preview-body">
+          <pre id="email-preview-text" class="email-preview-content"></pre>
+        </div>
+
+        <div class="preview-actions">
+          <a 
+            id="send-mailto-btn" 
+            href="mailto:cncfpeshawar@gmail.com" 
+            class="btn btn--accent"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span>Open in Email App</span>
+          </a>
+
+          <button 
+            type="button" 
+            id="copy-template-btn" 
+            class="btn btn--secondary"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="copy-btn-text" aria-live="polite">Copy Email Text</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initEmailBuilder() {
+    const orgInput = document.getElementById('org-name') as HTMLInputElement | null;
+    const contactInput = document.getElementById('contact-name') as HTMLInputElement | null;
+    const emailInput = document.getElementById('contact-email') as HTMLInputElement | null;
+    const tierSelect = document.getElementById('tier-select') as HTMLSelectElement | null;
+    const timelineSelect = document.getElementById('timeline-select') as HTMLSelectElement | null;
+    const websiteInput = document.getElementById('org-website') as HTMLInputElement | null;
+    const notesInput = document.getElementById('scope-notes') as HTMLTextAreaElement | null;
+
+    const previewEl = document.getElementById('email-preview-text');
+    const mailtoBtn = document.getElementById('send-mailto-btn') as HTMLAnchorElement | null;
+    const copyBtn = document.getElementById('copy-template-btn');
+    const copyText = document.getElementById('copy-btn-text');
+
+    if (!previewEl || !mailtoBtn) return;
+
+    let copyFeedbackTimeout: number | undefined;
+
+    const sanitizeSingleLine = (val: string) => val.replace(/[\r\n]+/g, ' ').trim();
+
+    function buildEmailContent() {
+      const org = sanitizeSingleLine(orgInput?.value || '') || '[Organization / Company Name]';
+      const contact = sanitizeSingleLine(contactInput?.value || '') || '[Contact Person, Role]';
+      const email = sanitizeSingleLine(emailInput?.value || '') || '[Contact Email Address]';
+      const tier = tierSelect?.value || 'Refreshment Partner (Community Hospitality)';
+      const timeline = timelineSelect?.value || 'CNCF Peshawar Genesis (Sep 4, 2026)';
+      const website = sanitizeSingleLine(websiteInput?.value || '') || '[Website URL / Logo Asset Link]';
+      const notes = notesInput?.value.trim() || '[Details on venue capacity, refreshment contribution, or swag vouchers]';
+
+      const subject = `CNCF Peshawar Sponsorship Inquiry — ${org}`;
+
+      const body = `Hi Cloud Native Peshawar Organizers,
+
+We would like to explore partnering with CNCF Peshawar to support free, high-quality cloud native and open-source education in Khyber Pakhtunkhwa.
+
+Organization Overview:
+- Organization / Company: ${org}
+- Primary Contact: ${contact}
+- Contact Email: ${email}
+- Website / Logo Link: ${website}
+
+Sponsorship Interest:
+- Proposed Tier: ${tier}
+- Target Event / Timeline: ${timeline}
+- Support Scope / Logistics:
+  ${notes}
+
+We look forward to discussing the next steps and collaborating with the local cloud native community.
+
+Best regards,
+${contact}
+${org}`;
+
+      if (previewEl) {
+        previewEl.textContent = `Subject: ${subject}\n\n${body}`;
+      }
+
+      const mailtoUrl = `mailto:cncfpeshawar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (mailtoBtn) {
+        mailtoBtn.href = mailtoUrl;
+      }
+
+      return { subject, body };
+    }
+
+    // Attach real-time listeners
+    const inputs = [orgInput, contactInput, emailInput, tierSelect, timelineSelect, websiteInput, notesInput];
+    inputs.forEach(input => {
+      if (input) {
+        input.addEventListener('input', buildEmailContent);
+        input.addEventListener('change', buildEmailContent);
+      }
+    });
+
+    // Copy to clipboard handler
+    if (copyBtn && copyText) {
+      copyBtn.addEventListener('click', async () => {
+        const { subject, body } = buildEmailContent();
+        const fullContent = `To: cncfpeshawar@gmail.com\nSubject: ${subject}\n\n${body}`;
+        
+        if (copyFeedbackTimeout) clearTimeout(copyFeedbackTimeout);
+
+        try {
+          await navigator.clipboard.writeText(fullContent);
+          copyText.textContent = 'Copied to Clipboard! ✓';
+          copyFeedbackTimeout = window.setTimeout(() => {
+            if (copyText) copyText.textContent = 'Copy Email Text';
+          }, 2500);
+        } catch {
+          if (previewEl) {
+            const range = document.createRange();
+            range.selectNodeContents(previewEl);
+            const selection = window.getSelection();
+            selection?.removeAllRanges();
+            selection?.addRange(range);
+          }
+          copyText.textContent = 'Selected (Press Ctrl+C)';
+          copyFeedbackTimeout = window.setTimeout(() => {
+            if (copyText) copyText.textContent = 'Copy Email Text';
+          }, 3000);
+        }
+      });
+    }
+
+    // Check URL parameters (e.g. from tier cards ?tier=...)
+    const params = new URLSearchParams(window.location.search);
+    const tierParam = params.get('tier');
+    if (tierParam && tierSelect) {
+      for (let i = 0; i < tierSelect.options.length; i++) {
+        if (tierSelect.options[i].value.toLowerCase().includes(tierParam.toLowerCase())) {
+          tierSelect.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    // Initial render
+    buildEmailContent();
+  }
+
+  // Support both initial load and Astro page transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEmailBuilder);
+  } else {
+    initEmailBuilder();
+  }
+  document.addEventListener('astro:page-load', initEmailBuilder);
+</script>
+
+<style>
+  .builder-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .builder-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .builder-form-card,
+  .builder-preview-card {
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+  }
+
+  .card-title {
+    font-size: var(--font-size-xl);
+    color: var(--color-ink);
+    margin-bottom: var(--space-lg);
+    font-family: var(--font-display);
+  }
+
+  .form-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 640px) {
+    .form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+
+  .form-group label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-ink);
+  }
+
+  .required {
+    color: var(--color-accent);
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink);
+    background-color: var(--color-paper-card-hover);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .form-input:focus-visible,
+  .form-select:focus-visible,
+  .form-textarea:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 1px;
+    border-color: var(--color-accent);
+  }
+
+  .preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .preview-title-box {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .preview-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-signal-green);
+    box-shadow: 0 0 8px var(--color-signal-green);
+  }
+
+  .preview-label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-ink);
+    text-transform: uppercase;
+  }
+
+  .recipient-tag {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-muted);
+    background-color: var(--color-paper-card-hover);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+  }
+
+  .preview-body {
+    background-color: var(--color-paper);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+    max-height: 420px;
+    overflow-y: auto;
+  }
+
+  .email-preview-content {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 0;
+  }
+
+  .preview-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .preview-actions .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+</style>

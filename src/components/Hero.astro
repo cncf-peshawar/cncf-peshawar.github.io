@@ -1,0 +1,285 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section class="hero section">
+  <div class="container hero__grid">
+    <!-- Left Column: Mission & Core Actions -->
+    <div class="hero__content">
+      <div class="hero__badge-row">
+        <span class="badge badge--live">Official CNCF Chapter</span>
+        <span class="badge">Peshawar, Pakistan</span>
+      </div>
+
+      <h1 class="hero__title">
+        Building Peshawar's Cloud Native Future.
+      </h1>
+
+      <p class="hero__lede">
+        Empowering local engineers, developers, and students through hands-on Kubernetes, distributed systems, and open-source collaboration in Khyber Pakhtunkhwa.
+      </p>
+
+      <!-- Primary Action Buttons -->
+      <div class="hero__actions">
+        <a 
+          href="https://ocgroups.dev/cncf/group/6vwk2n4" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn--accent"
+        >
+          <span>Join on Open Community Groups</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+        <a href={`${base}/events`} class="btn btn--secondary">
+          <span>Explore Meetups</span>
+        </a>
+
+        <a href={`${base}/sponsors`} class="btn btn--secondary">
+          <span>Sponsor Us</span>
+        </a>
+      </div>
+
+      <!-- Honest Proof Note -->
+      <div class="hero__proof">
+        <span class="hero__proof-dot"></span>
+        <p class="hero__proof-text">
+          <strong>100% Free & Open Access</strong> · Powered by the Cloud Native Computing Foundation & community sponsors.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Column: Focus Areas & Structure -->
+    <div class="hero__visual">
+      <div class="terminal-card">
+        <!-- Card Header (Hallmark Compliant) -->
+        <div class="terminal-card__header">
+          <span class="badge badge--live">CHAPTER CHARTER</span>
+          <span class="terminal-card__title">cncf-peshawar.github.io</span>
+        </div>
+
+        <!-- Card Body -->
+        <div class="terminal-card__body">
+          <div class="charter-item">
+            <span class="charter-label">COMMUNITY GROUP:</span>
+            <span class="charter-val">Cloud Native Peshawar (CNCF)</span>
+          </div>
+          <div class="charter-item">
+            <span class="charter-label">REGION:</span>
+            <span class="charter-val">Peshawar, Khyber Pakhtunkhwa</span>
+          </div>
+          <div class="charter-item">
+            <span class="charter-label">PLATFORM:</span>
+            <span class="charter-val">Open Community Groups (OCG)</span>
+          </div>
+          <div class="charter-item">
+            <span class="charter-label">INAUGURAL EVENT:</span>
+            <span class="charter-val charter-val--active">
+              <span class="live-dot"></span> Sep 4, 2026 @ NIC Peshawar
+            </span>
+          </div>
+
+          <div class="terminal-card__divider"></div>
+
+          <h3 class="charter-section-title">CORE TECHNICAL FOCUS</h3>
+          <div class="tech-chips">
+            <span class="tech-chip">Kubernetes</span>
+            <span class="tech-chip">Containers</span>
+            <span class="tech-chip">Microservices</span>
+            <span class="tech-chip">DevOps</span>
+            <span class="tech-chip">MLOps</span>
+            <span class="tech-chip">Agentic AI</span>
+            <span class="tech-chip">Open Source</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-2xl);
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 992px) {
+    .hero__grid {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  .hero__badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero__title {
+    font-size: var(--font-size-5xl);
+    margin-bottom: var(--space-md);
+    color: var(--color-ink);
+  }
+
+  .hero__lede {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-ink-muted);
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero__proof {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    background-color: var(--color-paper-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    width: fit-content;
+  }
+
+  .hero__proof-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-signal-green);
+    flex-shrink: 0;
+  }
+
+  .hero__proof-text {
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-muted);
+    margin: 0;
+  }
+
+  .hero__proof-text strong {
+    color: var(--color-ink);
+  }
+
+  /* Terminal / Info Card Surface */
+  .terminal-card {
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+
+  .terminal-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-xs) var(--space-md);
+    background-color: var(--color-paper-subtle);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .terminal-card__title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-muted);
+  }
+
+  .terminal-card__body {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .charter-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  @media (min-width: 480px) {
+    .charter-item {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+  }
+
+  .charter-label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+    letter-spacing: 0.04em;
+  }
+
+  .charter-val {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-ink);
+  }
+
+  .charter-val--active {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    color: var(--color-accent);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .live-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-signal-green);
+    animation: pulse-live 2s infinite ease-in-out;
+  }
+
+  .terminal-card__divider {
+    height: 1px;
+    background-color: var(--color-border);
+    margin-block: var(--space-xs);
+  }
+
+  .charter-section-title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-ink-subtle);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-3xs);
+  }
+
+  .tech-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+  }
+
+  .tech-chip {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    padding: 0.2rem 0.5rem;
+    background-color: var(--color-paper-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    color: var(--color-ink);
+  }
+</style>

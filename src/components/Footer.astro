@@ -1,0 +1,295 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <!-- Ft5 Statement Archetype -->
+    <div class="footer__statement">
+      <h2 class="footer__headline">
+        Building Peshawar's Cloud Native Future.
+      </h2>
+      <p class="footer__subheadline">
+        Cloud Native Peshawar · Official Cloud Native Computing Foundation Community Group.
+      </p>
+    </div>
+
+    <div class="footer__grid">
+      <!-- Brand & Mission Column -->
+      <div class="footer__col footer__col--brand">
+        <div class="footer__brand">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M12 22V12" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 7L12 12L2 7" stroke="currentColor" stroke-width="2"/>
+            <circle cx="12" cy="12" r="3" fill="var(--color-accent)"/>
+          </svg>
+          <span class="footer__brand-title">Cloud Native Peshawar</span>
+        </div>
+        <p class="footer__desc">
+          Official CNCF chapter in Pakistan advancing Kubernetes, distributed systems, DevOps, MLOps, and Agentic AI.
+        </p>
+        <div class="footer__status">
+          <span class="badge badge--live">Official CNCF Chapter</span>
+          <span class="badge">100% Free</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="footer__col">
+        <h3 class="footer__heading">Community</h3>
+        <ul class="footer__links" role="list">
+          <li><a href={`${base}/events`}>Events & Meetups</a></li>
+          <li><a href={`${base}/speak`}>Call for Speakers (CFP)</a></li>
+          <li><a href={`${base}/sponsors`}>Sponsorship & Impact</a></li>
+          <li><a href={`${base}/team`}>Organizers & Team</a></li>
+          <li><a href={`${base}/blog`}>Blog & Recaps</a></li>
+          <li><a href={`${base}/code-of-conduct`}>Code of Conduct</a></li>
+        </ul>
+      </div>
+
+      <!-- Ecosystem Links -->
+      <div class="footer__col">
+        <h3 class="footer__heading">Community Channels</h3>
+        <ul class="footer__links" role="list">
+          <li><a href="https://ocgroups.dev/cncf/group/6vwk2n4" target="_blank" rel="noopener noreferrer">Open Community Groups (OCG) ↗</a></li>
+          <li><a href="https://slack.cncf.io" target="_blank" rel="noopener noreferrer">CNCF Slack (#peshawar) ↗</a></li>
+          <li><a href="mailto:cncfpeshawar@gmail.com?subject=Join%20WhatsApp%20Community">Request WhatsApp Group Invite ↗</a></li>
+          <li><a href="https://github.com/Cloud-Native-Peshawar" target="_blank" rel="noopener noreferrer">GitHub Organization ↗</a></li>
+          <li><a href="https://www.linkedin.com/company/cloud-native-cncf-peshawar/" target="_blank" rel="noopener noreferrer">LinkedIn Company ↗</a></li>
+          <li><a href="https://www.instagram.com/cncfpeshawar/" target="_blank" rel="noopener noreferrer">Instagram (@cncfpeshawar) ↗</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Column -->
+      <div class="footer__col">
+        <h3 class="footer__heading">Contact & Connect</h3>
+        <p class="footer__connect-text">
+          Have questions, want to partner, or submit a talk?
+        </p>
+        <a href="mailto:cncfpeshawar@gmail.com" class="footer__email-link">
+          cncfpeshawar@gmail.com
+        </a>
+        <div class="footer__socials">
+          <a href="https://ocgroups.dev/cncf/group/6vwk2n4" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Open Community Groups">
+            OCG
+          </a>
+          <a href="https://slack.cncf.io" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="CNCF Slack">
+            Slack
+          </a>
+          <a href="https://github.com/Cloud-Native-Peshawar" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/company/cloud-native-cncf-peshawar/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+            LinkedIn
+          </a>
+          <a href="https://www.instagram.com/cncfpeshawar/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+            Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Hairline Bar -->
+    <div class="footer__bottom">
+      <div class="footer__legal">
+        <p>
+          &copy; {currentYear} Cloud Native Peshawar. CNCF® and Linux Foundation® are registered trademarks of The Linux Foundation.
+        </p>
+      </div>
+
+      <div class="footer__meta">
+        <a href={`${base}/admin/`} class="footer__admin-link" title="Open Headless CMS">
+          <span>CMS Portal</span>
+        </a>
+        <span class="footer__meta-dot">·</span>
+        <a href="https://github.com/Cloud-Native-Peshawar/cncf-peshawar-website" target="_blank" rel="noopener noreferrer" class="footer__admin-link">
+          <span>GitHub Repo</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-paper-subtle);
+    border-top: 1px solid var(--color-border);
+    padding-top: clamp(var(--space-2xl), 8vw, var(--space-3xl));
+    padding-bottom: var(--space-xl);
+    margin-top: auto;
+  }
+
+  .footer__statement {
+    padding-bottom: var(--space-2xl);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .footer__headline {
+    font-size: clamp(1.75rem, 3.5vw + 0.5rem, 2.75rem);
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-xs);
+  }
+
+  .footer__subheadline {
+    font-size: var(--font-size-base);
+    color: var(--color-ink-muted);
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+  }
+
+  @media (min-width: 600px) {
+    .footer__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .footer__grid {
+      grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+      gap: var(--space-2xl);
+    }
+  }
+
+  .footer__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-ink);
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer__brand-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .footer__desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-md);
+  }
+
+  .footer__status {
+    display: flex;
+    gap: var(--space-2xs);
+  }
+
+  .footer__heading {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-ink);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-md);
+  }
+
+  .footer__links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .footer__links a {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .footer__links a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer__connect-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    margin-bottom: var(--space-xs);
+    line-height: var(--line-height-normal);
+  }
+
+  .footer__email-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .footer__email-link:hover {
+    text-decoration: underline;
+  }
+
+  .footer__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+  }
+
+  .social-btn {
+    padding: 0.3rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    background-color: var(--color-paper-card);
+    color: var(--color-ink);
+  }
+
+  .social-btn:hover {
+    border-color: var(--color-border-hover);
+    color: var(--color-accent);
+  }
+
+  .footer__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+  }
+
+  @media (min-width: 768px) {
+    .footer__bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .footer__legal p {
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+  }
+
+  .footer__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .footer__meta-dot {
+    color: var(--color-border);
+  }
+
+  .footer__admin-link {
+    color: var(--color-ink-muted);
+  }
+
+  .footer__admin-link:hover {
+    color: var(--color-accent);
+  }
+</style>

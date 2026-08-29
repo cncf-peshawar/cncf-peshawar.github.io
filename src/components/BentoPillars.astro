@@ -1,0 +1,176 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section class="section">
+  <div class="container">
+    <!-- S1 Left-Margin Numbered Section Header -->
+    <div class="section-header">
+      <span class="section-header__num">01 // PILLARS</span>
+      <div>
+        <h2 class="section-header__title">How We Empower the Community.</h2>
+        <p class="section-header__desc">
+          Four foundational pillars driving cloud native engineering excellence in Peshawar.
+        </p>
+      </div>
+    </div>
+
+    <!-- F1 Bento Grid -->
+    <div class="bento-grid">
+      <!-- Tile 1: 2-column span on desktop -->
+      <div class="bento-tile bento-tile--span2">
+        <div class="bento-tile__badge">Architecture & Infrastructure</div>
+        <h3 class="bento-tile__title">Production-Grade Deep Dives</h3>
+        <p class="bento-tile__desc">
+          We skip generic high-level slides. Every session examines real production challenges—from Kubernetes control-plane failure modes and eBPF kernel networking to GitOps workflows with ArgoCD and distributed observability with OpenTelemetry.
+        </p>
+        <div class="bento-tile__chips">
+          <span>Kubernetes</span>
+          <span>eBPF</span>
+          <span>ArgoCD</span>
+          <span>Envoy</span>
+          <span>OpenTelemetry</span>
+        </div>
+      </div>
+
+      <!-- Tile 2: 1-column span -->
+      <div class="bento-tile">
+        <div class="bento-tile__badge">Interactive Practice</div>
+        <h3 class="bento-tile__title">Hands-On Labs</h3>
+        <p class="bento-tile__desc">
+          Attendees bring their laptops. We provide guided step-by-step lab repositories to spin up local Kind/k3s clusters, deploy microservices, and inspect network traffic live.
+        </p>
+        <a href="https://github.com/Cloud-Native-Peshawar" target="_blank" rel="noopener noreferrer" class="bento-tile__link">
+          <span>Explore Lab Repositories</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Tile 3: 1-column span -->
+      <div class="bento-tile">
+        <div class="bento-tile__badge">Speaker Platform</div>
+        <h3 class="bento-tile__title">Mentorship & CFP</h3>
+        <p class="bento-tile__desc">
+          Never given a talk before? Our organizers work 1-on-1 with local engineers on topic selection, slide architecture, and rehearsal coaching.
+        </p>
+        <a href={`${base}/speak`} class="bento-tile__link">
+          <span>Submit Talk Proposal</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Tile 4: 2-column span on desktop -->
+      <div class="bento-tile bento-tile--span2">
+        <div class="bento-tile__badge">Industry & Talent</div>
+        <h3 class="bento-tile__title">Sponsor Visibility & Talent Bridge</h3>
+        <p class="bento-tile__desc">
+          We connect regional software houses, tech incubators, and global sponsors with the most motivated cloud architects, SREs, and student developers in Khyber Pakhtunkhwa.
+        </p>
+        <div class="bento-tile__actions">
+          <a href={`${base}/sponsors`} class="btn btn--secondary btn--sm">
+            <span>View Sponsorship Prospectus</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+
+    .bento-tile--span2 {
+      grid-column: span 2;
+    }
+  }
+
+  .bento-tile {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-xl);
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+  }
+
+  .bento-tile:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .bento-tile__badge {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .bento-tile__title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-xs);
+    color: var(--color-ink);
+  }
+
+  .bento-tile__desc {
+    font-size: var(--font-size-base);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-lg);
+    flex-grow: 1;
+  }
+
+  .bento-tile__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .bento-tile__chips span {
+    padding: 0.25rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    background-color: var(--color-paper-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    color: var(--color-ink);
+  }
+
+  .bento-tile__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    margin-top: auto;
+  }
+
+  .bento-tile__link:hover {
+    text-decoration: underline;
+  }
+
+  .btn--sm {
+    padding: 0.45rem 0.9rem;
+    font-size: var(--font-size-xs);
+  }
+</style>

@@ -1,0 +1,369 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const navLinks = [
+  { name: 'Events', href: `${base}/events` },
+  { name: 'Speakers & CFP', href: `${base}/speak` },
+  { name: 'Sponsors & Impact', href: `${base}/sponsors` },
+  { name: 'Team', href: `${base}/team` },
+  { name: 'Blog', href: `${base}/blog` },
+  { name: 'Code of Conduct', href: `${base}/code-of-conduct` },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="nav-wrapper">
+  <nav class="nav" aria-label="Main Navigation">
+    <!-- Brand / Logo -->
+    <a href={`${base}/`} class="nav__brand" aria-label="CNCF Peshawar Home">
+      <div class="nav__logo-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M12 22V12" stroke="currentColor" stroke-width="2"/>
+          <path d="M22 7L12 12L2 7" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="12" r="3" fill="var(--color-accent)"/>
+        </svg>
+      </div>
+      <div class="nav__brand-text">
+        <span class="nav__brand-title">CNCF</span>
+        <span class="nav__brand-subtitle">Peshawar</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <ul class="nav__menu" role="list">
+      {navLinks.map((link) => {
+        const isActive = currentPath === link.href || (link.href !== `${base}/` && currentPath.startsWith(link.href));
+        return (
+          <li class="nav__item">
+            <a 
+              href={link.href} 
+              class={`nav__link ${isActive ? 'is-active' : ''}`}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {link.name}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+
+    <!-- Action Group / OCG CTA -->
+    <div class="nav__actions">
+      <a 
+        href="https://ocgroups.dev/cncf/group/6vwk2n4" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="btn btn--accent nav__cta"
+      >
+        <span class="nav__cta-dot"></span>
+        <span>Join on OCG</span>
+      </a>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button 
+        id="mobile-nav-toggle" 
+        class="nav__toggle" 
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav-drawer"
+      >
+        <svg class="nav__toggle-icon open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg class="nav__toggle-icon close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-nav-drawer" class="nav-drawer" aria-hidden="true">
+    <ul class="nav-drawer__list" role="list">
+      {navLinks.map((link) => {
+        const isActive = currentPath === link.href || (link.href !== `${base}/` && currentPath.startsWith(link.href));
+        return (
+          <li>
+            <a 
+              href={link.href} 
+              class={`nav-drawer__link ${isActive ? 'is-active' : ''}`}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {link.name}
+            </a>
+          </li>
+        );
+      })}
+      <li class="nav-drawer__action">
+        <a 
+          href="https://ocgroups.dev/cncf/group/6vwk2n4" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn--accent"
+          style="width: 100%;"
+        >
+          Join Chapter on Open Community Groups (OCG)
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<style>
+  .nav-wrapper {
+    position: sticky;
+    top: var(--space-xs);
+    z-index: 100;
+    padding-inline: clamp(var(--space-sm), 4vw, var(--space-xl));
+    margin-bottom: var(--space-lg);
+  }
+
+  .nav {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1rem;
+    background-color: var(--color-paper-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .nav__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-ink);
+  }
+
+  .nav__logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+  }
+
+  .nav__brand-text {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-base);
+    letter-spacing: -0.02em;
+  }
+
+  .nav__brand-title {
+    color: var(--color-ink);
+  }
+
+  .nav__brand-subtitle {
+    color: var(--color-accent);
+  }
+
+  .nav__menu {
+    display: none;
+    list-style: none;
+    align-items: center;
+    gap: var(--space-2xs);
+  }
+
+  @media (min-width: 860px) {
+    .nav__menu {
+      display: flex;
+    }
+  }
+
+  .nav__link {
+    display: inline-block;
+    padding: 0.4rem 0.75rem;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-ink-muted);
+    border-radius: var(--radius-full);
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+  }
+
+  .nav__link:hover {
+    color: var(--color-ink);
+    background-color: var(--color-paper-subtle);
+  }
+
+  .nav__link.is-active {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-semibold);
+    background-color: var(--color-accent-subtle);
+  }
+
+  .nav__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .nav__cta {
+    font-size: var(--font-size-xs);
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--radius-full);
+  }
+
+  .nav__cta-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-signal-green);
+  }
+
+  .nav__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    background-color: transparent;
+    color: var(--color-ink);
+    cursor: pointer;
+  }
+
+  @media (min-width: 860px) {
+    .nav__toggle {
+      display: none;
+    }
+  }
+
+  .nav__toggle-icon.close {
+    display: none;
+  }
+
+  .nav-drawer {
+    display: none;
+    position: absolute;
+    top: calc(100% + var(--space-xs));
+    left: clamp(var(--space-sm), 4vw, var(--space-xl));
+    right: clamp(var(--space-sm), 4vw, var(--space-xl));
+    background-color: var(--color-paper-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .nav-drawer.is-open {
+    display: block;
+  }
+
+  .nav-wrapper:has(.nav-drawer.is-open) .nav__toggle-icon.open {
+    display: none;
+  }
+
+  .nav-wrapper:has(.nav-drawer.is-open) .nav__toggle-icon.close {
+    display: block;
+  }
+
+  .nav-drawer__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+
+  .nav-drawer__link {
+    display: block;
+    padding: 0.65rem var(--space-sm);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-ink);
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .nav-drawer__link:hover,
+  .nav-drawer__link.is-active {
+    background-color: var(--color-paper-subtle);
+    color: var(--color-accent);
+  }
+
+  .nav-drawer__action {
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+  }
+</style>
+
+<script>
+  function setupMobileNav() {
+    const toggleBtn = document.getElementById('mobile-nav-toggle');
+    const drawer = document.getElementById('mobile-nav-drawer');
+    const navWrapper = document.querySelector('.nav-wrapper');
+
+    if (!toggleBtn || !drawer) return;
+
+    function closeDrawer() {
+      if (!toggleBtn || !drawer) return;
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      drawer.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function openDrawer() {
+      if (!toggleBtn || !drawer) return;
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      drawer.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (drawer.classList.contains('is-open') && !navWrapper?.contains(e.target as Node)) {
+        closeDrawer();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+        closeDrawer();
+        toggleBtn.focus();
+      }
+    });
+
+    // Close on drawer link click
+    const drawerLinks = drawer.querySelectorAll('a');
+    drawerLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        closeDrawer();
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMobileNav);
+  } else {
+    setupMobileNav();
+  }
+  document.addEventListener('astro:page-load', setupMobileNav);
+</script>

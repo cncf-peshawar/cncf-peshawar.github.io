@@ -1,0 +1,268 @@
+---
+interface Props {
+  targetDate?: string;
+}
+
+const { targetDate = "2026-09-04T15:00:00+05:00" } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<div class="countdown-card" data-target={targetDate}>
+  <div class="countdown-card__header">
+    <div class="countdown-card__live-indicator">
+      <span class="live-dot"></span>
+      <span class="live-label">COUNTDOWN TO GENESIS</span>
+    </div>
+    <span class="countdown-card__date">SEP 4, 2026 · 03:00 PM PKT</span>
+  </div>
+
+  <div class="countdown-grid" id="genesis-countdown">
+    <div class="countdown-box">
+      <span class="countdown-num" id="cd-days">--</span>
+      <span class="countdown-unit">DAYS</span>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-box">
+      <span class="countdown-num" id="cd-hours">--</span>
+      <span class="countdown-unit">HOURS</span>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-box">
+      <span class="countdown-num" id="cd-mins">--</span>
+      <span class="countdown-unit">MINUTES</span>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-box">
+      <span class="countdown-num" id="cd-secs">--</span>
+      <span class="countdown-unit">SECONDS</span>
+    </div>
+  </div>
+
+  <div class="countdown-footer">
+    <div class="countdown-venue">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+      <span>NIC (National Incubation Center), South Canal Road, Peshawar</span>
+    </div>
+    <div class="countdown-actions">
+      <a 
+        href={`${base}/events/01-cncf-peshawar-genesis`} 
+        class="btn btn--secondary btn--sm"
+      >
+        <span>View Agenda →</span>
+      </a>
+      <a 
+        href="https://ocgroups.dev/cncf/group/6vwk2n4/event/z7sb6wa" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="btn btn--accent btn--sm"
+      >
+        <span>RSVP on OCG (Free)</span>
+      </a>
+      <a 
+        href="https://luma.com/shufbsm5" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="btn btn--secondary btn--sm"
+      >
+        <span>Luma ↗</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .countdown-card {
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    box-shadow: 0 0 24px var(--color-accent-subtle);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .countdown-card__header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .countdown-card__live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-signal-green);
+    animation: pulse-live 2s infinite ease-in-out;
+  }
+
+  .live-label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.05em;
+    color: var(--color-ink);
+  }
+
+  .countdown-card__date {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-muted);
+  }
+
+  .countdown-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(var(--space-2xs), 2vw, var(--space-md));
+    margin-block: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .countdown-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-paper-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: clamp(var(--space-xs), 2vw, var(--space-sm)) clamp(var(--space-sm), 3vw, var(--space-md));
+    min-width: clamp(54px, 12vw, 84px);
+  }
+
+  .countdown-num {
+    font-family: var(--font-mono);
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-ink);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .countdown-unit {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-ink-subtle);
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+  }
+
+  .countdown-sep {
+    font-family: var(--font-mono);
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+    line-height: 1;
+    user-select: none;
+  }
+
+  .countdown-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .countdown-venue {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-muted);
+  }
+
+  .countdown-venue svg {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .countdown-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+  }
+
+  .btn--sm {
+    padding: 0.35rem 0.75rem;
+    font-size: var(--font-size-xs);
+  }
+</style>
+
+<script>
+  function initCountdown() {
+    const container = document.querySelector('.countdown-card');
+    if (!container) return;
+
+    const targetDateStr = container.getAttribute('data-target') || '2026-09-04T15:00:00+05:00';
+    const targetTime = new Date(targetDateStr).getTime();
+
+    const daysEl = document.getElementById('cd-days');
+    const hoursEl = document.getElementById('cd-hours');
+    const minsEl = document.getElementById('cd-mins');
+    const secsEl = document.getElementById('cd-secs');
+    const liveLabel = container.querySelector('.live-label');
+
+    if (isNaN(targetTime)) {
+      if (daysEl) daysEl.innerText = '00';
+      if (hoursEl) hoursEl.innerText = '00';
+      if (minsEl) minsEl.innerText = '00';
+      if (secsEl) secsEl.innerText = '00';
+      return;
+    }
+
+    let intervalId: number | undefined;
+
+    function update() {
+      const now = new Date().getTime();
+      const diff = targetTime - now;
+
+      if (diff <= 0) {
+        if (daysEl) daysEl.innerText = '00';
+        if (hoursEl) hoursEl.innerText = '00';
+        if (minsEl) minsEl.innerText = '00';
+        if (secsEl) secsEl.innerText = '00';
+        if (liveLabel) liveLabel.textContent = 'EVENT IN PROGRESS / COMPLETED';
+        if (intervalId) clearInterval(intervalId);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      if (daysEl) daysEl.innerText = String(days).padStart(2, '0');
+      if (hoursEl) hoursEl.innerText = String(hours).padStart(2, '0');
+      if (minsEl) minsEl.innerText = String(mins).padStart(2, '0');
+      if (secsEl) secsEl.innerText = String(secs).padStart(2, '0');
+    }
+
+    update();
+    intervalId = window.setInterval(update, 1000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCountdown);
+  } else {
+    initCountdown();
+  }
+  document.addEventListener('astro:page-load', initCountdown);
+</script>

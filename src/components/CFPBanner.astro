@@ -1,0 +1,116 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section class="cfp-banner">
+  <div class="container">
+    <div class="cfp-box">
+      <div class="cfp-box__content">
+        <span class="cfp-box__tag">CALL FOR PROPOSALS (CFP) · ALWAYS OPEN</span>
+        <h2 class="cfp-box__title">Have a Cloud Native Story or Architecture to Share?</h2>
+        <p class="cfp-box__desc">
+          Whether you are a seasoned Kubernetes maintainer, a DevOps engineer troubleshooting production outages, or a student experimenting with WebAssembly and Linux containers—our stage is yours.
+        </p>
+        <div class="cfp-box__formats">
+          <span class="format-chip">15-Min Lightning Talk</span>
+          <span class="format-chip">40-Min Deep Dive Session</span>
+          <span class="format-chip">90-Min Hands-On Workshop</span>
+        </div>
+      </div>
+
+      <div class="cfp-box__action">
+        <a href={`${base}/speak`} class="btn btn--accent">
+          <span>Apply to Speak at CNCF Peshawar</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <span class="cfp-box__reassurance">First-time speakers receive 1-on-1 coaching & slide review.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cfp-banner {
+    padding-block: var(--space-2xl);
+  }
+
+  .cfp-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    padding: clamp(var(--space-lg), 5vw, var(--space-2xl));
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (min-width: 900px) {
+    .cfp-box {
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+    }
+  }
+
+  .cfp-box__tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-xs);
+  }
+
+  .cfp-box__title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-sm);
+    line-height: var(--line-height-snug);
+  }
+
+  .cfp-box__desc {
+    font-size: var(--font-size-base);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-lg);
+  }
+
+  .cfp-box__formats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .format-chip {
+    padding: 0.3rem 0.65rem;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    background-color: var(--color-paper-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    color: var(--color-ink);
+  }
+
+  .cfp-box__action {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    align-items: flex-start;
+  }
+
+  @media (min-width: 900px) {
+    .cfp-box__action {
+      align-items: flex-end;
+      text-align: right;
+    }
+  }
+
+  .cfp-box__reassurance {
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+  }
+</style>
