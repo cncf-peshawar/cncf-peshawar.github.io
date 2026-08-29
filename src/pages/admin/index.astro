@@ -7,6 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import YAML from 'yaml';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const configPath = path.resolve('./public/admin/config.yml');
 const configYaml = fs.readFileSync(configPath, 'utf-8');
 const parsedConfig = YAML.parse(configYaml);
@@ -23,8 +24,8 @@ const config = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cloud Native Peshawar — Content Manager</title>
     <!-- Explicit CMS Config Links -->
-    <link href="/admin/config.yml" type="application/yaml" rel="cms-config-url" />
-    <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+    <link href={`${base}/admin/config.yml`} type="application/yaml" rel="cms-config-url" />
+    <link href={`${base}/admin/config.yml`} type="text/yaml" rel="cms-config-url" />
     <link href="config.yml" type="application/yaml" rel="cms-config-url" />
 
     <!-- Sveltia CMS Manual Initialization -->

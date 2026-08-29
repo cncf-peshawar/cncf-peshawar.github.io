@@ -5,7 +5,7 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://cloud-native-peshawar.github.io',
-  base: '/',
+  base: '/cncf-peshawar-website',
   integrations: [mdx()],
   build: {
     format: 'directory'

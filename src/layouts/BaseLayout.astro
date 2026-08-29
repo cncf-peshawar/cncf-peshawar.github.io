@@ -9,10 +9,12 @@ interface Props {
   image?: string;
 }
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const {
   title = "Cloud Native Peshawar — Official CNCF Community Group",
   description = "Compiling the future of Peshawar's tech ecosystem, one container at a time. Empowering engineers, students, and companies with Kubernetes, DevOps, MLOps, and Agentic AI.",
-  image = "/images/og-default.svg"
+  image = `${base}/images/og-default.svg`
 } = Astro.props;
 
 const siteUrl = Astro.site || new URL('https://cloud-native-peshawar.github.io');
@@ -28,7 +30,7 @@ const fullTitle = title.includes("Cloud Native Peshawar") || title.includes("CNC
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
     <link rel="canonical" href={canonicalURL} />
     
     <!-- Primary Meta Tags -->

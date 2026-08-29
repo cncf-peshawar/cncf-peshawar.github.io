@@ -155,7 +155,21 @@ function isExternalOrIgnored(url) {
   return false;
 }
 
-function resolveTargetFile(urlPath, currentFile, distDir) {
+function getAstroBase() {
+  try {
+    const configPath = path.resolve(process.cwd(), 'astro.config.mjs');
+    if (fs.existsSync(configPath)) {
+      const content = fs.readFileSync(configPath, 'utf8');
+      const match = content.match(/base:\s*['"`]([^'"`]+)['"`]/);
+      if (match && match[1] && match[1] !== '/') {
+        return match[1].replace(/\/$/, '');
+      }
+    }
+  } catch {}
+  return '';
+}
+
+function resolveTargetFile(urlPath, currentFile, distDir, basePrefix = '') {
   let decodedPath;
   try {
     decodedPath = decodeURIComponent(urlPath);
@@ -163,49 +177,66 @@ function resolveTargetFile(urlPath, currentFile, distDir) {
     decodedPath = urlPath;
   }
 
-  let basePath;
-  if (decodedPath.startsWith('/')) {
-    basePath = path.join(distDir, decodedPath);
-  } else {
-    basePath = path.resolve(path.dirname(currentFile), decodedPath);
-  }
+  const effectiveBase = basePrefix || getAstroBase();
 
-  // 1. Direct file or directory match
-  if (fs.existsSync(basePath)) {
-    try {
-      const stat = fs.statSync(basePath);
-      if (stat.isFile()) {
-        const isHtml = basePath.endsWith('.html') || basePath.endsWith('.htm');
-        return { found: true, filePath: basePath, isHtml };
-      }
-      if (stat.isDirectory()) {
-        const indexHtml = path.join(basePath, 'index.html');
-        if (fs.existsSync(indexHtml) && fs.statSync(indexHtml).isFile()) {
-          return { found: true, filePath: indexHtml, isHtml: true };
+  const checkCandidate = (targetPath) => {
+    if (fs.existsSync(targetPath)) {
+      try {
+        const stat = fs.statSync(targetPath);
+        if (stat.isFile()) {
+          const isHtml = targetPath.endsWith('.html') || targetPath.endsWith('.htm');
+          return { found: true, filePath: targetPath, isHtml };
         }
-        const indexHtm = path.join(basePath, 'index.htm');
-        if (fs.existsSync(indexHtm) && fs.statSync(indexHtm).isFile()) {
-          return { found: true, filePath: indexHtm, isHtml: true };
+        if (stat.isDirectory()) {
+          const indexHtml = path.join(targetPath, 'index.html');
+          if (fs.existsSync(indexHtml) && fs.statSync(indexHtml).isFile()) {
+            return { found: true, filePath: indexHtml, isHtml: true };
+          }
+          const indexHtm = path.join(targetPath, 'index.htm');
+          if (fs.existsSync(indexHtm) && fs.statSync(indexHtm).isFile()) {
+            return { found: true, filePath: indexHtm, isHtml: true };
+          }
         }
+      } catch {
+        // stat failure fallback
       }
-    } catch {
-      // stat failure fallback
     }
-  }
 
-  // 2. basePath + .html
-  const withHtml = basePath + '.html';
-  if (fs.existsSync(withHtml) && fs.statSync(withHtml).isFile()) {
-    return { found: true, filePath: withHtml, isHtml: true };
-  }
+    // p + .html
+    const withHtml = targetPath + '.html';
+    if (fs.existsSync(withHtml) && fs.statSync(withHtml).isFile()) {
+      return { found: true, filePath: withHtml, isHtml: true };
+    }
 
-  // 3. basePath + /index.html
-  const withIndexHtml = path.join(basePath, 'index.html');
-  if (fs.existsSync(withIndexHtml) && fs.statSync(withIndexHtml).isFile()) {
-    return { found: true, filePath: withIndexHtml, isHtml: true };
-  }
+    // p + /index.html
+    const withIndexHtml = path.join(targetPath, 'index.html');
+    if (fs.existsSync(withIndexHtml) && fs.statSync(withIndexHtml).isFile()) {
+      return { found: true, filePath: withIndexHtml, isHtml: true };
+    }
 
-  return { found: false, attemptedPath: basePath };
+    return null;
+  };
+
+  if (decodedPath.startsWith('/')) {
+    const directPath = path.join(distDir, decodedPath);
+    const directRes = checkCandidate(directPath);
+    if (directRes) return directRes;
+
+    if (effectiveBase && decodedPath.startsWith(effectiveBase)) {
+      const stripped = decodedPath.slice(effectiveBase.length) || '/';
+      const strippedPath = path.join(distDir, stripped);
+      const strippedRes = checkCandidate(strippedPath);
+      if (strippedRes) return strippedRes;
+    }
+
+    return { found: false, attemptedPath: directPath };
+  } else {
+    const relPath = path.resolve(path.dirname(currentFile), decodedPath);
+    const relRes = checkCandidate(relPath);
+    if (relRes) return relRes;
+
+    return { found: false, attemptedPath: relPath };
+  }
 }
 
 export function checkLinks({ dir = 'dist', verbose = false } = {}) {
