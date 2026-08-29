@@ -1,0 +1,387 @@
+@import './tokens.css';
+
+/* -------------------------------------------------------------------------- */
+/* RESET & FOUNDATION (Hallmark Slop-Test Compliant)                         */
+/* -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: var(--line-height-normal);
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip; /* Gate 34 */
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip; /* Gate 34 */
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* -------------------------------------------------------------------------- */
+/* ACCESSIBILITY: SKIP LINK & FOCUS-VISIBLE (WCAG 2.4.1 & 2.4.7)             */
+/* -------------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: var(--space-xs);
+  left: var(--space-xs);
+  z-index: 1000;
+  padding: 0.65rem 1.25rem;
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-150%);
+  transition: transform var(--transition-fast);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* TYPOGRAPHY RULES (Purity: Roman Headings, No Fake Italic Headers)          */
+/* -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-style: normal; /* Gate 38a: No italic headers */
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-ink);
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+h1 {
+  font-size: var(--font-size-5xl);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.035em;
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+}
+
+p {
+  max-width: var(--container-prose);
+  color: var(--color-ink-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+p + p {
+  margin-top: var(--space-md);
+}
+
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+/* -------------------------------------------------------------------------- */
+/* LAYOUT CONTAINERS & SECTION HEADERS (Hallmark Single Column Compliant)     */
+/* -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: clamp(var(--space-sm), 4vw, var(--space-xl));
+}
+
+.section {
+  padding-block: clamp(var(--space-2xl), 8vw, var(--space-3xl));
+  position: relative;
+}
+
+.section--subtle {
+  background-color: var(--color-paper-subtle);
+  border-block: 1px solid var(--color-border);
+}
+
+/* Clean Single-Column Vertical Section Header */
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  margin-bottom: var(--space-2xl);
+  max-width: var(--container-max);
+}
+
+.section-header__num {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.section-header__title {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--space-xs);
+}
+
+.section-header__desc {
+  font-size: var(--font-size-lg);
+  color: var(--color-ink-muted);
+}
+
+/* -------------------------------------------------------------------------- */
+/* INTERACTIVE BUTTONS (All 8 States Enforced)                                */
+/* -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 0.65rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.01em;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+  transition: transform var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+@media (max-width: 480px) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+    word-break: break-word;
+  }
+}
+
+/* Primary Button */
+.btn--primary {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+}
+
+.btn--primary:hover,
+.btn--primary.is-hover {
+  background-color: var(--color-ink-hover);
+  border-color: var(--color-ink-hover);
+  color: var(--color-paper);
+  transform: translateY(-1px);
+}
+
+.btn--primary:active,
+.btn--primary.is-active {
+  background-color: var(--color-ink);
+  transform: translateY(0);
+}
+
+/* Accent Button (CNCF Cloud Blue) */
+.btn--accent {
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-color: var(--color-accent);
+  box-shadow: 0 1px 3px var(--color-accent-subtle);
+}
+
+.btn--accent:hover,
+.btn--accent.is-hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  box-shadow: 0 4px 12px var(--color-accent-subtle);
+  transform: translateY(-1px);
+}
+
+.btn--accent:active,
+.btn--accent.is-active {
+  background-color: var(--color-accent);
+  transform: translateY(0);
+}
+
+/* Secondary / Outline Button */
+.btn--secondary {
+  background-color: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-border);
+}
+
+.btn--secondary:hover,
+.btn--secondary.is-hover {
+  background-color: var(--color-paper-subtle);
+  border-color: var(--color-border-hover);
+  transform: translateY(-1px);
+}
+
+.btn--secondary:active,
+.btn--secondary.is-active {
+  background-color: var(--color-paper-card);
+  transform: translateY(0);
+}
+
+/* Small Button Modifier */
+.btn--sm {
+  padding: 0.45rem 0.85rem;
+  font-size: var(--font-size-xs);
+}
+
+/* Shared States: Focus-Visible, Disabled, Loading */
+.btn:focus-visible,
+.btn.is-focus {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"],
+.btn.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn[data-state="loading"],
+.btn.is-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.btn[data-state="loading"]::after,
+.btn.is-loading::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* -------------------------------------------------------------------------- */
+/* BADGES & CHIPS                                                             */
+/* -------------------------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  padding: 0.25rem 0.65rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-paper-subtle);
+  color: var(--color-ink);
+}
+
+.badge--live {
+  border-color: var(--color-signal-green);
+  background-color: var(--color-signal-green-subtle);
+  color: var(--color-signal-green-ink);
+}
+
+.badge--live::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-signal-green);
+  animation: pulse-live 2s infinite ease-in-out;
+}
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.badge--accent {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent-subtle);
+  color: var(--color-accent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* CARD SURFACES                                                              */
+/* -------------------------------------------------------------------------- */
+.card {
+  background-color: var(--color-paper-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: clamp(var(--space-md), 4vw, var(--space-xl));
+  transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+  position: relative;
+}
+
+.card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* -------------------------------------------------------------------------- */
+/* ACCESSIBILITY & UTILITIES                                                  */
+/* -------------------------------------------------------------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
