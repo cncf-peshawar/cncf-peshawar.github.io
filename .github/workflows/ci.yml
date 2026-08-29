@@ -1,0 +1,36 @@
+name: CI Quality & Static Integrity Validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    name: Type Check, Test, Build & Link Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript & Content Schema Check (astro check)
+        run: npm run check
+
+      - name: Execute End-to-End Test Suite
+        run: npm test
+
+      - name: Production Static Build (astro build)
+        run: npm run build
+
+      - name: Verify Internal Links & Static Asset Integrity
+        run: npm run check:links

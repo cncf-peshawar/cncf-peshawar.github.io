@@ -1,0 +1,53 @@
+name: Scheduled OCG Event Sync
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: "event-sync"
+  cancel-in-progress: false
+
+jobs:
+  sync-events:
+    name: Sync OCG Events
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run OCG Event Synchronization
+        run: node scripts/sync-ocg-events.mjs
+
+      - name: Validate Astro Content Schema
+        run: npm run check
+
+      - name: Commit and Push Changes
+        run: |
+          if [ -n "$(git status --porcelain src/content/events)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add src/content/events
+            git commit -m "chore(events): sync OCG events [skip ci]"
+            git push
+          else
+            echo "No event changes detected. Working tree clean."
+          fi

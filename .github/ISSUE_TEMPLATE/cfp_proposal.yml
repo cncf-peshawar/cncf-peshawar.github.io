@@ -1,0 +1,109 @@
+name: "🎙️ Call for Proposals (CFP) — Speaker Submission"
+description: "Submit a talk proposal, deep dive, or workshop for Cloud Native Peshawar"
+title: "[CFP]: <Your Talk Title Here>"
+labels: ["cfp", "pending-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Welcome to the Cloud Native Peshawar Speaker Hub!
+        We welcome community members, students, industry practitioners, and open source maintainers to share knowledge on Kubernetes, Cloud Native, DevOps, and AI.
+        
+        Please fill out this form to submit your proposal to the organizer team.
+
+  - type: input
+    id: speaker_name
+    attributes:
+      label: "Speaker Full Name"
+      placeholder: "e.g. Syed Hassan Tayyab"
+    validations:
+      required: true
+
+  - type: input
+    id: speaker_role
+    attributes:
+      label: "Current Role / Company / University"
+      placeholder: "e.g. AI Product Developer at UET Peshawar"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: talk_format
+    attributes:
+      label: "Session Format"
+      description: "Select the format of your session"
+      options:
+        - "15-minute Lightning Talk (Quick concept / Demo)"
+        - "40-minute Deep Dive (Architecture, Live code, Case study)"
+        - "90-minute Hands-on Workshop (Interactive lab with attendee participation)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: technical_track
+    attributes:
+      label: "Technical Track"
+      options:
+        - "Kubernetes & Container Orchestration"
+        - "Cloud Native AI, MLOps & Agentic Systems"
+        - "DevOps, GitOps & CI/CD Pipelines"
+        - "Observability (OpenTelemetry, Prometheus, Jaeger)"
+        - "Security, Zero-Trust & Identity (SPIFFE/SPIRE)"
+        - "Open Source Contribution & Career Stories"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: target_audience
+    attributes:
+      label: "Target Audience Level"
+      options:
+        - "Beginner (No prior Kubernetes experience required)"
+        - "Intermediate (Familiar with containers & basic cloud)"
+        - "Advanced (Production-grade distributed systems architecture)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: session_abstract
+    attributes:
+      label: "Session Abstract & Key Takeaways"
+      description: "Describe what your talk is about and 3 key things attendees will learn."
+      placeholder: "In this session, attendees will discover how to..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: speaker_bio
+    attributes:
+      label: "Speaker Bio"
+      description: "Brief 2-3 sentences about your background, experience, and projects."
+      placeholder: "Tell the community about yourself..."
+    validations:
+      required: true
+
+  - type: input
+    id: linkedin_github
+    attributes:
+      label: "LinkedIn / GitHub / Linux Foundation Profile URL"
+      placeholder: "https://www.linkedin.com/in/... or https://github.com/..."
+    validations:
+      required: true
+
+  - type: input
+    id: slides_draft
+    attributes:
+      label: "Draft Slides or Outline Link (Optional)"
+      placeholder: "https://docs.google.com/presentation/... or GitHub repo"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: coc_agreement
+    attributes:
+      label: "Code of Conduct & Vendor Neutrality"
+      options:
+        - label: "I agree to follow the [CNCF Community Code of Conduct](https://github.com/cncf/foundation/blob/main/code-of-conduct.md)."
+          required: true
+        - label: "I understand that CNCF talks must remain educational, open, and vendor-neutral without direct commercial sales pitches."
+          required: true
