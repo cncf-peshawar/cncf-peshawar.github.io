@@ -1,0 +1,83 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0B1120"/>
+  
+  <!-- Subtle Grid Pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1E293B" stroke-width="1" stroke-opacity="0.4"/>
+    </pattern>
+    <linearGradient id="blue-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0086FF" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#0086FF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0086FF"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="1000" cy="150" r="350" fill="url(#blue-glow)"/>
+  <circle cx="200" cy="500" r="250" fill="url(#blue-glow)"/>
+
+  <!-- Outer Border Frame -->
+  <rect x="40" y="40" width="1120" height="550" rx="16" stroke="#334155" stroke-width="2"/>
+
+  <!-- CNCF Hexagon Symbol -->
+  <g transform="translate(100, 110)">
+    <path d="M40 5 L75 25 V65 L40 85 L5 65 V25 Z" stroke="url(#accent-grad)" stroke-width="6" fill="#0F172A"/>
+    <path d="M40 85 V45" stroke="url(#accent-grad)" stroke-width="5"/>
+    <path d="M75 25 L40 45 L5 25" stroke="url(#accent-grad)" stroke-width="5"/>
+    <circle cx="40" cy="45" r="10" fill="#38BDF8"/>
+  </g>
+
+  <!-- Header Category Badge -->
+  <rect x="210" y="115" width="230" height="34" rx="17" fill="#1E293B" stroke="#0086FF" stroke-width="1.5"/>
+  <circle cx="228" cy="132" r="4" fill="#10B981"/>
+  <text x="242" y="137" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#F8FAFC" letter-spacing="1.5">OFFICIAL CNCF CHAPTER</text>
+
+  <rect x="455" y="115" width="180" height="34" rx="17" fill="#1E293B" stroke="#334155" stroke-width="1.5"/>
+  <text x="475" y="137" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#94A3B8" letter-spacing="1">PESHAWAR, PK</text>
+
+  <!-- Title Text -->
+  <text x="100" y="240" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="52" font-weight="800" fill="#FFFFFF" letter-spacing="-1">
+    Cloud Native Peshawar
+  </text>
+
+  <!-- Tagline Text -->
+  <text x="100" y="315" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="500" fill="#94A3B8">
+    Compiling the future of Peshawar's tech ecosystem,
+  </text>
+  <text x="100" y="355" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="700" fill="#38BDF8">
+    one container at a time.
+  </text>
+
+  <!-- Technical Chips -->
+  <g transform="translate(100, 420)">
+    <rect x="0" y="0" width="130" height="36" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="18" y="23" font-family="monospace" font-size="14" font-weight="600" fill="#CBD5E1">Kubernetes</text>
+
+    <rect x="145" y="0" width="120" height="36" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="163" y="23" font-family="monospace" font-size="14" font-weight="600" fill="#CBD5E1">DevOps</text>
+
+    <rect x="280" y="0" width="110" height="36" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="298" y="23" font-family="monospace" font-size="14" font-weight="600" fill="#CBD5E1">MLOps</text>
+
+    <rect x="405" y="0" width="130" height="36" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="423" y="23" font-family="monospace" font-size="14" font-weight="600" fill="#CBD5E1">Agentic AI</text>
+
+    <rect x="550" y="0" width="140" height="36" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="568" y="23" font-family="monospace" font-size="14" font-weight="600" fill="#CBD5E1">Open Source</text>
+  </g>
+
+  <!-- Bottom Details Bar -->
+  <line x1="100" y1="495" x2="1100" y2="495" stroke="#334155" stroke-width="1"/>
+  
+  <text x="100" y="535" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600" fill="#F8FAFC">
+    Inaugural Gathering: CNCF Peshawar Genesis · Sep 4, 2026 @ NIC Peshawar
+  </text>
+  <text x="890" y="535" font-family="monospace" font-size="14" font-weight="600" fill="#38BDF8">
+    cloud-native-peshawar.github.io
+  </text>
+</svg>

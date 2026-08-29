@@ -1,0 +1,242 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const allTeam = await getCollection('team');
+const sortedTeam = allTeam.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+---
+
+<BaseLayout 
+  title="Organizers & Team | CNCF Peshawar" 
+  description="Meet the passionate engineers, community leads, and volunteers organizing the Cloud Native Chapter in Peshawar."
+>
+  <!-- Page Header -->
+  <section class="page-header section">
+    <div class="container">
+      <span class="badge badge--live">Chapter Leadership</span>
+      <h1 class="page-header__title">Organizers & Volunteer Team.</h1>
+      <p class="page-header__desc">
+        Cloud Native Peshawar is organized by passionate engineers, researchers, and open-source advocates dedicated to growing the cloud native ecosystem in Khyber Pakhtunkhwa.
+      </p>
+    </div>
+  </section>
+
+  <!-- Core Team Grid -->
+  <section class="section section--subtle">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__num">01 // LEADS</span>
+        <div>
+          <h2 class="section-header__title">Chapter Organizers.</h2>
+          <p class="section-header__desc">
+            Organizers coordinating sessions, speaker curation, and community operations.
+          </p>
+        </div>
+      </div>
+
+      <div class="team-grid">
+        {sortedTeam.map(member => (
+          <div class="member-card">
+            <div class="member-card__avatar">
+              <span class="member-card__initials">
+                {member.data.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+              </span>
+            </div>
+
+            <h3 class="member-card__name">{member.data.name}</h3>
+            <p class="member-card__role">{member.data.role}</p>
+            {member.data.company && (
+              <p class="member-card__company">{member.data.company}</p>
+            )}
+            <p class="member-card__bio">{member.data.bio}</p>
+
+            <div class="member-card__links">
+              {member.data.linuxFoundationUser && (
+                <span class="lf-badge" title="Linux Foundation ID">
+                  LF: @{member.data.linuxFoundationUser}
+                </span>
+              )}
+              {member.data.linkedin && (
+                <a href={member.data.linkedin} target="_blank" rel="noopener noreferrer" class="social-btn">
+                  LinkedIn ↗
+                </a>
+              )}
+              {member.data.github && (
+                <a href={member.data.github} target="_blank" rel="noopener noreferrer" class="social-btn">
+                  GitHub ↗
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Volunteer Callout -->
+  <section class="section">
+    <div class="container">
+      <div class="volunteer-box">
+        <span class="badge badge--accent">Join Our Team</span>
+        <h2 class="volunteer-title">Want to Volunteer as an Organizer or Ambassador?</h2>
+        <p class="volunteer-desc">
+          We welcome enthusiastic community members to help with event logistics, photography, AV recording, workshop mentorship, and university outreach in Peshawar.
+        </p>
+        <a 
+          href="mailto:cncfpeshawar@gmail.com?subject=Volunteer%20Application%20%7C%20CNCF%20Peshawar&body=Hi%20CNCF%20Peshawar%20Team%2C%0A%0AI%20would%20like%20to%20volunteer%20as%20an%20Organizer%20%2F%20Campus%20Ambassador.%0A%0AName%3A%20%0ARole%2FUniversity%3A%20%0ALinkedIn%2FGitHub%3A%20%0AAreas%20of%20Interest%20(Event%20Logistics%2C%20Design%2C%20AV%2C%20Workshop%20Mentorship)%3A%20%0A%0AThank%20you!" 
+          class="btn btn--accent"
+        >
+          <span>Apply to Volunteer</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: var(--space-xl);
+  }
+
+  .page-header__title {
+    font-size: var(--font-size-5xl);
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__desc {
+    font-size: var(--font-size-lg);
+    color: var(--color-ink-muted);
+    max-width: var(--container-prose);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .member-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-xl);
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+  }
+
+  .member-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .member-card__avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--color-accent-subtle);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .member-card__initials {
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+  }
+
+  .member-card__name {
+    font-size: var(--font-size-xl);
+    margin-bottom: 2px;
+    color: var(--color-ink);
+  }
+
+  .member-card__role {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .member-card__company {
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+    margin-bottom: var(--space-sm);
+  }
+
+  .member-card__bio {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--space-lg);
+    flex-grow: 1;
+  }
+
+  .member-card__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .lf-badge {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-muted);
+    background-color: var(--color-paper-subtle);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-xs);
+  }
+
+  .social-btn {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+  }
+
+  .social-btn:hover {
+    text-decoration: underline;
+  }
+
+  .volunteer-box {
+    padding: clamp(var(--space-lg), 5vw, var(--space-2xl));
+    background-color: var(--color-paper-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .volunteer-title {
+    font-size: var(--font-size-3xl);
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .volunteer-desc {
+    font-size: var(--font-size-base);
+    color: var(--color-ink-muted);
+    max-width: var(--container-prose);
+    margin-bottom: var(--space-xl);
+  }
+</style>

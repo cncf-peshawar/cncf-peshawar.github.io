@@ -1,0 +1,272 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import TrackRecordStats from '../components/TrackRecordStats.astro';
+import BentoPillars from '../components/BentoPillars.astro';
+import EventCard from '../components/EventCard.astro';
+import SpeakerCard from '../components/SpeakerCard.astro';
+import CFPBanner from '../components/CFPBanner.astro';
+import GenesisCountdown from '../components/GenesisCountdown.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Query collections safely
+const allEvents = await getCollection('events');
+const getTimestamp = (dateStr: string) => {
+  const ts = new Date(dateStr).getTime();
+  return isNaN(ts) ? 0 : ts;
+};
+const sortedEvents = allEvents.sort((a, b) => getTimestamp(b.data.date) - getTimestamp(a.data.date));
+const upcomingEvents = sortedEvents.filter(e => e.data.status === 'upcoming');
+const pastEvents = sortedEvents.filter(e => e.data.status === 'completed');
+const otherUpcomingEvents = upcomingEvents.filter(e => e.slug !== '01-cncf-peshawar-genesis');
+
+const allSpeakers = await getCollection('speakers');
+const featuredSpeakers = allSpeakers.filter(s => s.data.featured);
+const speakersToShow = featuredSpeakers.length > 0 ? featuredSpeakers : allSpeakers;
+const sponsors = await getCollection('sponsors');
+---
+
+<BaseLayout title="Cloud Native Peshawar — Official CNCF Community Group">
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Track Record Stats Strip -->
+  <TrackRecordStats />
+
+  <!-- Next / Upcoming Meetup Spotlight & Live Countdown -->
+  <section class="section section--subtle">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__num">00 // INAUGURAL MEETUP</span>
+        <h2 class="section-header__title">CNCF Peshawar Genesis.</h2>
+        <p class="section-header__desc">
+          Reserve your seat for our launch gathering in Peshawar.
+        </p>
+      </div>
+
+      <!-- Real-time Countdown Card -->
+      <GenesisCountdown />
+
+      {otherUpcomingEvents.length > 0 && (
+        <div class="events-list">
+          {otherUpcomingEvents.map(event => (
+            <EventCard event={event} />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- 01 Community Pillars (Bento Grid) -->
+  <BentoPillars />
+
+  <!-- 02 Recent Meetups & Track Record Archives (if past events exist) -->
+  {pastEvents.length > 0 && (
+    <section class="section section--subtle">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__num">02 // ARCHIVES</span>
+          <h2 class="section-header__title">Past Meetups & Technical Labs.</h2>
+          <p class="section-header__desc">
+            Explore slide decks, code repositories, and recordings from our previous sessions.
+          </p>
+        </div>
+
+        <div class="events-grid">
+          {pastEvents.slice(0, 2).map(event => (
+            <EventCard event={event} />
+          ))}
+        </div>
+
+        <div class="section-cta-center">
+          <a href={`${base}/events`} class="btn btn--secondary">
+            <span>View Full Meetup Archive</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 03 Speakers & Mentors -->
+  {speakersToShow.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__num">03 // SPEAKERS</span>
+          <h2 class="section-header__title">Learn from Industry Practitioners.</h2>
+          <p class="section-header__desc">
+            Engineers, researchers, and architects sharing real-world distributed systems experience.
+          </p>
+        </div>
+
+        <div class="speakers-grid">
+          {speakersToShow.slice(0, 3).map(speaker => (
+            <SpeakerCard speaker={speaker} />
+          ))}
+        </div>
+
+        <div class="section-cta-center">
+          <a href={`${base}/speak`} class="btn btn--secondary">
+            <span>Explore All Speakers & Submit a Talk</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 04 Call for Proposals (CFP) Banner -->
+  <CFPBanner />
+
+  <!-- 05 Sponsors & Community Partners Wall -->
+  {sponsors.length > 0 && (
+    <section class="section section--subtle">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__num">05 // SPONSORS & PARTNERS</span>
+          <h2 class="section-header__title">Supported by Visionary Partners.</h2>
+          <p class="section-header__desc">
+            We are deeply grateful to our venue hosts, refreshment partners, and ecosystem supporters who keep Cloud Native Peshawar 100% free.
+          </p>
+        </div>
+
+        <div class="sponsors-grid">
+          {sponsors.map(sponsor => (
+            <div class="sponsor-card">
+              <span class="sponsor-card__tier">{sponsor.data.tier} Partner</span>
+              <h3 class="sponsor-card__name">{sponsor.data.name}</h3>
+              <p class="sponsor-card__desc">{sponsor.data.description}</p>
+              <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="sponsor-card__link">
+                <span>Visit Website ↗</span>
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <div class="section-cta-center">
+          <a href={`${base}/sponsors`} class="btn btn--accent">
+            <span>Become a Community Sponsor</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .events-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .events-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .speakers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .speakers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .speakers-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .sponsors-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .sponsors-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .sponsor-card {
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: clamp(var(--space-md), 4vw, var(--space-xl));
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .sponsor-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .sponsor-card__tier {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs);
+  }
+
+  .sponsor-card__name {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-xs);
+    color: var(--color-ink);
+  }
+
+  .sponsor-card__desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--space-lg);
+    flex-grow: 1;
+  }
+
+  .sponsor-card__link {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    margin-top: auto;
+  }
+
+  .sponsor-card__link:hover {
+    text-decoration: underline;
+  }
+
+  .section-cta-center {
+    display: flex;
+    justify-content: center;
+  }
+</style>

@@ -1,0 +1,374 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SponsorTierCard from '../components/SponsorTierCard.astro';
+import SponsorshipEmailBuilder from '../components/SponsorshipEmailBuilder.astro';
+import TrackRecordStats from '../components/TrackRecordStats.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const sponsors = await getCollection('sponsors');
+
+const sponsorshipTiers = [
+  {
+    tierName: "Venue Host Partner",
+    badge: "In-Kind / Logistics",
+    commitment: "Provide Meetup Venue",
+    description: "Host an in-person CNCF Peshawar meetup by providing an auditorium or hall space with AV projection and internet connectivity.",
+    perks: [
+      "Keynote Stage Welcome & 2-Minute Opening Remarks",
+      "Dedicated Rollup Banner & Table Space in the venue",
+      "Co-branding on official CNCF Open Community Groups (OCG) chapter page",
+      "Direct networking and connection with attending developers"
+    ],
+    isFeatured: false
+  },
+  {
+    tierName: "Refreshment Partner",
+    badge: "Community Hospitality",
+    commitment: "Support Event Refreshments",
+    description: "Cover tea, coffee, or snacks for attendees and speakers during networking and Q&A breaks.",
+    perks: [
+      "Verbal acknowledgement & thank you during opening and closing",
+      "Logo placement on presentation slides and OCG event description",
+      "Social media acknowledgement on chapter LinkedIn & Twitter",
+      "Option to place company stickers / flyers on refreshment tables"
+    ],
+    isFeatured: true
+  },
+  {
+    tierName: "Community Swag Partner",
+    badge: "Community Booster",
+    commitment: "Support Swag & Merchandise",
+    description: "Sponsor official CNCF stickers, lanyard badges, community t-shirts, or Linux Foundation certification vouchers for hands-on lab participants.",
+    perks: [
+      "Logo featured on event badges and custom meetup stickers",
+      "Official Swag Handover photo opportunity during the session",
+      "Listed as an active community partner on the website",
+      "Direct mention in community announcements"
+    ],
+    isFeatured: false
+  },
+  {
+    tierName: "Annual Ecosystem Partner",
+    badge: "Strategic Partner",
+    commitment: "Annual Collaboration",
+    description: "For tech companies, software houses, and institutions looking for continuous collaboration, branding, and talent engagement across the year.",
+    perks: [
+      "Continuous logo placement on the website and all meetup decks",
+      "Opportunity to deliver 1 approved technical session per year",
+      "Direct hiring and job board announcements shared with attendees",
+      "Featured partner status across all CNCF Peshawar activities"
+    ],
+    isFeatured: false
+  }
+];
+
+const generalMailto = `mailto:cncfpeshawar@gmail.com?subject=${encodeURIComponent("CNCF Peshawar Sponsorship Inquiry")}&body=${encodeURIComponent(
+`Hi Cloud Native Peshawar Organizers,
+
+We would like to explore partnering with CNCF Peshawar to support free developer education in Khyber Pakhtunkhwa.
+
+Organization Overview:
+- Organization / Company: [Company Name]
+- Primary Contact: [Contact Person, Title]
+- Contact Email / Phone: [Work Email / Phone]
+- Website: [Website URL]
+
+Proposed Sponsorship Scope:
+- Interested Tier / In-Kind Contribution: [Venue / Refreshments / Swag / Annual / Other]
+- Target Meetup / Timing: [Genesis Sep 4, 2026 / Upcoming / Annual]
+
+We look forward to connecting with the organizers.
+
+Best regards,`
+)}`;
+---
+
+<BaseLayout 
+  title="Sponsorship Prospectus | CNCF Peshawar" 
+  description="Partner with CNCF Peshawar. Help us keep cloud native education 100% free while connecting your organization with developers and open-source practitioners in KP."
+>
+  <!-- Page Header -->
+  <section class="page-header section">
+    <div class="container">
+      <span class="badge badge--live">Sponsorship Prospectus · 100% Free Community</span>
+      <h1 class="page-header__title">Partner with CNCF Peshawar.</h1>
+      <p class="page-header__desc">
+        We are a 100% free, community-organized chapter of the Cloud Native Computing Foundation. Every meetup is free for attendees thanks to our venue hosts and community partners.
+      </p>
+
+      <div class="page-header__actions">
+        <a 
+          href="#email-builder" 
+          class="btn btn--accent"
+        >
+          <span>Draft Sponsorship Proposal</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a 
+          href={generalMailto}
+          class="btn btn--secondary"
+        >
+          <span>Quick Email (cncfpeshawar@gmail.com)</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </a>
+        <a 
+          href={`${base}/assets/sponsorship-prospectus.pdf`} 
+          download="CNCF_Peshawar_Sponsorship_Prospectus.pdf" 
+          class="btn btn--secondary"
+        >
+          <span>Download Prospectus (PDF)</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verifiable Facts -->
+  <TrackRecordStats />
+
+  <!-- Why Sponsor CNCF Peshawar? -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__num">01 // WHY PARTNER</span>
+        <h2 class="section-header__title">Why Support CNCF Peshawar?</h2>
+        <p class="section-header__desc">
+          Direct community engagement and support for local open-source technology education.
+        </p>
+      </div>
+
+      <div class="reasons-grid">
+        <div class="reason-card">
+          <div class="reason-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3>Local Tech Enablement</h3>
+          <p>Support free technical education for engineers, developers, and university students learning modern distributed systems in Khyber Pakhtunkhwa.</p>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+          </div>
+          <h3>Brand Visibility</h3>
+          <p>Gain recognition across the official CNCF Open Community Groups (OCG) chapter, presentation decks, social media channels, and local tech circles.</p>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="12" r="6"/>
+              <circle cx="12" cy="12" r="2"/>
+            </svg>
+          </div>
+          <h3>Developer Engagement</h3>
+          <p>Connect directly with practicing engineers, open-source contributors, and university graduates passionate about cloud infrastructure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sponsorship Tiers Grid -->
+  <section id="tiers" class="section section--subtle">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__num">02 // PACKAGES</span>
+        <h2 class="section-header__title">Partnership Packages.</h2>
+        <p class="section-header__desc">
+          Flexible, transparent options for venue hosts, refreshments, swag, and ecosystem partners.
+        </p>
+      </div>
+
+      <div class="tiers-grid">
+        {sponsorshipTiers.map(tier => (
+          <SponsorTierCard 
+            tierName={tier.tierName}
+            badge={tier.badge}
+            commitment={tier.commitment}
+            description={tier.description}
+            perks={tier.perks}
+            isFeatured={tier.isFeatured}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Structured Intake Email Builder -->
+  <SponsorshipEmailBuilder />
+
+  <!-- Existing Partners Wall (if any) -->
+  {sponsors.length > 0 && (
+    <section class="section section--subtle">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__num">04 // PARTNERS</span>
+          <h2 class="section-header__title">Community Partners.</h2>
+          <p class="section-header__desc">
+            Organizations supporting our mission in Peshawar.
+          </p>
+        </div>
+
+        <div class="sponsors-grid">
+          {sponsors.map(sponsor => (
+            <div class="partner-box">
+              <span class="partner-tier">{sponsor.data.tier} Partner</span>
+              <h3 class="partner-name">{sponsor.data.name}</h3>
+              <p class="partner-desc">{sponsor.data.description}</p>
+              <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="partner-link">
+                <span>Visit Website ↗</span>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: var(--space-xl);
+  }
+
+  .page-header__title {
+    font-size: var(--font-size-5xl);
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__desc {
+    font-size: var(--font-size-lg);
+    color: var(--color-ink-muted);
+    max-width: var(--container-prose);
+    margin-bottom: var(--space-xl);
+  }
+
+  .page-header__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .reasons-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .reason-card {
+    padding: clamp(var(--space-md), 4vw, var(--space-xl));
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .reason-icon {
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .reason-card h3 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-xs);
+    color: var(--color-ink);
+  }
+
+  .reason-card p {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-normal);
+  }
+
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .tiers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .sponsors-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .sponsors-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .partner-box {
+    padding: clamp(var(--space-md), 4vw, var(--space-xl));
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .partner-tier {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs);
+  }
+
+  .partner-name {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-xs);
+    color: var(--color-ink);
+  }
+
+  .partner-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .partner-link {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    margin-top: auto;
+  }
+
+  .partner-link:hover {
+    text-decoration: underline;
+  }
+</style>

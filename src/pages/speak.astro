@@ -1,0 +1,321 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SpeakerCard from '../components/SpeakerCard.astro';
+
+const allSpeakers = await getCollection('speakers');
+const featuredSpeakers = allSpeakers.filter(s => s.data.featured);
+const regularSpeakers = allSpeakers.filter(s => !s.data.featured);
+---
+
+<BaseLayout 
+  title="Speaker Hub & Call for Proposals | CNCF Peshawar" 
+  description="Submit a talk proposal for Cloud Native Peshawar. We support first-time and seasoned speakers with mentorship and slide reviews."
+>
+  <!-- Page Header / Hero -->
+  <section class="page-header section">
+    <div class="container">
+      <span class="badge badge--live">Open Call for Proposals (CFP)</span>
+      <h1 class="page-header__title">Share Your Knowledge.<br />Inspire Peshawar's Builders.</h1>
+      <p class="page-header__desc">
+        Whether you are a seasoned distributed systems architect or a student giving your very first tech talk, Cloud Native Peshawar offers an encouraging, vendor-neutral stage for you to share your journey.
+      </p>
+
+      <div class="page-header__actions">
+        <a 
+          href="https://github.com/Cloud-Native-Peshawar/cncf-peshawar-website/issues/new?template=cfp_proposal.yml" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn--accent"
+        >
+          <span>Submit Talk Proposal on GitHub (CFP)</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a 
+          href="mailto:cncfpeshawar@gmail.com?subject=CNCF%20Peshawar%20CFP%20Inquiry" 
+          class="btn btn--secondary"
+        >
+          <span>Email CFP Questions</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formats & Tracks Section -->
+  <section class="section section--subtle">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__num">01 // TALK FORMATS</span>
+        <div>
+          <h2 class="section-header__title">Session Formats We Host.</h2>
+          <p class="section-header__desc">
+            Choose the format that matches your topic depth and comfort level.
+          </p>
+        </div>
+      </div>
+
+      <div class="formats-grid">
+        <!-- 15 min -->
+        <div class="format-card">
+          <div class="format-card__badge">15 MINUTES</div>
+          <h3 class="format-card__title">Lightning Talk</h3>
+          <p class="format-card__desc">
+            Fast-paced, focused introduction to a single open-source tool, bug fix story, or lesson learned in production. Ideal for first-time speakers!
+          </p>
+          <ul class="format-card__list">
+            <li>Single concept focus</li>
+            <li>Live demo optional</li>
+            <li>No Q&A required</li>
+          </ul>
+        </div>
+
+        <!-- 40 min -->
+        <div class="format-card format-card--featured">
+          <div class="format-card__badge">40 MINUTES</div>
+          <h3 class="format-card__title">Technical Deep Dive</h3>
+          <p class="format-card__desc">
+            In-depth architectural breakdown, code walkthrough, or real-world migration case study with 5-10 minutes of audience Q&A.
+          </p>
+          <ul class="format-card__list">
+            <li>Architecture patterns</li>
+            <li>Production trade-offs</li>
+            <li>Live Q&A session</li>
+          </ul>
+        </div>
+
+        <!-- 90 min -->
+        <div class="format-card">
+          <div class="format-card__badge">90 MINUTES</div>
+          <h3 class="format-card__title">Hands-on Workshop</h3>
+          <p class="format-card__desc">
+            Step-by-step interactive lab where attendees follow along on their own laptops to deploy, configure, or debug infrastructure.
+          </p>
+          <ul class="format-card__list">
+            <li>Pre-configured GitHub repository</li>
+            <li>Hands-on attendee tasks</li>
+            <li>Co-mentors available to help</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Speaker Support / Mentorship -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__num">02 // SPEAKER SUPPORT</span>
+        <div>
+          <h2 class="section-header__title">First-Time Speaker? We Have Your Back.</h2>
+          <p class="section-header__desc">
+            Public speaking in front of technical peers can feel intimidating. Our organizers provide 1-on-1 mentorship to ensure your talk succeeds.
+          </p>
+        </div>
+      </div>
+
+      <div class="support-grid">
+        <div class="support-item">
+          <div class="support-num">01</div>
+          <h3 class="support-title">Abstract & Topic Refinement</h3>
+          <p class="support-desc">
+            Not sure if your topic is relevant? We will help shape your outline and tailor it to the local engineering audience.
+          </p>
+        </div>
+
+        <div class="support-item">
+          <div class="support-num">02</div>
+          <h3 class="support-title">Slide Review & Dry Runs</h3>
+          <p class="support-desc">
+            Schedule a private 30-minute practice run with an organizer to test timing, slide legibility, and demo terminal setups.
+          </p>
+        </div>
+
+        <div class="support-item">
+          <div class="support-num">03</div>
+          <h3 class="support-title">AV Setup & Live Recording</h3>
+          <p class="support-desc">
+            We provide HDMI/USB-C connectivity, high-quality audio, and record sessions for YouTube so you have a professional portfolio talk.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Speakers -->
+  {allSpeakers.length > 0 && (
+    <section class="section section--subtle">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__num">03 // PAST & UPCOMING SPEAKERS</span>
+          <div>
+            <h2 class="section-header__title">Community Voices.</h2>
+            <p class="section-header__desc">
+              Meet the engineers and practitioners who share their knowledge with Cloud Native Peshawar.
+            </p>
+          </div>
+        </div>
+
+        <div class="speakers-grid">
+          {featuredSpeakers.map((speaker) => (
+            <SpeakerCard speaker={speaker} />
+          ))}
+          {regularSpeakers.map((speaker) => (
+            <SpeakerCard speaker={speaker} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: var(--space-xl);
+  }
+
+  .page-header__title {
+    font-size: var(--font-size-5xl);
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__desc {
+    font-size: var(--font-size-lg);
+    color: var(--color-ink-muted);
+    max-width: var(--container-prose);
+    margin-bottom: var(--space-xl);
+  }
+
+  .page-header__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  /* Formats Grid */
+  .formats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .formats-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .format-card {
+    padding: var(--space-xl);
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .format-card--featured {
+    border-color: var(--color-accent);
+    background-color: var(--color-paper-elevated);
+    box-shadow: var(--shadow-md);
+  }
+
+  .format-card__badge {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+    letter-spacing: 0.05em;
+  }
+
+  .format-card__title {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-xs);
+  }
+
+  .format-card__desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .format-card__list {
+    list-style: none;
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .format-card__list li::before {
+    content: "✓ ";
+    color: var(--color-accent);
+    font-weight: bold;
+  }
+
+  /* Support Grid */
+  .support-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .support-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .support-item {
+    padding: var(--space-xl);
+    background-color: var(--color-paper-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .support-num {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+
+  .support-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .support-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-normal);
+  }
+
+  /* Speakers Grid */
+  .speakers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .speakers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .speakers-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

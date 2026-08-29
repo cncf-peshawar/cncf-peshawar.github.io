@@ -1,0 +1,133 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EventCard from '../../components/EventCard.astro';
+import CFPBanner from '../../components/CFPBanner.astro';
+
+const allEvents = await getCollection('events');
+const getTimestamp = (dateStr: string) => {
+  const ts = new Date(dateStr).getTime();
+  return isNaN(ts) ? 0 : ts;
+};
+const sortedEvents = allEvents.sort((a, b) => getTimestamp(b.data.date) - getTimestamp(a.data.date));
+const upcomingEvents = sortedEvents.filter(e => e.data.status === 'upcoming');
+const pastEvents = sortedEvents.filter(e => e.data.status === 'completed');
+---
+
+<BaseLayout 
+  title="Events & Meetups | CNCF Peshawar" 
+  description="Explore upcoming and past Cloud Native meetups, Kubernetes workshops, and distributed systems labs in Peshawar."
+>
+  <!-- Page Header -->
+  <section class="page-header section">
+    <div class="container">
+      <span class="badge badge--live">Community Gatherings</span>
+      <h1 class="page-header__title">Events & Technical Labs.</h1>
+      <p class="page-header__desc">
+        All CNCF Peshawar meetups and workshops are 100% free, community-driven, and open to all engineers, researchers, and students.
+      </p>
+    </div>
+  </section>
+
+  <!-- Upcoming Events -->
+  {upcomingEvents.length > 0 && (
+    <section class="section section--subtle">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__num">01 // UPCOMING</span>
+          <h2 class="section-header__title">Next In-Person Meetup.</h2>
+          <p class="section-header__desc">
+            Seats are limited to venue capacity. RSVP early on Open Community Groups (OCG) or Luma.
+          </p>
+        </div>
+
+        <div class="events-list">
+          {upcomingEvents.map(event => (
+            <EventCard event={event} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Past Events Archive -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__num">02 // ARCHIVE</span>
+        <h2 class="section-header__title">Past Meetup Archives.</h2>
+        <p class="section-header__desc">
+          Explore slide decks, video recordings, and summaries from our previous sessions.
+        </p>
+      </div>
+
+      {pastEvents.length > 0 ? (
+        <div class="events-grid">
+          {pastEvents.map(event => (
+            <EventCard event={event} />
+          ))}
+        </div>
+      ) : (
+        <div class="empty-archive-box">
+          <p>
+            Our inaugural meetup is upcoming! Recordings, slide decks, and code repositories will be archived here immediately following the Genesis session.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- CFP Banner -->
+  <CFPBanner />
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: var(--space-xl);
+  }
+
+  .page-header__title {
+    font-size: var(--font-size-5xl);
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__desc {
+    font-size: var(--font-size-lg);
+    color: var(--color-ink-muted);
+    max-width: var(--container-prose);
+  }
+
+  .events-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .events-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .empty-archive-box {
+    padding: var(--space-xl);
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+
+  .empty-archive-box p {
+    font-size: var(--font-size-base);
+    color: var(--color-ink-muted);
+    max-width: 60ch;
+    margin-inline: auto;
+  }
+</style>
