@@ -1,0 +1,135 @@
+backend:
+  name: github
+  repo: Cloud-Native-Peshawar/cncf-peshawar-website
+  branch: main
+
+# Local backend allows editing directly from local folder or localhost
+local_backend: true
+
+# Media / Uploads
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# Display settings
+site_url: "https://cloud-native-peshawar.github.io"
+display_url: "https://cloud-native-peshawar.github.io"
+logo_url: "/favicon.svg"
+
+collections:
+  # ----------------------------------------------------------------------------
+  # EVENTS & MEETUPS
+  # ----------------------------------------------------------------------------
+  - name: "events"
+    label: "Events & Meetups"
+    folder: "src/content/events"
+    create: true
+    slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Time Range", name: "time", widget: "string", default: "03:00 PM - 07:00 PM PKT" }
+      - { label: "Venue Name", name: "venue", widget: "string" }
+      - { label: "Location", name: "location", widget: "string", default: "Peshawar, KPK, Pakistan" }
+      - { label: "Status", name: "status", widget: "select", options: ["upcoming", "completed"], default: "upcoming" }
+      - { label: "Capacity (Seats)", name: "capacity", widget: "number", required: false }
+      - { label: "Open Community Groups (OCG) RSVP URL", name: "rsvpUrl", widget: "string" }
+      - { label: "Luma Event URL", name: "lumaUrl", widget: "string", required: false }
+      - { label: "Slides URL (GitHub / SlideShare)", name: "slidesUrl", widget: "string", required: false }
+      - { label: "Recording URL (YouTube)", name: "recordingUrl", widget: "string", required: false }
+      - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
+      - { label: "Speakers", name: "speakers", widget: "list", required: false }
+      - { label: "Tags", name: "tags", widget: "list", default: ["Genesis", "Kubernetes", "CloudNative", "OpenSource"] }
+      - { label: "Summary / Lede", name: "summary", widget: "text" }
+      - { label: "Event Agenda & Body", name: "body", widget: "markdown" }
+
+  # ----------------------------------------------------------------------------
+  # SPEAKERS & MENTORS
+  # ----------------------------------------------------------------------------
+  - name: "speakers"
+    label: "Speakers & Mentors"
+    folder: "src/content/speakers"
+    create: true
+    slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
+    fields:
+      - { label: "Full Name", name: "name", widget: "string" }
+      - { label: "Professional Title / Role", name: "role", widget: "string" }
+      - { label: "Organization / Company / University", name: "organization", widget: "string" }
+      - { label: "Bio", name: "bio", widget: "text" }
+      - { label: "Avatar Image", name: "avatar", widget: "image", required: false }
+      - { label: "Talk Topic", name: "topic", widget: "string" }
+      - { label: "Slides URL", name: "slidesUrl", widget: "string", required: false }
+      - { label: "Recording URL", name: "recordingUrl", widget: "string", required: false }
+      - { label: "GitHub Profile", name: "github", widget: "string", required: false }
+      - { label: "LinkedIn Profile", name: "linkedin", widget: "string", required: false }
+      - { label: "Twitter / X Profile", name: "twitter", widget: "string", required: false }
+      - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: false }
+      - { label: "Speaker Notes / Details", name: "body", widget: "markdown", required: false }
+
+  # ----------------------------------------------------------------------------
+  # SPONSORS & PARTNERS
+  # ----------------------------------------------------------------------------
+  - name: "sponsors"
+    label: "Sponsors & Partners"
+    folder: "src/content/sponsors"
+    create: true
+    slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
+    fields:
+      - { label: "Organization Name", name: "name", widget: "string" }
+      - { label: "Sponsorship Tier", name: "tier", widget: "select", options: ["Venue", "Refreshment", "Community", "Ecosystem", "Annual", "Event Sponsor"] }
+      - { label: "Logo Image", name: "logo", widget: "image", required: false }
+      - { label: "Website URL", name: "website", widget: "string" }
+      - { label: "Description / Partnership Scope", name: "description", widget: "text" }
+      - { label: "Active Partner", name: "active", widget: "boolean", default: true }
+      - { label: "Perks & Acknowledgements", name: "perks", widget: "list", required: false }
+      - { label: "Additional Info", name: "body", widget: "markdown", required: false }
+
+  # ----------------------------------------------------------------------------
+  # ORGANIZERS & TEAM
+  # ----------------------------------------------------------------------------
+  - name: "team"
+    label: "Organizers & Leads"
+    folder: "src/content/team"
+    create: true
+    slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Role / Title", name: "role", widget: "string" }
+      - { label: "Bio", name: "bio", widget: "text" }
+      - { label: "Company / Affiliation", name: "company", widget: "string", required: false }
+      - { label: "Avatar Image", name: "avatar", widget: "image", required: false }
+      - { label: "Linux Foundation Username", name: "linuxFoundationUser", widget: "string", required: false }
+      - { label: "GitHub Profile", name: "github", widget: "string", required: false }
+      - { label: "LinkedIn Profile", name: "linkedin", widget: "string", required: false }
+      - { label: "Twitter / X Profile", name: "twitter", widget: "string", required: false }
+      - { label: "Is Core Lead", name: "isLead", widget: "boolean", default: false }
+      - { label: "Display Order", name: "order", widget: "number", default: 10 }
+      - { label: "Profile Content", name: "body", widget: "markdown", required: false }
+
+  # ----------------------------------------------------------------------------
+  # BLOG & RECAPS
+  # ----------------------------------------------------------------------------
+  - name: "blog"
+    label: "Blog & Recaps"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Author Name", name: "author", widget: "string" }
+      - { label: "Author Role", name: "authorRole", widget: "string", default: "CNCF Peshawar Organizer" }
+      - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", default: ["Community", "CNCF", "Peshawar", "Genesis"] }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Post Content", name: "body", widget: "markdown" }

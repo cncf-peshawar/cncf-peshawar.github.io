@@ -1,0 +1,51 @@
+---
+// src/pages/admin/index.astro
+// Git-backed headless CMS portal for managing events, speakers, sponsors, team, and blog.
+// @ts-ignore
+import fs from 'node:fs';
+// @ts-ignore
+import path from 'node:path';
+import YAML from 'yaml';
+
+const configPath = path.resolve('./public/admin/config.yml');
+const configYaml = fs.readFileSync(configPath, 'utf-8');
+const parsedConfig = YAML.parse(configYaml);
+const config = {
+  ...parsedConfig,
+  load_config_file: false
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cloud Native Peshawar — Content Manager</title>
+    <!-- Explicit CMS Config Links -->
+    <link href="/admin/config.yml" type="application/yaml" rel="cms-config-url" />
+    <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+    <link href="config.yml" type="application/yaml" rel="cms-config-url" />
+
+    <!-- Sveltia CMS Manual Initialization -->
+    <script is:inline>
+      window.CMS_MANUAL_INIT = true;
+    </script>
+    <script is:inline src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+  </head>
+  <body>
+    <script is:inline define:vars={{ config }}>
+      function initCms() {
+        if (window.CMS && typeof window.CMS.init === 'function') {
+          window.CMS.init({ config });
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCms);
+      } else {
+        initCms();
+      }
+    </script>
+  </body>
+</html>
