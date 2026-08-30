@@ -18,9 +18,15 @@ const getTimestamp = (dateStr: string) => {
   return isNaN(ts) ? 0 : ts;
 };
 const sortedEvents = allEvents.sort((a, b) => getTimestamp(b.data.date) - getTimestamp(a.data.date));
-const upcomingEvents = sortedEvents.filter(e => e.data.status === 'upcoming');
+
+// Upcoming events sorted chronologically (nearest upcoming first)
+const upcomingEvents = allEvents
+  .filter(e => e.data.status === 'upcoming')
+  .sort((a, b) => getTimestamp(a.data.date) - getTimestamp(b.data.date));
+
 const pastEvents = sortedEvents.filter(e => e.data.status === 'completed');
-const otherUpcomingEvents = upcomingEvents.filter(e => e.slug !== '01-cncf-peshawar-genesis');
+const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : null;
+const otherUpcomingEvents = upcomingEvents.length > 1 ? upcomingEvents.slice(1) : [];
 
 const allSpeakers = await getCollection('speakers');
 const featuredSpeakers = allSpeakers.filter(s => s.data.featured);
@@ -36,28 +42,62 @@ const sponsors = await getCollection('sponsors');
   <TrackRecordStats />
 
   <!-- Next / Upcoming Meetup Spotlight & Live Countdown -->
-  <section class="section section--subtle">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-header__num">00 // INAUGURAL MEETUP</span>
-        <h2 class="section-header__title">CNCF Peshawar Genesis.</h2>
-        <p class="section-header__desc">
-          Reserve your seat for our launch gathering in Peshawar.
-        </p>
-      </div>
-
-      <!-- Real-time Countdown Card -->
-      <GenesisCountdown />
-
-      {otherUpcomingEvents.length > 0 && (
-        <div class="events-list">
-          {otherUpcomingEvents.map(event => (
-            <EventCard event={event} />
-          ))}
+  {nextFeaturedEvent ? (
+    <section class="section section--subtle">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__num">00 // UPCOMING MEETUP</span>
+          <h2 class="section-header__title">{nextFeaturedEvent.data.title}.</h2>
+          <p class="section-header__desc">
+            {nextFeaturedEvent.data.summary || 'Reserve your seat for our upcoming community gathering in Peshawar.'}
+          </p>
         </div>
-      )}
-    </div>
-  </section>
+
+        <!-- Real-time Countdown Card -->
+        <GenesisCountdown event={nextFeaturedEvent} />
+
+        {otherUpcomingEvents.length > 0 && (
+          <div class="events-list">
+            <h3 class="other-events-title">More Upcoming Gatherings</h3>
+            {otherUpcomingEvents.map(event => (
+              <EventCard event={event} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  ) : (
+    <section class="section section--subtle">
+      <div class="container">
+        <div class="planning-box">
+          <div class="planning-box__header">
+            <span class="badge badge--live">MEETUP IN PLANNING</span>
+            <span class="planning-box__meta">Open Community Groups (OCG)</span>
+          </div>
+          <div class="planning-box__body">
+            <h2 class="planning-box__title">Our Next Meetup is in the Works.</h2>
+            <p class="planning-box__desc">
+              We are currently coordinating venues, hands-on workshop topics, and guest speakers for our upcoming session. Join our official community group on OCG to get notified as soon as registrations open.
+            </p>
+            <div class="planning-box__actions">
+              <a href="https://ocgroups.dev/cncf/group/6vwk2n4" target="_blank" rel="noopener noreferrer" class="btn btn--accent">
+                <span>Join CNCF Peshawar on OCG</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+              <a href={`${base}/speak`} class="btn btn--secondary">
+                <span>Submit a Talk / CFP</span>
+              </a>
+              <a href={`${base}/events`} class="btn btn--secondary">
+                <span>Explore Past Meetups</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- 01 Community Pillars (Bento Grid) -->
   <BentoPillars />
@@ -263,6 +303,61 @@ const sponsors = await getCollection('sponsors');
 
   .sponsor-card__link:hover {
     text-decoration: underline;
+  }
+
+  .other-events-title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .planning-box {
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: clamp(var(--space-md), 4vw, var(--space-xl));
+    margin-bottom: var(--space-xl);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .planning-box__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .planning-box__meta {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-muted);
+  }
+
+  .planning-box__title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-xs);
+    color: var(--color-ink);
+  }
+
+  .planning-box__desc {
+    font-size: var(--font-size-base);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-relaxed);
+    max-width: 65ch;
+    margin-bottom: var(--space-lg);
+  }
+
+  .planning-box__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
   }
 
   .section-cta-center {

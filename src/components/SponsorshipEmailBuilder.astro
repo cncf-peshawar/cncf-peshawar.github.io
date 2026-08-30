@@ -67,9 +67,9 @@
             <div class="form-group">
               <label for="timeline-select">Target Meetup / Timing <span class="required">*</span></label>
               <select id="timeline-select" class="form-select">
-                <option value="CNCF Peshawar Genesis (Sep 4, 2026)">CNCF Peshawar Genesis (Sep 4, 2026)</option>
-                <option value="Upcoming 2026 Meetup Series">Upcoming 2026 Meetup Series</option>
-                <option value="Annual 2026-2027 Ongoing Partnership">Annual 2026-2027 Ongoing Partnership</option>
+                <option value="Next Upcoming Meetup">Next Upcoming Meetup</option>
+                <option value="Upcoming Meetup Series">Upcoming Meetup Series</option>
+                <option value="Annual Ongoing Partnership">Annual Ongoing Partnership</option>
               </select>
             </div>
           </div>
@@ -166,7 +166,7 @@
       const contact = sanitizeSingleLine(contactInput?.value || '') || '[Contact Person, Role]';
       const email = sanitizeSingleLine(emailInput?.value || '') || '[Contact Email Address]';
       const tier = tierSelect?.value || 'Refreshment Partner (Community Hospitality)';
-      const timeline = timelineSelect?.value || 'CNCF Peshawar Genesis (Sep 4, 2026)';
+      const timeline = timelineSelect?.value || 'Next Upcoming Meetup';
       const website = sanitizeSingleLine(websiteInput?.value || '') || '[Website URL / Logo Asset Link]';
       const notes = notesInput?.value.trim() || '[Details on venue capacity, refreshment contribution, or swag vouchers]';
 

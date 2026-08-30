@@ -1,19 +1,40 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+
 interface Props {
+  event?: CollectionEntry<'events'>;
   targetDate?: string;
 }
 
-const { targetDate = "2026-09-04T15:00:00+05:00" } = Astro.props;
+const { event, targetDate } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const title = event?.data.title ?? "CNCF Peshawar Genesis";
+const dateStr = event?.data.date ?? "2026-09-04";
+const timeStr = event?.data.time ?? "03:00 PM - 07:00 PM PKT";
+const venueStr = event?.data.venue ?? "NIC (National Incubation Center), South Canal Road, Peshawar";
+const rsvpUrl = event?.data.rsvpUrl ?? "https://ocgroups.dev/cncf/group/6vwk2n4/event/z7sb6wa";
+const lumaUrl = event?.data.lumaUrl;
+const eventSlug = event?.slug ?? "01-cncf-peshawar-genesis";
+
+// Format date nicely (e.g. SEP 4, 2026)
+const dateFormatted = new Date(dateStr).toLocaleDateString('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric'
+}).toUpperCase();
+
+// Form ISO target date string for countdown
+const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15:00:00+05:00` : "2026-09-04T15:00:00+05:00");
 ---
 
-<div class="countdown-card" data-target={targetDate}>
+<div class="countdown-card" data-target={effectiveTarget}>
   <div class="countdown-card__header">
     <div class="countdown-card__live-indicator">
-      <span class="live-dot"></span>
-      <span class="live-label">COUNTDOWN TO GENESIS</span>
+      <span class="live-dot" id="cd-live-dot"></span>
+      <span class="live-label" id="cd-live-label">COUNTDOWN TO {title.toUpperCase()}</span>
     </div>
-    <span class="countdown-card__date">SEP 4, 2026 · 03:00 PM PKT</span>
+    <span class="countdown-card__date" id="cd-date-display">{dateFormatted} · {timeStr}</span>
   </div>
 
   <div class="countdown-grid" id="genesis-countdown">
@@ -44,31 +65,36 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
         <circle cx="12" cy="10" r="3"/>
       </svg>
-      <span>NIC (National Incubation Center), South Canal Road, Peshawar</span>
+      <span>{venueStr}</span>
     </div>
-    <div class="countdown-actions">
+    <div class="countdown-actions" id="cd-actions">
       <a 
-        href={`${base}/events/01-cncf-peshawar-genesis`} 
+        href={`${base}/events/${eventSlug}`} 
         class="btn btn--secondary btn--sm"
       >
-        <span>View Agenda →</span>
+        <span>View Details →</span>
       </a>
-      <a 
-        href="https://ocgroups.dev/cncf/group/6vwk2n4/event/z7sb6wa" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        class="btn btn--accent btn--sm"
-      >
-        <span>RSVP on OCG (Free)</span>
-      </a>
-      <a 
-        href="https://luma.com/shufbsm5" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        class="btn btn--secondary btn--sm"
-      >
-        <span>Luma ↗</span>
-      </a>
+      {rsvpUrl && (
+        <a 
+          href={rsvpUrl} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn--accent btn--sm"
+          id="cd-rsvp-btn"
+        >
+          <span>RSVP on OCG (Free)</span>
+        </a>
+      )}
+      {lumaUrl && (
+        <a 
+          href={lumaUrl} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn--secondary btn--sm"
+        >
+          <span>Luma ↗</span>
+        </a>
+      )}
     </div>
   </div>
 </div>
@@ -81,6 +107,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     padding: var(--space-lg);
     box-shadow: 0 0 24px var(--color-accent-subtle);
     margin-bottom: var(--space-2xl);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .countdown-card--concluded {
+    border-color: var(--color-border);
+    box-shadow: none;
   }
 
   .countdown-card__header {
@@ -106,6 +138,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     border-radius: 50%;
     background-color: var(--color-signal-green);
     animation: pulse-live 2s infinite ease-in-out;
+  }
+
+  .live-dot--concluded {
+    background-color: var(--color-ink-subtle);
+    animation: none;
   }
 
   .live-label {
@@ -218,7 +255,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     const hoursEl = document.getElementById('cd-hours');
     const minsEl = document.getElementById('cd-mins');
     const secsEl = document.getElementById('cd-secs');
-    const liveLabel = container.querySelector('.live-label');
+    const liveDot = document.getElementById('cd-live-dot');
+    const liveLabel = document.getElementById('cd-live-label');
+    const rsvpBtn = document.getElementById('cd-rsvp-btn');
 
     if (isNaN(targetTime)) {
       if (daysEl) daysEl.innerText = '00';
@@ -239,7 +278,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         if (hoursEl) hoursEl.innerText = '00';
         if (minsEl) minsEl.innerText = '00';
         if (secsEl) secsEl.innerText = '00';
-        if (liveLabel) liveLabel.textContent = 'EVENT IN PROGRESS / COMPLETED';
+        if (liveLabel) liveLabel.textContent = 'EVENT CONCLUDED / ARCHIVED';
+        if (liveDot) liveDot.classList.add('live-dot--concluded');
+        container?.classList.add('countdown-card--concluded');
+        if (rsvpBtn) {
+          rsvpBtn.textContent = 'Join OCG Group';
+          rsvpBtn.setAttribute('href', 'https://ocgroups.dev/cncf/group/6vwk2n4');
+        }
         if (intervalId) clearInterval(intervalId);
         return;
       }
