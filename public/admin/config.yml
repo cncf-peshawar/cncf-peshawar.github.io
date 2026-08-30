@@ -1,7 +1,14 @@
 backend:
   name: github
-  repo: Cloud-Native-Peshawar/cncf-peshawar-website
+  repo: cncf-peshawar/cncf-peshawar.github.io
   branch: main
+  base_url: https://cncf-peshawar-oauth-worker.cncfpeshawar.workers.dev
+  auth_endpoint: /auth
+
+# Sign-in methods: supports direct GitHub Personal Access Token (PAT) & OAuth proxy
+auth_methods:
+  - token
+  - oauth
 
 # Local backend allows editing directly from local folder or localhost
 local_backend: true
@@ -11,8 +18,8 @@ media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 # Display settings
-site_url: "https://cloud-native-peshawar.github.io"
-display_url: "https://cloud-native-peshawar.github.io"
+site_url: "https://cncf-peshawar.github.io"
+display_url: "https://cncf-peshawar.github.io"
 logo_url: "/favicon.svg"
 
 collections:

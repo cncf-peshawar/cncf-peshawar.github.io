@@ -10,8 +10,19 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Route: /auth - Redirects user to GitHub OAuth
-    if (url.pathname === '/auth') {
+    // Handle CORS preflight
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        },
+      });
+    }
+
+    // Route: /auth or /oauth - Redirects user to GitHub OAuth
+    if (url.pathname === '/auth' || url.pathname === '/oauth' || url.pathname === '/oauth/authorize') {
       const scope = url.searchParams.get('scope') || 'repo,user';
       const state = crypto.randomUUID();
 
@@ -19,8 +30,35 @@ export default {
       return Response.redirect(githubAuthUrl, 302);
     }
 
-    // Route: /callback - Exchanges code for GitHub Access Token & returns message to CMS window
-    if (url.pathname === '/callback') {
+    // Route: /callback or /oauth/callback - Exchanges code for GitHub Access Token & returns message to CMS window
+    if (url.pathname === '/callback' || url.pathname === '/oauth/callback') {
+      // Handle user cancellation or GitHub OAuth error
+      if (url.searchParams.get('error')) {
+        const error = url.searchParams.get('error');
+        const errorDescription = url.searchParams.get('error_description') || error;
+        const errorContent = `
+          <!doctype html>
+          <html>
+            <body>
+              <script>
+                (function() {
+                  if (window.opener) {
+                    window.opener.postMessage('authorization:github:error:${JSON.stringify({ error: errorDescription })}', '*');
+                    window.close();
+                  }
+                })();
+              </script>
+              <p style="font-family: sans-serif; text-align: center; padding: 40px;">
+                Authentication canceled: ${errorDescription}. You may close this window.
+              </p>
+            </body>
+          </html>
+        `;
+        return new Response(errorContent, {
+          headers: { 'Content-Type': 'text/html' },
+        });
+      }
+
       const code = url.searchParams.get('code');
 
       if (!code) {
@@ -44,7 +82,28 @@ export default {
       const tokenData = await tokenResponse.json();
 
       if (tokenData.error) {
-        return new Response(JSON.stringify(tokenData), { status: 400 });
+        const errorContent = `
+          <!doctype html>
+          <html>
+            <body>
+              <script>
+                (function() {
+                  if (window.opener) {
+                    window.opener.postMessage('authorization:github:error:${JSON.stringify(tokenData)}', '*');
+                    window.close();
+                  }
+                })();
+              </script>
+              <p style="font-family: sans-serif; text-align: center; padding: 40px;">
+                OAuth Error: ${tokenData.error_description || tokenData.error}. You may close this window.
+              </p>
+            </body>
+          </html>
+        `;
+        return new Response(errorContent, {
+          headers: { 'Content-Type': 'text/html' },
+          status: 400,
+        });
       }
 
       // Format response for Netlify / Decap / Sveltia CMS window message listener
@@ -68,15 +127,27 @@ export default {
                 window.opener.postMessage("authorizing:github", "*");
               })();
             </script>
+            <p style="font-family: sans-serif; text-align: center; padding: 40px;">
+              Authentication successful. Redirecting back to CMS...
+            </p>
           </body>
         </html>
       `;
 
       return new Response(content, {
-        headers: { 'Content-Type': 'text/html' },
+        headers: {
+          'Content-Type': 'text/html',
+          'Access-Control-Allow-Origin': '*',
+        },
       });
     }
 
-    return new Response('CNCF Peshawar OAuth Proxy Worker is online.', { status: 200 });
+    return new Response('CNCF Peshawar OAuth Proxy Worker is online.', {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'text/plain',
+      },
+    });
   },
 };
