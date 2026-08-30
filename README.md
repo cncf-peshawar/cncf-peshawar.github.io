@@ -3,7 +3,7 @@
 [![Astro 5](https://img.shields.io/badge/Built%20with-Astro%205-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 [![CNCF Community](https://img.shields.io/badge/CNCF-Open%20Community%20Groups-0086FF?style=flat-square&logo=cncf&logoColor=white)](https://ocgroups.dev/cncf/group/6vwk2n4)
 [![GitHub Pages](https://img.shields.io/badge/Deployed%20on-GitHub%20Pages-222222?style=flat-square&logo=githubpages&logoColor=white)](https://pages.github.com)
-[![100% Free](https://img.shields.io/badge/Cost-%240%20(Free%20Forever)-10B981?style=flat-square)](https://github.com/Cloud-Native-Peshawar/cncf-peshawar-website)
+[![100% Free](https://img.shields.io/badge/Cost-%240%20(Free%20Forever)-10B981?style=flat-square)](https://github.com/cncf-peshawar/cncf-peshawar.github.io)
 [![CMS](https://img.shields.io/badge/CMS-Sveltia%20%2F%20Decap-6366F1?style=flat-square)](https://github.com/sveltia/sveltia-cms)
 
 The official website, speaker hub, sponsorship prospectus, and content management portal for **Cloud Native Peshawar**—the official Cloud Native Computing Foundation (CNCF) community group in Khyber Pakhtunkhwa, Pakistan.
@@ -46,8 +46,8 @@ The official website, speaker hub, sponsorship prospectus, and content managemen
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/Cloud-Native-Peshawar/cncf-peshawar-website.git
-cd cncf-peshawar-website
+git clone https://github.com/cncf-peshawar/cncf-peshawar.github.io.git
+cd cncf-peshawar.github.io
 ```
 
 ### 2. Install dependencies
@@ -143,7 +143,9 @@ The automated sync runs automatically via [`.github/workflows/event-sync.yml`](.
 You do not need to edit code to publish new events or blog posts:
 
 1. Open `http://localhost:4321/admin/` (or the live URL `/admin/`).
-2. Log in using your GitHub account or a Personal Access Token (PAT).
+2. **Log in**:
+   - **Personal Access Token (Instant)**: Go to [GitHub Settings -> Tokens](https://github.com/settings/tokens), create a token with `repo` scope, and paste it into the **Personal Access Token** tab in the CMS login modal.
+   - **One-Click GitHub OAuth**: If your team has deployed the Cloudflare OAuth worker, click **Sign in with GitHub**.
 3. Select a collection (**Events & Meetups**, **Speakers & Mentors**, **Sponsors & Partners**, **Organizers & Team**, **Blog & Recaps**).
 4. Create or edit an entry and click **Save & Publish**.
 5. The CMS commits the Markdown file directly to GitHub, triggering a fresh build on GitHub Pages in ~45 seconds.
