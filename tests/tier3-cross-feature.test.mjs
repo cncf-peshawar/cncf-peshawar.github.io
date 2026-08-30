@@ -78,7 +78,7 @@ export async function runTier3Suite() {
         issueBody,
         issueTitle: '[CFP] Multi-Agent Systems on K8s',
         issueNumber: '42',
-        issueUrl: 'https://github.com/Cloud-Native-Peshawar/cncf-peshawar-website/issues/42',
+        issueUrl: 'https://github.com/cncf-peshawar/cncf-peshawar.github.io/issues/42',
         baseDir: tempDir,
         dryRun: false
       });
@@ -245,7 +245,7 @@ summary: "Community launch meetup with deep-dive technical talks."
       '--issue-body', 'tests/fixtures/cfp-issue-valid-full.md',
       '--issue-title', '[CFP] Multi-Agent Systems on K8s',
       '--issue-number', '42',
-      '--issue-url', 'https://github.com/Cloud-Native-Peshawar/cncf-peshawar-website/issues/42',
+      '--issue-url', 'https://github.com/cncf-peshawar/cncf-peshawar.github.io/issues/42',
       '--dry-run',
       '--output-json'
     ]);

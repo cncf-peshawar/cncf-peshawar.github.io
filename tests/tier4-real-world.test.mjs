@@ -57,7 +57,7 @@ export async function runTier4Suite() {
         issueBody,
         issueTitle: '[CFP] Multi-Agent Systems on K8s',
         issueNumber: '42',
-        issueUrl: 'https://github.com/Cloud-Native-Peshawar/cncf-peshawar-website/issues/42',
+        issueUrl: 'https://github.com/cncf-peshawar/cncf-peshawar.github.io/issues/42',
         baseDir: tempDir,
         dryRun: false
       });
@@ -329,7 +329,7 @@ Profile details for ${nameOnly}.
       const customBody = `
 ## Preparation Guidelines for Attendees
 1. Bring your laptop with Docker Desktop or Minikube installed.
-2. Clone repository: \`git clone https://github.com/Cloud-Native-Peshawar/genesis-workshop.git\`.
+2. Clone repository: \`git clone https://github.com/cncf-peshawar/genesis-workshop.git\`.
 
 ### Workshop Leads
 - Syed Hassan Tayyab

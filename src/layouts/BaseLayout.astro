@@ -17,7 +17,7 @@ const {
   image = `${base}/images/og-default.svg`
 } = Astro.props;
 
-const siteUrl = Astro.site || new URL('https://cloud-native-peshawar.github.io');
+const siteUrl = Astro.site || new URL('https://cncf-peshawar.github.io');
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 const imageURL = new URL(image, siteUrl);
 const fullTitle = title.includes("Cloud Native Peshawar") || title.includes("CNCF Peshawar") 

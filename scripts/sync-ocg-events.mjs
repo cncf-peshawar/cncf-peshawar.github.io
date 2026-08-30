@@ -16,7 +16,7 @@ import YAML from 'yaml';
 export const DEFAULT_OCG_GROUP_URL = 'https://ocgroups.dev/cncf/group/6vwk2n4';
 export const DEFAULT_EVENTS_DIR = path.resolve(process.cwd(), 'src/content/events');
 export const DEFAULT_TIMEZONE = 'Asia/Karachi';
-export const USER_AGENT = 'CNCF-Peshawar-SyncBot/1.0 (+https://github.com/Cloud-Native-Peshawar/cncf-peshawar-website)';
+export const USER_AGENT = 'CNCF-Peshawar-SyncBot/1.0 (+https://github.com/cncf-peshawar/cncf-peshawar.github.io)';
 
 /**
  * Decodes standard HTML entities into plain text.

@@ -502,7 +502,7 @@ https://linkedin.com/in/farhadkhan-k8s
       const cfpResult = await parseCfpIssue({
         issueBody: sampleIssueBody,
         issueNumber: 991,
-        issueUrl: 'https://github.com/Cloud-Native-Peshawar/cncf-peshawar-website/issues/991',
+        issueUrl: 'https://github.com/cncf-peshawar/cncf-peshawar.github.io/issues/991',
         baseDir: tempSandbox
       });
 
