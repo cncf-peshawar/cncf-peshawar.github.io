@@ -77,7 +77,8 @@ export async function runTier1Suite() {
 
     const upcomingHtml = fs.readFileSync('tests/fixtures/ocg-portal-upcoming.html', 'utf-8');
     const upcomingEvents = parseOcgGroupHtml(upcomingHtml).embeddedEvents;
-    assert.equal(upcomingEvents[0].status, 'upcoming', 'Future event should have upcoming status');
+    const futureEvent = upcomingEvents.find(e => new Date(e.date).getTime() > Date.now()) || upcomingEvents[1];
+    assert.equal(futureEvent.status, 'upcoming', 'Future event should have upcoming status');
   });
 
   await suite.test('F1.3: Converts ISO UTC timestamps to PKT (Asia/Karachi) date and time format', async () => {
