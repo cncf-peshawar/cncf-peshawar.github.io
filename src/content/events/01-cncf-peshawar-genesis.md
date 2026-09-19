@@ -4,12 +4,13 @@ date: "2026-09-04"
 time: "03:00 PM - 07:00 PM PKT"
 venue: "National Incubation Center (NIC), South Canal Road"
 location: "Peshawar, KPK, Pakistan"
-status: "upcoming"
+status: "completed"
 capacity: 70
 rsvpUrl: "https://ocgroups.dev/cncf/group/6vwk2n4/event/z7sb6wa"
 lumaUrl: "https://luma.com/shufbsm5"
 speakers:
   - "Syed Hassan Tayyab (Co Founder & AI Product Developer)"
+  - "Hamid Naeem"
 tags:
   - "Genesis"
   - "OpenSource"
