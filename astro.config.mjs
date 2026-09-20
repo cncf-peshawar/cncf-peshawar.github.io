@@ -6,6 +6,9 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   site: 'https://cncf-peshawar.github.io',
   integrations: [mdx()],
+  server: {
+    allowedHosts: ['localhost', '.trycloudflare.com']
+  },
   build: {
     format: 'directory'
   }
