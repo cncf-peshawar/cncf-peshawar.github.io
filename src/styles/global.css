@@ -211,13 +211,11 @@ a {
   background-color: var(--color-ink-hover);
   border-color: var(--color-ink-hover);
   color: var(--color-paper);
-  transform: translateY(-1px);
 }
 
 .btn--primary:active,
 .btn--primary.is-active {
   background-color: var(--color-ink);
-  transform: translateY(0);
 }
 
 /* Accent Button (CNCF Cloud Blue) */
@@ -225,21 +223,19 @@ a {
   background-color: var(--color-accent);
   color: var(--color-accent-contrast);
   border-color: var(--color-accent);
-  box-shadow: 0 1px 3px var(--color-accent-subtle);
 }
 
 .btn--accent:hover,
 .btn--accent.is-hover {
   background-color: var(--color-accent-hover);
   border-color: var(--color-accent-hover);
-  box-shadow: 0 4px 12px var(--color-accent-subtle);
-  transform: translateY(-1px);
+  box-shadow: var(--shadow-glow);
 }
 
 .btn--accent:active,
 .btn--accent.is-active {
   background-color: var(--color-accent);
-  transform: translateY(0);
+  box-shadow: none;
 }
 
 /* Secondary / Outline Button */
@@ -251,15 +247,14 @@ a {
 
 .btn--secondary:hover,
 .btn--secondary.is-hover {
-  background-color: var(--color-paper-subtle);
+  background-color: var(--color-paper-card);
   border-color: var(--color-border-hover);
-  transform: translateY(-1px);
+  color: var(--color-accent);
 }
 
 .btn--secondary:active,
 .btn--secondary.is-active {
   background-color: var(--color-paper-card);
-  transform: translateY(0);
 }
 
 /* Small Button Modifier */
@@ -361,14 +356,13 @@ a {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: clamp(var(--space-md), 4vw, var(--space-xl));
-  transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
   position: relative;
 }
 
 .card:hover {
   border-color: var(--color-border-hover);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -384,4 +378,244 @@ a {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* ICONS (Material Symbols Outlined)                                          */
+/* -------------------------------------------------------------------------- */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+}
+
+/* -------------------------------------------------------------------------- */
+/* FORM CONTROLS (shared across sponsorship builder & contact form)           */
+/* -------------------------------------------------------------------------- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.form-group label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-ink);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.required {
+  color: var(--color-accent);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-ink);
+  background-color: var(--color-paper-card-hover);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+  border-color: var(--color-accent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* TOAST / SNACKBAR (shared copy-to-clipboard & form feedback)                */
+/* -------------------------------------------------------------------------- */
+.toast-region {
+  position: fixed;
+  bottom: var(--space-md);
+  right: var(--space-md);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: 0.75rem 1rem;
+  background-color: var(--color-paper-card);
+  border: 1px solid var(--color-border-hover);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-rim);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-ink);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* -------------------------------------------------------------------------- */
+/* FILTER TOOLBAR (events search/category pills)                              */
+/* -------------------------------------------------------------------------- */
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  background-color: var(--color-paper-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.filter-pill:hover {
+  color: var(--color-ink);
+  border-color: var(--color-border-hover);
+}
+
+.filter-pill.is-active {
+  color: var(--color-accent-contrast);
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* RADIO CARD (contact inquiry-type selector)                                 */
+/* -------------------------------------------------------------------------- */
+.radio-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: 0.65rem var(--space-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-paper-card);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.radio-card:has(input:checked),
+.radio-card.is-checked {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent-subtle);
+}
+
+.radio-card input[type="radio"] {
+  accent-color: var(--color-accent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* DIVIDED LIST (past-events archive style rows)                              */
+/* -------------------------------------------------------------------------- */
+.divider-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.divider-list__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color var(--transition-fast);
+}
+
+.divider-list__row:last-child {
+  border-bottom: none;
+}
+
+.divider-list__row:hover {
+  background-color: var(--color-paper-card);
+}
+
+/* -------------------------------------------------------------------------- */
+/* VERTICAL TIMELINE (genesis recap sessions)                                 */
+/* -------------------------------------------------------------------------- */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding-left: var(--space-lg);
+  border-left: 1px solid var(--color-border);
+}
+
+.timeline__item {
+  position: relative;
+}
+
+.timeline__item::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--space-lg) - 5px);
+  top: 0.35rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-paper);
+  border: 2px solid var(--color-accent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* STAT PILL ROW (telemetry-style metric strips)                              */
+/* -------------------------------------------------------------------------- */
+.stat-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-ink-muted);
+}
+
+.stat-pill-row__sep {
+  color: var(--color-ink-subtle);
+  opacity: 0.5;
 }

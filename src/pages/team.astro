@@ -1,71 +1,93 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { buildWorkingGroups, getAvatarSrc as getAvatarSrcBase, initials } from '../lib/team';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const allTeam = await getCollection('team');
 const sortedTeam = allTeam.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const coreTeam = sortedTeam.filter((m) => m.data.isLead);
+const getAvatarSrc = (avatar?: string) => getAvatarSrcBase(base, avatar);
+
+const workingGroups = buildWorkingGroups(sortedTeam);
+const activeGroupCount = workingGroups.length;
 ---
 
-<BaseLayout 
-  title="Organizers & Team | CNCF Peshawar" 
+<BaseLayout
+  title="Organizers & Team | CNCF Peshawar"
   description="Meet the passionate engineers, community leads, and volunteers organizing the Cloud Native Chapter in Peshawar."
 >
-  <!-- Page Header -->
+  <!-- Page Header & Telemetry -->
   <section class="page-header section">
     <div class="container">
-      <span class="badge badge--live">Chapter Leadership</span>
-      <h1 class="page-header__title">Organizers & Volunteer Team.</h1>
+      <span class="badge badge--live">Community Leadership · Peshawar Chapter</span>
+      <h1 class="page-header__title">Community Leadership &amp; Organizers.</h1>
       <p class="page-header__desc">
-        Cloud Native Peshawar is organized by passionate engineers, researchers, and open-source advocates dedicated to growing the cloud native ecosystem in Khyber Pakhtunkhwa.
+        Meet the engineers, organizers, and volunteers driving cloud native adoption across Peshawar and the broader Khyber Pakhtunkhwa ecosystem.
       </p>
+
+      <div class="telemetry-pills">
+        <div class="telemetry-pill">
+          <span class="material-symbols-outlined">groups</span>
+          <span class="telemetry-pill__num">{sortedTeam.length}</span>
+          <span>Active Organizers</span>
+        </div>
+        <div class="telemetry-pill">
+          <span class="material-symbols-outlined">lan</span>
+          <span class="telemetry-pill__num">{activeGroupCount}</span>
+          <span>Working Groups</span>
+        </div>
+        <div class="telemetry-pill">
+          <span class="material-symbols-outlined">volunteer_activism</span>
+          <span class="telemetry-pill__num">100%</span>
+          <span>Volunteer Powered</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Core Team Grid -->
+  <!-- Core Leadership -->
   <section class="section section--subtle">
     <div class="container">
-      <div class="section-header">
-        <span class="section-header__num">01 // LEADS</span>
-        <div>
-          <h2 class="section-header__title">Chapter Organizers.</h2>
-          <p class="section-header__desc">
-            Organizers coordinating sessions, speaker curation, and community operations.
-          </p>
-        </div>
+      <div class="core-header">
+        <span class="core-header__label">CORE ARCHITECTURE / EXECUTIVE STEERING</span>
       </div>
 
-      <div class="team-grid">
-        {sortedTeam.map(member => (
-          <div class="member-card">
-            <div class="member-card__avatar">
-              <span class="member-card__initials">
-                {member.data.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
-              </span>
+      <div class="core-grid">
+        {coreTeam.map((member, i) => (
+          <div class="core-card">
+            <div class="core-card__photo">
+              {member.data.avatar ? (
+                <img src={getAvatarSrc(member.data.avatar)} alt={member.data.name} loading="lazy" />
+              ) : (
+                <span class="core-card__initials">{initials(member.data.name)}</span>
+              )}
+              <span class="core-card__role-badge">{member.data.role}</span>
             </div>
-
-            <h3 class="member-card__name">{member.data.name}</h3>
-            <p class="member-card__role">{member.data.role}</p>
-            {member.data.company && (
-              <p class="member-card__company">{member.data.company}</p>
-            )}
-            <p class="member-card__bio">{member.data.bio}</p>
-
-            <div class="member-card__links">
-              {member.data.linuxFoundationUser && (
-                <span class="lf-badge" title="Linux Foundation ID">
-                  LF: @{member.data.linuxFoundationUser}
-                </span>
+            <div class="core-card__body">
+              <div class="core-card__heading">
+                <h3>{member.data.name}</h3>
+                <span class="core-card__sig">SIG-{String(i + 1).padStart(2, '0')}</span>
+              </div>
+              {(member.data.company || member.data.university) && (
+                <p class="core-card__org">{member.data.company || member.data.university}</p>
               )}
-              {member.data.linkedin && (
-                <a href={member.data.linkedin} target="_blank" rel="noopener noreferrer" class="social-btn">
-                  LinkedIn ↗
-                </a>
-              )}
-              {member.data.github && (
-                <a href={member.data.github} target="_blank" rel="noopener noreferrer" class="social-btn">
-                  GitHub ↗
-                </a>
-              )}
+              {member.data.bio && <p class="core-card__bio">{member.data.bio}</p>}
+            </div>
+            <div class="core-card__footer">
+              <div class="core-card__links">
+                {member.data.github && (
+                  <a href={member.data.github} target="_blank" rel="noopener noreferrer" aria-label={`${member.data.name} on GitHub`}><span class="material-symbols-outlined">code</span></a>
+                )}
+                {member.data.linkedin && (
+                  <a href={member.data.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${member.data.name} on LinkedIn`}><span class="material-symbols-outlined">business_center</span></a>
+                )}
+                {member.data.email && (
+                  <a href={`mailto:${member.data.email}`} aria-label={`Email ${member.data.name}`}><span class="material-symbols-outlined">mail</span></a>
+                )}
+              </div>
+              <span class="core-card__location">PESHAWAR, PK</span>
             </div>
           </div>
         ))}
@@ -73,8 +95,51 @@ const sortedTeam = allTeam.sort((a, b) => (a.data.order || 99) - (b.data.order |
     </div>
   </section>
 
-  <!-- Volunteer Callout -->
+  <!-- Specialized Working Groups -->
   <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__num">Distributed Operations / Working Groups</span>
+        <h2 class="section-header__title">Specialized Working Groups</h2>
+        <p class="section-header__desc">Volunteer teams managing end-to-end community operations.</p>
+      </div>
+
+      <div class="wg-grid">
+        {workingGroups.map((group) => (
+          <a href={`${base}/team/${group.slug}`} class="wg-card">
+            <div class="wg-card__head">
+              <div class="wg-card__icon"><span class="material-symbols-outlined">{group.icon}</span></div>
+              <span class="wg-card__code">{group.code}</span>
+            </div>
+            <h3 class="wg-card__title">{group.title}</h3>
+            <p class="wg-card__desc">{group.desc}</p>
+            <div class="wg-card__members">
+              {group.members.slice(0, 6).map((member) => (
+                <span class="wg-member" title={member.data.name}>
+                  {member.data.avatar ? (
+                    <img src={getAvatarSrc(member.data.avatar)} alt={member.data.name} loading="lazy" />
+                  ) : (
+                    <span class="wg-member__initials">{initials(member.data.name)}</span>
+                  )}
+                </span>
+              ))}
+              {group.members.length > 6 && <span class="wg-member wg-member--more">+{group.members.length - 6}</span>}
+            </div>
+            <div class="wg-card__footer">
+              <span class="wg-card__count">{group.members.length} member{group.members.length === 1 ? '' : 's'}</span>
+              <span class="wg-card__cta">
+                View Team
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Volunteer Callout -->
+  <section class="section section--subtle">
     <div class="container">
       <div class="volunteer-box">
         <span class="badge badge--accent">Join Our Team</span>
@@ -82,14 +147,12 @@ const sortedTeam = allTeam.sort((a, b) => (a.data.order || 99) - (b.data.order |
         <p class="volunteer-desc">
           We welcome enthusiastic community members to help with event logistics, photography, AV recording, workshop mentorship, and university outreach in Peshawar.
         </p>
-        <a 
-          href="mailto:cncfpeshawar@gmail.com?subject=Volunteer%20Application%20%7C%20CNCF%20Peshawar&body=Hi%20CNCF%20Peshawar%20Team%2C%0A%0AI%20would%20like%20to%20volunteer%20as%20an%20Organizer%20%2F%20Campus%20Ambassador.%0A%0AName%3A%20%0ARole%2FUniversity%3A%20%0ALinkedIn%2FGitHub%3A%20%0AAreas%20of%20Interest%20(Event%20Logistics%2C%20Design%2C%20AV%2C%20Workshop%20Mentorship)%3A%20%0A%0AThank%20you!" 
+        <a
+          href="mailto:cncfpeshawar@gmail.com?subject=Volunteer%20Application%20%7C%20CNCF%20Peshawar&body=Hi%20CNCF%20Peshawar%20Team%2C%0A%0AI%20would%20like%20to%20volunteer%20as%20an%20Organizer%20%2F%20Campus%20Ambassador.%0A%0AName%3A%20%0ARole%2FUniversity%3A%20%0ALinkedIn%2FGitHub%3A%20%0AAreas%20of%20Interest%20(Event%20Logistics%2C%20Design%2C%20AV%2C%20Workshop%20Mentorship)%3A%20%0A%0AThank%20you!"
           class="btn btn--accent"
         >
           <span>Apply to Volunteer</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <span class="material-symbols-outlined">arrow_forward</span>
         </a>
       </div>
     </div>
@@ -98,7 +161,7 @@ const sortedTeam = allTeam.sort((a, b) => (a.data.order || 99) - (b.data.order |
 
 <style>
   .page-header {
-    padding-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
   }
 
   .page-header__title {
@@ -111,132 +174,372 @@ const sortedTeam = allTeam.sort((a, b) => (a.data.order || 99) - (b.data.order |
     font-size: var(--font-size-lg);
     color: var(--color-ink-muted);
     max-width: var(--container-prose);
+    margin-bottom: var(--space-lg);
   }
 
-  .team-grid {
+  .telemetry-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .telemetry-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.5rem 0.85rem;
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .telemetry-pill .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--color-accent);
+  }
+
+  .telemetry-pill__num {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-ink);
+  }
+
+  .core-header {
+    display: flex;
+    align-items: center;
+    padding-bottom: var(--space-md);
+    margin-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .core-header__label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+    color: var(--color-ink-subtle);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .core-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-lg);
   }
 
-  @media (min-width: 768px) {
-    .team-grid {
+  @media (min-width: 640px) {
+    .core-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .member-card {
+  @media (min-width: 992px) {
+    .core-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .core-card {
     display: flex;
     flex-direction: column;
-    padding: var(--space-xl);
     background-color: var(--color-paper-card);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
+    padding: var(--space-lg);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   }
 
-  .member-card:hover {
+  .core-card:hover {
     border-color: var(--color-border-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-glow);
   }
 
-  .member-card__avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: var(--color-accent-subtle);
-    border: 1px solid var(--color-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .core-card__photo {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background-color: var(--color-paper-subtle);
     margin-bottom: var(--space-md);
   }
 
-  .member-card__initials {
-    font-family: var(--font-display);
-    font-size: var(--font-size-lg);
+  .core-card__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+    transition: filter var(--transition-slow);
+  }
+
+  .core-card:hover .core-card__photo img {
+    filter: grayscale(0);
+  }
+
+  .core-card__initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
+    color: var(--color-ink-subtle);
+  }
+
+  .core-card__role-badge {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    padding: 0.3rem 0.65rem;
+    background-color: color-mix(in srgb, var(--color-accent) 20%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+    border-radius: var(--radius-xs);
     color: var(--color-accent);
-  }
-
-  .member-card__name {
-    font-size: var(--font-size-xl);
-    margin-bottom: 2px;
-    color: var(--color-ink);
-  }
-
-  .member-card__role {
+    font-family: var(--font-mono);
     font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-accent);
-    margin-bottom: var(--space-2xs);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    backdrop-filter: blur(4px);
   }
 
-  .member-card__company {
+  .core-card__heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-xs);
+  }
+
+  .core-card__heading h3 {
+    font-size: var(--font-size-xl);
+  }
+
+  .core-card__sig {
+    font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     color: var(--color-ink-subtle);
-    margin-bottom: var(--space-sm);
   }
 
-  .member-card__bio {
+  .core-card__org {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    color: var(--color-accent);
+    margin-top: 2px;
+  }
+
+  .core-card__bio {
     font-size: var(--font-size-sm);
     color: var(--color-ink-muted);
-    line-height: var(--line-height-normal);
-    margin-bottom: var(--space-lg);
-    flex-grow: 1;
+    line-height: var(--line-height-relaxed);
+    margin-top: var(--space-xs);
   }
 
-  .member-card__links {
+  .core-card__footer {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-xs);
-    margin-top: auto;
-    padding-top: var(--space-sm);
+    justify-content: space-between;
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
     border-top: 1px solid var(--color-border);
   }
 
-  .lf-badge {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-muted);
-    background-color: var(--color-paper-subtle);
-    padding: 0.2rem 0.5rem;
-    border-radius: var(--radius-xs);
+  .core-card__links {
+    display: flex;
+    gap: var(--space-xs);
   }
 
-  .social-btn {
+  .core-card__links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .core-card__links a:hover {
+    color: var(--color-ink);
+    border-color: var(--color-border-hover);
+  }
+
+  .core-card__links .material-symbols-outlined {
+    font-size: 18px;
+  }
+
+  .core-card__location {
+    font-family: var(--font-mono);
     font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
+    color: var(--color-ink-subtle);
+  }
+
+  /* Working Groups */
+  .wg-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 640px) {
+    .wg-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .wg-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .wg-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-lg);
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .wg-card:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .wg-card:hover .wg-card__cta {
     color: var(--color-accent);
   }
 
-  .social-btn:hover {
-    text-decoration: underline;
+  .wg-card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
   }
 
-  .volunteer-box {
-    padding: clamp(var(--space-lg), 5vw, var(--space-2xl));
+  .wg-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-paper-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--color-accent);
+  }
+
+  .wg-card__code {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+  }
+
+  .wg-card__title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .wg-card__desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .wg-card__members {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+    margin-bottom: var(--space-md);
+  }
+
+  .wg-member {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
     background-color: var(--color-paper-subtle);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    text-align: center;
+  }
+
+  .wg-member img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .wg-member__initials {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-ink-muted);
+  }
+
+  .wg-member--more {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+  }
+
+  .wg-card__footer {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+  }
+
+  .wg-card__count {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+  }
+
+  .wg-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-ink-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .wg-card__cta .material-symbols-outlined {
+    font-size: 16px;
+  }
+
+  /* Volunteer Box */
+  .volunteer-box {
+    text-align: center;
+    max-width: 640px;
+    margin-inline: auto;
+    padding: var(--space-xl);
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-lg);
   }
 
   .volunteer-title {
     font-size: var(--font-size-3xl);
-    margin-top: var(--space-xs);
-    margin-bottom: var(--space-sm);
+    margin-top: var(--space-sm);
   }
 
   .volunteer-desc {
-    font-size: var(--font-size-base);
     color: var(--color-ink-muted);
-    max-width: var(--container-prose);
-    margin-bottom: var(--space-xl);
+    line-height: var(--line-height-relaxed);
+    margin: var(--space-sm) 0 var(--space-lg);
+  }
+
+  .volunteer-box .material-symbols-outlined {
+    font-size: 16px;
   }
 </style>

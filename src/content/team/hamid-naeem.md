@@ -1,9 +1,13 @@
 ---
 name: "Hamid Naeem"
 role: "Chapter Organizer"
-bio: "Open-source practitioner and Linux Foundation contributor co-leading chapter launch and community operations for Cloud Native Peshawar."
-linuxFoundationUser: "hamidnaee"
+team: "Core Team"
+university: "UET Peshawar"
+company: "UET Peshawar"
+email: "hamidnaeem@gmail.com"
+avatar: "https://github.com/hamidnaee.png"
+linkedin: "https://www.linkedin.com/in/hamidnaee"
 isLead: true
 order: 2
+bio: "Open-source practitioner and Linux Foundation contributor co-leading chapter launch and community operations for Cloud Native Peshawar."
 ---
-Hamid Naeem is a core organizer for Cloud Native Peshawar, coordinating open-source initiatives and community partnerships under the CNCF.
