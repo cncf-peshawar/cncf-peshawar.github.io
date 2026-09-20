@@ -10,11 +10,19 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // Single strict production origin for CNCF Peshawar Website CMS
+    const ALLOWED_ORIGIN = 'https://cncf-peshawar.github.io';
+    const originHeader = request.headers.get('Origin');
+    const isAllowed = originHeader === ALLOWED_ORIGIN;
+
     // Handle CORS preflight
     if (request.method === 'OPTIONS') {
+      if (!isAllowed) {
+        return new Response('Forbidden', { status: 403 });
+      }
       return new Response(null, {
         headers: {
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
           'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
           'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         },
@@ -43,7 +51,7 @@ export default {
               <script>
                 (function() {
                   if (window.opener) {
-                    window.opener.postMessage('authorization:github:error:${JSON.stringify({ error: errorDescription })}', '*');
+                    window.opener.postMessage('authorization:github:error:${JSON.stringify({ error: errorDescription })}', '${ALLOWED_ORIGIN}');
                     window.close();
                   }
                 })();
@@ -89,7 +97,7 @@ export default {
               <script>
                 (function() {
                   if (window.opener) {
-                    window.opener.postMessage('authorization:github:error:${JSON.stringify(tokenData)}', '*');
+                    window.opener.postMessage('authorization:github:error:${JSON.stringify(tokenData)}', '${ALLOWED_ORIGIN}');
                     window.close();
                   }
                 })();
@@ -113,18 +121,23 @@ export default {
           <body>
             <script>
               (function() {
+                var ALLOWED_ORIGIN = 'https://cncf-peshawar.github.io';
                 function receiveMessage(e) {
+                  if (e.origin !== ALLOWED_ORIGIN) {
+                    console.warn('Blocked unauthorized OAuth origin:', e.origin);
+                    return;
+                  }
                   window.opener.postMessage(
                     'authorization:github:success:${JSON.stringify({
                       token: tokenData.access_token,
                       provider: 'github',
                     })}',
-                    e.origin
+                    ALLOWED_ORIGIN
                   );
                   window.close();
                 }
                 window.addEventListener("message", receiveMessage, false);
-                window.opener.postMessage("authorizing:github", "*");
+                window.opener.postMessage("authorizing:github", ALLOWED_ORIGIN);
               })();
             </script>
             <p style="font-family: sans-serif; text-align: center; padding: 40px;">
@@ -137,7 +150,7 @@ export default {
       return new Response(content, {
         headers: {
           'Content-Type': 'text/html',
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': isAllowed ? ALLOWED_ORIGIN : 'null',
         },
       });
     }
@@ -145,7 +158,7 @@ export default {
     return new Response('CNCF Peshawar OAuth Proxy Worker is online.', {
       status: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': isAllowed ? ALLOWED_ORIGIN : 'null',
         'Content-Type': 'text/plain',
       },
     });

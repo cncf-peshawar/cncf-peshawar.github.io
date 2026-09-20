@@ -26,8 +26,10 @@ pnpm-debug.log*
 .cache/
 .parcel-cache/
 
-# Multi-Agent & Tooling Internal Working Dirs
+# Local Workspace, Agent & Tooling Internal Working Dirs
+.workspace/
 .agents/
+.claude/
 .hallmark/
 
 # Environment Variables & Secrets

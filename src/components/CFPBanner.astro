@@ -5,8 +5,18 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <section class="cfp-banner">
   <div class="container">
     <div class="cfp-box">
+      <div class="cfp-box__decoration" aria-hidden="true">
+        <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="80" stroke="currentColor" stroke-width="2" stroke-dasharray="8 8"/>
+          <circle cx="100" cy="100" r="50" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M70 110 A 30 30 0 0 1 120 85 A 25 25 0 0 1 150 110 Z" fill="currentColor" opacity="0.4"/>
+        </svg>
+      </div>
       <div class="cfp-box__content">
-        <span class="cfp-box__tag">CALL FOR PROPOSALS (CFP) · ALWAYS OPEN</span>
+        <span class="cfp-box__tag">
+          <span class="material-symbols-outlined">record_voice_over</span>
+          Call for Proposals (CFP) · Always Open
+        </span>
         <h2 class="cfp-box__title">Have a Cloud Native Story or Architecture to Share?</h2>
         <p class="cfp-box__desc">
           Whether you are a seasoned Kubernetes maintainer, a DevOps engineer troubleshooting production outages, or a student experimenting with WebAssembly and Linux containers—our stage is yours.
@@ -21,9 +31,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <div class="cfp-box__action">
         <a href={`${base}/speak`} class="btn btn--accent">
           <span>Apply to Speak at CNCF Peshawar</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <span class="material-symbols-outlined">campaign</span>
         </a>
         <span class="cfp-box__reassurance">First-time speakers receive 1-on-1 coaching & slide review.</span>
       </div>
@@ -56,14 +64,41 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     }
   }
 
+  .cfp-box__decoration {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 33%;
+    opacity: 0.08;
+    color: var(--color-signal-green);
+    pointer-events: none;
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .cfp-box__decoration {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
   .cfp-box__tag {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
     color: var(--color-accent);
     letter-spacing: 0.05em;
+    text-transform: uppercase;
     margin-bottom: var(--space-xs);
+  }
+
+  .cfp-box__tag .material-symbols-outlined {
+    font-size: 16px;
   }
 
   .cfp-box__title {

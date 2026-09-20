@@ -19,12 +19,7 @@ const currentYear = new Date().getFullYear();
       <!-- Brand & Mission Column -->
       <div class="footer__col footer__col--brand">
         <div class="footer__brand">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M12 22V12" stroke="currentColor" stroke-width="2"/>
-            <path d="M22 7L12 12L2 7" stroke="currentColor" stroke-width="2"/>
-            <circle cx="12" cy="12" r="3" fill="var(--color-accent)"/>
-          </svg>
+          <img src={`${base}/images/logo-mark.png`} alt="" width="26" height="26" class="footer__brand-icon" />
           <span class="footer__brand-title">Cloud Native Peshawar</span>
         </div>
         <p class="footer__desc">
@@ -32,7 +27,6 @@ const currentYear = new Date().getFullYear();
         </p>
         <div class="footer__status">
           <span class="badge badge--live">Official CNCF Chapter</span>
-          <span class="badge">100% Free</span>
         </div>
       </div>
 
@@ -41,10 +35,12 @@ const currentYear = new Date().getFullYear();
         <h3 class="footer__heading">Community</h3>
         <ul class="footer__links" role="list">
           <li><a href={`${base}/events`}>Events & Meetups</a></li>
+          <li><a href={`${base}/about`}>About & Mission</a></li>
           <li><a href={`${base}/speak`}>Call for Speakers (CFP)</a></li>
           <li><a href={`${base}/sponsors`}>Sponsorship & Impact</a></li>
           <li><a href={`${base}/team`}>Organizers & Team</a></li>
           <li><a href={`${base}/blog`}>Blog & Recaps</a></li>
+          <li><a href={`${base}/contact`}>Contact Us</a></li>
           <li><a href={`${base}/code-of-conduct`}>Code of Conduct</a></li>
         </ul>
       </div>
@@ -94,6 +90,7 @@ const currentYear = new Date().getFullYear();
     <!-- Bottom Hairline Bar -->
     <div class="footer__bottom">
       <div class="footer__legal">
+        <img src={`${base}/images/cncf-official-logo.png`} alt="Cloud Native Computing Foundation" width="130" height="21" class="footer__cncf-badge" />
         <p>
           &copy; {currentYear} Cloud Native Peshawar. CNCF® and Linux Foundation® are registered trademarks of The Linux Foundation.
         </p>
@@ -268,6 +265,24 @@ const currentYear = new Date().getFullYear();
       justify-content: space-between;
       align-items: center;
     }
+  }
+
+  .footer__legal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  @media (min-width: 768px) {
+    .footer__legal {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .footer__cncf-badge {
+    opacity: 0.85;
   }
 
   .footer__legal p {
