@@ -7,6 +7,8 @@ const sortedTeam = allTeam.sort((a, b) => (a.data.order || 99) - (b.data.order |
 
 const allMembers = await getCollection('members');
 const sortedMembers = allMembers.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+const memberTeams: { team: string; members: typeof allMembers }[] = [...new Set(sortedMembers.map(m => m.data.team))]
+  .map(team => ({ team, members: sortedMembers.filter(m => m.data.team === team) }));
 
 const initials = (name: string) =>
   name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
@@ -119,43 +121,50 @@ const initials = (name: string) =>
         </div>
       </div>
 
-      <div class="member-grid">
-        {sortedMembers.map(member => (
-          <article class="member-card">
-            <div class="member-card__photo">
-              {member.data.photo ? (
-                <img
-                  src={member.data.photo}
-                  alt={member.data.name}
-                  loading="lazy"
-                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                />
-              ) : null}
-              <span class="member-card__initials" style={member.data.photo ? 'display: none;' : ''}>
-                {initials(member.data.name)}
-              </span>
-              {member.data.linkedin && (
-                <a
-                  href={member.data.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="member-card__overlay"
-                  aria-label={`Connect with ${member.data.name} on LinkedIn`}
-                >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                    <rect x="2" y="9" width="4" height="12"/>
-                    <circle cx="4" cy="4" r="2"/>
-                  </svg>
-                  <span>Connect on LinkedIn</span>
-                </a>
-              )}
+      <div class="member-teams">
+        {memberTeams.map(group => (
+          <div class="member-team">
+            <h3 class="member-team__heading">{group.team}</h3>
+            <div class="member-grid">
+              {group.members.map(member => (
+                <article class="member-card">
+                  <div class="member-card__photo">
+                    {member.data.photo ? (
+                      <img
+                        src={member.data.photo}
+                        alt={member.data.name}
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                      />
+                    ) : null}
+                    <span class="member-card__initials" style={member.data.photo ? 'display: none;' : ''}>
+                      {initials(member.data.name)}
+                    </span>
+                    {member.data.linkedin && (
+                      <a
+                        href={member.data.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="member-card__overlay"
+                        aria-label={`Connect with ${member.data.name} on LinkedIn`}
+                      >
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                          <rect x="2" y="9" width="4" height="12"/>
+                          <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                        <span>Connect on LinkedIn</span>
+                      </a>
+                    )}
+                  </div>
+                  <div class="member-card__info">
+                    <h3 class="member-card__name">{member.data.name}</h3>
+                    <p class="member-card__team">{member.data.team}</p>
+                  </div>
+                </article>
+              ))}
             </div>
-            <div class="member-card__info">
-              <h3 class="member-card__name">{member.data.name}</h3>
-              <p class="member-card__team">{member.data.team}</p>
-            </div>
-          </article>
+          </div>
         ))}
       </div>
     </div>
@@ -361,6 +370,35 @@ const initials = (name: string) =>
   /* ------------------------------------------------------------------ */
   /* GENERAL MEMBER ROSTER (NIC-style LinkedIn hover reveal)            */
   /* ------------------------------------------------------------------ */
+  .member-team {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .member-team:last-child {
+    margin-bottom: 0;
+  }
+
+  .member-team__heading {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-ink);
+    letter-spacing: var(--letter-spacing-tight);
+    padding-bottom: var(--space-xs);
+    margin-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .member-team__heading::after {
+    content: '';
+    flex: 0 0 48px;
+    height: 2px;
+    background: var(--gradient-brand);
+    border-radius: var(--radius-full);
+  }
+
   .member-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

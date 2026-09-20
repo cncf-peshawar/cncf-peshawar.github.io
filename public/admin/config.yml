@@ -107,6 +107,8 @@ collections:
     label: "Organizers & Leads"
     folder: "src/content/team"
     create: true
+    identifier_field: "name"
+    summary: "{{name}} — {{role}}"
     slug: "{{slug}}"
     format: "frontmatter"
     extension: "md"

@@ -2,6 +2,7 @@
 name: "Hamid Naeem"
 role: "Chapter Organizer"
 bio: "Open-source practitioner and Linux Foundation contributor co-leading chapter launch and community operations for Cloud Native Peshawar."
+avatar: "/images/team/hamid-naeem.png"
 linuxFoundationUser: "hamidnaee"
 isLead: true
 order: 2
