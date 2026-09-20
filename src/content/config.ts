@@ -62,9 +62,21 @@ const team = defineCollection({
     avatar: z.string().optional(),
     github: z.string().url().optional(),
     linkedin: z.string().url().optional(),
+    instagram: z.string().url().optional(),
     twitter: z.string().url().optional(),
     linuxFoundationUser: z.string().optional(),
     isLead: z.boolean().default(false),
+    order: z.number().default(99)
+  })
+});
+
+const members = defineCollection({
+  type: 'content',
+  schema: z.object({
+    name: z.string(),
+    team: z.string(),
+    photo: z.string().optional(),
+    linkedin: z.string().url().optional(),
     order: z.number().default(99)
   })
 });
@@ -88,5 +100,6 @@ export const collections = {
   speakers,
   sponsors,
   team,
+  members,
   blog
 };

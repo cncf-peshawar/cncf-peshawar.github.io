@@ -85,6 +85,7 @@ h1 {
   font-size: var(--font-size-5xl);
   line-height: var(--line-height-tight);
   letter-spacing: -0.035em;
+  font-weight: var(--font-weight-bold);
 }
 
 h2 {
@@ -151,17 +152,29 @@ a {
 
 .section-header__num {
   font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: var(--letter-spacing-wide);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
   color: var(--color-accent);
   text-transform: uppercase;
-  margin-bottom: 2px;
+  margin-bottom: var(--space-2xs);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.section-header__num::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: var(--gradient-brand);
+  border-radius: var(--radius-full);
 }
 
 .section-header__title {
-  font-size: var(--font-size-3xl);
+  font-size: clamp(var(--font-size-3xl), 4vw + 0.5rem, var(--font-size-4xl));
   margin-bottom: var(--space-xs);
+  letter-spacing: var(--letter-spacing-tight);
 }
 
 .section-header__desc {
@@ -369,6 +382,20 @@ a {
   border-color: var(--color-border-hover);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
+}
+
+/* -------------------------------------------------------------------------- */
+/* BRAND GRADIENT UTILITIES (CNCF 2026 style)                                */
+/* -------------------------------------------------------------------------- */
+.text-gradient {
+  background: var(--gradient-brand-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-gradient {
+  background: var(--gradient-brand);
 }
 
 /* -------------------------------------------------------------------------- */

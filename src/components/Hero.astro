@@ -12,7 +12,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </div>
 
       <h1 class="hero__title">
-        Building Peshawar's Cloud Native Future.
+        Building Peshawar's <span class="text-gradient">Cloud Native</span> Future.
       </h1>
 
       <p class="hero__lede">
@@ -105,11 +105,28 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <style>
   .hero {
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-2xl);
+    padding-top: clamp(var(--space-xl), 6vw, var(--space-3xl));
+    padding-bottom: clamp(var(--space-2xl), 8vw, var(--space-3xl));
+    position: relative;
+  }
+
+  /* CNCF-style ambient blue glow (dark-first friendly) */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -160px;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, oklch(0.56 0.18 248 / 0.18), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
   }
 
   .hero__grid {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
@@ -134,6 +151,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     font-size: var(--font-size-5xl);
     margin-bottom: var(--space-md);
     color: var(--color-ink);
+    max-width: 16ch;
   }
 
   .hero__lede {
@@ -141,6 +159,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     line-height: var(--line-height-relaxed);
     color: var(--color-ink-muted);
     margin-bottom: var(--space-xl);
+    max-width: 55ch;
   }
 
   .hero__actions {
@@ -183,8 +202,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .terminal-card {
     background-color: var(--color-paper-card);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
     overflow: hidden;
   }
 
@@ -257,7 +276,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   .terminal-card__divider {
     height: 1px;
-    background-color: var(--color-border);
+    background: var(--gradient-brand);
+    opacity: 0.4;
     margin-block: var(--space-xs);
   }
 
@@ -280,10 +300,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .tech-chip {
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
-    padding: 0.2rem 0.5rem;
-    background-color: var(--color-paper-subtle);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xs);
-    color: var(--color-ink);
+    padding: 0.25rem 0.6rem;
+    background-color: var(--color-accent-subtle);
+    border: 1px solid color-mix(in oklch, var(--color-accent) 30%, transparent);
+    border-radius: var(--radius-full);
+    color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
   }
 </style>

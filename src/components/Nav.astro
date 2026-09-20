@@ -156,7 +156,7 @@ const currentPath = Astro.url.pathname;
     display: flex;
     align-items: baseline;
     gap: 4px;
-    font-family: var(--font-display);
+    font-family: var(--font-brand);
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-base);
     letter-spacing: -0.02em;
@@ -202,6 +202,7 @@ const currentPath = Astro.url.pathname;
     color: var(--color-accent);
     font-weight: var(--font-weight-semibold);
     background-color: var(--color-accent-subtle);
+    box-shadow: inset 0 -1px 0 var(--color-accent);
   }
 
   .nav__actions {
@@ -214,6 +215,7 @@ const currentPath = Astro.url.pathname;
     font-size: var(--font-size-xs);
     padding: 0.45rem 0.9rem;
     border-radius: var(--radius-full);
+    box-shadow: var(--shadow-glow);
   }
 
   .nav__cta-dot {
