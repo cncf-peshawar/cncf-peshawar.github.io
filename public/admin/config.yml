@@ -134,14 +134,22 @@ collections:
     label: "General Members"
     folder: "src/content/members"
     create: true
+    identifier_field: "name"
+    summary: "{{name}} — {{team}}"
     slug: "{{slug}}"
     format: "frontmatter"
     extension: "md"
     fields:
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Team / Group", name: "team", widget: "string" }
-      - { label: "Photo", name: "photo", widget: "image", required: false }
+      - { label: "Role / Title", name: "role", widget: "string", required: false }
+      - { label: "Team / Working Group", name: "team", widget: "string" }
+      - { label: "University", name: "university", widget: "string", required: false }
+      - { label: "Company / Affiliation", name: "company", widget: "string", required: false }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { label: "Avatar Image / URL", name: "avatar", widget: "string", required: false }
+      - { label: "GitHub Profile", name: "github", widget: "string", required: false }
       - { label: "LinkedIn Profile", name: "linkedin", widget: "string", required: false }
+      - { label: "Is Lead", name: "isLead", widget: "boolean", default: false }
       - { label: "Display Order", name: "order", widget: "number", default: 50 }
 
   # ----------------------------------------------------------------------------

@@ -57,15 +57,15 @@ const initials = (name: string) =>
         {group.members.map(member => (
           <article class="member-card">
             <div class="member-card__photo">
-              {getAvatarSrc(member.data.photo) ? (
+              {getAvatarSrc(member.data.avatar || member.data.photo) ? (
                 <img
-                  src={getAvatarSrc(member.data.photo)!}
+                  src={getAvatarSrc(member.data.avatar || member.data.photo)!}
                   alt={member.data.name}
                   loading="lazy"
                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                 />
               ) : null}
-              <span class="member-card__initials" style={member.data.photo ? 'display: none;' : ''}>
+              <span class="member-card__initials" style={(member.data.avatar || member.data.photo) ? 'display: none;' : ''}>
                 {initials(member.data.name)}
               </span>
               {member.data.linkedin && (
