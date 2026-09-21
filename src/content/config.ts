@@ -74,9 +74,16 @@ const members = defineCollection({
   type: 'content',
   schema: z.object({
     name: z.string(),
+    role: z.string().optional(),
     team: z.string(),
     photo: z.string().optional(),
+    avatar: z.string().optional(),
+    university: z.string().optional(),
+    company: z.string().optional(),
+    email: z.string().optional(),
+    github: z.string().url().optional(),
     linkedin: z.string().url().optional(),
+    isLead: z.boolean().default(false),
     order: z.number().default(99)
   })
 });

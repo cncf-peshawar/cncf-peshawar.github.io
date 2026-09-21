@@ -1,0 +1,368 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { buildWorkingGroups, getAvatarSrc as getAvatarSrcBase } from '../../lib/teams';
+
+export async function getStaticPaths() {
+  const allMembers = await getCollection('members');
+  const sortedMembers = allMembers.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+  const groups = buildWorkingGroups(sortedMembers);
+
+  return groups.map((group) => ({
+    params: { group: group.slug },
+    props: { group },
+  }));
+}
+
+const { group } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const getAvatarSrc = (avatar?: string) => getAvatarSrcBase(base, avatar);
+
+const initials = (name: string) =>
+  name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+---
+
+<BaseLayout
+  title={`${group.title} | CNCF Peshawar Team`}
+  description={`Meet the ${group.members.length} volunteers on the CNCF Peshawar ${group.title}. ${group.desc}`}
+>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb container">
+    <a href={`${base}/`}>Home</a>
+    <span>/</span>
+    <a href={`${base}/team`}>Team</a>
+    <span>/</span>
+    <span>{group.title}</span>
+  </div>
+
+  <!-- Group Header -->
+  <section class="page-header section">
+    <div class="container">
+      <div class="group-header">
+        <div class="group-header__badge">{group.title.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}</div>
+        <div>
+          <span class="group-header__code">{group.code}</span>
+          <h1 class="page-header__title">{group.title}</h1>
+        </div>
+      </div>
+      <p class="page-header__desc">{group.desc}</p>
+      <span class="badge badge--live">{group.members.length} Member{group.members.length === 1 ? '' : 's'}</span>
+    </div>
+  </section>
+
+  <!-- Member Grid -->
+  <section class="section section--subtle">
+    <div class="container">
+      <div class="member-grid">
+        {group.members.map(member => (
+          <article class="member-card">
+            <div class="member-card__photo">
+              {getAvatarSrc(member.data.photo) ? (
+                <img
+                  src={getAvatarSrc(member.data.photo)!}
+                  alt={member.data.name}
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+              ) : null}
+              <span class="member-card__initials" style={member.data.photo ? 'display: none;' : ''}>
+                {initials(member.data.name)}
+              </span>
+              {member.data.linkedin && (
+                <a
+                  href={member.data.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="member-card__overlay"
+                  aria-label={`Connect with ${member.data.name} on LinkedIn`}
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                    <rect x="2" y="9" width="4" height="12"/>
+                    <circle cx="4" cy="4" r="2"/>
+                  </svg>
+                  <span>Connect on LinkedIn</span>
+                </a>
+              )}
+            </div>
+            <div class="member-card__info">
+              <h3 class="member-card__name">{member.data.name}</h3>
+              <p class="member-card__team">{member.data.role || member.data.team}</p>
+              {(member.data.university || member.data.company) && (
+                <p class="member-card__org">{member.data.university || member.data.company}</p>
+              )}
+              <div class="member-card__links">
+                {member.data.github && (
+                  <a href={member.data.github} target="_blank" rel="noopener noreferrer" aria-label={`${member.data.name} on GitHub`}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                  </a>
+                )}
+                {member.data.linkedin && (
+                  <a href={member.data.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${member.data.name} on LinkedIn`}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                      <rect x="2" y="9" width="4" height="12"/>
+                      <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                  </a>
+                )}
+                {member.data.email && (
+                  <a href={`mailto:${member.data.email}`} aria-label={`Email ${member.data.name}`}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <rect x="2" y="4" width="20" height="16" rx="2"/>
+                      <path d="m22 7-10 6L2 7"/>
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Back to All Team -->
+      <div class="back-row">
+        <a href={`${base}/team`} class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          <span>Back to All Team &amp; Organizers</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding-top: var(--space-lg);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+  }
+
+  .breadcrumb a {
+    color: var(--color-ink-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--color-accent);
+  }
+
+  .page-header {
+    padding-bottom: var(--space-lg);
+  }
+
+  .page-header__title {
+    font-size: var(--font-size-4xl);
+    color: var(--color-ink);
+  }
+
+  .page-header__desc {
+    font-size: var(--font-size-lg);
+    color: var(--color-ink-muted);
+    max-width: var(--container-prose);
+    margin-bottom: var(--space-md);
+  }
+
+  .group-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .group-header__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    background: var(--gradient-brand);
+    border-radius: var(--radius-lg);
+    color: var(--color-accent-contrast);
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.04em;
+  }
+
+  .group-header__code {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+  }
+
+  .member-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 560px) {
+    .member-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .member-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .member-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  .member-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .member-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-md);
+  }
+
+  .member-card__photo {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background-color: var(--color-accent-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .member-card__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-base);
+  }
+
+  .member-card:hover .member-card__photo img {
+    transform: scale(1.04);
+  }
+
+  .member-card__initials {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+  }
+
+  .member-card__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xs);
+    background: linear-gradient(180deg, oklch(0.56 0.18 248 / 0.85), oklch(0.16 0.02 260 / 0.92));
+    color: var(--color-accent-contrast);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity var(--transition-base), transform var(--transition-base);
+  }
+
+  .member-card__overlay span {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.02em;
+  }
+
+  .member-card:hover .member-card__overlay,
+  .member-card:focus-within .member-card__overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .member-card__info {
+    padding: var(--space-xs) var(--space-sm) var(--space-md);
+    text-align: center;
+  }
+
+  .member-card__name {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+
+  .member-card__team {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-accent);
+  }
+
+  .member-card__org {
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+    margin-top: 2px;
+  }
+
+  .member-card__links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2xs);
+    margin-top: var(--space-xs);
+  }
+
+  .member-card__links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    color: var(--color-ink-muted);
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .member-card__links a:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .back-row {
+    margin-top: var(--space-2xl);
+    display: flex;
+    justify-content: center;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+</style>
