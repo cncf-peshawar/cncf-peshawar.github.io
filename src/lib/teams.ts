@@ -2,7 +2,7 @@ import type { CollectionEntry } from 'astro:content';
 
 export interface WorkingGroupDef {
   slug: string;
-  icon: string;
+  iconTitle: string;
   code: string;
   title: string;
   desc: string;
@@ -12,7 +12,7 @@ export interface WorkingGroupDef {
 export const WORKING_GROUP_DEFS: WorkingGroupDef[] = [
   {
     slug: 'tech-team',
-    icon: 'terminal',
+    iconTitle: 'Tech',
     code: 'WG-TECH',
     title: 'Tech Team',
     desc: 'Engineers and developers building workshops, maintaining lab repositories, and driving technical content.',
@@ -20,7 +20,7 @@ export const WORKING_GROUP_DEFS: WorkingGroupDef[] = [
   },
   {
     slug: 'events-team',
-    icon: 'event_seat',
+    iconTitle: 'Events',
     code: 'WG-EVT',
     title: 'Events Team',
     desc: 'The logistics, hosting, and operations crew ensuring every meetup runs smoothly.',
@@ -28,7 +28,7 @@ export const WORKING_GROUP_DEFS: WorkingGroupDef[] = [
   },
   {
     slug: 'community-outreach',
-    icon: 'hub',
+    iconTitle: 'Outreach',
     code: 'WG-OUT',
     title: 'Community & Outreach',
     desc: 'Campus ambassadors, partnership leads, and outreach coordinators expanding our reach across KPK.',
@@ -36,7 +36,7 @@ export const WORKING_GROUP_DEFS: WorkingGroupDef[] = [
   },
   {
     slug: 'design-media',
-    icon: 'palette',
+    iconTitle: 'Design',
     code: 'WG-DSG',
     title: 'Design & Media',
     desc: 'Creatives handling event photography, videography, graphics, and visual branding.',
@@ -44,10 +44,10 @@ export const WORKING_GROUP_DEFS: WorkingGroupDef[] = [
   },
 ];
 
-export function buildWorkingGroups(sortedTeam: CollectionEntry<'team'>[]) {
+export function buildWorkingGroups(sortedMembers: CollectionEntry<'members'>[]) {
   return WORKING_GROUP_DEFS.map((def) => ({
     ...def,
-    members: sortedTeam.filter((m) => !m.data.isLead && m.data.team === def.teamValue),
+    members: sortedMembers.filter((m) => m.data.team === def.teamValue),
   })).filter((group) => group.members.length > 0);
 }
 
@@ -55,8 +55,4 @@ export function getAvatarSrc(base: string, avatar?: string) {
   if (!avatar) return null;
   if (avatar.startsWith('http://') || avatar.startsWith('https://')) return avatar;
   return `${base}${avatar}`;
-}
-
-export function initials(name: string) {
-  return name.split(' ').filter(Boolean).map((n) => n[0]).join('').slice(0, 2).toUpperCase();
 }

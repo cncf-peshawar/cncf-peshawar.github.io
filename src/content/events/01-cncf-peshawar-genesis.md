@@ -41,7 +41,7 @@ As the inaugural gathering of CNCF Peshawar, Genesis aims to create meaningful c
 - **Date**: Friday, September 4, 2026
 - **Time**: 03:00 PM – 07:00 PM PKT
 - **Venue**: NIC (National Incubation Center), South Canal Road, Peshawar City Tehsil, KPK, Pakistan
-- **Registration**: General Admission
+- **Registration**: 100% Free (General Admission)
 - **Official Platforms**: [Open Community Groups (OCG)](https://ocgroups.dev/cncf/group/6vwk2n4/event/z7sb6wa) & [Luma](https://luma.com/shufbsm5)
 
 ---

@@ -10,6 +10,10 @@ auth_methods:
   - token
   - oauth
 
+# Editorial workflow: every save creates a Pull Request (Unstable → main) instead of
+# committing directly to main. Publishers merge the PR after review; deployment triggers on merge.
+publish_mode: editorial_workflow
+
 # Local backend allows editing directly from local folder or localhost
 local_backend: true
 
@@ -103,6 +107,8 @@ collections:
     label: "Organizers & Leads"
     folder: "src/content/team"
     create: true
+    identifier_field: "name"
+    summary: "{{name}} — {{role}}"
     slug: "{{slug}}"
     format: "frontmatter"
     extension: "md"
@@ -111,14 +117,40 @@ collections:
       - { label: "Role / Title", name: "role", widget: "string" }
       - { label: "Bio", name: "bio", widget: "text" }
       - { label: "Company / Affiliation", name: "company", widget: "string", required: false }
-      - { label: "Avatar Image", name: "avatar", widget: "image", required: false }
+      - { label: "Photo / Avatar Image", name: "avatar", widget: "image", required: false }
       - { label: "Linux Foundation Username", name: "linuxFoundationUser", widget: "string", required: false }
       - { label: "GitHub Profile", name: "github", widget: "string", required: false }
       - { label: "LinkedIn Profile", name: "linkedin", widget: "string", required: false }
+      - { label: "Instagram Profile / Post", name: "instagram", widget: "string", required: false }
       - { label: "Twitter / X Profile", name: "twitter", widget: "string", required: false }
       - { label: "Is Core Lead", name: "isLead", widget: "boolean", default: false }
       - { label: "Display Order", name: "order", widget: "number", default: 10 }
       - { label: "Profile Content", name: "body", widget: "markdown", required: false }
+
+  # ----------------------------------------------------------------------------
+  # GENERAL MEMBERS
+  # ----------------------------------------------------------------------------
+  - name: "members"
+    label: "General Members"
+    folder: "src/content/members"
+    create: true
+    identifier_field: "name"
+    summary: "{{name}} — {{team}}"
+    slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Role / Title", name: "role", widget: "string", required: false }
+      - { label: "Team / Working Group", name: "team", widget: "string" }
+      - { label: "University", name: "university", widget: "string", required: false }
+      - { label: "Company / Affiliation", name: "company", widget: "string", required: false }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { label: "Avatar Image / URL", name: "avatar", widget: "string", required: false }
+      - { label: "GitHub Profile", name: "github", widget: "string", required: false }
+      - { label: "LinkedIn Profile", name: "linkedin", widget: "string", required: false }
+      - { label: "Is Lead", name: "isLead", widget: "boolean", default: false }
+      - { label: "Display Order", name: "order", widget: "number", default: 50 }
 
   # ----------------------------------------------------------------------------
   # BLOG & RECAPS

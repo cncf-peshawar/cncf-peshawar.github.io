@@ -2,24 +2,35 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import TrackRecordStats from '../components/TrackRecordStats.astro';
+import BentoPillars from '../components/BentoPillars.astro';
 import EventCard from '../components/EventCard.astro';
+import SpeakerCard from '../components/SpeakerCard.astro';
 import CFPBanner from '../components/CFPBanner.astro';
+import GenesisCountdown from '../components/GenesisCountdown.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
+// Query collections safely
 const allEvents = await getCollection('events');
 const getTimestamp = (dateStr: string) => {
   const ts = new Date(dateStr).getTime();
   return isNaN(ts) ? 0 : ts;
 };
 const sortedEvents = allEvents.sort((a, b) => getTimestamp(b.data.date) - getTimestamp(a.data.date));
-const upcomingEvents = allEvents
-  .filter((e) => e.data.status === 'upcoming')
-  .sort((a, b) => getTimestamp(a.data.date) - getTimestamp(b.data.date));
-const pastEvents = sortedEvents.filter((e) => e.data.status === 'completed');
-const featuredEvents = [...upcomingEvents, ...pastEvents].slice(0, 3);
 
-const team = await getCollection('team');
+// Upcoming events sorted chronologically (nearest upcoming first)
+const upcomingEvents = allEvents
+  .filter(e => e.data.status === 'upcoming')
+  .sort((a, b) => getTimestamp(a.data.date) - getTimestamp(b.data.date));
+
+const pastEvents = sortedEvents.filter(e => e.data.status === 'completed');
+const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : null;
+const otherUpcomingEvents = upcomingEvents.length > 1 ? upcomingEvents.slice(1) : [];
+
+const allSpeakers = await getCollection('speakers');
+const featuredSpeakers = allSpeakers.filter(s => s.data.featured);
+const speakersToShow = featuredSpeakers.length > 0 ? featuredSpeakers : allSpeakers;
 const sponsors = await getCollection('sponsors');
 ---
 
@@ -27,141 +38,183 @@ const sponsors = await getCollection('sponsors');
   <!-- Hero Section -->
   <Hero />
 
-  <!-- Events Section -->
-  <section class="section section--subtle" id="events">
-    <div class="container">
-      <div class="events-header">
-        <div>
-          <span class="section-header__num">Featured Sessions</span>
-          <h2 class="section-header__title">Upcoming Meetups &amp; Workshops</h2>
-          <p class="section-header__desc">Hands-on platform engineering, Kubernetes orchestration, and telemetry labs in Peshawar.</p>
-        </div>
-        <a href={`${base}/events`} class="btn btn--secondary btn--sm">
-          <span>View All Events</span>
-          <span class="material-symbols-outlined">north_east</span>
-        </a>
-      </div>
+  <!-- Track Record Stats Strip -->
+  <TrackRecordStats />
 
-      {featuredEvents.length > 0 ? (
-        <div class="events-grid">
-          {featuredEvents.map((event) => <EventCard event={event} />)}
-        </div>
-      ) : (
-        <p class="events-empty">Our first meetup is being planned — check back soon, or join our OCG group to be notified.</p>
-      )}
-    </div>
-  </section>
-
-  <!-- Team Leadership Banner -->
-  <section class="section" id="team">
-    <div class="container">
-      <div class="team-banner">
-        <div>
-          <span class="section-header__num">Community Leadership</span>
-          <h3 class="team-banner__title">Meet the Organizers Guiding CNCF Peshawar</h3>
-          <p class="team-banner__desc">{team.length} organizers, tech leads, and volunteers driving workshops and open source mentorship across KP.</p>
-        </div>
-        <a href={`${base}/team`} class="btn btn--secondary btn--sm">
-          <span>View Full Team</span>
-          <span class="material-symbols-outlined">arrow_forward</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sponsors Section -->
-  {sponsors.length > 0 && (
-    <section class="section section--subtle" id="sponsors">
+  <!-- Next / Upcoming Meetup Spotlight & Live Countdown -->
+  {nextFeaturedEvent ? (
+    <section class="section section--subtle">
       <div class="container">
-        <div class="section-header section-header--center">
-          <span class="section-header__num">Our Sponsors &amp; Partners</span>
-          <h2 class="section-header__title">Empowering Open Source Innovation</h2>
+        <div class="section-header">
+          <span class="section-header__num">00 // UPCOMING MEETUP</span>
+          <h2 class="section-header__title">{nextFeaturedEvent.data.title}.</h2>
           <p class="section-header__desc">
-            Free community education, venue hospitality, and student travel stipends in Peshawar made possible by our generous ecosystem supporters.
+            {nextFeaturedEvent.data.summary || 'Reserve your seat for our upcoming community gathering in Peshawar.'}
           </p>
         </div>
 
-        <div class="sponsors-grid">
-          {sponsors.map((sponsor) => (
-            <div class="sponsor-card">
-              <span class="sponsor-card__tier">{sponsor.data.tier} Partner</span>
-              <h3 class="sponsor-card__name">{sponsor.data.name}</h3>
-              <p class="sponsor-card__desc">{sponsor.data.description}</p>
-              <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="sponsor-card__link">
-                <span>Visit Website</span>
-                <span class="material-symbols-outlined">north_east</span>
+        <!-- Real-time Countdown Card -->
+        <GenesisCountdown event={nextFeaturedEvent} />
+
+        {otherUpcomingEvents.length > 0 && (
+          <div class="events-list">
+            <h3 class="other-events-title">More Upcoming Gatherings</h3>
+            {otherUpcomingEvents.map(event => (
+              <EventCard event={event} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  ) : (
+    <section class="section section--subtle">
+      <div class="container">
+        <div class="planning-box">
+          <div class="planning-box__header">
+            <span class="badge badge--live">MEETUP IN PLANNING</span>
+            <span class="planning-box__meta">Open Community Groups (OCG)</span>
+          </div>
+          <div class="planning-box__body">
+            <h2 class="planning-box__title">Our Next Meetup is in the Works.</h2>
+            <p class="planning-box__desc">
+              We are currently coordinating venues, hands-on workshop topics, and guest speakers for our upcoming session. Join our official community group on OCG to get notified as soon as registrations open.
+            </p>
+            <div class="planning-box__actions">
+              <a href="https://ocgroups.dev/cncf/group/6vwk2n4" target="_blank" rel="noopener noreferrer" class="btn btn--accent">
+                <span>Join CNCF Peshawar on OCG</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+              <a href={`${base}/speak`} class="btn btn--secondary">
+                <span>Submit a Talk / CFP</span>
+              </a>
+              <a href={`${base}/events`} class="btn btn--secondary">
+                <span>Explore Past Meetups</span>
               </a>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 01 Community Pillars (Bento Grid) -->
+  <BentoPillars />
+
+  <!-- 02 Recent Meetups & Track Record Archives (if past events exist) -->
+  {pastEvents.length > 0 && (
+    <section class="section section--subtle">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__num">02 // ARCHIVES</span>
+          <h2 class="section-header__title">Past Meetups & Technical Labs.</h2>
+          <p class="section-header__desc">
+            Explore slide decks, code repositories, and recordings from our previous sessions.
+          </p>
+        </div>
+
+        <div class="events-grid">
+          {pastEvents.slice(0, 2).map(event => (
+            <EventCard event={event} />
           ))}
         </div>
 
-        <div class="sponsor-callout">
-          <div class="sponsor-callout__text">
-            <span class="material-symbols-outlined">volunteer_activism</span>
-            <span>Interested in sponsoring our next meetup? Support student travel grants and workshop infrastructure.</span>
-          </div>
-          <a href={`${base}/sponsors`} class="sponsor-callout__link">
-            <span>Become a Sponsor</span>
-            <span class="material-symbols-outlined">arrow_forward</span>
+        <div class="section-cta-center">
+          <a href={`${base}/events`} class="btn btn--secondary">
+            <span>View Full Meetup Archive</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </a>
         </div>
       </div>
     </section>
   )}
 
-  <!-- Contact / Get Involved -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="contact-cta">
-        <span class="section-header__num">Get Involved</span>
-        <h2 class="contact-cta__title">Speak, Host or Sponsor a Session</h2>
-        <p class="contact-cta__desc">
-          Have a Kubernetes deployment story, eBPF insight, or architecture case study? We welcome student and industry speakers across Pakistan.
-        </p>
-        <div class="contact-cta__actions">
-          <a href={`${base}/speak`} class="btn btn--accent">
-            <span>Submit a Talk Proposal</span>
-            <span class="material-symbols-outlined">record_voice_over</span>
-          </a>
-          <a href={`${base}/sponsors`} class="btn btn--secondary">
-            <span>Sponsor Our Community</span>
-            <span class="material-symbols-outlined">volunteer_activism</span>
+  <!-- 03 Speakers & Mentors -->
+  {speakersToShow.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__num">03 // SPEAKERS</span>
+          <h2 class="section-header__title">Learn from Industry Practitioners.</h2>
+          <p class="section-header__desc">
+            Engineers, researchers, and architects sharing real-world distributed systems experience.
+          </p>
+        </div>
+
+        <div class="speakers-grid">
+          {speakersToShow.slice(0, 3).map(speaker => (
+            <SpeakerCard speaker={speaker} />
+          ))}
+        </div>
+
+        <div class="section-cta-center">
+          <a href={`${base}/speak`} class="btn btn--secondary">
+            <span>Explore All Speakers & Submit a Talk</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
-  <!-- Call for Proposals Banner -->
+  <!-- 04 Call for Proposals (CFP) Banner -->
   <CFPBanner />
+
+  <!-- 05 Sponsors & Community Partners Wall -->
+  {sponsors.length > 0 && (
+    <section class="section section--subtle">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-header__num">05 // SPONSORS & PARTNERS</span>
+          <h2 class="section-header__title">Supported by Visionary Partners.</h2>
+          <p class="section-header__desc">
+            We are deeply grateful to our venue hosts, refreshment partners, and ecosystem supporters who keep Cloud Native Peshawar 100% free.
+          </p>
+        </div>
+
+        <div class="sponsors-grid">
+          {sponsors.map(sponsor => (
+            <div class="sponsor-card">
+              <span class="sponsor-card__tier">{sponsor.data.tier} Partner</span>
+              <h3 class="sponsor-card__name">{sponsor.data.name}</h3>
+              <p class="sponsor-card__desc">{sponsor.data.description}</p>
+              <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="sponsor-card__link">
+                <span>Visit Website ↗</span>
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <div class="section-cta-center">
+          <a href={`${base}/sponsors`} class="btn btn--accent">
+            <span>Become a Community Sponsor</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
 </BaseLayout>
 
 <style>
-  /* Events Section */
-  .events-header {
+  .events-list {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--space-md);
-    margin-bottom: var(--space-xl);
-  }
-
-  @media (min-width: 768px) {
-    .events-header {
-      flex-direction: row;
-      align-items: flex-end;
-    }
-  }
-
-  .events-header .btn {
-    white-space: nowrap;
+    gap: var(--space-lg);
   }
 
   .events-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
   }
 
   @media (min-width: 768px) {
@@ -170,59 +223,23 @@ const sponsors = await getCollection('sponsors');
     }
   }
 
-  @media (min-width: 1100px) {
-    .events-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .events-empty {
-    color: var(--color-ink-muted);
-  }
-
-  /* Team Banner */
-  .team-banner {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--space-md);
-    padding: var(--space-lg);
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+  .speakers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
   }
 
   @media (min-width: 768px) {
-    .team-banner {
-      flex-direction: row;
-      align-items: center;
+    .speakers-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .team-banner__title {
-    font-size: var(--font-size-xl);
-    color: var(--color-ink);
-    margin-top: 2px;
-  }
-
-  .team-banner__desc {
-    font-size: var(--font-size-sm);
-    color: var(--color-ink-muted);
-    max-width: 55ch;
-    margin-top: 4px;
-  }
-
-  .team-banner .btn {
-    white-space: nowrap;
-  }
-
-  /* Sponsors */
-  .section-header--center {
-    text-align: center;
-    align-items: center;
-    max-width: 640px;
-    margin-inline: auto;
+  @media (min-width: 1024px) {
+    .speakers-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   .sponsors-grid {
@@ -234,7 +251,7 @@ const sponsors = await getCollection('sponsors');
 
   @media (min-width: 768px) {
     .sponsors-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
@@ -245,12 +262,13 @@ const sponsors = await getCollection('sponsors');
     padding: clamp(var(--space-md), 4vw, var(--space-xl));
     display: flex;
     flex-direction: column;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
   }
 
   .sponsor-card:hover {
     border-color: var(--color-border-hover);
-    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
   }
 
   .sponsor-card__tier {
@@ -263,7 +281,7 @@ const sponsors = await getCollection('sponsors');
   }
 
   .sponsor-card__name {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-2xl);
     margin-bottom: var(--space-xs);
     color: var(--color-ink);
   }
@@ -277,96 +295,73 @@ const sponsors = await getCollection('sponsors');
   }
 
   .sponsor-card__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
     color: var(--color-accent);
     margin-top: auto;
   }
 
-  .sponsor-card__link .material-symbols-outlined {
-    font-size: 14px;
+  .sponsor-card__link:hover {
+    text-decoration: underline;
   }
 
-  .sponsor-callout {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--space-sm);
-    padding: var(--space-md);
+  .other-events-title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .planning-box {
     background-color: var(--color-paper-card);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
+    padding: clamp(var(--space-md), 4vw, var(--space-xl));
+    margin-bottom: var(--space-xl);
+    box-shadow: var(--shadow-sm);
   }
 
-  @media (min-width: 640px) {
-    .sponsor-callout {
-      flex-direction: row;
-      align-items: center;
-    }
-  }
-
-  .sponsor-callout__text {
+  .planning-box__header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: var(--space-xs);
-    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .planning-box__meta {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
     color: var(--color-ink-muted);
   }
 
-  .sponsor-callout__text .material-symbols-outlined {
-    color: var(--color-signal-green);
-    font-size: 22px;
-  }
-
-  .sponsor-callout__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-accent);
-    white-space: nowrap;
-  }
-
-  .sponsor-callout__link .material-symbols-outlined {
-    font-size: 16px;
-  }
-
-  /* Contact CTA */
-  .contact-cta {
-    max-width: 700px;
-    margin-inline: auto;
-    text-align: center;
-    padding: var(--space-xl);
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-  }
-
-  .contact-cta__title {
+  .planning-box__title {
     font-size: var(--font-size-3xl);
-    margin-top: var(--space-2xs);
+    margin-bottom: var(--space-xs);
+    color: var(--color-ink);
   }
 
-  .contact-cta__desc {
+  .planning-box__desc {
+    font-size: var(--font-size-base);
     color: var(--color-ink-muted);
-    max-width: 55ch;
-    margin: var(--space-sm) auto var(--space-lg);
     line-height: var(--line-height-relaxed);
+    max-width: 65ch;
+    margin-bottom: var(--space-lg);
   }
 
-  .contact-cta__actions {
+  .planning-box__actions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-sm);
+    gap: var(--space-xs);
   }
 
-  .contact-cta .material-symbols-outlined {
-    font-size: 18px;
+  .section-cta-center {
+    display: flex;
+    justify-content: center;
   }
 </style>

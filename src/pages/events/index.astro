@@ -10,200 +10,42 @@ const getTimestamp = (dateStr: string) => {
   return isNaN(ts) ? 0 : ts;
 };
 const sortedEvents = allEvents.sort((a, b) => getTimestamp(b.data.date) - getTimestamp(a.data.date));
-const upcomingEvents = allEvents
-  .filter((e) => e.data.status === 'upcoming')
-  .sort((a, b) => getTimestamp(a.data.date) - getTimestamp(b.data.date));
-const pastEvents = sortedEvents.filter((e) => e.data.status === 'completed');
-
-const flagshipEvent = upcomingEvents[0] ?? null;
-const remainingUpcoming = upcomingEvents.slice(1);
-const upcomingTags = [...new Set(remainingUpcoming.flatMap((e) => e.data.tags))].sort();
-
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-const weekdayFormatter = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
-
-const parseSpeaker = (raw: string) => {
-  const match = raw.match(/^(.+?)\s*\(([^)]+)\)\s*$/);
-  return match ? { name: match[1].trim(), role: match[2].trim() } : { name: raw, role: '' };
-};
+const upcomingEvents = sortedEvents.filter(e => e.data.status === 'upcoming');
+const pastEvents = sortedEvents.filter(e => e.data.status === 'completed');
 ---
 
-<BaseLayout
-  title="Events & Meetups | CNCF Peshawar"
+<BaseLayout 
+  title="Events & Meetups | CNCF Peshawar" 
   description="Explore upcoming and past Cloud Native meetups, Kubernetes workshops, and distributed systems labs in Peshawar."
 >
-  <!-- Page Header & Telemetry Strip -->
+  <!-- Page Header -->
   <section class="page-header section">
     <div class="container">
-      <div class="page-header__pre">
-        <span class="badge badge--live">Community Calendar</span>
-        <span class="page-header__pre-sep">/</span>
-        <span class="page-header__pre-text">Khyber Pakhtunkhwa Ecosystem</span>
-      </div>
-      <h1 class="page-header__title">Community Meetups &amp; Workshops.</h1>
+      <span class="badge badge--live">Community Gatherings</span>
+      <h1 class="page-header__title">Events & Technical Labs.</h1>
       <p class="page-header__desc">
-        Join our in-person and virtual sessions on Kubernetes, DevOps, and cloud native architectures across Peshawar.
+        All CNCF Peshawar meetups and workshops are 100% free, community-driven, and open to all engineers, researchers, and students.
       </p>
-
-      <div class="telemetry-ribbon">
-        <div class="telemetry-tile">
-          <span class="material-symbols-outlined">calendar_month</span>
-          <div>
-            <div class="telemetry-tile__num">{upcomingEvents.length}</div>
-            <div class="telemetry-tile__label">Upcoming Sessions</div>
-          </div>
-        </div>
-        <div class="telemetry-tile">
-          <span class="material-symbols-outlined">history</span>
-          <div>
-            <div class="telemetry-tile__num">{pastEvents.length}</div>
-            <div class="telemetry-tile__label">Archived Sessions</div>
-          </div>
-        </div>
-        <div class="telemetry-tile">
-          <span class="material-symbols-outlined">code</span>
-          <div>
-            <div class="telemetry-tile__num">Open Source</div>
-            <div class="telemetry-tile__label">Curriculum &amp; Labs</div>
-          </div>
-        </div>
-        <div class="telemetry-tile">
-          <span class="material-symbols-outlined">hub</span>
-          <div>
-            <div class="telemetry-tile__num">Official</div>
-            <div class="telemetry-tile__label">CNCF Chapter</div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- Flagship Next Meetup -->
-  {flagshipEvent && (
-    <section class="section flagship-section">
-      <div class="container">
-        <div class="flagship-card">
-          <div class="flagship-card__accent"></div>
-          <div class="flagship-card__grid">
-            <div class="flagship-card__main">
-              <div class="flagship-card__badges">
-                <span class="flagship-badge">
-                  <span class="flagship-badge__dot"></span>
-                  Next Meetup
-                </span>
-                <span class="flagship-card__sep">|</span>
-                <span class="flagship-card__meta">
-                  <span class="material-symbols-outlined">event</span>
-                  {weekdayFormatter.format(new Date(flagshipEvent.data.date)).toUpperCase()} · {flagshipEvent.data.time}
-                </span>
-                <span class="flagship-card__sep">|</span>
-                <span class="flagship-card__meta">
-                  <span class="material-symbols-outlined">location_on</span>
-                  {flagshipEvent.data.venue}
-                </span>
-              </div>
-
-              <h2 class="flagship-card__title">{flagshipEvent.data.title}</h2>
-              <p class="flagship-card__desc">{flagshipEvent.data.summary}</p>
-
-              {flagshipEvent.data.tags.length > 0 && (
-                <div class="flagship-card__tags">
-                  {flagshipEvent.data.tags.map((tag) => (
-                    <span class="flagship-tag">#{tag}</span>
-                  ))}
-                </div>
-              )}
-
-              {flagshipEvent.data.speakers.length > 0 && (
-                <div class="flagship-card__speakers">
-                  <span class="flagship-card__speakers-label">Featured Speakers:</span>
-                  {flagshipEvent.data.speakers.map((raw) => {
-                    const { name, role } = parseSpeaker(raw);
-                    return (
-                      <div class="flagship-speaker">
-                        <div class="flagship-speaker__avatar">{name.charAt(0)}</div>
-                        <div>
-                          <span class="flagship-speaker__name">{name}</span>
-                          {role && <span class="flagship-speaker__role">{role}</span>}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-
-            <div class="flagship-card__side">
-              <div class="flagship-terminal">
-                <div class="flagship-terminal__header">
-                  <span>session-manifest.yaml</span>
-                  <span class="flagship-terminal__badge">RSVP required</span>
-                </div>
-                <div class="flagship-terminal__body">
-                  <div class="flagship-terminal__line flagship-terminal__line--cmd">$ ocg rsvp {flagshipEvent.slug}</div>
-                  <div>event: {flagshipEvent.data.title}</div>
-                  <div>venue: {flagshipEvent.data.venue}</div>
-                  {flagshipEvent.data.capacity && <div class="flagship-terminal__line--status">capacity: {flagshipEvent.data.capacity} seats</div>}
-                </div>
-              </div>
-
-              <div class="flagship-card__actions">
-                <a href={flagshipEvent.data.rsvpUrl} target="_blank" rel="noopener noreferrer" class="btn btn--accent">
-                  <span>RSVP on OCG (Free)</span>
-                  <span class="material-symbols-outlined">north_east</span>
-                </a>
-                {flagshipEvent.data.lumaUrl && (
-                  <a href={flagshipEvent.data.lumaUrl} target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
-                    <span>Luma ↗</span>
-                  </a>
-                )}
-                <a href={`${base}/events/${flagshipEvent.slug}`} class="btn btn--secondary">
-                  <span>Full Agenda &amp; Details</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Remaining Upcoming Events Grid -->
-  {remainingUpcoming.length > 0 && (
+  <!-- Upcoming Events -->
+  {upcomingEvents.length > 0 && (
     <section class="section section--subtle">
       <div class="container">
         <div class="section-header">
-          <span class="section-header__num">Upcoming Schedule</span>
-          <h2 class="section-header__title">More Upcoming Sessions.</h2>
+          <span class="section-header__num">01 // UPCOMING</span>
+          <h2 class="section-header__title">Next In-Person Meetup.</h2>
+          <p class="section-header__desc">
+            Seats are limited to venue capacity. RSVP early on Open Community Groups (OCG) or Luma.
+          </p>
         </div>
 
-        {remainingUpcoming.length > 1 && (
-          <div class="events-toolbar" id="events-toolbar">
-            <input
-              type="search"
-              class="events-toolbar__search"
-              id="events-search"
-              placeholder="Search upcoming sessions…"
-              aria-label="Search upcoming events"
-            />
-            <div class="events-toolbar__pills" role="group" aria-label="Filter by tag">
-              <button type="button" class="filter-pill is-active" data-tag="all">All</button>
-              {upcomingTags.map((tag) => (
-                <button type="button" class="filter-pill" data-tag={tag}>{tag}</button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div class="events-grid" id="events-list">
-          {remainingUpcoming.map((event) => (
-            <div class="events-list__item" data-tags={event.data.tags.join('|').toLowerCase()} data-search={event.data.title.toLowerCase()}>
-              <EventCard event={event} />
-            </div>
+        <div class="events-list">
+          {upcomingEvents.map(event => (
+            <EventCard event={event} />
           ))}
         </div>
-        <p class="events-empty" id="events-empty" hidden>No sessions match that search — try a different tag or keyword.</p>
       </div>
     </section>
   )}
@@ -212,7 +54,7 @@ const parseSpeaker = (raw: string) => {
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <span class="section-header__num">Archive</span>
+        <span class="section-header__num">02 // ARCHIVE</span>
         <h2 class="section-header__title">Past Meetup Archives.</h2>
         <p class="section-header__desc">
           Explore slide decks, video recordings, and summaries from our previous sessions.
@@ -220,23 +62,9 @@ const parseSpeaker = (raw: string) => {
       </div>
 
       {pastEvents.length > 0 ? (
-        <div class="divider-list">
-          {pastEvents.map((event) => (
-            <div class="divider-list__row archive-row">
-              <span class="archive-row__date">{dateFormatter.format(new Date(event.data.date)).toUpperCase()}</span>
-              <div class="archive-row__main">
-                <a href={`${base}/events/${event.slug}`} class="archive-row__title">{event.data.title}</a>
-                <div class="archive-row__meta">
-                  <span>{event.data.venue}</span>
-                  {event.data.tags.slice(0, 3).map((tag) => <span class="badge archive-row__tag">{tag}</span>)}
-                </div>
-              </div>
-              <div class="archive-row__actions">
-                {event.data.slidesUrl && <a href={event.data.slidesUrl} target="_blank" rel="noopener noreferrer">Slides ↗</a>}
-                {event.data.recordingUrl && <a href={event.data.recordingUrl} target="_blank" rel="noopener noreferrer">Recording ↗</a>}
-                <a href={`${base}/events/${event.slug}`}>Details →</a>
-              </div>
-            </div>
+        <div class="events-grid">
+          {pastEvents.map(event => (
+            <EventCard event={event} />
           ))}
         </div>
       ) : (
@@ -255,32 +83,12 @@ const parseSpeaker = (raw: string) => {
 
 <style>
   .page-header {
-    padding-bottom: var(--space-lg);
-  }
-
-  .page-header__pre {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    margin-bottom: var(--space-md);
-  }
-
-  .page-header__pre-sep {
-    color: var(--color-border);
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-  }
-
-  .page-header__pre-text {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    letter-spacing: var(--letter-spacing-wide);
-    text-transform: uppercase;
-    color: var(--color-ink-subtle);
+    padding-bottom: var(--space-xl);
   }
 
   .page-header__title {
     font-size: var(--font-size-5xl);
+    margin-top: var(--space-xs);
     margin-bottom: var(--space-md);
   }
 
@@ -288,309 +96,12 @@ const parseSpeaker = (raw: string) => {
     font-size: var(--font-size-lg);
     color: var(--color-ink-muted);
     max-width: var(--container-prose);
-    margin-bottom: var(--space-lg);
   }
 
-  .telemetry-ribbon {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-sm);
-  }
-
-  @media (min-width: 768px) {
-    .telemetry-ribbon {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  .telemetry-tile {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-sm);
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-  }
-
-  .telemetry-tile .material-symbols-outlined {
-    font-size: 22px;
-    color: var(--color-accent);
-  }
-
-  .telemetry-tile__num {
-    font-weight: var(--font-weight-bold);
-    color: var(--color-ink);
-  }
-
-  .telemetry-tile__label {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-subtle);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  /* Flagship Card */
-  .flagship-section {
-    padding-top: 0;
-  }
-
-  .flagship-card {
-    position: relative;
-    overflow: hidden;
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: clamp(var(--space-lg), 4vw, var(--space-xl));
-    transition: border-color var(--transition-fast);
-  }
-
-  .flagship-card:hover {
-    border-color: var(--color-border-hover);
-  }
-
-  .flagship-card__accent {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(to right, var(--color-accent), var(--color-signal-green), transparent);
-  }
-
-  .flagship-card__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
-
-  @media (min-width: 992px) {
-    .flagship-card__grid {
-      grid-template-columns: 1.4fr 1fr;
-    }
-  }
-
-  .flagship-card__badges {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-md);
-  }
-
-  .flagship-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0.25rem 0.65rem;
-    background-color: var(--color-signal-pink-subtle);
-    border: 1px solid var(--color-signal-pink);
-    border-radius: var(--radius-xs);
-    color: var(--color-signal-pink);
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: var(--font-weight-semibold);
-  }
-
-  .flagship-badge__dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--color-signal-pink);
-    animation: pulse-live 2s infinite ease-in-out;
-  }
-
-  .flagship-card__sep {
-    color: var(--color-border);
-  }
-
-  .flagship-card__meta {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-muted);
-    text-transform: uppercase;
-  }
-
-  .flagship-card__meta .material-symbols-outlined {
-    font-size: 16px;
-    color: var(--color-ink-subtle);
-  }
-
-  .flagship-card__title {
-    font-size: var(--font-size-3xl);
-    margin-bottom: var(--space-sm);
-  }
-
-  .flagship-card__desc {
-    color: var(--color-ink-muted);
-    line-height: var(--line-height-relaxed);
-    max-width: 60ch;
-    margin-bottom: var(--space-md);
-  }
-
-  .flagship-card__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2xs);
-    margin-bottom: var(--space-lg);
-  }
-
-  .flagship-tag {
-    padding: 0.2rem 0.6rem;
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    background-color: var(--color-paper-subtle);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xs);
-    color: var(--color-ink-muted);
-    text-transform: uppercase;
-  }
-
-  .flagship-card__speakers {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-md);
-    padding-top: var(--space-md);
-    border-top: 1px solid var(--color-border);
-  }
-
-  .flagship-card__speakers-label {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    text-transform: uppercase;
-    color: var(--color-ink-subtle);
-  }
-
-  .flagship-speaker {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-  }
-
-  .flagship-speaker__avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-sm);
-    background-color: var(--color-paper-subtle);
-    border: 1px solid var(--color-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-ink);
-  }
-
-  .flagship-speaker__name {
-    display: block;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-ink);
-    font-size: var(--font-size-sm);
-  }
-
-  .flagship-speaker__role {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-subtle);
-  }
-
-  .flagship-card__side {
+  .events-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
-  }
-
-  .flagship-terminal {
-    background-color: var(--color-paper);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    padding: var(--space-md);
-  }
-
-  .flagship-terminal__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: var(--space-xs);
-    margin-bottom: var(--space-xs);
-    border-bottom: 1px solid var(--color-border);
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-subtle);
-  }
-
-  .flagship-terminal__badge {
-    color: var(--color-signal-green);
-  }
-
-  .flagship-terminal__body {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    line-height: 1.6;
-    color: var(--color-ink-muted);
-  }
-
-  .flagship-terminal__line--cmd {
-    color: var(--color-signal-green);
-  }
-
-  .flagship-terminal__line--status {
-    color: var(--color-accent);
-  }
-
-  .flagship-card__actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xs);
-  }
-
-  .flagship-card__actions .btn {
-    width: 100%;
-  }
-
-  /* Grid & toolbar */
-  .events-toolbar {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-lg);
-  }
-
-  @media (min-width: 768px) {
-    .events-toolbar {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-    }
-  }
-
-  .events-toolbar__search {
-    padding: 0.6rem var(--space-sm);
-    font-family: var(--font-body);
-    font-size: var(--font-size-sm);
-    color: var(--color-ink);
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    min-width: 240px;
-  }
-
-  .events-toolbar__search:focus-visible {
-    outline: 2px solid var(--color-focus);
-    outline-offset: 1px;
-  }
-
-  .events-toolbar__pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2xs);
+    gap: var(--space-lg);
   }
 
   .events-grid {
@@ -603,19 +114,6 @@ const parseSpeaker = (raw: string) => {
     .events-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-  }
-
-  @media (min-width: 1100px) {
-    .events-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .events-empty {
-    padding: var(--space-lg);
-    text-align: center;
-    color: var(--color-ink-muted);
-    font-size: var(--font-size-sm);
   }
 
   .empty-archive-box {
@@ -632,103 +130,4 @@ const parseSpeaker = (raw: string) => {
     max-width: 60ch;
     margin-inline: auto;
   }
-
-  .archive-row {
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-
-  .archive-row__date {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-subtle);
-    min-width: 90px;
-  }
-
-  .archive-row__main {
-    flex: 1;
-    min-width: 200px;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3xs);
-  }
-
-  .archive-row__title {
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-ink);
-  }
-
-  .archive-row__title:hover {
-    color: var(--color-accent);
-  }
-
-  .archive-row__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-2xs);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-muted);
-  }
-
-  .archive-row__tag {
-    padding: 0.1rem 0.5rem;
-  }
-
-  .archive-row__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    font-size: var(--font-size-xs);
-    color: var(--color-accent);
-  }
 </style>
-
-<script>
-  function initEventsFilter() {
-    const toolbar = document.getElementById('events-toolbar');
-    if (!toolbar) return;
-
-    const searchInput = document.getElementById('events-search') as HTMLInputElement | null;
-    const pills = toolbar.querySelectorAll<HTMLButtonElement>('.filter-pill');
-    const items = document.querySelectorAll<HTMLElement>('#events-list .events-list__item');
-    const emptyState = document.getElementById('events-empty');
-
-    let activeTag = 'all';
-
-    function applyFilter() {
-      const query = (searchInput?.value || '').trim().toLowerCase();
-      let visibleCount = 0;
-
-      items.forEach((item) => {
-        const tags = item.dataset.tags || '';
-        const title = item.dataset.search || '';
-        const matchesTag = activeTag === 'all' || tags.includes(activeTag.toLowerCase());
-        const matchesQuery = query === '' || title.includes(query);
-        const visible = matchesTag && matchesQuery;
-        item.hidden = !visible;
-        if (visible) visibleCount++;
-      });
-
-      if (emptyState) emptyState.hidden = visibleCount > 0;
-    }
-
-    pills.forEach((pill) => {
-      pill.addEventListener('click', () => {
-        pills.forEach((p) => p.classList.remove('is-active'));
-        pill.classList.add('is-active');
-        activeTag = pill.dataset.tag || 'all';
-        applyFilter();
-      });
-    });
-
-    searchInput?.addEventListener('input', applyFilter);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initEventsFilter);
-  } else {
-    initEventsFilter();
-  }
-  document.addEventListener('astro:page-load', initEventsFilter);
-</script>

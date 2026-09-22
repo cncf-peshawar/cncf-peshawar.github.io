@@ -1,47 +1,66 @@
+/* CNCF Peshawar · Design System v2 — CNCF 2026-inspired + custom brand palette */
+/* Palette: #0d00ff (electric brand blue) · #010017 (deep ink navy) · #ffffff (cloud) */
+/* Type: Satoshi (display) · General Sans (UI/body) · Poppins (support) · Google Sans (brand accent) */
+
 :root {
   /* -------------------------------------------------------------------------- */
-  /* COLOR SYSTEM — Cloud Native High-Contrast Tech (dark, single-theme)        */
+  /* BRAND PALETTE                                                             */
   /* -------------------------------------------------------------------------- */
-  --color-paper: #000000;
-  --color-paper-subtle: #0a0a0a;
-  --color-paper-card: #111111;
-  --color-paper-card-hover: #161616;
-  --color-paper-elevated: #111111;
-
-  --color-ink: #ffffff;
-  --color-ink-hover: #e5e5e5;
-  --color-ink-muted: #c0c6d6;
-  --color-ink-subtle: #8a91a0; /* WCAG AA against black */
-
-  /* CNCF Blue */
-  --color-accent: #0086ff;
-  --color-accent-hover: #3b9eff;
-  --color-accent-subtle: #0a1e33;
-  --color-accent-contrast: #ffffff;
-
-  /* CNCF Turquoise — kept on the pre-existing "signal-green" slots so every
-     consumer (live dots, badge--live, countdown pulse) picks it up for free */
-  --color-signal-green: #93eaff;
-  --color-signal-green-subtle: #0d2630;
-  --color-signal-green-ink: #93eaff;
-
-  /* CNCF Pink — alerts, validation, destructive actions */
-  --color-signal-pink: #d62293;
-  --color-signal-pink-subtle: #2e0d1f;
-  --color-signal-amber: #f5a623;
-  --color-signal-amber-subtle: #2e2108;
-
-  --color-border: #333333;
-  --color-border-hover: #0086ff;
-  --color-focus: #0086ff;
+  --brand-blue: oklch(0.45 0.32 265);      /* #0d00ff */
+  --brand-blue-dark: oklch(0.38 0.34 265);
+  --brand-blue-soft: oklch(0.66 0.22 265); /* light accent for dark surfaces */
+  --brand-ink: oklch(0.10 0.03 278);       /* #010017 */
+  --brand-cloud: oklch(1 0 0);             /* #ffffff */
 
   /* -------------------------------------------------------------------------- */
-  /* TYPOGRAPHY SYSTEM                                                          */
+  /* COLOR SYSTEM (OKLCH) - Light Theme                                       */
   /* -------------------------------------------------------------------------- */
-  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, monospace;
+  --color-paper: var(--brand-cloud);
+  --color-paper-subtle: oklch(0.965 0.012 265);
+  --color-paper-card: oklch(1 0 0);
+  --color-paper-card-hover: oklch(0.97 0.014 265);
+  --color-paper-elevated: oklch(1 0 0);
 
+  --color-ink: var(--brand-ink);
+  --color-ink-hover: oklch(0.05 0.02 278);
+  --color-ink-muted: oklch(0.40 0.05 278);
+  --color-ink-subtle: oklch(0.38 0.05 278); /* WCAG AA on paper */
+
+  /* Brand Blue Accent */
+  --color-accent: var(--brand-blue);
+  --color-accent-hover: var(--brand-blue-dark);
+  --color-accent-subtle: oklch(0.93 0.06 265);
+  --color-accent-contrast: var(--brand-cloud);
+
+  /* Status Indicators */
+  --color-signal-green: oklch(0.60 0.17 155);
+  --color-signal-green-subtle: oklch(0.94 0.05 155);
+  --color-signal-green-ink: oklch(0.30 0.17 155);
+  --color-signal-amber: oklch(0.70 0.17 65);
+  --color-signal-amber-subtle: oklch(0.96 0.05 65);
+
+  /* Hairline and Component Borders */
+  --color-border: oklch(0.91 0.02 265);
+  --color-border-hover: var(--brand-blue);
+  --color-focus: var(--brand-blue);
+
+  /* Brand Gradients */
+  --gradient-brand: linear-gradient(135deg, var(--brand-blue) 0%, oklch(0.55 0.20 265) 55%, oklch(0.88 0.10 240) 100%);
+  --gradient-brand-text: linear-gradient(100deg, var(--brand-blue-dark) 0%, var(--brand-blue) 45%, oklch(0.70 0.16 240) 100%);
+
+  /* -------------------------------------------------------------------------- */
+  /* TYPOGRAPHY SYSTEM (4 Discipline Type Stack)                                 */
+  /*  Satoshi      → Display / Headings                                          */
+  /*  General Sans → Body / Interface                                            */
+  /*  Poppins      → Labels, Badges & Accent Text                                */
+  /*  Google Sans  → Brand, Terminal & Code-facing Text                          */
+  /* -------------------------------------------------------------------------- */
+  --font-display: 'Satoshi', 'General Sans', 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'General Sans', 'Poppins', 'Satoshi', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Google Sans', 'Poppins', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  --font-brand: 'Google Sans', 'Satoshi', 'General Sans', 'Poppins', ui-sans-serif, system-ui, sans-serif;
+
+  /* Typography Scale */
   --font-size-xs: 0.75rem;    /* 12px */
   --font-size-sm: 0.875rem;   /* 14px */
   --font-size-base: 1rem;     /* 16px */
@@ -50,24 +69,24 @@
   --font-size-2xl: 1.5rem;    /* 24px */
   --font-size-3xl: 2rem;      /* 32px */
   --font-size-4xl: 2.75rem;   /* 44px */
-  --font-size-5xl: clamp(2.5rem, 5vw + 0.5rem, 4.25rem); /* Hero display */
+  --font-size-5xl: clamp(2.75rem, 6vw + 0.5rem, 4.75rem); /* Hero display */
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  --line-height-tight: 1.1;
-  --line-height-snug: 1.25;
+  --line-height-tight: 1.05;
+  --line-height-snug: 1.2;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.65;
 
-  --letter-spacing-tight: -0.025em;
+  --letter-spacing-tight: -0.03em;
   --letter-spacing-normal: 0em;
   --letter-spacing-wide: 0.06em;
 
   /* -------------------------------------------------------------------------- */
-  /* SPACING SCALE (8-pt Grid)                                                  */
+  /* SPACING SCALE (4-pt Grid Standard)                                         */
   /* -------------------------------------------------------------------------- */
   --space-3xs: 4px;
   --space-2xs: 8px;
@@ -80,19 +99,18 @@
   --space-3xl: 96px;
 
   /* -------------------------------------------------------------------------- */
-  /* CORNERS & ELEVATION (borders carry depth, not blur)                        */
+  /* CORNERS & SHADOWS                                                          */
   /* -------------------------------------------------------------------------- */
   --radius-xs: 4px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 8px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 0 rgb(0 0 0 / 0.5);
-  --shadow-md: 0 2px 0 rgb(0 0 0 / 0.6);
-  --shadow-lg: 0 4px 0 0 #000000;
-  --shadow-rim: 0 4px 0 0 #000000;
-  --shadow-glow: 0 0 12px 0 rgb(147 234 255 / 0.25);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 6px 16px -4px rgb(0 0 0 / 0.08), 0 2px 6px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 16px 32px -8px rgb(0 0 0 / 0.12), 0 6px 10px -4px rgb(0 0 0 / 0.06);
+  --shadow-glow: 0 0 36px -6px oklch(0.45 0.32 265 / 0.35);
 
   /* -------------------------------------------------------------------------- */
   /* TIMINGS & TRANSITIONS                                                      */
@@ -106,4 +124,43 @@
   /* -------------------------------------------------------------------------- */
   --container-max: 1200px;
   --container-prose: 68ch;
+}
+
+/* -------------------------------------------------------------------------- */
+/* DARK THEME — developer-focused, brand blue on deep navy ink (#010017)     */
+/* -------------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper: var(--brand-ink);
+    --color-paper-subtle: oklch(0.14 0.045 278);
+    --color-paper-card: oklch(0.14 0.045 278);
+    --color-paper-card-hover: oklch(0.17 0.05 278);
+    --color-paper-elevated: oklch(0.15 0.048 278);
+
+    --color-ink: var(--brand-cloud);
+    --color-ink-hover: oklch(1 0 0);
+    --color-ink-muted: oklch(0.78 0.02 265);
+    --color-ink-subtle: oklch(0.72 0.02 265); /* WCAG AA on dark paper */
+
+    --color-accent: var(--brand-blue-soft);
+    --color-accent-hover: oklch(0.74 0.22 265);
+    --color-accent-subtle: oklch(0.24 0.08 265);
+    --color-accent-contrast: oklch(0.10 0.03 278);
+
+    --color-signal-green: oklch(0.78 0.19 155);
+    --color-signal-green-subtle: oklch(0.22 0.06 155);
+    --color-signal-green-ink: oklch(0.86 0.15 155);
+
+    --color-border: oklch(0.26 0.04 278);
+    --color-border-hover: var(--brand-blue-soft);
+    --color-focus: var(--brand-blue-soft);
+
+    --gradient-brand: linear-gradient(135deg, var(--brand-blue-soft) 0%, oklch(0.78 0.18 240) 100%);
+    --gradient-brand-text: linear-gradient(100deg, oklch(0.72 0.24 265) 0%, var(--brand-blue-soft) 55%, oklch(0.85 0.14 235) 100%);
+
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+    --shadow-md: 0 6px 16px -4px rgb(0 0 0 / 0.5);
+    --shadow-lg: 0 16px 32px -8px rgb(0 0 0 / 0.6);
+    --shadow-glow: 0 0 36px -6px oklch(0.66 0.22 265 / 0.35);
+  }
 }

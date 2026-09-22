@@ -56,17 +56,34 @@ const team = defineCollection({
   type: 'content',
   schema: z.object({
     name: z.string(),
-    role: z.string().optional().default('Member'),
-    bio: z.string().optional().default(''),
+    role: z.string(),
+    bio: z.string(),
     company: z.string().optional(),
-    university: z.string().optional(),
-    email: z.string().optional(),
     avatar: z.string().optional(),
+    email: z.string().optional(),
     github: z.string().url().optional(),
     linkedin: z.string().url().optional(),
+    instagram: z.string().url().optional(),
     twitter: z.string().url().optional(),
     linuxFoundationUser: z.string().optional(),
-    team: z.string().optional(),
+    isLead: z.boolean().default(false),
+    order: z.number().default(99)
+  })
+});
+
+const members = defineCollection({
+  type: 'content',
+  schema: z.object({
+    name: z.string(),
+    role: z.string().optional(),
+    team: z.string(),
+    photo: z.string().optional(),
+    avatar: z.string().optional(),
+    university: z.string().optional(),
+    company: z.string().optional(),
+    email: z.string().optional(),
+    github: z.string().url().optional(),
+    linkedin: z.string().url().optional(),
     isLead: z.boolean().default(false),
     order: z.number().default(99)
   })
@@ -91,5 +108,6 @@ export const collections = {
   speakers,
   sponsors,
   team,
+  members,
   blog
 };

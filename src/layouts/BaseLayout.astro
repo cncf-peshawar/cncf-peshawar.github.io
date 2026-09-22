@@ -39,7 +39,7 @@ const fullTitle = title.includes("Cloud Native Peshawar") || title.includes("CNC
     <title>{fullTitle}</title>
     <meta name="title" content={fullTitle} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0086FF" />
+    <meta name="theme-color" content="#0d00ff" />
 
     <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
     <meta property="og:type" content="website" />
@@ -58,11 +58,15 @@ const fullTitle = title.includes("Cloud Native Peshawar") || title.includes("CNC
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={imageURL} />
 
-    <!-- Google Fonts Preconnect (Inter, JetBrains Mono) -->
+    <!-- Fonts: Poppins (Google), Satoshi + General Sans (Fontshare), Google Sans (CDN Fonts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet" />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -71,7 +75,6 @@ const fullTitle = title.includes("Cloud Native Peshawar") || title.includes("CNC
       <slot />
     </main>
     <Footer />
-    <div id="toast-region" class="toast-region" aria-live="polite"></div>
   </body>
 </html>
 
@@ -82,26 +85,3 @@ const fullTitle = title.includes("Cloud Native Peshawar") || title.includes("CNC
     flex-direction: column;
   }
 </style>
-
-<script>
-  function showToast(message: string) {
-    const region = document.getElementById('toast-region');
-    if (!region) return;
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    region.appendChild(toast);
-    requestAnimationFrame(() => toast.classList.add('is-visible'));
-    setTimeout(() => {
-      toast.classList.remove('is-visible');
-      setTimeout(() => toast.remove(), 300);
-    }, 2600);
-  }
-
-  function registerToast() {
-    (window as typeof window & { cncfToast?: typeof showToast }).cncfToast = showToast;
-  }
-
-  registerToast();
-  document.addEventListener('astro:page-load', registerToast);
-</script>

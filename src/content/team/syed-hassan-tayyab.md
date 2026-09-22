@@ -1,13 +1,12 @@
 ---
 name: "Syed Hassan Tayyab"
 role: "Organizer & Host"
-team: "Core Team"
-university: "UET Peshawar"
-company: "UET Peshawar"
-email: "syedhassantayyab@gmail.com"
-avatar: "https://github.com/syedhassantayyab.png"
+company: "University Of Engineering & Technology Peshawar, Pakistan"
+bio: "Co-Founder & AI Product Developer at UET Peshawar. Community lead organizing CNCF Peshawar Genesis and advancing Cloud Native, MLOps, and Agentic AI initiatives."
+avatar: "/images/team/syed-hassan-tayyab.png"
 linkedin: "https://www.linkedin.com/in/syedhassantayyab/"
+linuxFoundationUser: "syedhassantayyab"
 isLead: true
 order: 1
-bio: "Co-Founder & AI Product Developer at UET Peshawar. Community lead organizing CNCF Peshawar Genesis and advancing Cloud Native, MLOps, and Agentic AI initiatives."
 ---
+Syed Hassan Tayyab is a Co-Founder and AI Product Developer at UET Peshawar, actively leading community operations and hosting technical workshops for Cloud Native Peshawar.
