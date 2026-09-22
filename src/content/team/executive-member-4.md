@@ -1,11 +1,11 @@
 ---
-name: "Executive Member 4"
-role: "Executive Team"
-bio: "Executive team member of Cloud Native Peshawar. Profile details to be added."
-avatar: ""
+name: "Farza Shahzad"
+role: "Management Team Lead"
+bio: "Management Team Lead at Cloud Native Peshawar, overseeing operations, coordination, and organizational workflows for the chapter."
+avatar: "/images/team/farza-shahzad.png"
+linkedin: "https://www.linkedin.com/in/farza-shahzad/"
 instagram: "https://www.instagram.com/cncfpeshawar/"
-linuxFoundationUser: ""
-isLead: false
+isLead: true
 order: 4
 ---
-Executive team member supporting community operations, events, and outreach for Cloud Native Peshawar under the CNCF umbrella.
+Farza Shahzad serves as Management Team Lead for Cloud Native Peshawar, coordinating chapter operations, planning, and management under the CNCF umbrella.
