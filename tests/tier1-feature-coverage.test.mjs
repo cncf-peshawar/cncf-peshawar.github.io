@@ -69,6 +69,26 @@ export async function runTier1Suite() {
     assert.ok(genesis.summary.includes('proudly sponsored by GitHub and nsave'));
   });
 
+  await suite.test('F1.1a: Identifies virtual OCG events without inventing a physical venue', async () => {
+    const virtualEventHtml = `
+      <link rel="canonical" href="https://ocgroups.dev/cncf/group/6vwk2n4/event/wpm4sp7">
+      <h1>The Cloud Native Launchpad: Docker, Kubernetes &amp; Real Deployments</h1>
+      <event-attendance data-starts="2026-09-26T14:00:00+00:00" data-availability-capacity="500"></event-attendance>
+      <div>virtual</div>
+      <div>Location</div>
+      <div>Virtual event</div>
+      <div class="markdown">
+        <p>Join Cloud Native Peshawar for an interactive hands-on webinar.</p>
+        <p>Format: Virtual (Google Meet)</p>
+      </div>
+    `;
+
+    const event = parseOcgEventHtml(virtualEventHtml);
+
+    assert.equal(event.venue, 'Virtual event');
+    assert.equal(event.location, 'Online');
+  });
+
   await suite.test('F1.2: Detects status automatically (upcoming for future, completed for past)', async () => {
     const pastHtml = fs.readFileSync('tests/fixtures/ocg-portal-past.html', 'utf-8');
     const pastEvents = parseOcgGroupHtml(pastHtml).embeddedEvents;

@@ -266,11 +266,19 @@ export function parseOcgEventHtml(html, defaultUrl = '') {
 
   // 5. Venue and Location
   let venue = '';
+  let location = 'Peshawar, KPK, Pakistan';
+  const eventText = stripHtml(html);
+  const isVirtualEvent = /\bLocation\s*:?\s*Virtual event\b/i.test(eventText) ||
+                         /\bFormat\s*:?\s*Virtual(?:\s*\([^)]*\))?/i.test(eventText) ||
+                         /<[^>]+>\s*virtual(?:\s+event)?\s*<\/[^>]+>/i.test(html);
   const mapModalMatch = html.match(/data-map-modal[\s\S]*?<div[^>]*class=["'][^"']*rounded-full[^"']*["'][^>]*>([\s\S]*?)<\/div>/i);
   const locationCardMatch = html.match(/class=["'][^"']*icon-location[^"']*["'][\s\S]*?<\/div>\s*<div[^>]*>([\s\S]*?)<\/div>/i);
   const generalLocationMatch = html.match(/<div[^>]*class=["'][^"']*location-name[^"']*["'][^>]*>([\s\S]*?)<\/div>/i);
 
-  if (mapModalMatch) {
+  if (isVirtualEvent) {
+    venue = 'Virtual event';
+    location = 'Online';
+  } else if (mapModalMatch) {
     venue = stripHtml(mapModalMatch[1]);
   } else if (locationCardMatch) {
     venue = stripHtml(locationCardMatch[1]);
@@ -279,8 +287,6 @@ export function parseOcgEventHtml(html, defaultUrl = '') {
   } else {
     venue = 'National Incubation Center (NIC), South Canal Road';
   }
-
-  const location = 'Peshawar, KPK, Pakistan';
 
   // 6. External Links
   let lumaUrl;
