@@ -238,10 +238,10 @@ This custom body text should never be overwritten by OCG sync!
     assert.ok(stepString.includes('npm run check'), 'Must validate schema with npm run check');
   });
 
-  await suite.test('F3.5: Workflow commits changes only to src/content/events with [skip ci]', async () => {
+  await suite.test('F3.5: Workflow commits only event content without suppressing deployment CI', async () => {
     const content = fs.readFileSync('.github/workflows/event-sync.yml', 'utf-8');
     assert.ok(content.includes('git add src/content/events'), 'Must stage src/content/events');
-    assert.ok(content.includes('[skip ci]'), 'Must include [skip ci] in commit message');
+    assert.ok(!content.includes('[skip ci]'), 'Event sync commits must allow deployment workflows to run');
   });
 
   await suite.test('F3.6: Workflow declares concurrency group to prevent overlapping runs', async () => {
