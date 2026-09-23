@@ -45,7 +45,7 @@ jobs:
         id: cpr
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore(events): sync OCG events [skip ci]"
+          commit-message: "chore(events): sync OCG events"
           committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
           author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
           branch: "automated/ocg-events-sync"
