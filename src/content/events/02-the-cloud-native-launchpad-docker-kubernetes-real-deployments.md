@@ -1,6 +1,6 @@
 ---
 title: "The Cloud Native Launchpad: Docker, Kubernetes & Real Deployments"
-date: "2026-09-26"
+date: "2026-10-03"
 time: "07:00 PM - 09:00 PM PKT"
 venue: "Virtual event"
 location: "Online"
@@ -33,4 +33,3 @@ The Cloud Native Launchpad: Docker, Kubernetes & Real Deployments Join Cloud Nat
 - **Venue**: Virtual event, Online
 - **Registration**: 100% Free (General Admission)
 - **Official Platforms**: [Open Community Groups (OCG)](https://ocgroups.dev/cncf/group/6vwk2n4/event/wpm4sp7)
-
