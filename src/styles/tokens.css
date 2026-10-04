@@ -1,93 +1,180 @@
-/* CNCF Peshawar · Design System v2 — CNCF 2026-inspired + custom brand palette */
-/* Palette: #0d00ff (electric brand blue) · #010017 (deep ink navy) · #ffffff (cloud) */
-/* Type: Satoshi (display) · General Sans (UI/body) · Poppins (support) · Google Sans (brand accent) */
+@import "./fonts.css";
+/* Source: DESIGN.md + CTO §4.4 corrections */
+/* Canonical MotherDuck Design Tokens with Accessibility Overrides */
 
 :root {
   /* -------------------------------------------------------------------------- */
-  /* BRAND PALETTE                                                             */
+  /* MOTHERDUCK CORE PALETTE (DESIGN.md)                                        */
   /* -------------------------------------------------------------------------- */
-  --brand-blue: oklch(0.45 0.32 265);      /* #0d00ff */
-  --brand-blue-dark: oklch(0.38 0.34 265);
-  --brand-blue-soft: oklch(0.66 0.22 265); /* light accent for dark surfaces */
-  --brand-ink: oklch(0.10 0.03 278);       /* #010017 */
-  --brand-cloud: oklch(1 0 0);             /* #ffffff */
+  --color-cream-paper: #f4efea;       /* Canvas and section backgrounds */
+  --color-frost-white: #ffffff;       /* Card surfaces, nav, inputs, panels */
+  --color-chalk-gray: #f8f8f7;        /* Secondary surface, body bg, subtle rules */
+  --color-ice-wash: #ebf9ff;          /* Tinted blue highlight surface */
+  --color-notebook-pale: #f9fbe7;     /* Faint yellow-green tint */
+  --color-charcoal-ink: #383838;      /* Primary text, borders, shadows (never pure black) */
+  --color-pencil-gray: #a1a1a1;       /* Secondary borders, disabled outlines */
+  --color-graphite: #818181;          /* Tertiary rules and dividers */
+  --color-soft-silver: #c0c0c0;       /* Low-contrast border accents */
 
-  /* -------------------------------------------------------------------------- */
-  /* COLOR SYSTEM (OKLCH) - Light Theme                                       */
-  /* -------------------------------------------------------------------------- */
-  --color-paper: var(--brand-cloud);
-  --color-paper-subtle: oklch(0.965 0.012 265);
-  --color-paper-card: oklch(1 0 0);
-  --color-paper-card-hover: oklch(0.97 0.014 265);
-  --color-paper-elevated: oklch(1 0 0);
+  /* Primary Action */
+  --color-sky-crayon: #6fc2ff;        /* Primary action fill and nav accent */
 
-  --color-ink: var(--brand-ink);
-  --color-ink-hover: oklch(0.05 0.02 278);
-  --color-ink-muted: oklch(0.40 0.05 278);
-  --color-ink-subtle: oklch(0.38 0.05 278); /* WCAG AA on paper */
+  /* Marquee and Illustration */
+  --color-canary-banner: #ffde00;     /* Yellow marquee band and status accents */
+  --color-duck-bill-orange: #ff9538;  /* Orange highlight wash and doodle accents */
+  --color-wet-cement: #54b4de;        /* Illustration strokes (water, cloud) */
+  --color-peach-blush: #fdedda;       /* Soft warm illustrated section tint */
 
-  /* Brand Blue Accent */
-  --color-accent: var(--brand-blue);
-  --color-accent-hover: var(--brand-blue-dark);
-  --color-accent-subtle: oklch(0.93 0.06 265);
-  --color-accent-contrast: var(--brand-cloud);
-
-  /* Status Indicators */
-  --color-signal-green: oklch(0.60 0.17 155);
-  --color-signal-green-subtle: oklch(0.94 0.05 155);
-  --color-signal-green-ink: oklch(0.30 0.17 155);
-  --color-signal-amber: oklch(0.70 0.17 65);
-  --color-signal-amber-subtle: oklch(0.96 0.05 65);
-
-  /* Hairline and Component Borders */
-  --color-border: oklch(0.91 0.02 265);
-  --color-border-hover: var(--brand-blue);
-  --color-focus: var(--brand-blue);
-
-  /* Brand Gradients */
-  --gradient-brand: linear-gradient(135deg, var(--brand-blue) 0%, oklch(0.55 0.20 265) 55%, oklch(0.88 0.10 240) 100%);
-  --gradient-brand-text: linear-gradient(100deg, var(--brand-blue-dark) 0%, var(--brand-blue) 45%, oklch(0.70 0.16 240) 100%);
+  /* Rainbow Outlined Button Palette (Cycling accents) */
+  --color-coral-sketch: #f38e84;
+  --color-peach-sketch: #f5b161;
+  --color-mint-sketch: #38c1b0;
+  --color-lilac-sketch: #b291de;
+  --color-lime-sketch: #b3c419;
+  --color-periwinkle-sketch: #7597ee;
+  --color-slate-sketch: #84a6bc;
+  --color-marigold-sketch: #e1c427;
 
   /* -------------------------------------------------------------------------- */
-  /* TYPOGRAPHY SYSTEM (4 Discipline Type Stack)                                 */
-  /*  Satoshi      → Display / Headings                                          */
-  /*  General Sans → Body / Interface                                            */
-  /*  Poppins      → Labels, Badges & Accent Text                                */
-  /*  Google Sans  → Brand, Terminal & Code-facing Text                          */
+  /* ACCESSIBILITY CORRECTIONS (CTO GUIDE §4.4)                                 */
   /* -------------------------------------------------------------------------- */
-  --font-display: 'Satoshi', 'General Sans', 'Poppins', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'General Sans', 'Poppins', 'Satoshi', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'Google Sans', 'Poppins', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
-  --font-brand: 'Google Sans', 'Satoshi', 'General Sans', 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --color-text-muted: #6b6b6b;        /* §4.4 #1: AA contrast on white (5.3:1) and cream (4.7:1) */
+  --color-text-disabled: var(--color-pencil-gray);
+  --color-on-sky: var(--color-charcoal-ink); /* §4.4 #2: Charcoal text on sky fill (6:1) */
 
-  /* Typography Scale */
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-base: 1rem;     /* 16px */
-  --font-size-lg: 1.125rem;   /* 18px */
-  --font-size-xl: 1.25rem;    /* 20px */
-  --font-size-2xl: 1.5rem;    /* 24px */
-  --font-size-3xl: 2rem;      /* 32px */
-  --font-size-4xl: 2.75rem;   /* 44px */
-  --font-size-5xl: clamp(2.75rem, 6vw + 0.5rem, 4.75rem); /* Hero display */
+  /* -------------------------------------------------------------------------- */
+  /* SEMANTIC & MAPPED SYSTEM TOKENS                                            */
+  /* -------------------------------------------------------------------------- */
+  --color-paper: var(--color-cream-paper);
+  --color-surface: var(--color-frost-white);
+  --color-paper-card: var(--color-frost-white);
+  --color-paper-subtle: var(--color-chalk-gray);
+  --color-paper-card-hover: var(--color-chalk-gray);
+  --color-paper-elevated: var(--color-frost-white);
 
+  --color-ink: var(--color-charcoal-ink);
+  --color-ink-hover: var(--color-charcoal-ink);
+  --color-ink-muted: var(--color-text-muted);
+  --color-ink-subtle: var(--color-text-muted);
+
+  --color-border: var(--color-charcoal-ink);
+  --color-border-hover: var(--color-charcoal-ink);
+  --color-focus: var(--color-charcoal-ink);
+
+  --color-accent: var(--color-sky-crayon);
+  --color-accent-hover: var(--color-sky-crayon);
+  --color-accent-subtle: var(--color-ice-wash);
+  --color-accent-contrast: var(--color-on-sky);
+
+  /* Convenience Colour Aliases */
+  --color-sky: var(--color-sky-crayon);
+  --color-yellow: var(--color-canary-banner);
+  --color-marigold: var(--color-duck-bill-orange);
+  --color-lime: var(--color-lime-sketch);
+  --color-peach: var(--color-peach-sketch);
+
+  /* Legacy Brand Aliases (Safeguard) */
+  --brand-blue: var(--color-sky-crayon);
+  --brand-blue-dark: var(--color-charcoal-ink);
+  --brand-blue-soft: var(--color-sky-crayon);
+  --brand-ink: var(--color-charcoal-ink);
+  --brand-cloud: var(--color-frost-white);
+
+  /* Status Colors */
+  --color-signal-green: var(--color-mint-sketch);
+  --color-signal-green-subtle: var(--color-notebook-pale);
+  --color-signal-green-ink: var(--color-charcoal-ink);
+  --color-signal-amber: var(--color-canary-banner);
+  --color-signal-amber-subtle: var(--color-notebook-pale);
+
+  /* -------------------------------------------------------------------------- */
+  /* SHAPES, BORDERS & SHADOWS (MotherDuck Neo-Brutalist 2px)                    */
+  /* -------------------------------------------------------------------------- */
+  --radius: 2px;                      /* Universal 2px radius */
+  --radius-xs: var(--radius);
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-full: var(--radius);
+
+  --border-width: 2px;
+  --border-solid: var(--border-width) solid var(--color-charcoal-ink);
+
+  --shadow-hard: -6px 6px 0px 0px var(--color-charcoal-ink);
+  --shadow-hard-pressed: 0px 0px 0px 0px var(--color-charcoal-ink);
+  --shadow-subtle: -6px 6px 0px 0px var(--color-charcoal-ink);
+  --shadow-sm: var(--shadow-hard);
+  --shadow-md: var(--shadow-hard);
+  --shadow-lg: var(--shadow-hard);
+  --shadow-glow: none;
+
+  /* Focus & Press Physics */
+  --focus-ring: 3px solid var(--color-charcoal-ink); /* §4.4 #3 */
+  --press-transform: translate(-6px, 6px);           /* §4.4 #6 */
+  --transition-press: transform 0.1s ease, box-shadow 0.1s ease;
+  --transition-fast: 0.1s ease;
+  --transition-base: 0.15s ease;
+  --transition-slow: 0.25s ease;
+
+  /* -------------------------------------------------------------------------- */
+  /* TYPOGRAPHY SYSTEM (Self-Hosted JetBrains Mono + Inter)                      */
+  /* -------------------------------------------------------------------------- */
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-display: 'JetBrains Mono', monospace;
+  --font-brand: 'JetBrains Mono', monospace;
+  --font-aeonik-mono: 'JetBrains Mono', monospace;
+  --font-inter: 'Inter', system-ui, sans-serif;
+
+  --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
-  --font-weight-bold: 700;
+  --font-weight-bold: 600;            /* JetBrains Mono capped at 600 */
 
-  --line-height-tight: 1.05;
+  /* Type Scale (with §4.4 #4 min 12px and §4.4 #7 responsive clamps) */
+  --font-size-display: clamp(2rem, 6vw, 3.5rem);       /* §4.4 #7: 56px max */
+  --font-size-heading-lg: clamp(1.5rem, 4vw, 2.5rem);   /* §4.4 #7: 40px max */
+  --font-size-heading-md: 2rem;       /* 32px */
+  --font-size-heading-sm: 1.5rem;     /* 24px */
+  --font-size-subheading: 1.125rem;   /* 18px */
+  --font-size-body-lg: 1rem;          /* 16px */
+  --font-size-body: 0.875rem;         /* 14px */
+  --font-size-caption: 0.75rem;       /* §4.4 #4: 12px min floor */
+
+  --text-display: var(--font-size-display);
+  --text-heading-lg: var(--font-size-heading-lg);
+  --text-heading: var(--font-size-heading-md);
+  --text-heading-sm: var(--font-size-heading-sm);
+  --text-subheading: var(--font-size-subheading);
+  --text-body-lg: var(--font-size-body-lg);
+  --text-body: var(--font-size-body);
+  --text-caption: var(--font-size-caption);
+
+  /* Legacy Scale Aliases */
+  --font-size-xs: var(--font-size-caption);
+  --font-size-sm: var(--font-size-body);
+  --font-size-base: var(--font-size-body-lg);
+  --font-size-lg: var(--font-size-subheading);
+  --font-size-xl: 1.25rem;            /* 20px */
+  --font-size-2xl: var(--font-size-heading-sm);
+  --font-size-3xl: var(--font-size-heading-md);
+  --font-size-4xl: var(--font-size-heading-lg);
+  --font-size-5xl: var(--font-size-display);
+
+  --line-height-tight: 1;
   --line-height-snug: 1.2;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.65;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.6;
 
-  --letter-spacing-tight: -0.03em;
-  --letter-spacing-normal: 0em;
-  --letter-spacing-wide: 0.06em;
+  --letter-spacing-tight: 0.02em;
+  --letter-spacing-normal: 0.02em;
+  --letter-spacing-wide: 0.02em;
 
   /* -------------------------------------------------------------------------- */
   /* SPACING SCALE (4-pt Grid Standard)                                         */
   /* -------------------------------------------------------------------------- */
+  --spacing-unit: 4px;
   --space-3xs: 4px;
   --space-2xs: 8px;
   --space-xs: 12px;
@@ -96,71 +183,32 @@
   --space-lg: 32px;
   --space-xl: 48px;
   --space-2xl: 64px;
-  --space-3xl: 96px;
+  --space-3xl: 80px;
+
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-60: 60px;
+  --spacing-64: 64px;
+  --spacing-68: 68px;
+  --spacing-80: 80px;
+  --spacing-100: 100px;
+  --spacing-120: 120px;
+  --spacing-140: 140px;
+  --spacing-200: 200px;
 
   /* -------------------------------------------------------------------------- */
-  /* CORNERS & SHADOWS                                                          */
+  /* LAYOUT & CONTAINERS                                                        */
   /* -------------------------------------------------------------------------- */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-full: 9999px;
-
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 6px 16px -4px rgb(0 0 0 / 0.08), 0 2px 6px -2px rgb(0 0 0 / 0.05);
-  --shadow-lg: 0 16px 32px -8px rgb(0 0 0 / 0.12), 0 6px 10px -4px rgb(0 0 0 / 0.06);
-  --shadow-glow: 0 0 36px -6px oklch(0.45 0.32 265 / 0.35);
-
-  /* -------------------------------------------------------------------------- */
-  /* TIMINGS & TRANSITIONS                                                      */
-  /* -------------------------------------------------------------------------- */
-  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-base: 240ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-slow: 350ms cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* -------------------------------------------------------------------------- */
-  /* CONTAINER WIDTHS                                                           */
-  /* -------------------------------------------------------------------------- */
-  --container-max: 1200px;
-  --container-prose: 68ch;
-}
-
-/* -------------------------------------------------------------------------- */
-/* DARK THEME — developer-focused, brand blue on deep navy ink (#010017)     */
-/* -------------------------------------------------------------------------- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-paper: var(--brand-ink);
-    --color-paper-subtle: oklch(0.14 0.045 278);
-    --color-paper-card: oklch(0.14 0.045 278);
-    --color-paper-card-hover: oklch(0.17 0.05 278);
-    --color-paper-elevated: oklch(0.15 0.048 278);
-
-    --color-ink: var(--brand-cloud);
-    --color-ink-hover: oklch(1 0 0);
-    --color-ink-muted: oklch(0.78 0.02 265);
-    --color-ink-subtle: oklch(0.72 0.02 265); /* WCAG AA on dark paper */
-
-    --color-accent: var(--brand-blue-soft);
-    --color-accent-hover: oklch(0.74 0.22 265);
-    --color-accent-subtle: oklch(0.24 0.08 265);
-    --color-accent-contrast: oklch(0.10 0.03 278);
-
-    --color-signal-green: oklch(0.78 0.19 155);
-    --color-signal-green-subtle: oklch(0.22 0.06 155);
-    --color-signal-green-ink: oklch(0.86 0.15 155);
-
-    --color-border: oklch(0.26 0.04 278);
-    --color-border-hover: var(--brand-blue-soft);
-    --color-focus: var(--brand-blue-soft);
-
-    --gradient-brand: linear-gradient(135deg, var(--brand-blue-soft) 0%, oklch(0.78 0.18 240) 100%);
-    --gradient-brand-text: linear-gradient(100deg, oklch(0.72 0.24 265) 0%, var(--brand-blue-soft) 55%, oklch(0.85 0.14 235) 100%);
-
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
-    --shadow-md: 0 6px 16px -4px rgb(0 0 0 / 0.5);
-    --shadow-lg: 0 16px 32px -8px rgb(0 0 0 / 0.6);
-    --shadow-glow: 0 0 36px -6px oklch(0.66 0.22 265 / 0.35);
-  }
+  --page-max-width: 1200px;
+  --container-max: var(--page-max-width);
+  --container-prose: 65ch;
+  --section-gap: 80px;
+  --card-padding: 40px;
+  --element-gap: 8px;
 }
