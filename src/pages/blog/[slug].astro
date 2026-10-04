@@ -1,0 +1,119 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { data } = post;
+const { Content } = await post.render();
+
+const postDate = new Date(data.publishDate).toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric'
+});
+---
+
+<BaseLayout title={`${data.title} | CNCF Peshawar`} description={data.description}>
+  <article class="post-article section">
+    <div class="container">
+      <div class="post-header">
+        <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/blog`} class="back-link">
+          ← Back to All Articles
+        </a>
+        <h1 class="post-title">{data.title}</h1>
+        <div class="post-meta">
+          <span>{postDate}</span>
+          <span>·</span>
+          <span>Written by {data.author} ({data.authorRole})</span>
+        </div>
+      </div>
+
+      <div class="post-prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-header {
+    margin-bottom: var(--space-2xl);
+    max-width: var(--container-prose);
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: var(--font-size-sm);
+    color: var(--color-accent);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-md);
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .post-title {
+    font-size: clamp(2rem, 4vw + 0.5rem, 3.25rem);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--space-sm);
+  }
+
+  .post-meta {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-muted);
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  .post-prose {
+    max-width: var(--container-prose);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-ink);
+  }
+
+  .post-prose :global(h2) {
+    font-size: var(--font-size-2xl);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .post-prose :global(h3) {
+    font-size: var(--font-size-xl);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .post-prose :global(p) {
+    margin-bottom: var(--space-md);
+  }
+
+  .post-prose :global(ul),
+  .post-prose :global(ol) {
+    margin-left: var(--space-lg);
+    margin-bottom: var(--space-md);
+  }
+
+  .post-prose :global(li) {
+    margin-bottom: var(--space-2xs);
+  }
+
+  .post-prose :global(a) {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+</style>

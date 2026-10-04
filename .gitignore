@@ -1,0 +1,69 @@
+# ==============================================================================
+# Cloud Native Peshawar — .gitignore
+# ==============================================================================
+
+# Build & Static Output
+dist/
+build/
+.build/
+out/
+.output/
+
+# Dependencies & Package Managers
+node_modules/
+.npm
+.pnpm-store/
+.yarn/*
+.pnp.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Astro & Vite Cache
+.astro/
+.vite/
+.cache/
+.parcel-cache/
+
+# Multi-Agent & Tooling Internal Working Dirs
+.agents/
+.hallmark/
+
+# Environment Variables & Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+secrets.json
+
+# Cloudflare Wrangler (if used for OAuth proxy)
+.wrangler/
+oauth-worker/.wrangler/
+oauth-worker/.env
+
+# Test & Coverage Output
+coverage/
+*.lcov
+.nyc_output/
+
+# Logs & Diagnostics
+logs/
+*.log
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+
+# IDE & Editor Configurations
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS Metadata Files
+.DS_Store
+Thumbs.db
+desktop.ini

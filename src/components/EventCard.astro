@@ -1,0 +1,240 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  event: CollectionEntry<'events'>;
+}
+
+const { event } = Astro.props;
+const { data, slug } = event;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Format Date safely
+const parsedDate = new Date(data.date);
+const eventDate = !isNaN(parsedDate.getTime())
+  ? parsedDate.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    })
+  : (data.date || 'Date TBA');
+---
+
+<article class="event-card">
+  <div class="event-card__header">
+    <div class="event-card__meta">
+      <span class="event-card__date">{eventDate}</span>
+      <span class="event-card__divider">·</span>
+      <span class="event-card__time">{data.time}</span>
+    </div>
+    
+    {data.status === 'upcoming' ? (
+      <span class="badge badge--live">Upcoming Meetup {data.capacity ? `(Capacity: ${data.capacity})` : ''}</span>
+    ) : (
+      <span class="badge">Completed Event</span>
+    )}
+  </div>
+
+  <h3 class="event-card__title">
+    <a href={`${base}/events/${slug}`}>{data.title}</a>
+  </h3>
+
+  <p class="event-card__venue">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+    <span>{data.venue}, {data.location}</span>
+  </p>
+
+  <p class="event-card__summary">{data.summary}</p>
+
+  <!-- Tags -->
+  {data.tags && data.tags.length > 0 && (
+    <div class="event-card__tags">
+      {data.tags.map((tag) => (
+        <span class="event-card__tag">#{tag}</span>
+      ))}
+    </div>
+  )}
+
+  <!-- Footer Actions -->
+  <div class="event-card__actions">
+    {data.status === 'upcoming' ? (
+      <div class="event-card__rsvp-group">
+        <a 
+          href={data.rsvpUrl} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn--accent"
+        >
+          <span>RSVP on Open Community Groups (OCG)</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+        {data.lumaUrl && (
+          <a 
+            href={data.lumaUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn--secondary btn--sm"
+          >
+            <span>Luma Link ↗</span>
+          </a>
+        )}
+
+        <a href={`${base}/events/${slug}`} class="event-card__detail-link">
+          <span>Agenda & Details →</span>
+        </a>
+      </div>
+    ) : (
+      <div class="event-card__past-actions">
+        {data.slidesUrl && (
+          <a 
+            href={data.slidesUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn--secondary btn--sm"
+          >
+            <span>View Slides</span>
+          </a>
+        )}
+        {data.recordingUrl && (
+          <a 
+            href={data.recordingUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn--secondary btn--sm"
+          >
+            <span>Watch Recording</span>
+          </a>
+        )}
+        <a href={`${base}/events/${slug}`} class="event-card__detail-link">
+          <span>Read Details →</span>
+        </a>
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .event-card {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(var(--space-md), 4vw, var(--space-xl));
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .event-card:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .event-card__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .event-card__meta {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .event-card__date {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .event-card__title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-xs);
+    line-height: var(--line-height-snug);
+  }
+
+  .event-card__title a:hover {
+    color: var(--color-accent);
+  }
+
+  .event-card__venue {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-subtle);
+    margin-bottom: var(--space-sm);
+  }
+
+  .event-card__summary {
+    font-size: var(--font-size-base);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .event-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .event-card__tag {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-muted);
+    background-color: var(--color-paper-subtle);
+    padding: 0.15rem 0.45rem;
+    border-radius: var(--radius-xs);
+  }
+
+  .event-card__actions {
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .event-card__rsvp-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .event-card__past-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .event-card__detail-link {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    margin-left: auto;
+  }
+
+  .event-card__detail-link:hover {
+    text-decoration: underline;
+  }
+
+  .btn--sm {
+    padding: 0.4rem 0.8rem;
+    font-size: var(--font-size-xs);
+  }
+</style>

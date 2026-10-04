@@ -1,0 +1,7 @@
+name = "cncf-peshawar-oauth-worker"
+main = "worker.js"
+compatibility_date = "2026-08-01"
+
+# Free tier settings (100,000 requests/day - zero cost forever)
+[vars]
+# Add GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET via Cloudflare Dashboard secrets or .dev.vars

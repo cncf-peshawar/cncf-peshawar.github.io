@@ -1,0 +1,169 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allPosts = await getCollection('blog');
+const publishedPosts = allPosts
+  .filter(p => !p.data.draft)
+  .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout 
+  title="Blog & Community Recaps | CNCF Peshawar" 
+  description="Read official announcements, workshop recaps, and technical cloud native tutorials from CNCF Peshawar."
+>
+  <section class="page-header section">
+    <div class="container">
+      <span class="badge badge--live">Announcements & Tutorials</span>
+      <h1 class="page-header__title">Blog & Community Recaps.</h1>
+      <p class="page-header__desc">
+        Updates, workshop recaps, and technical articles written by CNCF Peshawar organizers and community contributors.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--subtle">
+    <div class="container">
+      <div class="posts-grid">
+        {publishedPosts.map(post => {
+          const postDate = new Date(post.data.publishDate).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          });
+
+          return (
+            <article class="post-card">
+              <div class="post-card__meta">
+                <span class="post-card__date">{postDate}</span>
+                <span class="post-card__author">by {post.data.author} ({post.data.authorRole})</span>
+              </div>
+
+              <h2 class="post-card__title">
+                <a href={`${base}/blog/${post.slug}`}>{post.data.title}</a>
+              </h2>
+
+              <p class="post-card__desc">{post.data.description}</p>
+
+              <div class="post-card__footer">
+                <div class="post-card__tags">
+                  {post.data.tags.map(t => (
+                    <span class="post-tag">#{t}</span>
+                  ))}
+                </div>
+
+                <a href={`${base}/blog/${post.slug}`} class="post-card__link">
+                  <span>Read Article →</span>
+                </a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: var(--space-xl);
+  }
+
+  .page-header__title {
+    font-size: var(--font-size-5xl);
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__desc {
+    font-size: var(--font-size-lg);
+    color: var(--color-ink-muted);
+    max-width: var(--container-prose);
+  }
+
+  .posts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .post-card {
+    padding: var(--space-xl);
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+  }
+
+  .post-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .post-card__meta {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xs);
+  }
+
+  .post-card__date {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .post-card__title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-xs);
+    line-height: var(--line-height-snug);
+  }
+
+  .post-card__title a:hover {
+    color: var(--color-accent);
+  }
+
+  .post-card__desc {
+    font-size: var(--font-size-base);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-lg);
+  }
+
+  .post-card__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .post-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .post-tag {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+  }
+
+  .post-card__link {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+  }
+
+  .post-card__link:hover {
+    text-decoration: underline;
+  }
+</style>

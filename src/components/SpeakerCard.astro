@@ -1,0 +1,211 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  speaker: CollectionEntry<'speakers'>;
+}
+
+const { speaker } = Astro.props;
+const { data } = speaker;
+---
+
+<div class="speaker-card">
+  <div class="speaker-card__header">
+    <div class="speaker-card__avatar">
+      {data.avatar ? (
+        <img src={data.avatar} alt={data.name} class="avatar-img" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='flex';" />
+        <span class="avatar-initials" style="display: none;">
+          {data.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+        </span>
+      ) : (
+        <span class="avatar-initials">
+          {data.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+        </span>
+      )}
+    </div>
+
+    <div class="speaker-card__profile">
+      <h3 class="speaker-card__name">{data.name}</h3>
+      <p class="speaker-card__role">{data.role}</p>
+      <p class="speaker-card__org">{data.organization}</p>
+    </div>
+  </div>
+
+  <div class="speaker-card__topic">
+    <span class="topic-label">TALK / WORKSHOP:</span>
+    <h4 class="topic-title">{data.topic}</h4>
+  </div>
+
+  <p class="speaker-card__bio">{data.bio}</p>
+
+  <div class="speaker-card__footer">
+    <div class="speaker-card__links">
+      {data.github && (
+        <a href={data.github} target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+        </a>
+      )}
+      {data.linkedin && (
+        <a href={data.linkedin} target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+      )}
+    </div>
+
+    {data.slidesUrl && (
+      <a href={data.slidesUrl} target="_blank" rel="noopener noreferrer" class="speaker-card__slides">
+        <span>View Slides →</span>
+      </a>
+    )}
+  </div>
+</div>
+
+<style>
+  .speaker-card {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(var(--space-md), 4vw, var(--space-xl));
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .speaker-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .speaker-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .speaker-card__avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--color-accent-subtle);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .avatar-initials {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-base);
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
+
+  .speaker-card__name {
+    font-size: var(--font-size-xl);
+    margin-bottom: 2px;
+    color: var(--color-ink);
+  }
+
+  .speaker-card__role {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .speaker-card__org {
+    font-size: var(--font-size-xs);
+    font-family: var(--font-mono);
+    color: var(--color-accent);
+  }
+
+  .speaker-card__topic {
+    margin-bottom: var(--space-sm);
+    padding: var(--space-xs);
+    background-color: var(--color-paper-subtle);
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--color-border);
+  }
+
+  .topic-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-ink-subtle);
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+
+  .topic-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-ink);
+    line-height: var(--line-height-snug);
+  }
+
+  .speaker-card__bio {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .speaker-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+    margin-top: auto;
+  }
+
+  .speaker-card__links {
+    display: flex;
+    gap: var(--space-2xs);
+  }
+
+  .social-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-xs);
+    background-color: var(--color-paper-subtle);
+    color: var(--color-ink-muted);
+    border: 1px solid var(--color-border);
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .social-icon-btn:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .speaker-card__slides {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+  }
+
+  .speaker-card__slides:hover {
+    text-decoration: underline;
+  }
+</style>

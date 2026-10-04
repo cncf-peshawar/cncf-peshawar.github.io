@@ -1,0 +1,537 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { buildWorkingGroups, getAvatarSrc as getAvatarSrcBase } from '../lib/teams';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const allTeam = await getCollection('team');
+const sortedTeam = allTeam.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const allMembers = await getCollection('members');
+const sortedMembers = allMembers.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const workingGroups = buildWorkingGroups(sortedMembers);
+const getAvatarSrc = (avatar?: string) => getAvatarSrcBase(base, avatar);
+
+const initials = (name: string) =>
+  name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+---
+
+<BaseLayout 
+  title="Organizers & Team | CNCF Peshawar" 
+  description="Meet the passionate engineers, community leads, and volunteers organizing the Cloud Native Chapter in Peshawar."
+>
+  <!-- Page Header -->
+  <section class="page-header section">
+    <div class="container">
+      <span class="badge badge--live">Chapter Leadership</span>
+      <h1 class="page-header__title">The Team Behind <span class="text-gradient">Cloud Native Peshawar</span>.</h1>
+      <p class="page-header__desc">
+        Cloud Native Peshawar is organized by passionate engineers, researchers, and open-source advocates dedicated to growing the cloud native ecosystem in Khyber Pakhtunkhwa.
+      </p>
+    </div>
+  </section>
+
+  <!-- Executive Roster -->
+  <section class="section section--subtle">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__num">01 // EXECUTIVE TEAM</span>
+        <div>
+          <h2 class="section-header__title">Chapter Organizers.</h2>
+          <p class="section-header__desc">
+            The executive team coordinating sessions, speaker curation, partnerships, and community operations.
+          </p>
+        </div>
+      </div>
+
+      <div class="exec-grid">
+        {sortedTeam.map(member => (
+          <article class="exec-card">
+            <div class="exec-card__photo">
+              {member.data.avatar ? (
+                <img
+                  src={member.data.avatar}
+                  alt={member.data.name}
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+              ) : null}
+              <span class="exec-card__initials" style={member.data.avatar ? 'display: none;' : ''}>
+                {initials(member.data.name)}
+              </span>
+              {member.data.isLead && <span class="exec-card__flag">LEAD</span>}
+            </div>
+
+            <div class="exec-card__body">
+              <h3 class="exec-card__name">{member.data.name}</h3>
+              <p class="exec-card__role">{member.data.role}</p>
+              {member.data.company && <p class="exec-card__company">{member.data.company}</p>}
+              <p class="exec-card__bio">{member.data.bio}</p>
+
+              <div class="exec-card__links">
+                {member.data.linkedin && (
+                  <a href={member.data.linkedin} target="_blank" rel="noopener noreferrer" class="exec-link" aria-label={`${member.data.name} on LinkedIn`}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                      <rect x="2" y="9" width="4" height="12"/>
+                      <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                    <span>LinkedIn</span>
+                  </a>
+                )}
+                {member.data.instagram && (
+                  <a href={member.data.instagram} target="_blank" rel="noopener noreferrer" class="exec-link" aria-label={`${member.data.name} on Instagram`}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <rect x="2" y="2" width="20" height="20" rx="5"/>
+                      <path d="M16 11.37a4 4 0 1 1-7.75 1.13 4 4 0 0 1 7.75-1.13z"/>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                    <span>Instagram</span>
+                  </a>
+                )}
+                {member.data.github && (
+                  <a href={member.data.github} target="_blank" rel="noopener noreferrer" class="exec-link" aria-label={`${member.data.name} on GitHub`}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                    <span>GitHub</span>
+                  </a>
+                )}
+                {member.data.linuxFoundationUser && (
+                  <span class="lf-badge" title="Linux Foundation ID">
+                    LF: @{member.data.linuxFoundationUser}
+                  </span>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+<!-- Working Groups Tabs -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__num">02 // WORKING GROUPS</span>
+        <div>
+          <h2 class="section-header__title">Find Your Squad.</h2>
+          <p class="section-header__desc">
+            Volunteer teams managing end-to-end community operations. Tap a group to explore its members.
+          </p>
+        </div>
+      </div>
+
+      <div class="wg-tabs">
+        {workingGroups.map(group => (
+          <a href={`${base}/team/${group.slug}`} class="wg-tab">
+            <div class="wg-tab__top">
+              <span class="wg-tab__badge">{group.title.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}</span>
+              <span class="wg-tab__code">{group.code}</span>
+            </div>
+            <h3 class="wg-tab__title">{group.title}</h3>
+            <p class="wg-tab__desc">{group.desc}</p>
+            <div class="wg-tab__members">
+              {group.members.slice(0, 8).map(member => (
+                <span class="wg-tab__avatar" title={member.data.name}>
+                  {getAvatarSrc(member.data.avatar || member.data.photo) ? (
+                    <img src={getAvatarSrc(member.data.avatar || member.data.photo)!} alt={member.data.name} loading="lazy" />
+                  ) : (
+                    <span>{initials(member.data.name)}</span>
+                  )}
+                </span>
+              ))}
+              {group.members.length > 8 && <span class="wg-tab__more">+{group.members.length - 8}</span>}
+            </div>
+            <div class="wg-tab__footer">
+              <span class="wg-tab__count">{group.members.length} member{group.members.length === 1 ? '' : 's'}</span>
+              <span class="wg-tab__cta">
+                View Team
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+<!-- Volunteer Callout -->
+  <section class="section section--subtle">
+    <div class="container">
+      <div class="volunteer-box">
+        <span class="badge badge--accent">Join Our Team</span>
+        <h2 class="volunteer-title">Want to Volunteer as an Organizer or Ambassador?</h2>
+        <p class="volunteer-desc">
+          We welcome enthusiastic community members to help with event logistics, photography, AV recording, workshop mentorship, and university outreach in Peshawar.
+        </p>
+        <a 
+          href="mailto:cncfpeshawar@gmail.com?subject=Volunteer%20Application%20%7C%20CNCF%20Peshawar&body=Hi%20CNCF%20Peshawar%20Team%2C%0A%0AI%20would%20like%20to%20volunteer%20as%20an%20Organizer%20%2F%20Campus%20Ambassador.%0A%0AName%3A%20%0ARole%2FUniversity%3A%20%0ALinkedIn%2FGitHub%3A%20%0AAreas%20of%20Interest%20(Event%20Logistics%2C%20Design%2C%20AV%2C%20Workshop%20Mentorship)%3A%20%0A%0AThank%20you!" 
+          class="btn btn--accent"
+        >
+          <span>Apply to Volunteer</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: var(--space-xl);
+  }
+
+  .page-header__title {
+    font-size: var(--font-size-5xl);
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__desc {
+    font-size: var(--font-size-lg);
+    color: var(--color-ink-muted);
+    max-width: var(--container-prose);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* EXECUTIVE ROSTER                                                   */
+  /* ------------------------------------------------------------------ */
+  .exec-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 640px) {
+    .exec-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .exec-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .exec-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .exec-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .exec-card__photo {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--gradient-brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .exec-card__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .exec-card__initials {
+    font-family: var(--font-display);
+    font-size: clamp(var(--font-size-3xl), 6vw, var(--font-size-4xl));
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent-contrast);
+    letter-spacing: var(--letter-spacing-tight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .exec-card__flag {
+    position: absolute;
+    top: var(--space-xs);
+    right: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    background-color: var(--color-paper-elevated);
+    border: 1px solid var(--color-border);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-full);
+  }
+
+  .exec-card__body {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .exec-card__name {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-ink);
+    letter-spacing: var(--letter-spacing-tight);
+    margin-bottom: 2px;
+  }
+
+  .exec-card__role {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-2xs);
+  }
+
+  .exec-card__company {
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+    margin-bottom: var(--space-sm);
+  }
+
+  .exec-card__bio {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .exec-card__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+    margin-top: auto;
+  }
+
+  .exec-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    background-color: var(--color-paper-subtle);
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+  }
+
+  .exec-link:hover {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent-subtle);
+  }
+
+  .lf-badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-muted);
+    background-color: var(--color-paper-subtle);
+    border: 1px solid var(--color-border);
+    padding: 0.3rem 0.6rem;
+    border-radius: var(--radius-xs);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* WORKING GROUPS TABS                                                */
+  /* ------------------------------------------------------------------ */
+  .wg-tabs {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 640px) {
+    .wg-tabs {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .wg-tabs {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .wg-tab {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-lg);
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: inherit;
+    transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .wg-tab:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .wg-tab__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+  }
+
+  .wg-tab__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: var(--gradient-brand);
+    border-radius: var(--radius-md);
+    color: var(--color-accent-contrast);
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.04em;
+  }
+
+  .wg-tab__code {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-accent);
+    letter-spacing: 0.06em;
+  }
+
+  .wg-tab__title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-ink);
+    letter-spacing: var(--letter-spacing-tight);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .wg-tab__desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .wg-tab__members {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+    margin-bottom: var(--space-md);
+  }
+
+  .wg-tab__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--color-accent-subtle);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+  }
+
+  .wg-tab__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .wg-tab__more {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+    padding-left: 2px;
+  }
+
+  .wg-tab__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+  }
+
+  .wg-tab__count {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-ink-subtle);
+  }
+
+  .wg-tab__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-ink-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .wg-tab:hover .wg-tab__cta,
+  .wg-tab:focus-within .wg-tab__cta {
+    color: var(--color-accent);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* VOLUNTEER CALLOUT                                                  */
+  /* ------------------------------------------------------------------ */
+  .volunteer-box {
+    padding: clamp(var(--space-lg), 5vw, var(--space-2xl));
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .volunteer-title {
+    font-size: var(--font-size-3xl);
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .volunteer-desc {
+    font-size: var(--font-size-base);
+    color: var(--color-ink-muted);
+    max-width: var(--container-prose);
+    margin-bottom: var(--space-xl);
+  }
+</style>

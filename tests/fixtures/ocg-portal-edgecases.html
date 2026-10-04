@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CNCF Peshawar Chapter - Edge Cases</title>
+</head>
+<body>
+  <!-- Edge case 1: Special HTML entities & unicode characters & no capacity -->
+  <article class="card-hover-border">
+    <a href="/cncf/group/6vwk2n4/event/unicode-test-2026" class="card-title">Cloud Native &quot;Peshawar&quot; — كلاؤڈ نیٹو پشاور &amp; 🚀 Launch</a>
+    <div data-starts="2026-10-30T13:00:00+00:00"></div>
+    <div data-registration-window-date-panel>
+      <div class="font-semibold">October 30, 2026</div>
+      <div class="text-stone-600">6:00 PM – 9:00 PM PKT</div>
+    </div>
+    <div class="location-name">NIC Peshawar &lt;Room 402&gt;</div>
+    <user-chip user='{"name":"Muhammad &apos;Mo&apos; Usama","title":"Senior SRE &amp; Consultant"}'></user-chip>
+    <div class="markdown">Special characters &amp; entities test: &lt;div&gt;raw html&lt;/div&gt; &quot;quotes&quot; and em-dashes — with unicode: اردو متن</div>
+  </article>
+
+  <!-- Edge case 2: Malformed user chip JSON and missing location -->
+  <article class="card-hover-border">
+    <a href="/cncf/group/6vwk2n4/event/malformed-json-test" class="card-title">Resilient Parser Test Event</a>
+    <div data-starts="2026-11-01T05:00:00Z" data-availability-capacity="unlimited"></div>
+    <div data-registration-window-date-panel>
+      <div class="font-semibold">November 1, 2026</div>
+      <div class="text-stone-600">10:00 AM - 01:00 PM PKT</div>
+    </div>
+    <user-chip user='{malformed_json_without_quotes}'></user-chip>
+    <div class="markdown">Testing graceful degradation when user-chip contains broken JSON.</div>
+  </article>
+</body>
+</html>

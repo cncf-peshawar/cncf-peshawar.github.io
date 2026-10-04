@@ -1,0 +1,176 @@
+---
+interface Props {
+  tierName: string;
+  badge: string;
+  commitment: string;
+  description: string;
+  perks: string[];
+  isFeatured?: boolean;
+}
+
+const {
+  tierName,
+  badge,
+  commitment,
+  description,
+  perks,
+  isFeatured = false
+} = Astro.props;
+
+const tierSlug = encodeURIComponent(tierName);
+---
+
+<div class={`tier-card ${isFeatured ? 'tier-card--featured' : ''}`} id={tierName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
+  {isFeatured && <div class="tier-card__featured-tag">Most Popular Partner Tier</div>}
+  
+  <div class="tier-card__header">
+    <span class="tier-card__badge">{badge}</span>
+    <h3 class="tier-card__name">{tierName}</h3>
+    <div class="tier-card__commitment">
+      <span class="commitment-val">{commitment}</span>
+    </div>
+    <p class="tier-card__desc">{description}</p>
+  </div>
+
+  <div class="tier-card__perks">
+    <span class="perks-label">SPONSORSHIP INCLUDES:</span>
+    <ul class="perks-list" role="list">
+      {perks.map((perk) => (
+        <li class="perk-item">
+          <svg class="perk-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>{perk}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="tier-card__action">
+    <a 
+      href={`?tier=${tierSlug}#email-builder`}
+      class={`btn ${isFeatured ? 'btn--accent' : 'btn--secondary'}`}
+      style="width: 100%; justify-content: center;"
+    >
+      <span>Draft Proposal →</span>
+    </a>
+  </div>
+</div>
+
+<style>
+  .tier-card {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(var(--space-md), 4vw, var(--space-xl));
+    background-color: var(--color-paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    position: relative;
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .tier-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .tier-card--featured {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px var(--color-accent), var(--shadow-md);
+  }
+
+  .tier-card__featured-tag {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: var(--font-weight-semibold);
+    padding: 0.2rem 0.75rem;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .tier-card__header {
+    margin-bottom: var(--space-lg);
+  }
+
+  .tier-card__badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    margin-bottom: var(--space-2xs);
+    text-transform: uppercase;
+  }
+
+  .tier-card__name {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-xs);
+    color: var(--color-ink);
+  }
+
+  .tier-card__commitment {
+    margin-bottom: var(--space-xs);
+  }
+
+  .commitment-val {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-ink);
+  }
+
+  .tier-card__desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    line-height: var(--line-height-normal);
+  }
+
+  .tier-card__perks {
+    margin-bottom: var(--space-xl);
+    flex-grow: 1;
+  }
+
+  .perks-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-ink-subtle);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-xs);
+  }
+
+  .perks-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .perk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink);
+    line-height: var(--line-height-normal);
+  }
+
+  .perk-check {
+    color: var(--color-signal-green);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .tier-card__action {
+    margin-top: auto;
+  }
+</style>

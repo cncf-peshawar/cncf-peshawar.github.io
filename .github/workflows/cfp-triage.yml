@@ -1,0 +1,114 @@
+name: Speaker CFP Triage & Content PR Bot
+
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  triage-cfp:
+    name: Process CFP Submission
+    if: >
+      (github.event.action == 'opened' && (
+        contains(github.event.issue.title, '[CFP]') ||
+        contains(github.event.issue.title, '[cfp]') ||
+        contains(github.event.issue.title, 'CFP') ||
+        contains(github.event.issue.labels.*.name, 'cfp') ||
+        contains(github.event.issue.labels.*.name, 'CFP')
+      )) ||
+      (github.event.action == 'labeled' && (
+        github.event.label.name == 'cfp' ||
+        github.event.label.name == 'CFP'
+      ))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Parse CFP Issue and Generate Content
+        id: parse
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+        run: |
+          node scripts/parse-cfp-issue.mjs \
+            --issue-body "$ISSUE_BODY" \
+            --issue-title "$ISSUE_TITLE" \
+            --issue-number "$ISSUE_NUMBER" \
+            --issue-url "$ISSUE_URL"
+
+      - name: Validate Generated Content Schema
+        run: npm run check
+
+      - name: Create Draft Pull Request
+        uses: peter-evans/create-pull-request@v6
+        id: cpr
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "feat(cfp): add speaker profile and event draft for ${{ steps.parse.outputs.speaker_name }}"
+          branch: ${{ steps.parse.outputs.branch_name }}
+          delete-branch: true
+          title: "[CFP] Proposal: ${{ steps.parse.outputs.talk_title }} - ${{ steps.parse.outputs.speaker_name }}"
+          body: |
+            ## 🎙️ Automated CFP Submission PR
+
+            This draft pull request was automatically generated in response to issue #${{ github.event.issue.number }}.
+
+            ### 👤 Speaker Details
+            - **Speaker:** ${{ steps.parse.outputs.speaker_name }}
+            - **Role / Org:** ${{ steps.parse.outputs.speaker_role }} (${{ steps.parse.outputs.speaker_org }})
+            - **Topic:** ${{ steps.parse.outputs.talk_title }}
+            - **Originating Issue:** [Issue #${{ github.event.issue.number }}](${{ github.event.issue.html_url }})
+
+            ### 📁 Generated Content Files
+            - `${{ steps.parse.outputs.speaker_file }}`
+            - `${{ steps.parse.outputs.event_file }}`
+
+            ### 📋 Organizer Triage Checklist
+            - [ ] Verify speaker bio and technical track suitability
+            - [ ] Verify vendor neutrality (educational focus, no commercial pitches)
+            - [ ] Confirm speaker availability & schedule date/time with Open Community Groups
+            - [ ] Mark PR ready for review and merge when confirmed
+
+            ---
+            *Closes #${{ github.event.issue.number }} upon merge.*
+          draft: true
+          labels: |
+            cfp
+            automated-pr
+
+      - name: Comment on Origination Issue
+        if: steps.cpr.outputs.pull-request-number
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = '${{ steps.cpr.outputs.pull-request-number }}';
+            const prUrl = '${{ steps.cpr.outputs.pull-request-url }}';
+            const speakerName = '${{ steps.parse.outputs.speaker_name }}';
+            const talkTitle = '${{ steps.parse.outputs.talk_title }}';
+            const speakerFile = '${{ steps.parse.outputs.speaker_file }}';
+            const eventFile = '${{ steps.parse.outputs.event_file }}';
+            const body = `### 🤖 CFP Automation Bot\n\nThank you for submitting your talk proposal **"${talkTitle}"**, **${speakerName}**! 🎉\n\nWe have automatically processed your submission and created a draft Pull Request:\n- **Draft Pull Request:** [#${prNumber}](${prUrl})\n- **Speaker Profile:** \`${speakerFile}\`\n- **Event Draft:** \`${eventFile}\`\n\nThe organizer team will review your proposal shortly. You can share additional links, slides, or updates in this issue or on the PR anytime!`;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body
+            });
