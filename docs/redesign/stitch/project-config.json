@@ -1,0 +1,132 @@
+{
+  "project_id": "8961937842773735368",
+  "project_name": "projects/8961937842773735368",
+  "project_title": "CNCF Peshawar Redesign",
+  "api_endpoint": "https://stitch.googleapis.com",
+  "design_system_bound": true,
+  "design_system": {
+    "asset_id": "8d1e212b3585407c899652f6973e840f",
+    "name": "assets/8d1e212b3585407c899652f6973e840f",
+    "display_name": "Neo-Brutalist Terminal",
+    "source_file": "DESIGN.md",
+    "screen_id": "14867701188670104852",
+    "screen_instance_id": "14867701188670104852",
+    "theme_tokens": {
+      "color_mode": "LIGHT",
+      "font_family": "JETBRAINS_MONO",
+      "primary_color": "#006494",
+      "primary_container": "#6fc2ff",
+      "canvas_cream": "#fbf9f1",
+      "terminal_dark": "#383838",
+      "accent_orange": "#ff914d",
+      "border_radius": "2px",
+      "elevation_shadow": "rgb(56, 56, 56) -6px 6px 0px 0px"
+    }
+  },
+  "project_prompt": "Redesign of the CNCF Peshawar chapter website in the MotherDuck neo-brutalist technical-playful design system on warm cream paper with monospace typography and hard offset shadows.\n\nDESIGN SYSTEM (REQUIRED):\n- Platform: Web, responsive (desktop 1200px container, mobile-first 390px layout)\n- Theme: Light, neo-brutalist technical-playful\n- Background Canvas: Cream Paper (#f4efea)\n- Card / Panel Surface: Frost White (#ffffff)\n- Tertiary / Wash Surface: Chalk Gray (#f8f8f7)\n- Borders & Universal Ink: Charcoal Ink (#383838) at 1.5px–2px solid (never pure black #000000)\n- Primary Action / CTA Fill: Sky Crayon (#6fc2ff) with Charcoal Ink (#383838) text\n- Highlight / Marquee Background: Canary Banner (#ffde00)\n- Secondary Accent: Duck Bill Orange (#ff9538)\n- Rainbow Outline Palette (Rotating DOM Order): Coral (#f38e84), Peach (#f5b161), Mint (#38c1b0), Lilac (#b291de), Lime (#b3c419), Periwinkle (#7597ee), Slate (#84a6bc), Marigold (#e1c427)\n- Muted Text (WCAG AA compliant): #6b6b6b (replaces #a1a1a1 for readable text; #a1a1a1 reserved for disabled outlines only)\n- Typography: JetBrains Mono / Aeonik Mono (weights 300, 400, 500, 600; tracking +0.02em); Inter allowed for long-form blog prose\n- Geometry: 2px border radius strictly everywhere (buttons, cards, badges, inputs, nav)\n- Elevation: Zero-blur hard drop shadow rgb(56, 56, 56) -6px 6px 0px 0px on interactive cards and buttons\n- Interactive Press: translate(-6px, 6px) with shadow collapsing to 0 on hover/active\n- Focus State: :focus-visible { outline: 3px solid #383838; outline-offset: 3px }\n- Minimum Text Size: 12px floor for all readable copy; fluid clamp() for hero display headlines\n\nTarget Routes & Scope:\n1. / (Home): Centered hero (JetBrains Mono 300), charter terminal frame, Canary marquee, 4 key facts cards, featured countdown card, 2x2 pillar bento grid, archives, CFP banner, sponsors strip, footer.\n2. /events (Events Directory): Hero, upcoming meetup featured card, past events archive grid, CFP strip.\n3. /events/[slug] (Event Detail): Two-column layout (Markdown content left, sticky info/RSVP card right).\n4. /speak (Speaker CFP): 3 format cards (15m, 40m, 90m) in rainbow sketch borders, proposal support steps, CFP issue link CTA.\n5. /sponsors (Sponsors & Impact): 4 package cards, interactive proposal builder frame with 2px form inputs and live terminal proposal preview, prospectus link.\n6. /team (Team Directory): Core leads with 2px bordered portrait cards, white name labels, working group cards in rotating sketch colors.\n7. /team/[group] (Working Group): Responsive member card grid, social links, back navigation.\n8. /blog (Blog Archive): Post list cards with tag chips, author metadata, publication dates.\n9. /blog/[slug] (Article Detail): 720px measure container, Inter body typography, monospaced headings.\n10. /code-of-conduct (Code of Conduct): Formal Linux Foundation / CNCF community guidelines prose layout.\n11. /404 (Error Page): Technical-playful 404 terminal readout on cream canvas.\n\nFrozen Hooks & Contract Constraints (42 Asserted Selectors from CONTRACT.md §5):\nAll 42 hooks must be preserved verbatim in markup and client interactions:\n- Anchor & Structure: #main-content, #email-builder, #tiers\n- Navigation: #mobile-nav-toggle, #mobile-nav-drawer, aria-label=\"Main Navigation\", aria-label=\"Toggle navigation menu\", aria-expanded, aria-controls=\"mobile-nav-drawer\", aria-hidden, aria-current=\"page\"\n- Genesis Countdown: .countdown-card, data-target, #genesis-countdown, #cd-days, #cd-hours, #cd-mins, #cd-secs, #cd-live-dot, #cd-live-label, #cd-date-display, #cd-actions, #cd-rsvp-btn\n- Sponsorship Builder: #sponsor-form, #org-name, #contact-name, #contact-email, #tier-select, #timeline-select, #org-website, #scope-notes, #email-preview-text, #send-mailto-btn, #copy-template-btn, #copy-btn-text, aria-live=\"polite\"\n- Social & A11y Links: aria-label=\"Open Community Groups\", aria-label=\"CNCF Slack\", aria-label=\"GitHub\", aria-label=\"LinkedIn\", aria-label=\"Instagram\"\n- Routes: Exact href paths (/, /events, /speak, /sponsors, /team, /blog, /code-of-conduct, /admin/)",
+  "imported_baseline_screens": [
+    {
+      "route": "/",
+      "title": "Home Baseline",
+      "screen_id": "15163805839964025056",
+      "screen_name": "projects/8961937842773735368/screens/15163805839964025056",
+      "instance_id": "15163805839964025056",
+      "dimensions": { "width": 1280, "height": 6992 },
+      "status": "IMPORTED"
+    },
+    {
+      "route": "/events",
+      "title": "Events Baseline",
+      "screen_id": "14387220086790801564",
+      "screen_name": "projects/8961937842773735368/screens/14387220086790801564",
+      "instance_id": "14387220086790801564",
+      "dimensions": { "width": 1280, "height": 3711 },
+      "status": "IMPORTED"
+    },
+    {
+      "route": "/events/[slug]",
+      "title": "Event Detail Baseline",
+      "screen_id": "17193388500862455228",
+      "screen_name": "projects/8961937842773735368/screens/17193388500862455228",
+      "instance_id": "17193388500862455228",
+      "dimensions": { "width": 1280, "height": 2702 },
+      "status": "IMPORTED"
+    },
+    {
+      "route": "/speak",
+      "title": "Speak Baseline",
+      "screen_id": "5356968262093029116",
+      "screen_name": "projects/8961937842773735368/screens/5356968262093029116",
+      "instance_id": "5356968262093029116",
+      "dimensions": { "width": 1280, "height": 2931 },
+      "status": "IMPORTED"
+    },
+    {
+      "route": "/sponsors",
+      "title": "Sponsors Baseline",
+      "screen_id": "7084116757641183425",
+      "screen_name": "projects/8961937842773735368/screens/7084116757641183425",
+      "instance_id": "7084116757641183425",
+      "dimensions": { "width": 1280, "height": 6210 },
+      "status": "IMPORTED"
+    },
+    {
+      "route": "/team",
+      "title": "Team Baseline",
+      "screen_id": "8437765714839919147",
+      "screen_name": "projects/8961937842773735368/screens/8437765714839919147",
+      "instance_id": "8437765714839919147",
+      "dimensions": { "width": 1280, "height": 4676 },
+      "status": "IMPORTED"
+    },
+    {
+      "route": "/team/[group]",
+      "title": "Team Group Baseline",
+      "screen_id": "6872857789769646820",
+      "screen_name": "projects/8961937842773735368/screens/6872857789769646820",
+      "instance_id": "6872857789769646820",
+      "dimensions": { "width": 1280, "height": 2619 },
+      "status": "IMPORTED"
+    },
+    {
+      "route": "/blog",
+      "title": "Blog Baseline",
+      "screen_id": "10968969977441470671",
+      "screen_name": "projects/8961937842773735368/screens/10968969977441470671",
+      "instance_id": "10968969977441470671",
+      "dimensions": { "width": 1280, "height": 1784 },
+      "status": "IMPORTED"
+    },
+    {
+      "route": "/blog/[slug]",
+      "title": "Blog Detail Baseline",
+      "screen_id": "14556882857246553522",
+      "screen_name": "projects/8961937842773735368/screens/14556882857246553522",
+      "instance_id": "14556882857246553522",
+      "dimensions": { "width": 1280, "height": 2576 },
+      "status": "IMPORTED"
+    },
+    {
+      "route": "/code-of-conduct",
+      "title": "Code of Conduct Baseline",
+      "screen_id": "9615006288517344379",
+      "screen_name": "projects/8961937842773735368/screens/9615006288517344379",
+      "instance_id": "9615006288517344379",
+      "dimensions": { "width": 1280, "height": 2698 },
+      "status": "IMPORTED"
+    },
+    {
+      "route": "/404",
+      "title": "404 Baseline",
+      "screen_id": "188464803598299387",
+      "screen_name": "projects/8961937842773735368/screens/188464803598299387",
+      "instance_id": "188464803598299387",
+      "dimensions": { "width": 1280, "height": 1411 },
+      "status": "IMPORTED"
+    }
+  ],
+  "screens_imported_count": 11,
+  "total_screens_in_project": 12,
+  "created_at": "2026-10-04T20:53:12.073585Z",
+  "updated_at": "2026-10-04T21:02:04.471358Z"
+}
