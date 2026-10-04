@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 130" fill="none" aria-hidden="true">
+  <!-- LAPTOP SCREEN / DISPLAY -->
+  <!-- Screen outer bezel -->
+  <rect x="24" y="16" width="112" height="74" rx="4" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Terminal window header bar -->
+  <rect x="27" y="19" width="106" height="14" fill="#ffde00" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Window control buttons -->
+  <circle cx="35" cy="26" r="2.5" fill="#ff9538" stroke="#383838" stroke-width="1"/>
+  <circle cx="43" cy="26" r="2.5" fill="#ffde00" stroke="#383838" stroke-width="1"/>
+  <circle cx="51" cy="26" r="2.5" stroke="#383838" stroke-width="1"/>
+
+  <!-- Terminal content area -->
+  <!-- Prompt line 1: > _ -->
+  <path d="M 36 44 L 42 48 L 36 52" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 48 48 L 74 48" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <!-- Blinking block cursor -->
+  <rect x="78" y="42" width="6" height="11" fill="#ffde00" stroke="#383838" stroke-width="1.5"/>
+
+  <!-- Output line 2 -->
+  <path d="M 36 62 L 66 62" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 72 62 L 98 62" stroke="#383838" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 4"/>
+
+  <!-- Output line 3 -->
+  <path d="M 36 74 L 88 74" stroke="#383838" stroke-width="2" stroke-linecap="round" stroke-dasharray="12 4"/>
+
+  <!-- LAPTOP BASE / KEYBOARD -->
+  <!-- Base frame -->
+  <path d="M 18 90 L 142 90 L 152 118 L 8 118 Z" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Front lip & thumb indent -->
+  <path d="M 8 118 L 152 118" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 70 118 C 72 121, 88 121, 90 118" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Keyboard area -->
+  <polygon points="32,94 128,94 134,106 26,106" stroke="#383838" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Key rows sketch lines -->
+  <line x1="36" y1="98" x2="124" y2="98" stroke="#54b4de" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5 3"/>
+  <line x1="32" y1="102" x2="128" y2="102" stroke="#383838" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 3"/>
+
+  <!-- Trackpad -->
+  <rect x="66" y="108" width="28" height="8" rx="1.5" stroke="#383838" stroke-width="1.5"/>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none" aria-hidden="true">
+  <!-- STEAM PLUMES (Loose hand-drawn curling ribbons) -->
+  <path d="M 46 48 C 42 38, 48 30, 44 20 C 40 12, 46 6, 42 2" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 60 46 C 64 36, 56 26, 62 16 C 66 8, 60 4, 62 2" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 74 48 C 78 38, 72 30, 76 20 C 80 12, 74 6, 76 2" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- CUP LIQUID SURFACE -->
+  <ellipse cx="60" cy="58" rx="26" ry="7" fill="#ffde00" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <ellipse cx="60" cy="60" rx="22" ry="5" fill="#ff9538"/>
+
+  <!-- CUP BODY -->
+  <!-- Main glass/ceramic body with rich chai fill -->
+  <path d="M 34 58
+           C 34 76, 40 102, 44 112
+           C 46 114, 74 114, 76 112
+           C 80 102, 86 76, 86 58 Z"
+        fill="#ff9538"
+        stroke="#383838"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Golden foam band accent at top -->
+  <path d="M 35 64 C 44 68, 76 68, 85 64" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Hand-drawn glass facet sketch lines -->
+  <path d="M 46 68 L 49 108" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 60 68 L 60 110" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 74 68 L 71 108" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- CUP HANDLE -->
+  <path d="M 85 68 C 100 68, 102 96, 82 100" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- SAUCER BASE -->
+  <path d="M 22 120 C 22 114, 98 114, 98 120 C 98 128, 22 128, 22 120 Z" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 38 126 C 50 128, 70 128, 82 126" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- TABLE SURFACE SKETCH DASH -->
+  <path d="M 12 134 L 108 134" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

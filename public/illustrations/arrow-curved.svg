@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+  <!-- Accent echo sketch stroke -->
+  <path d="M 28 82 C 22 42, 60 22, 90 32" stroke="#54b4de" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 6"/>
+
+  <!-- Main pencil-curved shaft -->
+  <path d="M 22 78 C 16 34, 62 14, 94 34" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Hand-drawn arrowhead with sunny marigold fill -->
+  <polygon points="98,22 108,38 88,42" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Arrowhead barb accent dot -->
+  <circle cx="98" cy="34" r="2.5" fill="#ff9538"/>
+
+  <!-- Pencil flourish / origin curl -->
+  <path d="M 22 78 C 24 84, 20 88, 14 86 C 10 84, 12 78, 18 78" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Energy sparks near destination -->
+  <path d="M 104 14 L 108 8" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 112 24 L 118 22" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 106 46 L 112 50" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+</svg>

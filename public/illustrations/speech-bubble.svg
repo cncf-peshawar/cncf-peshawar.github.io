@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 120" fill="none" aria-hidden="true">
+  <!-- Echo sketch outline -->
+  <path d="M 22 18 C 50 14, 110 14, 138 20 C 146 36, 146 64, 138 78 C 114 84, 82 82, 64 82 L 32 106 L 40 82 C 24 80, 16 70, 14 54 C 12 36, 16 24, 22 18 Z"
+        stroke="#54b4de" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 6"/>
+
+  <!-- Main hand-drawn speech bubble body -->
+  <path d="M 26 16
+           C 54 12, 106 12, 132 16
+           C 142 28, 142 60, 134 74
+           C 112 80, 84 78, 66 78
+           L 36 102
+           L 44 78
+           C 26 76, 18 66, 16 50
+           C 14 32, 18 22, 26 16 Z"
+        fill="#ffde00"
+        stroke="#383838"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Dialogue lines inside the bubble -->
+  <path d="M 40 36 C 58 34, 94 34, 114 36" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 40 48 C 54 47, 82 47, 102 48" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 40 60 C 50 59, 66 59, 76 60" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Accent dot inside dialogue -->
+  <circle cx="86" cy="60" r="3" fill="#ff9538"/>
+
+  <!-- Ambient notebook doodle marks -->
+  <path d="M 138 26 L 144 22" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="14" cy="24" r="2.5" fill="#ff9538"/>
+</svg>
