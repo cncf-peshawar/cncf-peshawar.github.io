@@ -145,6 +145,20 @@ export function parseUserChips(html) {
 }
 
 /**
+ * Keeps metadata exposed on an OCG group card when the event detail page omits it.
+ * OCG currently surfaces some external registration links (notably Luma) only in
+ * the group listing, so a successful detail-page fetch must not discard them.
+ */
+export function enrichEventFromGroupCard(event, groupCardEvent) {
+  if (!event || !groupCardEvent) return event;
+
+  return {
+    ...event,
+    lumaUrl: event.lumaUrl || groupCardEvent.lumaUrl
+  };
+}
+
+/**
  * Extracts a single event detail from HTML.
  */
 export function parseOcgEventHtml(html, defaultUrl = '') {
@@ -605,7 +619,10 @@ export async function syncEvents(options = {}) {
           const eventHtml = await fetchWithRetry(eventUrl);
           const parsed = parseOcgEventHtml(eventHtml, eventUrl);
           if (parsed) {
-            parsedEvents.push(parsed);
+            const embedded = embeddedEvents.find(e =>
+              e.rsvpUrl === eventUrl || extractEventId(e.rsvpUrl) === extractEventId(eventUrl)
+            );
+            parsedEvents.push(enrichEventFromGroupCard(parsed, embedded));
           }
         } catch (err) {
           console.warn(`[WARN] Failed to fetch event detail for ${eventUrl}: ${err.message}`);

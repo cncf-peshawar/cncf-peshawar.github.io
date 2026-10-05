@@ -26,6 +26,7 @@ import {
   normalizeTimeRange,
   parseOcgEventHtml,
   parseOcgGroupHtml,
+  enrichEventFromGroupCard,
   syncEvents
 } from '../scripts/sync-ocg-events.mjs';
 
@@ -87,6 +88,23 @@ export async function runTier1Suite() {
 
     assert.equal(event.venue, 'Virtual event');
     assert.equal(event.location, 'Online');
+  });
+
+  await suite.test('F1.1b: Retains a group-card Luma link when the event detail page omits it', async () => {
+    const eventUrl = 'https://ocgroups.dev/cncf/group/6vwk2n4/event/group-only-luma';
+    const detailEvent = parseOcgEventHtml(`
+      <link rel="canonical" href="${eventUrl}">
+      <h1>Group-only Luma event</h1>
+      <event-attendance data-starts="2026-10-01T10:00:00Z"></event-attendance>
+    `, eventUrl);
+    const groupCardEvent = parseOcgEventHtml(`
+      <a class="card-title" href="${eventUrl}">Group-only Luma event</a>
+      <a href="https://luma.com/group-only-luma">Register on Luma</a>
+    `, eventUrl);
+
+    const enrichedEvent = enrichEventFromGroupCard(detailEvent, groupCardEvent);
+
+    assert.equal(enrichedEvent.lumaUrl, 'https://luma.com/group-only-luma');
   });
 
   await suite.test('F1.2: Detects status automatically (upcoming for future, completed for past)', async () => {
