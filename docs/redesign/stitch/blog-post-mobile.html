@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Announcing CNCF Peshawar | CNCF Peshawar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+
+    :root {
+      --color-cream-paper: #f4efea;
+      --color-frost-white: #ffffff;
+      --color-chalk-gray: #f8f8f7;
+      --color-ice-wash: #ebf9ff;
+      --color-notebook-pale: #f9fbe7;
+      --color-charcoal-ink: #383838;
+      --color-text-muted: #6b6b6b;
+      --color-sky-crayon: #6fc2ff;
+      --color-canary-banner: #ffde00;
+      --color-duck-bill-orange: #ff9538;
+      --color-coral-sketch: #f38e84;
+      --color-peach-sketch: #f5b161;
+      --color-mint-sketch: #38c1b0;
+      --color-lilac-sketch: #b291de;
+      --color-lime-sketch: #b3c419;
+      --color-periwinkle-sketch: #7597ee;
+      --color-slate-sketch: #84a6bc;
+      --color-marigold-sketch: #e1c427;
+      --color-wet-cement: #54b4de;
+      --color-terminal-bg: #1a1a1a;
+      --color-live-green: var(--color-mint-sketch);
+      
+      --font-mono: 'JetBrains Mono', 'Aeonik Mono', ui-monospace, monospace;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      
+      --radius-brutal: 2px;
+      --shadow-brutal: rgb(56, 56, 56) -6px 6px 0px 0px;
+      --shadow-brutal-sm: rgb(56, 56, 56) -3px 3px 0px 0px;
+      --shadow-none: 0px 0px 0px 0px rgba(56, 56, 56, 0);
+      --outline-focus: 3px solid #383838;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      background-color: var(--color-cream-paper);
+    }
+
+    body {
+      font-family: var(--font-mono);
+      background-color: var(--color-cream-paper);
+      color: var(--color-charcoal-ink);
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+      -webkit-font-smoothing: antialiased;
+      width: 100%;
+      max-width: 390px; margin: 0 auto; border-left: 1px solid rgba(56,56,56,0.15); border-right: 1px solid rgba(56,56,56,0.15);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -80px;
+      left: 16px;
+      background: var(--color-sky-crayon);
+      color: var(--color-charcoal-ink);
+      padding: 10px 18px;
+      font-weight: 600;
+      font-size: 13px;
+      border: 2px solid var(--color-charcoal-ink);
+      border-radius: var(--radius-brutal);
+      box-shadow: var(--shadow-brutal);
+      z-index: 99999;
+      transition: top 0.15s ease-out;
+    }
+    .skip-link:focus {
+      top: 16px;
+      outline: var(--outline-focus);
+      outline-offset: 3px;
+    }
+
+    #main-content {
+      outline: none;
+      display: block;
+    }
+
+    :focus-visible {
+      outline: var(--outline-focus) !important;
+      outline-offset: 3px !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-mono);
+      color: var(--color-charcoal-ink);
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    p, span, li, a, input, select, textarea, button {
+      font-family: var(--font-mono);
+    }
+
+    .text-muted {
+      color: var(--color-text-muted) !important;
+    }
+
+    .caption-text {
+      font-size: 12px !important;
+      line-height: 1.4;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 11px 22px;
+      border-radius: var(--radius-brutal);
+      border: 2px solid var(--color-charcoal-ink);
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
+      user-select: none;
+    }
+
+    .btn-sky {
+      background-color: var(--color-sky-crayon);
+      color: var(--color-charcoal-ink) !important;
+      box-shadow: var(--shadow-brutal);
+    }
+    .btn-sky:hover {
+      transform: translate(1px, -1px);
+      box-shadow: rgb(56, 56, 56) -7px 7px 0px 0px;
+    }
+    .btn-sky:active {
+      transform: translate(-6px, 6px) !important;
+      box-shadow: var(--shadow-none) !important;
+    }
+
+    .btn-outline {
+      background-color: var(--color-frost-white);
+      color: var(--color-charcoal-ink) !important;
+      box-shadow: var(--shadow-brutal);
+    }
+    .btn-outline:hover {
+      transform: translate(1px, -1px);
+      box-shadow: rgb(56, 56, 56) -7px 7px 0px 0px;
+    }
+    .btn-outline:active {
+      transform: translate(-6px, 6px) !important;
+      box-shadow: var(--shadow-none) !important;
+    }
+
+    .btn-sm {
+      padding: 7px 14px;
+      font-size: 12px;
+      box-shadow: var(--shadow-brutal-sm);
+    }
+    .btn-sm:active {
+      transform: translate(-4px, 4px) !important;
+      box-shadow: var(--shadow-none) !important;
+    }
+
+    .site-header {
+      width: 100%;
+      background-color: var(--color-cream-paper);
+      border-bottom: 2px solid var(--color-charcoal-ink);
+      padding: 16px 20px;
+      position: relative;
+      z-index: 1000;
+    }
+    .header-inner {
+      max-width: 390px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--color-charcoal-ink);
+    }
+    .brand-title {
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+    .brand-badge {
+      font-size: 11px;
+      padding: 2px 6px;
+      background: var(--color-canary-banner);
+      border: 1px solid var(--color-charcoal-ink);
+      font-weight: 700;
+    }
+
+    .desktop-nav {
+      display: none;
+      align-items: center;
+      gap: 24px;
+    }
+    .desktop-nav-list {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      list-style: none;
+    }
+    .nav-item-link {
+      color: var(--color-charcoal-ink);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 13px;
+      text-transform: uppercase;
+      padding: 4px 6px;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.1s ease;
+    }
+    .nav-item-link:hover, .nav-item-link.is-active {
+      border-bottom-color: var(--color-charcoal-ink);
+      font-weight: 700;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    #mobile-nav-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      background: var(--color-frost-white);
+      border: 2px solid var(--color-charcoal-ink);
+      border-radius: var(--radius-brutal);
+      box-shadow: var(--shadow-brutal-sm);
+      cursor: pointer;
+    }
+    #mobile-nav-toggle:active {
+      transform: translate(-3px, 3px);
+      box-shadow: var(--shadow-none);
+    }
+
+    #mobile-nav-drawer {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: var(--color-cream-paper);
+      border-bottom: 2px solid var(--color-charcoal-ink);
+      padding: 24px 20px;
+      box-shadow: 0 10px 24px rgba(56,56,56,0.15);
+      z-index: 999;
+    }
+    #mobile-nav-drawer.is-open {
+      display: block;
+    }
+    .drawer-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .drawer-nav-link {
+      color: var(--color-charcoal-ink);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(56,56,56,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .drawer-nav-link.is-active {
+      color: var(--color-charcoal-ink);
+      font-weight: 700;
+      border-bottom: 2px solid var(--color-charcoal-ink);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-brutal);
+      border: 1px solid var(--color-charcoal-ink);
+      letter-spacing: 0.04em;
+    }
+    .badge-yellow {
+      background: var(--color-canary-banner);
+      color: var(--color-charcoal-ink);
+    }
+    .badge-white {
+      background: var(--color-frost-white);
+      color: var(--color-charcoal-ink);
+    }
+    .badge-live {
+      background: var(--color-ice-wash);
+      color: var(--color-charcoal-ink);
+    }
+    .badge-orange {
+      background: var(--color-duck-bill-orange);
+      color: var(--color-charcoal-ink);
+    }
+    .badge-mint {
+      background: var(--color-mint-sketch);
+      color: var(--color-charcoal-ink);
+    }
+    .badge-lilac {
+      background: var(--color-lilac-sketch);
+      color: var(--color-charcoal-ink);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-live-green);
+      display: inline-block;
+      animation: livePulse 2s infinite ease-in-out;
+    }
+    @keyframes livePulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
+    }
+
+    .page-hero {
+      padding: 36px 20px 32px;
+      background-color: var(--color-cream-paper);
+      border-bottom: 2px solid var(--color-charcoal-ink);
+      position: relative;
+    }
+    .page-hero-inner {
+      max-width: 390px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .page-hero-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .page-hero-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .page-hero-desc {
+      font-size: 15px;
+      color: var(--color-charcoal-ink);
+      max-width: 760px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .page-hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .section-wrap {
+      padding: 36px 20px;
+      max-width: 390px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .section-header-box {
+      margin-bottom: 24px;
+    }
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .section-headline {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .section-subtext {
+      font-size: 14px;
+      color: var(--color-text-muted);
+      max-width: 680px;
+      line-height: 1.5;
+    }
+
+    /* Brutal Cards */
+    .brutal-card {
+      background: var(--color-frost-white);
+      border: 2px solid var(--color-charcoal-ink);
+      border-radius: var(--radius-brutal);
+      box-shadow: var(--shadow-brutal);
+      padding: 20px;
+      position: relative;
+    }
+    .brutal-card-sm {
+      padding: 16px;
+      box-shadow: var(--shadow-brutal-sm);
+    }
+
+    /* Marquee Strip */
+    .marquee-container {
+      width: 100%;
+      background: var(--color-canary-banner);
+      border-top: 2px solid var(--color-charcoal-ink);
+      border-bottom: 2px solid var(--color-charcoal-ink);
+      overflow: hidden;
+      padding: 10px 0;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marqueeScroll 25s linear infinite;
+    }
+    .marquee-content {
+      display: inline-flex;
+      align-items: center;
+      gap: 24px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-charcoal-ink);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding-right: 24px;
+    }
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Site Footer */
+    .site-footer {
+      background-color: var(--color-frost-white);
+      border-top: 2px solid var(--color-charcoal-ink);
+      padding: 40px 20px 24px;
+      position: relative;
+      margin-top: 40px;
+    }
+    .footer-inner {
+      max-width: 390px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr; gap: 28px;
+      margin-bottom: 40px;
+    }
+    .footer-col-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--color-text-muted);
+      margin-bottom: 14px;
+    }
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-link {
+      color: var(--color-charcoal-ink);
+      text-decoration: none;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+    .footer-social-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background: var(--color-chalk-gray);
+      border: 2px solid var(--color-charcoal-ink);
+      border-radius: var(--radius-brutal);
+      color: var(--color-charcoal-ink);
+      text-decoration: none;
+      box-shadow: var(--shadow-brutal-sm);
+    }
+    .social-btn:active {
+      transform: translate(-3px, 3px);
+      box-shadow: var(--shadow-none);
+    }
+    .footer-mascot-img {
+      position: absolute;
+      bottom: 70px; right: 15px; width: 85px; height: 85px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .footer-bottom-bar {
+      border-top: 1px solid rgba(56,56,56,0.15);
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column; gap: 10px;
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    /* Prose Styling for Markdown Content */
+    .prose-container {
+      max-width: 720px;
+      margin: 0 auto;
+      font-family: var(--font-sans);
+      color: var(--color-charcoal-ink);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    .prose-container h1, .prose-container h2, .prose-container h3, .prose-container h4 {
+      font-family: var(--font-mono);
+      color: var(--color-charcoal-ink);
+      margin-top: 1.8em;
+      margin-bottom: 0.6em;
+    }
+    .prose-container p {
+      margin-bottom: 1.2em;
+    }
+    .prose-container ul, .prose-container ol {
+      margin-left: 1.5em;
+      margin-bottom: 1.2em;
+    }
+    .prose-container li {
+      margin-bottom: 0.4em;
+    }
+    .prose-container a {
+      color: var(--color-charcoal-ink);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+    .prose-container pre {
+      background: var(--color-terminal-bg);
+      color: var(--color-frost-white);
+      padding: 16px;
+      border: 2px solid var(--color-charcoal-ink);
+      border-radius: var(--radius-brutal);
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      margin-bottom: 1.4em;
+      box-shadow: var(--shadow-brutal-sm);
+    }
+    .prose-container code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: rgba(56,56,56,0.08);
+      padding: 2px 5px;
+      border-radius: 2px;
+    }
+    .prose-container blockquote {
+      border-left: 4px solid var(--color-charcoal-ink);
+      background: var(--color-notebook-pale);
+      padding: 14px 18px;
+      margin-bottom: 1.2em;
+      font-style: italic;
+    }
+
+    /* Form Controls */
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      color: var(--color-charcoal-ink);
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: var(--color-frost-white);
+      border: 2px solid var(--color-charcoal-ink);
+      border-radius: var(--radius-brutal);
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-charcoal-ink);
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: var(--outline-focus);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .marquee-track {
+        animation: none !important;
+      }
+      .pulse-dot {
+        animation: none !important;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="brand-logo" aria-label="CNCF Peshawar Home">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="2" fill="#383838"/>
+          <path d="M8 8h6v6H8z" fill="#ffde00"/>
+          <path d="M18 8h6v6h-6z" fill="#6fc2ff"/>
+          <path d="M8 18h6v6H8z" fill="#38c1b0"/>
+          <path d="M18 18h6v6h-6z" fill="#f38e84"/>
+        </svg>
+        <span class="brand-title">CNCF Peshawar</span>
+        <span class="brand-badge">EST. 2026</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="desktop-nav-list">
+          <li><a href="/" class="nav-item-link">Home</a></li>
+<li><a href="/events" class="nav-item-link">Events</a></li>
+<li><a href="/speak" class="nav-item-link">Speak</a></li>
+<li><a href="/sponsors" class="nav-item-link">Sponsors</a></li>
+<li><a href="/team" class="nav-item-link">Team</a></li>
+<li><a href="/blog" class="nav-item-link is-active" aria-current="page">Blog</a></li>
+<li><a href="/code-of-conduct" class="nav-item-link">Code of Conduct</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/sponsors#email-builder" class="btn btn-sky btn-sm">Sponsor Us</a>
+        <button type="button" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-controls="mobile-nav-drawer" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#383838" stroke-width="2.5" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div id="mobile-nav-drawer" aria-hidden="true">
+      <ul class="drawer-nav-list">
+        <li><a href="/" class="drawer-nav-link"><span>Home</span><span>→</span></a></li>
+<li><a href="/events" class="drawer-nav-link"><span>Events</span><span>→</span></a></li>
+<li><a href="/speak" class="drawer-nav-link"><span>Speak</span><span>→</span></a></li>
+<li><a href="/sponsors" class="drawer-nav-link"><span>Sponsors</span><span>→</span></a></li>
+<li><a href="/team" class="drawer-nav-link"><span>Team</span><span>→</span></a></li>
+<li><a href="/blog" class="drawer-nav-link is-active" aria-current="page"><span>Blog</span><span>→</span></a></li>
+<li><a href="/code-of-conduct" class="drawer-nav-link"><span>Code of Conduct</span><span>→</span></a></li>
+      </ul>
+      <div style="margin-top: 18px; display: flex; flex-direction: column; gap: 10px;">
+        <a href="/sponsors#email-builder" class="btn btn-sky" style="width: 100%;">Sponsor CNCF Peshawar</a>
+        <a href="/speak" class="btn btn-outline" style="width: 100%;">Submit Talk (CFP)</a>
+      </div>
+    </div>
+  </header>
+  <script>
+    (function() {
+      const toggle = document.getElementById('mobile-nav-toggle');
+      const drawer = document.getElementById('mobile-nav-drawer');
+      if (toggle && drawer) {
+        toggle.addEventListener('click', function() {
+          const expanded = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', !expanded);
+          drawer.setAttribute('aria-hidden', expanded);
+          drawer.classList.toggle('is-open');
+        });
+      }
+    })();
+  </script>
+
+  
+  <main id="main-content">
+
+    <!-- Breadcrumb -->
+    <div style="max-width: 390px; margin: 0 auto; padding: 20px 20px 0;">
+      <a href="/blog" class="btn btn-outline btn-sm" style="margin-bottom: 16px;">← Back to All Articles</a>
+    </div>
+
+    <!-- Article Header -->
+    <section class="page-hero" style="border-bottom: 2px solid var(--color-charcoal-ink);">
+      <div class="page-hero-inner" style="max-width: 720px;">
+        <div class="page-hero-eyebrow">
+          <span class="badge badge-yellow">ANNOUNCEMENT</span>
+          <span>October 1, 2026 · 5 MIN READ</span>
+        </div>
+        <h1 class="page-hero-title" style="font-size: 1.6rem;">
+          Announcing CNCF Peshawar: Building KP's Cloud Native Hub.
+        </h1>
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 12px;">
+          <div style="width: 36px; height: 36px; background: var(--color-sky-crayon); border: 2px solid var(--color-charcoal-ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;">
+            MB
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 700;">Muhammad Bilal</div>
+            <div style="font-size: 11px; color: var(--color-text-muted);">Organizer, CNCF Peshawar</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prose Article Body -->
+    <article class="section-wrap">
+      <div class="prose-container">
+        <p>
+          Today marks an exciting milestone for software engineers, platform builders, and computer science students across Khyber Pakhtunkhwa: we are proud to officially launch the <strong>Cloud Native Peshawar Chapter</strong> under the Cloud Native Computing Foundation (CNCF).
+        </p>
+        
+        <h2>Why Peshawar Needs a Cloud-Native Community</h2>
+        <p>
+          Peshawar and the wider KP province have produced exceptional engineering talent for decades. However, local developer meetups have traditionally focused on entry-level web stacks or freelance workflows. As global architectures transition toward microservices, distributed systems, container orchestration, and AI infrastructure, having a vendor-neutral community to learn and practice these tools is vital.
+        </p>
+
+        <blockquote>
+          "Our goal is straightforward: bring world-class cloud-native knowledge directly to Peshawar, completely free of charge, with hands-on labs and zero marketing fluff."
+        </blockquote>
+
+        <h2>What You Can Expect From Our Meetups</h2>
+        <p>
+          Every meetup hosted by CNCF Peshawar adheres to four strict principles:
+        </p>
+        <ul>
+          <li><strong>100% Free & Open:</strong> No entry fees, no paywalls, and no hidden subscriptions.</li>
+          <li><strong>Vendor-Neutral:</strong> We explore open-source CNCF projects based on merit and technical architecture, not vendor sales pitches.</li>
+          <li><strong>Hands-on Labs:</strong> We prioritize live demos, interactive code walkthroughs, and practical cluster configurations.</li>
+          <li><strong>Encouraging Stage:</strong> We offer comprehensive 1-on-1 mentorship for first-time speakers.</li>
+        </ul>
+
+        <h2>Deploying With Us</h2>
+        <p>
+          To get started, follow our chapter repository and deploy our sample cluster configuration:
+        </p>
+
+        <pre><code># Clone the community repository
+git clone https://github.com/cncf-peshawar/genesis-lab.git
+cd genesis-lab
+
+# Bootstrap local kind cluster
+kind create cluster --name cncf-peshawar
+kubectl cluster-info</code></pre>
+
+        <p>
+          We look forward to meeting everyone in person at our upcoming Genesis session at IM|Sciences Peshawar!
+        </p>
+      </div>
+    </article>
+
+  </main>
+
+  
+  <div class="marquee-container" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>KUBERNETES</span><span>·</span>
+        <span>DEVOPS</span><span>·</span>
+        <span>MLOPS</span><span>·</span>
+        <span>DISTRIBUTED SYSTEMS</span><span>·</span>
+        <span>AGENTIC AI</span><span>·</span>
+        <span>100% FREE COMMUNITY</span><span>·</span>
+        <span>OPEN TO ALL BUILDERS</span><span>·</span>
+        <span>KHYBER PAKHTUNKHWA</span><span>·</span>
+      </div>
+      <div class="marquee-content">
+        <span>KUBERNETES</span><span>·</span>
+        <span>DEVOPS</span><span>·</span>
+        <span>MLOPS</span><span>·</span>
+        <span>DISTRIBUTED SYSTEMS</span><span>·</span>
+        <span>AGENTIC AI</span><span>·</span>
+        <span>100% FREE COMMUNITY</span><span>·</span>
+        <span>OPEN TO ALL BUILDERS</span><span>·</span>
+        <span>KHYBER PAKHTUNKHWA</span><span>·</span>
+      </div>
+    </div>
+  </div>
+
+  
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-mascot-img snow-leopard-footer" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+  <title>CNCF Peshawar snow leopard mascot</title>
+
+  
+  <path d="M 32 184 C 65 185, 135 185, 168 184" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 54 190 L 80 190" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+
+  
+  
+  <path d="M 64 124 C 44 134, 42 162, 54 176 C 60 180, 74 180, 80 176"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <circle cx="52" cy="144" r="3" fill="#383838"/>
+  <circle cx="58" cy="142" r="2.5" fill="#383838"/>
+  <circle cx="54" cy="150" r="2.5" fill="#383838"/>
+
+  
+  <path d="M 136 124 C 156 134, 158 162, 146 176 C 140 180, 126 180, 120 176"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <circle cx="148" cy="144" r="3" fill="#383838"/>
+  <circle cx="142" cy="142" r="2.5" fill="#383838"/>
+  <circle cx="146" cy="150" r="2.5" fill="#383838"/>
+
+  
+  <path d="M 74 98
+           C 66 112, 68 140, 72 160
+           L 128 160
+           C 132 140, 134 112, 126 98 Z"
+        fill="#ffffff"
+        stroke="#383838"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  
+  
+  <path d="M 80 114 L 80 172 C 80 176, 96 176, 96 172 L 96 128"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="85" y1="170" x2="85" y2="175" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <line x1="91" y1="170" x2="91" y2="175" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+
+  
+  <path d="M 104 128 L 104 172 C 104 176, 120 176, 120 172 L 120 114"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="109" y1="170" x2="109" y2="175" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <line x1="115" y1="170" x2="115" y2="175" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+
+  
+  <path d="M 48 160
+           C 40 174, 52 184, 80 184
+           C 114 184, 150 184, 166 176
+           C 176 168, 172 150, 160 148
+           C 148 146, 146 160, 154 166
+           C 146 170, 120 172, 86 172
+           C 66 172, 54 168, 56 160 Z"
+        fill="#ffffff"
+        stroke="#383838"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+  
+  <circle cx="70" cy="179" r="2.5" fill="#383838"/>
+  <circle cx="96" cy="179" r="3" fill="#383838"/>
+  <circle cx="124" cy="179" r="3" fill="#383838"/>
+  <circle cx="150" cy="175" r="2.5" fill="#383838"/>
+  <circle cx="162" cy="158" r="3" fill="#383838"/>
+
+  
+  <path d="M 88 102 C 88 116, 112 116, 112 102" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
+
+  
+  <rect x="74" y="93" width="52" height="9" rx="2" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linejoin="round"/>
+  <polygon points="100,102 106,109 100,116 94,109" fill="#ffde00" stroke="#383838" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="100" cy="109" r="2" fill="#383838"/>
+
+  
+  
+  <path d="M 70 46 C 64 30, 68 18, 80 23 C 86 26, 86 38, 84 44"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 70 25 C 74 22, 78 23, 80 23" stroke="#383838" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 74 32 C 74 28, 78 28, 80 32" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
+
+  
+  <path d="M 130 46 C 136 30, 132 18, 120 23 C 114 26, 114 38, 116 44"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 130 25 C 126 22, 122 23, 120 23" stroke="#383838" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 126 32 C 126 28, 122 28, 120 32" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
+
+  
+  <path d="M 84 40
+           C 92 36, 108 36, 116 40
+           C 130 44, 140 56, 140 70
+           C 140 84, 128 95, 100 95
+           C 72 95, 60 84, 60 70
+           C 60 56, 70 44, 84 40 Z"
+        fill="#ffffff"
+        stroke="#383838"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  
+  <circle cx="95" cy="44" r="2" fill="#383838"/>
+  <circle cx="100" cy="42" r="2.5" fill="#383838"/>
+  <circle cx="105" cy="44" r="2.5" fill="#383838"/>
+  <circle cx="92" cy="50" r="2" fill="#383838"/>
+  <circle cx="108" cy="50" r="2" fill="#383838"/>
+
+  
+  <circle cx="84" cy="62" r="8" fill="#54b4de" stroke="#383838" stroke-width="2"/>
+  <circle cx="84" cy="62" r="4.5" fill="#383838"/>
+  <circle cx="82" cy="59" r="2" fill="#ffffff"/>
+
+  <circle cx="116" cy="62" r="8" fill="#54b4de" stroke="#383838" stroke-width="2"/>
+  <circle cx="116" cy="62" r="4.5" fill="#383838"/>
+  <circle cx="114" cy="59" r="2" fill="#ffffff"/>
+
+  
+  <polygon points="100,73 105,68 95,68" fill="#383838" stroke="#383838" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M 100 73 L 100 78" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 94 77 C 96 81, 100 81, 100 78 C 100 81, 104 81, 106 77" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+
+  
+  <line x1="74" y1="73" x2="62" y2="71" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="74" y1="77" x2="62" y2="79" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="126" y1="73" x2="138" y2="71" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="126" y1="77" x2="138" y2="79" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+      </div>
+
+      <div class="footer-grid">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <rect width="32" height="32" rx="2" fill="#383838"/>
+              <path d="M8 8h6v6H8z" fill="#ffde00"/>
+              <path d="M18 8h6v6h-6z" fill="#6fc2ff"/>
+              <path d="M8 18h6v6H8z" fill="#38c1b0"/>
+              <path d="M18 18h6v6h-6z" fill="#f38e84"/>
+            </svg>
+            <span style="font-weight: 700; font-size: 16px; text-transform: uppercase;">CNCF Peshawar</span>
+          </div>
+          <p style="font-size: 13px; color: var(--color-text-muted); line-height: 1.5; margin-bottom: 16px;">
+            Official Cloud Native Computing Foundation (CNCF) community group in Khyber Pakhtunkhwa. Advancing Kubernetes, distributed systems, and open-source cloud architectures.
+          </p>
+          <div class="footer-social-row">
+            <a href="https://community.cncf.io/peshawar/" class="social-btn" aria-label="Open Community Groups" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#383838" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            </a>
+            <a href="https://slack.cncf.io/" class="social-btn" aria-label="CNCF Slack" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#383838" stroke-width="2" aria-hidden="true"><rect x="13" y="2" width="3" height="8" rx="1.5"/><path d="M19 8.5a2.5 2.5 0 0 1-5 0V6"/><rect x="2" y="13" width="8" height="3" rx="1.5"/><path d="M8.5 19a2.5 2.5 0 0 1 0-5H6"/></svg>
+            </a>
+            <a href="https://github.com/cncf-peshawar" class="social-btn" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#383838" stroke-width="2" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="https://linkedin.com/company/cncf-peshawar" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#383838" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://instagram.com/cncfpeshawar" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#383838" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37a4 4 0 1 1-7.75 1.13 4 4 0 0 1 7.75-1.13z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links-list">
+            <li><a href="/" class="footer-link">Home</a></li>
+            <li><a href="/events" class="footer-link">Events & Labs</a></li>
+            <li><a href="/speak" class="footer-link">Speaker Hub (CFP)</a></li>
+            <li><a href="/sponsors" class="footer-link">Sponsorships</a></li>
+            <li><a href="/team" class="footer-link">Organizers & Team</a></li>
+            <li><a href="/blog" class="footer-link">Blog & Recaps</a></li>
+            <li><a href="/code-of-conduct" class="footer-link">Code of Conduct</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Community & Labs</h4>
+          <ul class="footer-links-list">
+            <li><a href="https://community.cncf.io/peshawar/" class="footer-link" target="_blank" rel="noopener noreferrer">OCG Chapter Page ↗</a></li>
+            <li><a href="https://github.com/cncf-peshawar" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub Repositories ↗</a></li>
+            <li><a href="/team/tech-team" class="footer-link">Tech Working Group</a></li>
+            <li><a href="/team/events-team" class="footer-link">Events Operations</a></li>
+            <li><a href="/team/community-outreach" class="footer-link">Community Outreach</a></li>
+            <li><a href="/team/design-media" class="footer-link">Design & Media</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Administration</h4>
+          <ul class="footer-links-list">
+            <li><a href="/admin/" class="footer-link">CMS Portal (/admin/)</a></li>
+            <li><a href="mailto:cncfpeshawar@gmail.com" class="footer-link">cncfpeshawar@gmail.com</a></li>
+            <li><a href="https://github.com/cncf-peshawar/cncf-peshawar.github.io/issues/new?template=cfp_proposal.yml" class="footer-link" target="_blank" rel="noopener noreferrer">Submit CFP Issue ↗</a></li>
+            <li><a href="/sponsors#email-builder" class="footer-link">Draft Proposal</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <span>© 2026 Cloud Native Peshawar Chapter. All rights reserved. 100% Free & Open-Source.</span>
+        <span>Linux Foundation® and CNCF® are registered trademarks. Hosted in Pakistan.</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
