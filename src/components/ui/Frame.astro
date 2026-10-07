@@ -1,0 +1,111 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'div'> {
+  title?: string;
+  showControls?: boolean;
+  class?: string;
+}
+
+const {
+  title = 'terminal',
+  showControls = true,
+  class: className = '',
+  ...rest
+} = Astro.props;
+---
+
+<div class:list={['frame', className]} {...rest}>
+  <div class="frame__header">
+    {showControls && (
+      <div class="frame__controls" aria-hidden="true">
+        <span class="frame__dot frame__dot--close"></span>
+        <span class="frame__dot frame__dot--minimize"></span>
+        <span class="frame__dot frame__dot--expand"></span>
+      </div>
+    )}
+    {title && <span class="frame__title">{title}</span>}
+    <div class="frame__actions">
+      <slot name="header-action" />
+    </div>
+  </div>
+
+  <div class="frame__body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .frame {
+    background-color: var(--color-frost-white);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .frame__header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-12, 12px);
+    padding: var(--spacing-8, 8px) var(--spacing-16, 16px);
+    background-color: var(--color-frost-white);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    min-height: 38px;
+  }
+
+  .frame__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-6, 6px);
+  }
+
+  .frame__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-brutal);
+    border: 1.5px solid var(--color-charcoal-ink);
+    display: inline-block;
+  }
+
+  .frame__dot--close {
+    background-color: var(--color-coral-sketch);
+  }
+
+  .frame__dot--minimize {
+    background-color: var(--color-canary-banner);
+  }
+
+  .frame__dot--expand {
+    background-color: var(--color-mint-sketch);
+  }
+
+  .frame__title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-semibold, 600);
+    letter-spacing: var(--letter-spacing-wide, 0.02em);
+    color: var(--color-charcoal-ink);
+    text-transform: uppercase;
+    flex-grow: 1;
+  }
+
+  .frame__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8, 8px);
+  }
+
+  .frame__body {
+    background-color: var(--color-charcoal-ink);
+    color: var(--color-frost-white);
+    padding: var(--spacing-20, 20px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    line-height: var(--line-height-relaxed, 1.6);
+    overflow-x: auto;
+    flex-grow: 1;
+  }
+</style>

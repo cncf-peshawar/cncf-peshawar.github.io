@@ -1,0 +1,189 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface SelectOption {
+  value: string;
+  label: string;
+  selected?: boolean;
+  disabled?: boolean;
+}
+
+export interface Props extends HTMLAttributes<'select'> {
+  label?: string;
+  id?: string;
+  name?: string;
+  value?: string;
+  options?: SelectOption[];
+  placeholder?: string;
+  error?: string;
+  helper?: string;
+  required?: boolean;
+  disabled?: boolean;
+  class?: string;
+}
+
+const {
+  label,
+  id,
+  name,
+  value,
+  options,
+  placeholder,
+  error,
+  helper,
+  required = false,
+  disabled = false,
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const selectId = id || (name ? `select-${name}` : undefined);
+const errorId = selectId && error ? `${selectId}-error` : undefined;
+const helperId = selectId && helper ? `${selectId}-helper` : undefined;
+const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
+---
+
+<div class="field">
+  {label && (
+    <label for={selectId} class="field__label">
+      {label}
+      {required && <span class="field__required" aria-hidden="true">*</span>}
+    </label>
+  )}
+
+  <div class="field__select-wrapper">
+    <select
+      id={selectId}
+      name={name}
+      required={required}
+      disabled={disabled}
+      aria-invalid={error ? 'true' : undefined}
+      aria-describedby={describedBy}
+      class:list={['field__select', error && 'field__select--error', className]}
+      {...rest}
+    >
+      {placeholder && (
+        <option value="" disabled selected={!value}>
+          {placeholder}
+        </option>
+      )}
+      {options?.map((opt) => (
+        <option
+          value={opt.value}
+          selected={opt.selected ?? (value ? opt.value === value : false)}
+          disabled={opt.disabled}
+        >
+          {opt.label}
+        </option>
+      ))}
+      <slot />
+    </select>
+
+    <span class="field__arrow" aria-hidden="true">
+      <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.5 1.5L6 6L10.5 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </div>
+
+  {error && (
+    <span id={errorId} class="field__message field__message--error" role="alert">
+      {error}
+    </span>
+  )}
+
+  {helper && !error && (
+    <span id={helperId} class="field__message field__message--helper">
+      {helper}
+    </span>
+  )}
+</div>
+
+<style>
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6, 6px);
+    width: 100%;
+  }
+
+  .field__label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-semibold, 600);
+    color: var(--color-charcoal-ink);
+    letter-spacing: var(--letter-spacing-wide, 0.02em);
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  .field__required {
+    color: var(--color-coral-sketch);
+    margin-left: 2px;
+  }
+
+  .field__select-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .field__select {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    line-height: var(--line-height-normal, 1.4);
+    padding: 10px 36px 10px 14px;
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color var(--transition-fast, 0.1s ease);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .field__select:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+
+  .field__select:disabled {
+    background-color: var(--color-chalk-gray);
+    border-color: var(--color-pencil-gray);
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+  }
+
+  .field__select--error {
+    border-color: var(--color-coral-sketch);
+  }
+
+  .field__arrow {
+    position: absolute;
+    right: 14px;
+    pointer-events: none;
+    color: var(--color-charcoal-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .field__message {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    line-height: var(--line-height-tight, 1.2);
+  }
+
+  .field__message--error {
+    color: var(--color-coral-sketch);
+    font-weight: var(--font-weight-medium, 500);
+  }
+
+  .field__message--helper {
+    color: var(--color-text-muted);
+  }
+</style>

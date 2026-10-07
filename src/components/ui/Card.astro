@@ -1,0 +1,107 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'div'> {
+  variant?: 'white' | 'cream' | 'canary' | 'chalk';
+  padding?: 'none' | 'sm' | 'md' | 'lg';
+  shadow?: boolean;
+  interactive?: boolean;
+  as?: 'div' | 'article' | 'section' | 'li';
+  class?: string;
+}
+
+const {
+  variant = 'white',
+  padding = 'md',
+  shadow = true,
+  interactive = false,
+  as: Component = 'div',
+  class: className = '',
+  ...rest
+} = Astro.props;
+---
+
+<Component
+  class:list={[
+    'card',
+    `card--${variant}`,
+    `card--pad-${padding}`,
+    shadow && 'card--shadow',
+    interactive && 'card--interactive',
+    className
+  ]}
+  {...rest}
+>
+  <slot />
+</Component>
+
+<style>
+  .card {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    border-width: var(--border-width, 2px);
+    border-style: solid;
+    border-color: var(--color-charcoal-ink);
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .card--shadow {
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+  }
+
+  /* Surfaces */
+  .card--white {
+    background-color: var(--color-frost-white);
+  }
+
+  .card--cream {
+    background-color: var(--color-cream-paper);
+  }
+
+  .card--canary {
+    background-color: var(--color-canary-banner);
+  }
+
+  .card--chalk {
+    background-color: var(--color-chalk-gray);
+  }
+
+  /* Padding */
+  .card--pad-none {
+    padding: 0;
+  }
+
+  .card--pad-sm {
+    padding: var(--spacing-16, 16px);
+  }
+
+  .card--pad-md {
+    padding: var(--spacing-24, 24px);
+  }
+
+  .card--pad-lg {
+    padding: var(--card-padding, 40px);
+  }
+
+  /* Interactive behavior */
+  .card--interactive {
+    cursor: pointer;
+    transition: var(--transition-press, transform 0.1s ease, box-shadow 0.1s ease);
+  }
+
+  .card--interactive:hover {
+    background-color: var(--color-chalk-gray);
+  }
+
+  .card--interactive:active {
+    transform: var(--press-transform, translate(-6px, 6px));
+    box-shadow: 0 0 0 0 var(--color-charcoal-ink);
+  }
+
+  .card--interactive:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+</style>

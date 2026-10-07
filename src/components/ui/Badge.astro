@@ -1,0 +1,65 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'span'> {
+  variant?: 'canary' | 'yellow' | 'mint' | 'orange' | 'charcoal';
+  class?: string;
+}
+
+const {
+  variant = 'canary',
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+// Normalise 'yellow' alias to 'canary'
+const activeVariant = variant === 'yellow' ? 'canary' : variant;
+---
+
+<span class:list={['badge', `badge--${activeVariant}`, className]} {...rest}>
+  <slot />
+</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-semibold, 600);
+    line-height: var(--line-height-tight, 1);
+    letter-spacing: var(--letter-spacing-wide, 0.02em);
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: var(--radius-brutal);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    white-space: nowrap;
+    user-select: none;
+    vertical-align: middle;
+  }
+
+  .badge--canary {
+    background-color: var(--color-canary-banner);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--mint {
+    background-color: var(--color-mint-sketch);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--orange {
+    background-color: var(--color-duck-bill-orange);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--charcoal {
+    background-color: var(--color-charcoal-ink);
+    color: var(--color-frost-white);
+    border-color: var(--color-charcoal-ink);
+  }
+</style>

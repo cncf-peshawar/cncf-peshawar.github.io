@@ -1,0 +1,142 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'a'> {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'rainbow';
+  size?: 'sm' | 'md' | 'lg';
+  rainbowColor?: 'coral' | 'peach' | 'mint' | 'lilac' | 'lime' | 'periwinkle' | 'slate' | 'marigold';
+  class?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  rainbowColor,
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const rainbowClass = variant === 'rainbow'
+  ? rainbowColor
+    ? `btn--rainbow-${rainbowColor}`
+    : 'btn--rainbow-cycle'
+  : undefined;
+---
+
+<a
+  href={href}
+  class:list={['btn', `btn--${variant}`, `btn--${size}`, rainbowClass, className]}
+  {...rest}
+>
+  <slot />
+</a>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8, 8px);
+    font-family: var(--font-mono);
+    font-weight: var(--font-weight-medium, 500);
+    line-height: var(--line-height-snug, 1.2);
+    letter-spacing: var(--letter-spacing-normal, 0.02em);
+    text-transform: uppercase;
+    text-decoration: none !important;
+    border-radius: var(--radius-brutal);
+    border-width: var(--border-width, 2px);
+    border-style: solid;
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    transition: var(--transition-press, transform 0.1s ease, box-shadow 0.1s ease);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .btn:hover {
+    text-decoration: none !important;
+  }
+
+  .btn:active {
+    transform: var(--press-transform, translate(-6px, 6px));
+    box-shadow: 0 0 0 0 var(--color-charcoal-ink);
+  }
+
+  .btn:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+
+  /* Sizes */
+  .btn--sm {
+    padding: 6px 14px;
+    font-size: var(--font-size-caption, 0.75rem);
+    min-height: 32px;
+  }
+
+  .btn--md {
+    padding: 10px 24px;
+    font-size: var(--font-size-body, 0.875rem);
+    min-height: 44px;
+  }
+
+  .btn--lg {
+    padding: 14px 32px;
+    font-size: var(--font-size-body-lg, 1rem);
+    min-height: 52px;
+  }
+
+  /* Variants */
+  .btn--primary {
+    background-color: var(--color-sky-crayon);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn--primary:hover {
+    background-color: var(--color-sky-crayon);
+  }
+
+  .btn--secondary {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn--secondary:hover {
+    background-color: var(--color-chalk-gray);
+  }
+
+  .btn--rainbow {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-coral-sketch);
+  }
+
+  .btn--rainbow:hover {
+    background-color: var(--color-chalk-gray);
+  }
+
+  /* Rainbow explicit color slots */
+  .btn--rainbow-coral { border-color: var(--color-coral-sketch); }
+  .btn--rainbow-peach { border-color: var(--color-peach-sketch); }
+  .btn--rainbow-mint { border-color: var(--color-mint-sketch); }
+  .btn--rainbow-lilac { border-color: var(--color-lilac-sketch); }
+  .btn--rainbow-lime { border-color: var(--color-lime-sketch); }
+  .btn--rainbow-periwinkle { border-color: var(--color-periwinkle-sketch); }
+  .btn--rainbow-slate { border-color: var(--color-slate-sketch); }
+  .btn--rainbow-marigold { border-color: var(--color-marigold-sketch); }
+
+  /* Rainbow cycling */
+  .btn--rainbow-cycle:nth-of-type(8n + 1) { border-color: var(--color-coral-sketch); }
+  .btn--rainbow-cycle:nth-of-type(8n + 2) { border-color: var(--color-peach-sketch); }
+  .btn--rainbow-cycle:nth-of-type(8n + 3) { border-color: var(--color-mint-sketch); }
+  .btn--rainbow-cycle:nth-of-type(8n + 4) { border-color: var(--color-lilac-sketch); }
+  .btn--rainbow-cycle:nth-of-type(8n + 5) { border-color: var(--color-lime-sketch); }
+  .btn--rainbow-cycle:nth-of-type(8n + 6) { border-color: var(--color-periwinkle-sketch); }
+  .btn--rainbow-cycle:nth-of-type(8n + 7) { border-color: var(--color-slate-sketch); }
+  .btn--rainbow-cycle:nth-of-type(8n + 8) { border-color: var(--color-marigold-sketch); }
+</style>
