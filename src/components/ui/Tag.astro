@@ -1,0 +1,68 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'span'> {
+  variant?: 'coral' | 'peach' | 'mint' | 'lilac' | 'lime' | 'periwinkle' | 'slate' | 'marigold' | 'charcoal';
+  color?: 'coral' | 'peach' | 'mint' | 'lilac' | 'lime' | 'periwinkle' | 'slate' | 'marigold' | 'charcoal';
+  class?: string;
+}
+
+const {
+  variant,
+  color,
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const selectedColor = color || variant;
+const colorClass = selectedColor ? `tag--${selectedColor}` : 'tag--cycle';
+---
+
+<span class:list={['tag', colorClass, className]} {...rest}>
+  <slot />
+</span>
+
+<style>
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-4, 4px);
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-medium, 500);
+    line-height: var(--line-height-snug, 1.2);
+    letter-spacing: var(--letter-spacing-normal, 0.02em);
+    padding: 4px 10px;
+    border-radius: var(--radius-brutal);
+    border-width: var(--border-width, 2px);
+    border-style: solid;
+    border-color: var(--color-charcoal-ink);
+    white-space: nowrap;
+    user-select: none;
+    vertical-align: middle;
+  }
+
+  /* Specific color variants */
+  .tag--coral { border-color: var(--color-coral-sketch); }
+  .tag--peach { border-color: var(--color-peach-sketch); }
+  .tag--mint { border-color: var(--color-mint-sketch); }
+  .tag--lilac { border-color: var(--color-lilac-sketch); }
+  .tag--lime { border-color: var(--color-lime-sketch); }
+  .tag--periwinkle { border-color: var(--color-periwinkle-sketch); }
+  .tag--slate { border-color: var(--color-slate-sketch); }
+  .tag--marigold { border-color: var(--color-marigold-sketch); }
+  .tag--charcoal { border-color: var(--color-charcoal-ink); }
+
+  /* Automatic cycling across the 8 sketch colors */
+  .tag--cycle:nth-of-type(8n + 1) { border-color: var(--color-coral-sketch); }
+  .tag--cycle:nth-of-type(8n + 2) { border-color: var(--color-peach-sketch); }
+  .tag--cycle:nth-of-type(8n + 3) { border-color: var(--color-mint-sketch); }
+  .tag--cycle:nth-of-type(8n + 4) { border-color: var(--color-lilac-sketch); }
+  .tag--cycle:nth-of-type(8n + 5) { border-color: var(--color-lime-sketch); }
+  .tag--cycle:nth-of-type(8n + 6) { border-color: var(--color-periwinkle-sketch); }
+  .tag--cycle:nth-of-type(8n + 7) { border-color: var(--color-slate-sketch); }
+  .tag--cycle:nth-of-type(8n + 8) { border-color: var(--color-marigold-sketch); }
+</style>

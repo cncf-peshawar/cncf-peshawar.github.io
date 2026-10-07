@@ -1,0 +1,387 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import LinkButton from '../components/ui/LinkButton.astro';
+import Badge from '../components/ui/Badge.astro';
+import Tag from '../components/ui/Tag.astro';
+import Card from '../components/ui/Card.astro';
+import Frame from '../components/ui/Frame.astro';
+import Input from '../components/ui/Input.astro';
+import Textarea from '../components/ui/Textarea.astro';
+import Select from '../components/ui/Select.astro';
+
+const rainbowColors = [
+  'coral',
+  'peach',
+  'mint',
+  'lilac',
+  'lime',
+  'periwinkle',
+  'slate',
+  'marigold'
+] as const;
+
+const selectOptions = [
+  { value: 'k8s', label: 'Kubernetes Deep Dive' },
+  { value: 'devops', label: 'DevOps & GitOps Pipeline' },
+  { value: 'mlops', label: 'Cloud Native MLOps' },
+  { value: 'agents', label: 'Agentic AI Workflows' }
+];
+---
+
+<BaseLayout title="UI Primitives Dev Kit — MotherDuck Design System">
+  <main class="dev-kit" id="main-content">
+    <header class="dev-kit__header">
+      <Badge variant="canary">H2 Visual Gate</Badge>
+      <h1 class="dev-kit__title">MotherDuck UI Primitives</h1>
+      <p class="dev-kit__subtitle">
+        Interactive catalog of all 9 core UI primitives and variant states for CNCF Peshawar.
+      </p>
+    </header>
+
+    <!-- 1. BUTTONS -->
+    <section class="dev-kit__section" id="section-buttons">
+      <div class="dev-kit__section-header">
+        <h2 class="dev-kit__section-title">1. Button.astro</h2>
+        <Tag color="periwinkle">Interactive Primitive</Tag>
+      </div>
+
+      <div class="dev-kit__grid">
+        <Card variant="white" padding="md">
+          <h3 class="dev-kit__card-title">Variants</h3>
+          <div class="dev-kit__row">
+            <Button variant="primary">Primary Action</Button>
+            <Button variant="secondary">Secondary Outline</Button>
+            <Button variant="rainbow" rainbowColor="coral">Rainbow Coral</Button>
+            <Button variant="rainbow" rainbowColor="mint">Rainbow Mint</Button>
+          </div>
+        </Card>
+
+        <Card variant="white" padding="md">
+          <h3 class="dev-kit__card-title">Sizes & States</h3>
+          <div class="dev-kit__row">
+            <Button size="sm" variant="primary">Small</Button>
+            <Button size="md" variant="primary">Medium</Button>
+            <Button size="lg" variant="primary">Large</Button>
+            <Button variant="primary" disabled>Disabled</Button>
+          </div>
+        </Card>
+
+        <Card variant="white" padding="md">
+          <h3 class="dev-kit__card-title">Rainbow Cycling Palette (8 Sketch Colors)</h3>
+          <div class="dev-kit__row">
+            {rainbowColors.map((color) => (
+              <Button variant="rainbow" rainbowColor={color}>
+                {color}
+              </Button>
+            ))}
+          </div>
+        </Card>
+      </div>
+    </section>
+
+    <!-- 2. LINK BUTTONS -->
+    <section class="dev-kit__section" id="section-link-buttons">
+      <div class="dev-kit__section-header">
+        <h2 class="dev-kit__section-title">2. LinkButton.astro</h2>
+        <Tag color="mint">Anchor Navigation</Tag>
+      </div>
+
+      <Card variant="white" padding="md">
+        <h3 class="dev-kit__card-title">Link Variants (renders &lt;a&gt;)</h3>
+        <div class="dev-kit__row">
+          <LinkButton href="#section-buttons" variant="primary">Primary Link</LinkButton>
+          <LinkButton href="#section-cards" variant="secondary">Secondary Link</LinkButton>
+          <LinkButton href="#section-badges" variant="rainbow" rainbowColor="lilac">Rainbow Lilac Link</LinkButton>
+          <LinkButton href="#section-frames" variant="rainbow" rainbowColor="peach" size="sm">Small Peach Link</LinkButton>
+        </div>
+      </Card>
+    </section>
+
+    <!-- 3. BADGES -->
+    <section class="dev-kit__section" id="section-badges">
+      <div class="dev-kit__section-header">
+        <h2 class="dev-kit__section-title">3. Badge.astro</h2>
+        <Tag color="marigold">Status Pill</Tag>
+      </div>
+
+      <Card variant="white" padding="md">
+        <h3 class="dev-kit__card-title">Badge Variants</h3>
+        <div class="dev-kit__row">
+          <Badge variant="canary">Canary Banner</Badge>
+          <Badge variant="yellow">Yellow Alias</Badge>
+          <Badge variant="mint">Signal Mint</Badge>
+          <Badge variant="orange">Duck Bill Orange</Badge>
+          <Badge variant="charcoal">Charcoal Ink</Badge>
+        </div>
+      </Card>
+    </section>
+
+    <!-- 4. TAGS -->
+    <section class="dev-kit__section" id="section-tags">
+      <div class="dev-kit__section-header">
+        <h2 class="dev-kit__section-title">4. Tag.astro</h2>
+        <Tag color="coral">Taxonomy</Tag>
+      </div>
+
+      <Card variant="white" padding="md">
+        <h3 class="dev-kit__card-title">Tag Colors & Cycling</h3>
+        <div class="dev-kit__row">
+          {rainbowColors.map((color) => (
+            <Tag color={color}>#{color}</Tag>
+          ))}
+          <Tag color="charcoal">#charcoal</Tag>
+          <Tag>#auto-cycle-1</Tag>
+          <Tag>#auto-cycle-2</Tag>
+        </div>
+      </Card>
+    </section>
+
+    <!-- 5. CARDS -->
+    <section class="dev-kit__section" id="section-cards">
+      <div class="dev-kit__section-header">
+        <h2 class="dev-kit__section-title">5. Card.astro</h2>
+        <Tag color="slate">Surface Container</Tag>
+      </div>
+
+      <div class="dev-kit__card-grid">
+        <Card variant="white" padding="md">
+          <h3 class="dev-kit__card-title">White Card</h3>
+          <p class="dev-kit__body">Default frost-white card with 2px charcoal border and hard offset shadow.</p>
+        </Card>
+
+        <Card variant="cream" padding="md">
+          <h3 class="dev-kit__card-title">Cream Card</h3>
+          <p class="dev-kit__body">Cream paper canvas surface with hard brutalist shadow.</p>
+        </Card>
+
+        <Card variant="canary" padding="md">
+          <h3 class="dev-kit__card-title">Canary Card</h3>
+          <p class="dev-kit__body">High-impact canary yellow callout card for announcements or testimonials.</p>
+        </Card>
+
+        <Card variant="chalk" padding="md" interactive={true}>
+          <h3 class="dev-kit__card-title">Interactive Card</h3>
+          <p class="dev-kit__body">Click or press to observe active translate(-6px, 6px) physics into shadow.</p>
+        </Card>
+      </div>
+    </section>
+
+    <!-- 6. FRAME -->
+    <section class="dev-kit__section" id="section-frames">
+      <div class="dev-kit__section-header">
+        <h2 class="dev-kit__section-title">6. Frame.astro</h2>
+        <Tag color="lime">Console & Code</Tag>
+      </div>
+
+      <Frame title="bash ~ cncf-peshawar/cluster-probe">
+        <div slot="header-action">
+          <Badge variant="canary">PROD</Badge>
+        </div>
+        <pre class="dev-kit__terminal-output"><code>$ kubectl get nodes -o wide
+NAME                  STATUS   ROLES           AGE   VERSION
+peshawar-control-01   Ready    control-plane   42d   v1.31.1
+peshawar-worker-01    Ready    worker          42d   v1.31.1
+peshawar-worker-02    Ready    worker          42d   v1.31.1
+
+$ cncf-peshawar status --gate h2
+[STATUS] 9/9 Primitives Verified PASS</code></pre>
+      </Frame>
+    </section>
+
+    <!-- 7. FORM CONTROLS -->
+    <section class="dev-kit__section" id="section-forms">
+      <div class="dev-kit__section-header">
+        <h2 class="dev-kit__section-title">7. Form Controls (Input, Textarea, Select)</h2>
+        <Tag color="peach">Input Primitives</Tag>
+      </div>
+
+      <Card variant="white" padding="lg">
+        <form class="dev-kit__form" onsubmit="return false;">
+          <div class="dev-kit__form-row">
+            <Input
+              id="kit-input-normal"
+              name="speaker_name"
+              label="Speaker Name"
+              placeholder="e.g. Linus Torvalds"
+              required={true}
+              helper="Enter your full legal or professional handle."
+            />
+
+            <Input
+              id="kit-input-error"
+              name="speaker_email"
+              label="Email Address"
+              value="invalid-email"
+              error="Please provide a valid email format (e.g. user@domain.com)."
+            />
+          </div>
+
+          <div class="dev-kit__form-row">
+            <Select
+              id="kit-select-track"
+              name="talk_track"
+              label="Technical Track"
+              placeholder="Select a presentation track..."
+              options={selectOptions}
+              value="k8s"
+              helper="Choose the track best matching your proposal."
+            />
+
+            <Input
+              id="kit-input-disabled"
+              name="locked_field"
+              label="Locked Parameter"
+              value="FROZEN_CONTRACT_MODE"
+              disabled={true}
+              helper="This setting is locked by governance."
+            />
+          </div>
+
+          <Textarea
+            id="kit-textarea-bio"
+            name="abstract"
+            label="Proposal Abstract"
+            rows={4}
+            placeholder="Describe the architectural deep-dive, code demonstration, and learning outcomes..."
+            helper="Minimum 200 words recommended for CFP triage."
+          />
+
+          <div class="dev-kit__form-actions">
+            <Button type="submit" variant="primary">Submit Proposal</Button>
+            <Button type="reset" variant="secondary">Reset Form</Button>
+          </div>
+        </form>
+      </Card>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .dev-kit {
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    padding-inline: var(--spacing-24, 24px);
+    padding-block: var(--spacing-40, 40px) var(--spacing-80, 80px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-48, 48px);
+  }
+
+  .dev-kit__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-12, 12px);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    padding-bottom: var(--spacing-24, 24px);
+  }
+
+  .dev-kit__title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-heading-lg, 2.5rem);
+    font-weight: var(--font-weight-bold, 600);
+    color: var(--color-charcoal-ink);
+    line-height: var(--line-height-tight, 1);
+    letter-spacing: var(--letter-spacing-tight, 0.02em);
+    margin: 0;
+  }
+
+  .dev-kit__subtitle {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-subheading, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-normal, 1.4);
+    margin: 0;
+    max-width: var(--container-prose, 65ch);
+  }
+
+  .dev-kit__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-20, 20px);
+  }
+
+  .dev-kit__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-12, 12px);
+    border-bottom: 1px solid var(--color-graphite);
+    padding-bottom: var(--spacing-8, 8px);
+  }
+
+  .dev-kit__section-title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-heading-sm, 1.5rem);
+    font-weight: var(--font-weight-semibold, 600);
+    color: var(--color-charcoal-ink);
+    margin: 0;
+  }
+
+  .dev-kit__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-20, 20px);
+  }
+
+  .dev-kit__card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--spacing-20, 20px);
+  }
+
+  .dev-kit__card-title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body-lg, 1rem);
+    font-weight: var(--font-weight-semibold, 600);
+    color: var(--color-charcoal-ink);
+    margin-top: 0;
+    margin-bottom: var(--spacing-12, 12px);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide, 0.02em);
+  }
+
+  .dev-kit__body {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    line-height: var(--line-height-relaxed, 1.6);
+    color: var(--color-charcoal-ink);
+    margin: 0;
+  }
+
+  .dev-kit__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-12, 12px);
+  }
+
+  .dev-kit__terminal-output {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    line-height: var(--line-height-relaxed, 1.6);
+    color: var(--color-frost-white);
+  }
+
+  .dev-kit__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-20, 20px);
+  }
+
+  .dev-kit__form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--spacing-16, 16px);
+  }
+
+  .dev-kit__form-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-12, 12px);
+    padding-top: var(--spacing-12, 12px);
+  }
+</style>
