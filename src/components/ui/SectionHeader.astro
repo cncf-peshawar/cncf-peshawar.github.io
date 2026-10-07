@@ -1,0 +1,76 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  align?: 'left' | 'center';
+  as?: 'h1' | 'h2' | 'h3';
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  align = 'left',
+  as: HeadingTag = 'h2',
+  class: className = '',
+  ...rest
+} = Astro.props;
+---
+
+<div class:list={['section-header', `section-header--${align}`, className]} {...rest}>
+  {eyebrow && <span class="section-header__eyebrow">{eyebrow}</span>}
+  <HeadingTag class="section-header__title">{title}</HeadingTag>
+  {description && <p class="section-header__description">{description}</p>}
+  <slot />
+</div>
+
+<style>
+  .section-header {
+    margin-bottom: var(--spacing-32, 32px);
+  }
+
+  .section-header--center {
+    text-align: center;
+  }
+
+  .section-header--center .section-header__description {
+    margin-inline: auto;
+  }
+
+  .section-header__eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem); /* 12px */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted, #6b6b6b);
+    margin-bottom: var(--spacing-8, 8px);
+  }
+
+  .section-header__title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-heading-lg, clamp(1.5rem, 4vw, 2.5rem));
+    font-weight: 600;
+    line-height: var(--line-height-snug, 1.2);
+    letter-spacing: var(--letter-spacing-tight, 0.02em);
+    color: var(--color-charcoal-ink, #383838);
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .section-header__description {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 14px);
+    line-height: var(--line-height-relaxed, 1.6);
+    color: var(--color-text-muted, #6b6b6b);
+    max-width: var(--container-prose, 65ch);
+    margin-top: var(--spacing-12, 12px);
+    margin-bottom: 0;
+    text-wrap: pretty;
+  }
+</style>

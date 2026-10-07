@@ -1,0 +1,211 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
+  items?: string[];
+  separator?: string;
+  speed?: string;
+  label?: string;
+  class?: string;
+}
+
+const {
+  items = [
+    'KUBERNETES',
+    'DEVOPS',
+    'MLOPS',
+    'AGENTIC AI',
+    '100% FREE',
+    'OPEN TO ALL',
+  ],
+  separator = '·',
+  speed = '28s',
+  label = 'Community Topics Marquee',
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const textSequence = items.join(` ${separator} `) + ` ${separator} `;
+const repeatedSequence = Array(4).fill(textSequence).join('');
+---
+
+<div
+  class:list={['marquee', className]}
+  role="region"
+  aria-label={label}
+  style={`--marquee-speed: ${speed};`}
+  {...rest}
+>
+  <div class="marquee__track" tabindex="0" aria-label="Scrolling announcements banner">
+    <div class="marquee__content">
+      <slot>
+        <span class="marquee__text">{repeatedSequence}</span>
+      </slot>
+    </div>
+    <div class="marquee__content" aria-hidden="true">
+      <slot>
+        <span class="marquee__text">{repeatedSequence}</span>
+      </slot>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    class="marquee__pause-btn"
+    aria-label="Pause marquee animation"
+    aria-pressed="false"
+  >
+    <svg class="marquee__pause-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <rect x="5" y="4" width="4" height="16" rx="1"></rect>
+      <rect x="15" y="4" width="4" height="16" rx="1"></rect>
+    </svg>
+    <span class="marquee__pause-text">PAUSE</span>
+  </button>
+</div>
+
+<script>
+  function initMarquees() {
+    document.querySelectorAll<HTMLElement>('.marquee').forEach((marquee) => {
+      const btn = marquee.querySelector<HTMLButtonElement>('.marquee__pause-btn');
+      if (!btn || btn.dataset.bound === 'true') return;
+      btn.dataset.bound = 'true';
+
+      const icon = btn.querySelector('.marquee__pause-icon');
+      const textSpan = btn.querySelector('.marquee__pause-text');
+
+      btn.addEventListener('click', () => {
+        const isCurrentlyPaused = marquee.getAttribute('data-paused') === 'true';
+        const nextPaused = !isCurrentlyPaused;
+
+        marquee.setAttribute('data-paused', String(nextPaused));
+        btn.setAttribute('aria-pressed', String(nextPaused));
+        btn.setAttribute('aria-label', nextPaused ? 'Resume marquee animation' : 'Pause marquee animation');
+
+        if (textSpan) {
+          textSpan.textContent = nextPaused ? 'PLAY' : 'PAUSE';
+        }
+
+        if (icon) {
+          if (nextPaused) {
+            icon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+          } else {
+            icon.innerHTML = '<rect x="5" y="4" width="4" height="16" rx="1"></rect><rect x="15" y="4" width="4" height="16" rx="1"></rect>';
+          }
+        }
+      });
+    });
+  }
+
+  initMarquees();
+  document.addEventListener('astro:page-load', initMarquees);
+</script>
+
+<style>
+  .marquee {
+    width: 100%;
+    background-color: var(--color-canary-banner, #ffde00);
+    border-top: var(--border-width, 2px) solid var(--color-charcoal-ink, #383838);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink, #383838);
+    padding: var(--spacing-12, 12px) 0;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .marquee__track {
+    display: inline-flex;
+    width: max-content;
+    will-change: transform;
+    animation: marquee-scroll var(--marquee-speed, 28s) linear infinite;
+  }
+
+  .marquee:hover .marquee__track,
+  .marquee:focus-within .marquee__track,
+  .marquee[data-paused="true"] .marquee__track {
+    animation-play-state: paused;
+  }
+
+  .marquee__content {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .marquee__text {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-subheading, 1.125rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-charcoal-ink, #383838);
+    line-height: 1;
+    padding-right: var(--spacing-32, 32px);
+  }
+
+  @media (min-width: 768px) {
+    .marquee__text {
+      font-size: 1.25rem;
+    }
+  }
+
+  .marquee__pause-btn {
+    position: absolute;
+    right: var(--spacing-16, 16px);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: var(--color-frost-white, #ffffff);
+    color: var(--color-charcoal-ink, #383838);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    box-shadow: -2px 2px 0px 0px var(--color-charcoal-ink, #383838);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 12px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1;
+    transition: transform var(--transition-fast, 0.1s ease), box-shadow var(--transition-fast, 0.1s ease);
+  }
+
+  .marquee__pause-btn:hover {
+    transform: translateY(-50%) translate(-1px, 1px);
+    box-shadow: -1px 1px 0px 0px var(--color-charcoal-ink, #383838);
+  }
+
+  .marquee__pause-btn:focus-visible {
+    outline: var(--focus-ring, 3px solid #383838);
+    outline-offset: 2px;
+  }
+
+  .marquee__pause-icon {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee-scroll {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track {
+      animation: none;
+    }
+
+    .marquee__pause-btn {
+      display: none;
+    }
+  }
+</style>
