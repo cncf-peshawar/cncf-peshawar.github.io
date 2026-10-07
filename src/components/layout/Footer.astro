@@ -1,0 +1,241 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-statement">
+      <h2 class="footer-headline">Building Peshawar's Cloud Native Future.</h2>
+      <p class="footer-subheadline">Cloud Native Peshawar · Official Cloud Native Computing Foundation Community Group.</p>
+    </div>
+
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3 class="footer-col-title">Community</h3>
+        <ul class="footer-links" role="list">
+          <li><a href="/events">Events & Meetups</a></li>
+          <li><a href="/speak">Call for Speakers (CFP)</a></li>
+          <li><a href="/sponsors">Sponsorship & Impact</a></li>
+          <li><a href="/team">Organizers & Team</a></li>
+          <li><a href="/blog">Blog & Recaps</a></li>
+          <li><a href="/code-of-conduct">Code of Conduct</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Community Channels</h3>
+        <ul class="footer-links" role="list">
+          <li><a href="https://ocgroups.dev/cncf/group/6vwk2n4" target="_blank" rel="noopener noreferrer">Open Community Groups (OCG) ↗</a></li>
+          <li><a href="https://slack.cncf.io" target="_blank" rel="noopener noreferrer">CNCF Slack (#peshawar) ↗</a></li>
+          <li><a href="mailto:cncfpeshawar@gmail.com?subject=Join%20WhatsApp%20Community">Request WhatsApp Group Invite ↗</a></li>
+          <li><a href="https://github.com/cncf-peshawar" target="_blank" rel="noopener noreferrer">GitHub Organization ↗</a></li>
+          <li><a href="https://www.linkedin.com/company/cloud-native-cncf-peshawar/" target="_blank" rel="noopener noreferrer">LinkedIn Company ↗</a></li>
+          <li><a href="https://www.instagram.com/cncfpeshawar/" target="_blank" rel="noopener noreferrer">Instagram (@cncfpeshawar) ↗</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Contact & Connect</h3>
+        <p class="footer-contact-desc">Have questions, want to partner, or submit a talk?</p>
+        <a href="mailto:cncfpeshawar@gmail.com" class="footer-email">cncfpeshawar@gmail.com</a>
+        <div class="footer-social-row">
+          <a href="https://ocgroups.dev/cncf/group/6vwk2n4" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Open Community Groups">OCG</a>
+          <a href="https://slack.cncf.io" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="CNCF Slack">Slack</a>
+          <a href="https://github.com/cncf-peshawar" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">GitHub</a>
+          <a href="https://www.linkedin.com/company/cloud-native-cncf-peshawar/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">LinkedIn</a>
+          <a href="https://www.instagram.com/cncfpeshawar/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <p class="footer-legal">&copy; {currentYear} Cloud Native Peshawar. CNCF® and Linux Foundation® are registered trademarks of The Linux Foundation.</p>
+      <div class="footer-meta">
+        <a href="/admin/">CMS Portal</a>
+        <span class="footer-meta-sep">·</span>
+        <a href="https://github.com/cncf-peshawar/cncf-peshawar.github.io" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    width: 100%;
+    background-color: var(--color-frost-white);
+    border-top: 1px solid var(--color-charcoal-ink);
+    padding: var(--spacing-40) var(--spacing-24) var(--spacing-24);
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+  }
+
+  .footer-statement {
+    padding-bottom: var(--spacing-24);
+    border-bottom: 1px solid rgba(56, 56, 56, 0.2);
+    margin-bottom: var(--spacing-32);
+  }
+
+  .footer-headline {
+    font-family: var(--font-mono);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-charcoal-ink);
+    line-height: var(--line-height-snug);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .footer-subheadline {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    color: var(--color-text-muted);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-32);
+    margin-bottom: var(--spacing-40);
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-40);
+    }
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-col-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-charcoal-ink);
+    margin-bottom: var(--spacing-12);
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+  }
+
+  .footer-links a {
+    font-family: var(--font-mono);
+    font-size: var(--text-body);
+    color: var(--color-charcoal-ink);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-sky-crayon);
+    text-underline-offset: 2px;
+  }
+
+  .footer-contact-desc {
+    font-family: var(--font-mono);
+    font-size: var(--text-body);
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-8);
+  }
+
+  .footer-email {
+    font-family: var(--font-mono);
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-charcoal-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-sky-crayon);
+    text-underline-offset: 3px;
+    margin-bottom: var(--spacing-16);
+    display: inline-block;
+  }
+
+  .footer-social-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-8);
+    margin-top: var(--spacing-4);
+  }
+
+  .social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-bold);
+    background-color: var(--color-chalk-gray);
+    border: 1.5px solid var(--color-charcoal-ink);
+    border-radius: var(--radius);
+    color: var(--color-charcoal-ink);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .social-btn:hover {
+    background-color: var(--color-sky-crayon);
+  }
+
+  .footer-bottom-bar {
+    padding-top: var(--spacing-20);
+    border-top: 1px solid rgba(56, 56, 56, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-12);
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom-bar {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .footer-legal {
+    margin: 0;
+  }
+
+  .footer-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+  }
+
+  .footer-meta a {
+    color: var(--color-charcoal-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-sky-crayon);
+    text-underline-offset: 2px;
+  }
+
+  .footer-meta-sep {
+    color: var(--color-text-muted);
+  }
+
+  /* Focus-visible: 3px solid charcoal, 3px offset per CTO §4.4 */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+</style>
