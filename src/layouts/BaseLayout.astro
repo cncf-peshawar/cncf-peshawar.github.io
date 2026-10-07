@@ -1,7 +1,9 @@
 ---
+import '../styles/tokens.css';
+import '../styles/base.css';
 import '../styles/global.css';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
 
 interface Props {
   title?: string;
@@ -39,7 +41,7 @@ const fullTitle = title.includes("Cloud Native Peshawar") || title.includes("CNC
     <title>{fullTitle}</title>
     <meta name="title" content={fullTitle} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0d00ff" />
+    <meta name="theme-color" content="#f4efea" />
 
     <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
     <meta property="og:type" content="website" />
@@ -57,20 +59,20 @@ const fullTitle = title.includes("Cloud Native Peshawar") || title.includes("CNC
     <meta property="twitter:title" content={fullTitle} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={imageURL} />
-
-    <!-- Fonts: Poppins (Google), Satoshi + General Sans (Fontshare), Google Sans (CDN Fonts) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://api.fontshare.com" />
-    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.cdnfonts.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet" />
+    <!-- Reticle Verification (local only) -->
+    <script is:inline>
+      if (typeof window !== 'undefined' && (location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+        import('https://cdn.jsdelivr.net/npm/@reticlehq/browser@latest/+esm')
+          .then(({ reticle }) => {
+            reticle.connect({ token: '951a55df63f79bf5b3b7b3baac307f5de6848ed1d683af96' });
+          })
+          .catch(() => {});
+      }
+    </script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <Nav />
+    <Header currentPath={canonicalURL.pathname} />
     <main id="main-content">
       <slot />
     </main>

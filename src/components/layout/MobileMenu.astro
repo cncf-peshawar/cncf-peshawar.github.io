@@ -1,0 +1,314 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { currentPath = Astro.url.pathname } = Astro.props;
+
+const drawerLinks = [
+  { label: '01 // Home', href: `${base}/` },
+  { label: '02 // Events', href: `${base}/events` },
+  { label: '03 // Speak & CFP', href: `${base}/speak` },
+  { label: '04 // Sponsors', href: `${base}/sponsors` },
+  { label: '05 // Team', href: `${base}/team` },
+  { label: '06 // Blog', href: `${base}/blog` },
+  { label: '07 // Code of Conduct', href: `${base}/code-of-conduct` },
+  { label: '08 // CMS Portal', href: `${base}/admin/` },
+];
+---
+
+<!-- Mobile Drawer Overlay & Container -->
+<div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+
+<aside id="mobile-nav-drawer" class="mobile-nav-drawer" aria-hidden="true" aria-label="Mobile Navigation Drawer">
+  <div class="drawer-header">
+    <span class="drawer-heading">Navigation</span>
+    <button id="close-nav-btn" class="drawer-close-btn" type="button" aria-label="Close navigation menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Mobile Navigation">
+    <ul class="drawer-list" role="list">
+      {drawerLinks.map((link) => {
+        const isHome = link.href === `${base}/` || link.href === '/';
+        const isActive = isHome
+          ? currentPath === '/' || currentPath === '' || currentPath === `${base}/` || currentPath === base
+          : currentPath === link.href || currentPath.startsWith(`${link.href}/`);
+        return (
+          <li>
+            <a
+              href={link.href}
+              class={`drawer-link ${isActive ? 'is-active' : ''}`}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+
+  <div class="drawer-footer">
+    <a
+      href="https://ocgroups.dev/cncf/group/6vwk2n4"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="drawer-cta-btn"
+    >
+      Join on OCG
+    </a>
+  </div>
+</aside>
+
+<style>
+  .drawer-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(56, 56, 56, 0.45);
+    backdrop-filter: blur(2px);
+    z-index: 9998;
+  }
+
+  .drawer-overlay.is-open {
+    display: block;
+  }
+
+  .mobile-nav-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px;
+    max-width: 85vw;
+    height: 100vh;
+    height: 100dvh;
+    background-color: var(--color-cream-paper, #f4efea);
+    border-left: 2px solid var(--color-charcoal-ink, #383838);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 9999;
+    transform: translateX(105%);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+  }
+
+  .mobile-nav-drawer.is-open {
+    transform: translateX(0);
+  }
+
+  .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-charcoal-ink, #383838);
+    padding-bottom: 12px;
+  }
+
+  .drawer-heading {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-charcoal-ink, #383838);
+  }
+
+  .drawer-close-btn {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-frost-white, #ffffff);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    color: var(--color-charcoal-ink, #383838);
+    cursor: pointer;
+    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink, #383838);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  .drawer-close-btn:active {
+    transform: translate(-2px, 2px);
+    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink, #383838);
+  }
+
+  .drawer-close-btn:focus-visible,
+  .drawer-link:focus-visible,
+  .drawer-cta-btn:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink, #383838);
+    outline-offset: 3px;
+  }
+
+  .drawer-nav {
+    flex: 1;
+  }
+
+  .drawer-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .drawer-link {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--color-charcoal-ink, #383838);
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    min-height: 44px;
+    border: 1px solid transparent;
+    border-radius: var(--radius, 2px);
+    border-bottom: 1px solid rgba(56, 56, 56, 0.15);
+    transition: background-color 0.1s ease, border-color 0.1s ease;
+  }
+
+  .drawer-link:hover {
+    background-color: var(--color-frost-white, #ffffff);
+    border-color: var(--color-charcoal-ink, #383838);
+  }
+
+  .drawer-link.is-active {
+    background-color: var(--color-canary-banner, #ffde00);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    font-weight: 700;
+    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink, #383838);
+  }
+
+  .drawer-footer {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 2px solid var(--color-charcoal-ink, #383838);
+  }
+
+  .drawer-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 44px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--color-charcoal-ink, #383838);
+    background-color: var(--color-sky-crayon, #6fc2ff);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    padding: 10px 16px;
+    box-shadow: -4px 4px 0px 0px var(--color-charcoal-ink, #383838);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  .drawer-cta-btn:hover {
+    transform: translate(1px, -1px);
+    box-shadow: -5px 5px 0px 0px var(--color-charcoal-ink, #383838);
+  }
+
+  .drawer-cta-btn:active {
+    transform: translate(-3px, 3px);
+    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink, #383838);
+  }
+</style>
+
+<script>
+  function setupDrawer() {
+    const toggleBtn = document.getElementById('mobile-nav-toggle');
+    const drawer = document.getElementById('mobile-nav-drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    const closeBtn = document.getElementById('close-nav-btn');
+
+    if (!toggleBtn || !drawer) return;
+
+    function openMenu() {
+      if (!toggleBtn || !drawer) return;
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      drawer.classList.add('is-open');
+      if (overlay) overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      if (closeBtn) {
+        setTimeout(() => closeBtn.focus(), 50);
+      }
+    }
+
+    function closeMenu() {
+      if (!toggleBtn || !drawer) return;
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      drawer.classList.remove('is-open');
+      if (overlay) overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+      toggleBtn.focus();
+    }
+
+    // Toggle click
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    // Close button click
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeMenu();
+      });
+    }
+
+    // Overlay click
+    if (overlay) {
+      overlay.addEventListener('click', () => {
+        closeMenu();
+      });
+    }
+
+    // Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+        closeMenu();
+      }
+    });
+
+    // Link clicks inside drawer
+    const links = drawer.querySelectorAll('a');
+    links.forEach((link) => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupDrawer);
+  } else {
+    setupDrawer();
+  }
+  document.addEventListener('astro:page-load', setupDrawer);
+</script>
