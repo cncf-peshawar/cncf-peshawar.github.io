@@ -6,11 +6,24 @@ function parseArgs() {
   const args = process.argv.slice(2);
   let distDir = null;
   let outFile = null;
+  let routes = null;
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--out' && i + 1 < args.length) {
       outFile = args[i + 1];
       i++;
+    } else if (args[i] === '--routes') {
+      routes = [];
+      i++;
+      while (i < args.length && !args[i].startsWith('--')) {
+        if (args[i].includes(',')) {
+          routes.push(...args[i].split(',').map(r => r.trim()));
+        } else {
+          routes.push(args[i].trim());
+        }
+        i++;
+      }
+      i--;
     } else if (!distDir && !args[i].startsWith('--')) {
       distDir = args[i];
     }
@@ -20,7 +33,7 @@ function parseArgs() {
     distDir = 'dist';
   }
 
-  return { distDir, outFile };
+  return { distDir, outFile, routes };
 }
 
 function findHtmlFiles(dir, baseDir = dir) {
@@ -299,7 +312,7 @@ export function extractParity(html, route) {
   };
 }
 
-export function generateSnapshot(distDir) {
+export function generateSnapshot(distDir, routes = null) {
   const resolvedDist = path.resolve(process.cwd(), distDir);
   const htmlFiles = findHtmlFiles(resolvedDist, resolvedDist);
   htmlFiles.sort();
@@ -308,6 +321,9 @@ export function generateSnapshot(distDir) {
   for (const filePath of htmlFiles) {
     const relPath = path.relative(resolvedDist, filePath);
     const route = normaliseRoute(relPath);
+    if (routes && !routes.includes(route)) {
+      continue;
+    }
     const content = fs.readFileSync(filePath, 'utf8');
     snapshot[route] = extractParity(content, route);
   }
@@ -321,8 +337,8 @@ export function generateSnapshot(distDir) {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const { distDir, outFile } = parseArgs();
-  const result = generateSnapshot(distDir);
+  const { distDir, outFile, routes } = parseArgs();
+  const result = generateSnapshot(distDir, routes);
   const jsonOutput = JSON.stringify(result, null, 2) + '\n';
 
   if (outFile) {

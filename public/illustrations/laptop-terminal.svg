@@ -1,42 +1,91 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 130" fill="none" aria-hidden="true">
-  <!-- LAPTOP SCREEN / DISPLAY -->
-  <!-- Screen outer bezel -->
-  <rect x="24" y="16" width="112" height="74" rx="4" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <!-- Terminal window header bar -->
-  <rect x="27" y="19" width="106" height="14" fill="#ffde00" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Window control buttons -->
-  <circle cx="35" cy="26" r="2.5" fill="#ff9538" stroke="#383838" stroke-width="1"/>
-  <circle cx="43" cy="26" r="2.5" fill="#ffde00" stroke="#383838" stroke-width="1"/>
-  <circle cx="51" cy="26" r="2.5" stroke="#383838" stroke-width="1"/>
+  <!-- Whimsical spark / steam accents -->
+  <path d="M 22 24 C 23 22 25 20 27 18"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 138 20 C 139 18 141 16 143 14"
+        stroke="#ff9538" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 138 26 C 140 24 142 25 142 27 C 141 29 138 28 138 26 Z"
+        fill="#ffde00"/>
 
-  <!-- Terminal content area -->
-  <!-- Prompt line 1: > _ -->
-  <path d="M 36 44 L 42 48 L 36 52" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M 48 48 L 74 48" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <!-- Blinking block cursor -->
-  <rect x="78" y="42" width="6" height="11" fill="#ffde00" stroke="#383838" stroke-width="1.5"/>
+  <!-- Laptop Screen Lid & Outer Bezel -->
+  <path d="M 32 18 C 54 17 106 17 128 18 C 131 38 131 66 128 86 C 106 87 54 87 32 86 C 29 66 29 38 32 18 Z"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Output line 2 -->
-  <path d="M 36 62 L 66 62" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 72 62 L 98 62" stroke="#383838" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 4"/>
+  <!-- Inner Terminal Display Area (Charcoal dark terminal) -->
+  <path d="M 36 22 C 56 21 104 21 124 22 C 126 38 126 64 124 82 C 104 83 56 83 36 82 C 34 64 34 38 36 22 Z"
+        fill="#383838" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Output line 3 -->
-  <path d="M 36 74 L 88 74" stroke="#383838" stroke-width="2" stroke-linecap="round" stroke-dasharray="12 4"/>
+  <!-- Terminal Window Titlebar Header (Canary Yellow) -->
+  <path d="M 36 22 C 56 21 104 21 124 22 C 124 26 124 30 124 33 C 95 33 65 33 36 33 C 36 30 36 26 36 22 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- LAPTOP BASE / KEYBOARD -->
-  <!-- Base frame -->
-  <path d="M 18 90 L 142 90 L 152 118 L 8 118 Z" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Front lip & thumb indent -->
-  <path d="M 8 118 L 152 118" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 70 118 C 72 121, 88 121, 90 118" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <!-- Window Control Blobs (organic closed paths) -->
+  <path d="M 41 27 C 43 25 45 25 45 27 C 45 29 42 30 41 27 Z"
+        fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 48 27 C 50 25 52 25 52 27 C 52 29 49 30 48 27 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 55 27 C 57 25 59 25 59 27 C 59 29 56 30 55 27 Z"
+        fill="#54b4de" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Keyboard area -->
-  <polygon points="32,94 128,94 134,106 26,106" stroke="#383838" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Key rows sketch lines -->
-  <line x1="36" y1="98" x2="124" y2="98" stroke="#54b4de" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5 3"/>
-  <line x1="32" y1="102" x2="128" y2="102" stroke="#383838" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 3"/>
+  <!-- Terminal Content Lines inside dark screen -->
+  <!-- Prompt line: > kubectl -->
+  <path d="M 42 42 C 44 44 45 45 47 46 C 45 47 44 49 42 50"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 52 46 C 61 46 70 46 78 46"
+        stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Blinking block cursor (organic box path) -->
+  <path d="M 82 42 C 84 42 86 42 87 42 C 87 45 87 48 87 50 C 85 50 83 50 82 50 C 82 47 82 45 82 42 Z"
+        fill="#ffde00"/>
 
-  <!-- Trackpad -->
-  <rect x="66" y="108" width="28" height="8" rx="1.5" stroke="#383838" stroke-width="1.5"/>
+  <!-- Output line 1: NAME STATUS dots and dashes -->
+  <path d="M 43 58 C 44 56 46 56 46 58 C 45 60 43 60 43 58 Z"
+        fill="#54b4de"/>
+  <path d="M 50 58 C 58 58 66 58 74 58"
+        stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 81 58 C 82 56 84 56 84 58 C 83 60 81 60 81 58 Z"
+        fill="#ffde00"/>
+  <path d="M 88 58 C 94 58 100 58 106 58"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 111 58 C 112 56 114 56 114 58 C 113 60 111 60 111 58 Z"
+        fill="#ff9538"/>
+
+  <!-- Output line 2: Ready / Master status -->
+  <path d="M 44 68 C 51 68 59 68 66 68"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 72 68 C 81 68 89 68 98 68"
+        stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 3"/>
+  <path d="M 104 68 C 109 68 113 68 118 68"
+        stroke="#ffde00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Laptop Hinge -->
+  <path d="M 56 86 C 70 87 90 87 104 86"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Laptop Base Keyboard Deck in Perspective -->
+  <path d="M 32 86 C 27 96 23 106 18 116 C 20 119 140 119 142 116 C 137 106 133 96 128 86 Z"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Keyboard Well & Hand-drawn Key Rows -->
+  <path d="M 38 90 C 35 95 31 99 28 104 C 63 104 97 104 132 104 C 129 99 125 95 122 90 Z"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Top key row -->
+  <path d="M 37 94 C 66 94 94 94 123 94"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 4"/>
+  <!-- Middle key row -->
+  <path d="M 34 99 C 65 99 95 99 126 99"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="10 4"/>
+
+  <!-- Spacebar -->
+  <path d="M 62 103 C 74 103 86 103 98 103"
+        stroke="#ffde00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Trackpad (organic box) -->
+  <path d="M 68 107 C 76 107 84 107 92 107 C 92 110 92 112 92 115 C 84 115 76 115 68 115 C 68 112 68 110 68 107 Z"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Base Table Shadow / Desk line -->
+  <path d="M 12 122 C 40 123 120 123 148 122"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 34 126 C 54 127 106 127 126 126"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

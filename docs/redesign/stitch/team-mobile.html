@@ -539,11 +539,12 @@
       transform: translate(-3px, 3px);
       box-shadow: var(--shadow-none);
     }
-    .footer-mascot-img {
+    .footer-doodle-img {
       position: absolute;
-      bottom: 70px; right: 15px; width: 85px; height: 85px;
+      bottom: 60px; right: 35px; width: 110px; height: 125px;
       pointer-events: none;
       z-index: 10;
+      opacity: 0.9;
     }
     .footer-bottom-bar {
       border-top: 1px solid rgba(56,56,56,0.15);
@@ -757,11 +758,11 @@
       </div>
 
       <div style="display: grid; grid-template-columns: 1fr; gap: 18px;">
-        <!-- Lead 1: Muhammad Bilal -->
+        <!-- Lead: Muhammad Bilal -->
         <article class="brutal-card">
           <div style="display: flex; gap: 14px; align-items: center; margin-bottom: 14px;">
-            <div style="width: 56px; height: 56px; background: var(--color-sky-crayon); border: 2px solid var(--color-charcoal-ink); border-radius: var(--radius-brutal); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">
-              MB
+            <div style="width: 56px; height: 56px; border: 2px solid var(--color-charcoal-ink); border-radius: var(--radius-brutal); box-shadow: var(--shadow-brutal-sm); overflow: hidden; flex-shrink: 0; background: var(--color-cream-paper);">
+              <img src="https://api.dicebear.com/8.x/identicon/svg?seed=CNCF" alt="Muhammad Bilal avatar" width="100" height="100" data-natural-width="150" onload="this.dataset.naturalWidth=this.naturalWidth" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
             </div>
             <div>
               <div style="display: flex; align-items: center; gap: 6px;">
@@ -780,11 +781,57 @@
           </div>
         </article>
 
-        <!-- Lead 2: Farhan Khan -->
+        <!-- Lead: Hamid Naeem -->
         <article class="brutal-card">
           <div style="display: flex; gap: 14px; align-items: center; margin-bottom: 14px;">
-            <div style="width: 56px; height: 56px; background: var(--color-canary-banner); border: 2px solid var(--color-charcoal-ink); border-radius: var(--radius-brutal); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">
-              FK
+            <div style="width: 56px; height: 56px; border: 2px solid var(--color-charcoal-ink); border-radius: var(--radius-brutal); box-shadow: var(--shadow-brutal-sm); overflow: hidden; flex-shrink: 0; background: var(--color-cream-paper);">
+              <img src="https://api.dicebear.com/8.x/identicon/svg?seed=CNCF" alt="Hamid Naeem avatar" width="100" height="100" data-natural-width="150" onload="this.dataset.naturalWidth=this.naturalWidth" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <h3 style="font-size: 1.15rem; margin: 0;">Hamid Naeem</h3>
+                <span class="badge badge-yellow" style="font-size: 10px; padding: 2px 5px;">ORGANIZER</span>
+              </div>
+              <p style="font-size: 12px; color: var(--color-text-muted); margin: 0;">Chapter Organizer</p>
+            </div>
+          </div>
+          <p style="font-size: 13px; line-height: 1.5; color: var(--color-charcoal-ink); margin-bottom: 14px;">
+            Open-source practitioner and Linux Foundation contributor co-leading chapter launch and community operations for Cloud Native Peshawar.
+          </p>
+          <div style="display: flex; gap: 8px; font-size: 12px;">
+            <a href="https://www.linkedin.com/in/hamid-naeem-khan-278413402/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">LinkedIn ↗</a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">GitHub ↗</a>
+          </div>
+        </article>
+
+        <!-- Lead: Syed Hassan Tayyab -->
+        <article class="brutal-card">
+          <div style="display: flex; gap: 14px; align-items: center; margin-bottom: 14px;">
+            <div style="width: 56px; height: 56px; border: 2px solid var(--color-charcoal-ink); border-radius: var(--radius-brutal); box-shadow: var(--shadow-brutal-sm); overflow: hidden; flex-shrink: 0; background: var(--color-cream-paper);">
+              <img src="https://api.dicebear.com/8.x/identicon/svg?seed=CNCF" alt="Syed Hassan Tayyab avatar" width="100" height="100" data-natural-width="150" onload="this.dataset.naturalWidth=this.naturalWidth" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <h3 style="font-size: 1.15rem; margin: 0;">Syed Hassan Tayyab</h3>
+                <span class="badge badge-white" style="font-size: 10px; padding: 2px 5px;">TECH LEAD</span>
+              </div>
+              <p style="font-size: 12px; color: var(--color-text-muted); margin: 0;">Technical Lead</p>
+            </div>
+          </div>
+          <p style="font-size: 13px; line-height: 1.5; color: var(--color-charcoal-ink); margin-bottom: 14px;">
+            Full-stack and cloud engineer directing curriculum design, production sandbox environments, and Kubernetes hands-on workshops.
+          </p>
+          <div style="display: flex; gap: 8px; font-size: 12px;">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">LinkedIn ↗</a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">GitHub ↗</a>
+          </div>
+        </article>
+
+        <!-- Lead: Farhan Khan -->
+        <article class="brutal-card">
+          <div style="display: flex; gap: 14px; align-items: center; margin-bottom: 14px;">
+            <div style="width: 56px; height: 56px; border: 2px solid var(--color-charcoal-ink); border-radius: var(--radius-brutal); box-shadow: var(--shadow-brutal-sm); overflow: hidden; flex-shrink: 0; background: var(--color-cream-paper);">
+              <img src="https://api.dicebear.com/8.x/identicon/svg?seed=CNCF" alt="Farhan Khan avatar" width="100" height="100" data-natural-width="150" onload="this.dataset.naturalWidth=this.naturalWidth" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
             </div>
             <div>
               <div style="display: flex; align-items: center; gap: 6px;">
@@ -803,11 +850,11 @@
           </div>
         </article>
 
-        <!-- Lead 3: Hamza Tariq -->
+        <!-- Lead: Hamza Tariq -->
         <article class="brutal-card">
           <div style="display: flex; gap: 14px; align-items: center; margin-bottom: 14px;">
-            <div style="width: 56px; height: 56px; background: var(--color-mint-sketch); border: 2px solid var(--color-charcoal-ink); border-radius: var(--radius-brutal); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">
-              HT
+            <div style="width: 56px; height: 56px; border: 2px solid var(--color-charcoal-ink); border-radius: var(--radius-brutal); box-shadow: var(--shadow-brutal-sm); overflow: hidden; flex-shrink: 0; background: var(--color-cream-paper);">
+              <img src="https://api.dicebear.com/8.x/identicon/svg?seed=CNCF" alt="Hamza Tariq avatar" width="100" height="100" data-natural-width="150" onload="this.dataset.naturalWidth=this.naturalWidth" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
             </div>
             <div>
               <div style="display: flex; align-items: center; gap: 6px;">
@@ -819,6 +866,75 @@
           </div>
           <p style="font-size: 13px; line-height: 1.5; color: var(--color-charcoal-ink); margin-bottom: 14px;">
             Community advocate building university alliances and facilitating inclusive onboarding for first-time cloud developers.
+          </p>
+          <div style="display: flex; gap: 8px; font-size: 12px;">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">LinkedIn ↗</a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">GitHub ↗</a>
+          </div>
+        </article>
+
+        <!-- Lead: Aiman Shams -->
+        <article class="brutal-card">
+          <div style="display: flex; gap: 14px; align-items: center; margin-bottom: 14px;">
+            <div style="width: 56px; height: 56px; border: 2px solid var(--color-charcoal-ink); border-radius: var(--radius-brutal); box-shadow: var(--shadow-brutal-sm); overflow: hidden; flex-shrink: 0; background: var(--color-cream-paper);">
+              <img src="https://api.dicebear.com/8.x/identicon/svg?seed=CNCF" alt="Aiman Shams avatar" width="100" height="100" data-natural-width="150" onload="this.dataset.naturalWidth=this.naturalWidth" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <h3 style="font-size: 1.15rem; margin: 0;">Aiman Shams</h3>
+                <span class="badge badge-white" style="font-size: 10px; padding: 2px 5px;">CREATIVE LEAD</span>
+              </div>
+              <p style="font-size: 12px; color: var(--color-text-muted); margin: 0;">Design & Creative Lead</p>
+            </div>
+          </div>
+          <p style="font-size: 13px; line-height: 1.5; color: var(--color-charcoal-ink); margin-bottom: 14px;">
+            Visual designer crafting brutalist digital identities, event banners, and accessible UI assets for chapter publications.
+          </p>
+          <div style="display: flex; gap: 8px; font-size: 12px;">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">LinkedIn ↗</a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">GitHub ↗</a>
+          </div>
+        </article>
+
+        <!-- Lead: Fatima Yasin -->
+        <article class="brutal-card">
+          <div style="display: flex; gap: 14px; align-items: center; margin-bottom: 14px;">
+            <div style="width: 56px; height: 56px; border: 2px solid var(--color-charcoal-ink); border-radius: var(--radius-brutal); box-shadow: var(--shadow-brutal-sm); overflow: hidden; flex-shrink: 0; background: var(--color-cream-paper);">
+              <img src="https://api.dicebear.com/8.x/identicon/svg?seed=CNCF" alt="Fatima Yasin avatar" width="100" height="100" data-natural-width="150" onload="this.dataset.naturalWidth=this.naturalWidth" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <h3 style="font-size: 1.15rem; margin: 0;">Fatima Yasin</h3>
+                <span class="badge badge-white" style="font-size: 10px; padding: 2px 5px;">STUDENT LEAD</span>
+              </div>
+              <p style="font-size: 12px; color: var(--color-text-muted); margin: 0;">Women in Tech & Student Outreach Lead</p>
+            </div>
+          </div>
+          <p style="font-size: 13px; line-height: 1.5; color: var(--color-charcoal-ink); margin-bottom: 14px;">
+            Championing gender diversity and university outreach programs to foster the next generation of cloud builders in KPK.
+          </p>
+          <div style="display: flex; gap: 8px; font-size: 12px;">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">LinkedIn ↗</a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">GitHub ↗</a>
+          </div>
+        </article>
+
+        <!-- Lead: Muhammad Anas -->
+        <article class="brutal-card">
+          <div style="display: flex; gap: 14px; align-items: center; margin-bottom: 14px;">
+            <div style="width: 56px; height: 56px; border: 2px solid var(--color-charcoal-ink); border-radius: var(--radius-brutal); box-shadow: var(--shadow-brutal-sm); overflow: hidden; flex-shrink: 0; background: var(--color-cream-paper);">
+              <img src="https://api.dicebear.com/8.x/identicon/svg?seed=CNCF" alt="Muhammad Anas avatar" width="100" height="100" data-natural-width="150" onload="this.dataset.naturalWidth=this.naturalWidth" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <h3 style="font-size: 1.15rem; margin: 0;">Muhammad Anas</h3>
+                <span class="badge badge-white" style="font-size: 10px; padding: 2px 5px;">INFRA LEAD</span>
+              </div>
+              <p style="font-size: 12px; color: var(--color-text-muted); margin: 0;">Platform & Cloud Infra Lead</p>
+            </div>
+          </div>
+          <p style="font-size: 13px; line-height: 1.5; color: var(--color-charcoal-ink); margin-bottom: 14px;">
+            Specializing in cluster deployments, GitOps pipelines, and microservices automation across public cloud and bare-metal nodes.
           </p>
           <div style="display: flex; gap: 8px; font-size: 12px;">
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">LinkedIn ↗</a>
@@ -924,135 +1040,80 @@
   
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="footer-mascot-img snow-leopard-footer" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" aria-hidden="true">
-  <title>CNCF Peshawar snow leopard mascot</title>
+            <div class="footer-doodle-img" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none" aria-hidden="true">
+  <!-- Whimsical swirling steam plumes -->
+  <g>
+    <!-- Left steam plume -->
+    <path d="M 44 48 C 38 36, 48 26, 42 16 C 38 8, 44 2, 40 0"
+          stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Center steam plume with loop -->
+    <path d="M 58 44 C 64 34, 52 24, 60 14 C 64 8, 58 2, 60 0"
+          stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Right steam plume -->
+    <path d="M 72 48 C 78 36, 68 26, 76 16 C 80 8, 74 2, 76 0"
+          stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Aromatic tea sparks / scent dots -->
+    <circle cx="34" cy="22" r="1.5" fill="#ffde00"/>
+    <circle cx="84" cy="24" r="2" fill="#ff9538"/>
+  </g>
 
-  
-  <path d="M 32 184 C 65 185, 135 185, 168 184" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 54 190 L 80 190" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <!-- SAUCER DISH (Solid white surface resting on table) -->
+  <path d="M 20 114
+           C 20 108, 96 108, 96 114
+           C 96 122, 20 122, 20 114 Z"
+        fill="#ffffff"
+        stroke="#383838"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+  <!-- Inner saucer well groove -->
+  <path d="M 32 114 C 38 116, 78 116, 84 114" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
 
-  
-  
-  <path d="M 64 124 C 44 134, 42 162, 54 176 C 60 180, 74 180, 80 176"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <circle cx="52" cy="144" r="3" fill="#383838"/>
-  <circle cx="58" cy="142" r="2.5" fill="#383838"/>
-  <circle cx="54" cy="150" r="2.5" fill="#383838"/>
+  <!-- CUP BODY (Tapered glass resting firmly inside saucer) -->
+  <!-- Cup base and body fill with rich chai color -->
+  <path d="M 36 56
+           C 36 78, 42 102, 46 114
+           C 52 116, 64 116, 70 114
+           C 74 102, 80 78, 80 56 Z"
+        fill="#ff9538"
+        stroke="#383838"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
 
-  
-  <path d="M 136 124 C 156 134, 158 162, 146 176 C 140 180, 126 180, 120 176"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <circle cx="148" cy="144" r="3" fill="#383838"/>
-  <circle cx="142" cy="142" r="2.5" fill="#383838"/>
-  <circle cx="146" cy="150" r="2.5" fill="#383838"/>
+  <!-- White glass highlight reflection strip on left edge -->
+  <path d="M 40 62 C 40 78, 45 98, 48 110" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
 
-  
-  <path d="M 74 98
-           C 66 112, 68 140, 72 160
-           L 128 160
-           C 132 140, 134 112, 126 98 Z"
+  <!-- Hot chai liquid surface ellipse at rim -->
+  <ellipse cx="58" cy="56" rx="22" ry="7" fill="#ffde00" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <!-- Rich tea center & foam bubbles -->
+  <ellipse cx="58" cy="57" rx="17" ry="5" fill="#ff9538"/>
+  <circle cx="52" cy="56" r="1.5" fill="#ffffff"/>
+  <circle cx="64" cy="57" r="1.5" fill="#ffffff"/>
+
+  <!-- Hand-drawn glass fluting / facet lines -->
+  <path d="M 48 64 L 51 110" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 58 64 L 58 112" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 68 64 L 65 110" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Decorative golden rim band -->
+  <path d="M 37 62 C 46 66, 70 66, 79 62" stroke="#ffde00" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Ergonomic Cup Handle on right -->
+  <path d="M 79 66
+           C 96 66, 98 94, 76 98
+           C 74 98, 74 94, 76 92
+           C 90 90, 88 72, 79 72"
         fill="#ffffff"
         stroke="#383838"
         stroke-width="2.5"
         stroke-linecap="round"
         stroke-linejoin="round"/>
 
-  
-  
-  <path d="M 80 114 L 80 172 C 80 176, 96 176, 96 172 L 96 128"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="85" y1="170" x2="85" y2="175" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <line x1="91" y1="170" x2="91" y2="175" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-
-  
-  <path d="M 104 128 L 104 172 C 104 176, 120 176, 120 172 L 120 114"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="109" y1="170" x2="109" y2="175" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <line x1="115" y1="170" x2="115" y2="175" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-
-  
-  <path d="M 48 160
-           C 40 174, 52 184, 80 184
-           C 114 184, 150 184, 166 176
-           C 176 168, 172 150, 160 148
-           C 148 146, 146 160, 154 166
-           C 146 170, 120 172, 86 172
-           C 66 172, 54 168, 56 160 Z"
-        fill="#ffffff"
-        stroke="#383838"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
-  
-  <circle cx="70" cy="179" r="2.5" fill="#383838"/>
-  <circle cx="96" cy="179" r="3" fill="#383838"/>
-  <circle cx="124" cy="179" r="3" fill="#383838"/>
-  <circle cx="150" cy="175" r="2.5" fill="#383838"/>
-  <circle cx="162" cy="158" r="3" fill="#383838"/>
-
-  
-  <path d="M 88 102 C 88 116, 112 116, 112 102" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-
-  
-  <rect x="74" y="93" width="52" height="9" rx="2" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linejoin="round"/>
-  <polygon points="100,102 106,109 100,116 94,109" fill="#ffde00" stroke="#383838" stroke-width="2" stroke-linejoin="round"/>
-  <circle cx="100" cy="109" r="2" fill="#383838"/>
-
-  
-  
-  <path d="M 70 46 C 64 30, 68 18, 80 23 C 86 26, 86 38, 84 44"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M 70 25 C 74 22, 78 23, 80 23" stroke="#383838" stroke-width="3" stroke-linecap="round"/>
-  <path d="M 74 32 C 74 28, 78 28, 80 32" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-
-  
-  <path d="M 130 46 C 136 30, 132 18, 120 23 C 114 26, 114 38, 116 44"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M 130 25 C 126 22, 122 23, 120 23" stroke="#383838" stroke-width="3" stroke-linecap="round"/>
-  <path d="M 126 32 C 126 28, 122 28, 120 32" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-
-  
-  <path d="M 84 40
-           C 92 36, 108 36, 116 40
-           C 130 44, 140 56, 140 70
-           C 140 84, 128 95, 100 95
-           C 72 95, 60 84, 60 70
-           C 60 56, 70 44, 84 40 Z"
-        fill="#ffffff"
-        stroke="#383838"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
-
-  
-  <circle cx="95" cy="44" r="2" fill="#383838"/>
-  <circle cx="100" cy="42" r="2.5" fill="#383838"/>
-  <circle cx="105" cy="44" r="2.5" fill="#383838"/>
-  <circle cx="92" cy="50" r="2" fill="#383838"/>
-  <circle cx="108" cy="50" r="2" fill="#383838"/>
-
-  
-  <circle cx="84" cy="62" r="8" fill="#54b4de" stroke="#383838" stroke-width="2"/>
-  <circle cx="84" cy="62" r="4.5" fill="#383838"/>
-  <circle cx="82" cy="59" r="2" fill="#ffffff"/>
-
-  <circle cx="116" cy="62" r="8" fill="#54b4de" stroke="#383838" stroke-width="2"/>
-  <circle cx="116" cy="62" r="4.5" fill="#383838"/>
-  <circle cx="114" cy="59" r="2" fill="#ffffff"/>
-
-  
-  <polygon points="100,73 105,68 95,68" fill="#383838" stroke="#383838" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M 100 73 L 100 78" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 94 77 C 96 81, 100 81, 100 78 C 100 81, 104 81, 106 77" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-
-  
-  <line x1="74" y1="73" x2="62" y2="71" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="74" y1="77" x2="62" y2="79" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="126" y1="73" x2="138" y2="71" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="126" y1="77" x2="138" y2="79" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Ground table shadow line -->
+  <path d="M 12 126 C 36 127, 86 127, 104 126" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 28 131 C 44 132, 76 132, 88 131" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
 </svg>
       </div>
 

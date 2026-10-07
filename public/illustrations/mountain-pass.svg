@@ -1,34 +1,71 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 120" fill="none" aria-hidden="true">
-  <!-- Sun rising behind the pass -->
-  <circle cx="90" cy="46" r="18" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 90 20 L 90 14" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 108 26 L 114 20" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 72 26 L 66 20" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-
-  <!-- Distant mountain peaks (Sky blue strokes) -->
-  <path d="M 28 85 L 56 48 L 86 78" stroke="#54b4de" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M 94 78 L 126 42 L 158 85" stroke="#54b4de" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Left Pass Peak (Rugged Khyber cliff) -->
-  <path d="M 10 108 L 22 75 L 42 42 L 62 66 L 76 88 L 82 108"
+  <!-- Sun rising in the mountain pass notch -->
+  <!-- Sun disc (organic wobbly closed curve) -->
+  <path d="M 90 46 C 90 37 96 30 104 30 C 113 30 120 37 120 46 C 120 55 113 62 104 62 C 96 62 90 55 90 46 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 98 36 C 108 34 114 40 112 50 C 110 46 106 40 98 38 Z"
+        fill="#ff9538"/>
+  <!-- Sunbeams radiating into sky -->
+  <path d="M 104 24 C 104 21 104 19 104 16"
         stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Left cliff ridge hatching -->
-  <path d="M 42 42 L 46 72 L 58 108" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 30 65 L 44 80" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 20 88 L 32 98" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-
-  <!-- Right Pass Peak (Towering mountain ridge) -->
-  <path d="M 98 108 L 106 84 L 124 50 L 140 68 L 154 58 L 172 108"
+  <path d="M 118 29 C 120 27 122 25 124 23"
         stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Right cliff ridge hatching -->
-  <path d="M 124 50 L 128 78 L 138 108" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 136 70 L 150 86" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 152 76 L 164 92" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 90 29 C 88 27 86 25 84 23"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 124 44 C 127 43 129 43 132 42"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Winding canyon pass road through the center -->
-  <polygon points="76,108 88,72 96,72 98,108" fill="#ff9538" stroke="#383838" stroke-width="2" stroke-linejoin="round"/>
-  <polygon points="85,96 89,84 92,84 88,96" fill="#ffde00"/>
+  <!-- Distant mountain ridges (Sky blue strokes) -->
+  <path d="M 14 86 C 30 70 46 64 60 72 C 74 60 92 68 106 62 C 120 54 142 66 166 84"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Ground base line -->
-  <path d="M 6 108 L 174 108" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Main Multi-Peak Khyber Mountain Range -->
+  <path d="M 8 108 C 14 92 22 74 34 60 C 44 48 56 62 68 46 C 74 36 82 30 86 32 C 92 44 98 62 104 74 C 112 54 122 36 132 28 C 140 40 150 56 160 74 C 166 86 170 98 174 108 Z"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Left summit snow cap -->
+  <path d="M 86 32 C 80 38 74 44 72 50 C 78 52 82 48 86 50 C 90 52 94 46 96 48 C 94 40 90 34 86 32 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Right summit snow cap -->
+  <path d="M 132 28 C 126 34 120 42 118 48 C 124 50 128 46 132 48 C 136 50 140 44 144 46 C 142 38 138 32 132 28 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Mountain Spines and Crag Hatching -->
+  <path d="M 86 32 C 84 56 78 82 70 108"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 44 64 C 47 67 51 71 54 74"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 58 78 C 61 81 65 85 68 88"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 76 60 C 79 63 83 65 86 68"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 80 78 C 84 81 88 83 92 86"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Right ridge spine -->
+  <path d="M 132 28 C 136 52 142 80 146 108"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 120 60 C 123 63 127 65 130 68"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 112 76 C 115 79 119 83 122 86"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 140 54 C 143 57 147 59 150 62"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 146 72 C 150 75 154 77 158 80"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Khyber Pass Winding Road through valley notch -->
+  <path d="M 94 108 C 98 96 100 86 102 76 C 104 74 108 74 110 76 C 112 86 116 96 120 108 Z"
+        fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 106 108 C 106 98 106 88 106 76"
+        stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 3"/>
+
+  <!-- Foothill base ground line -->
+  <path d="M 6 112 C 40 113 140 113 174 112"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 24 116 C 44 117 64 116 76 116"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 100 116 C 122 117 144 116 158 116"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

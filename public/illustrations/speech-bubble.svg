@@ -1,32 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 120" fill="none" aria-hidden="true">
-  <!-- Echo sketch outline -->
-  <path d="M 22 18 C 50 14, 110 14, 138 20 C 146 36, 146 64, 138 78 C 114 84, 82 82, 64 82 L 32 106 L 40 82 C 24 80, 16 70, 14 54 C 12 36, 16 24, 22 18 Z"
-        stroke="#54b4de" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 6"/>
+  <!-- Echo sketch shadow offset behind (Wet Cement blue dashed) -->
+  <path d="M 28 20 C 54 16 106 16 130 20 C 142 30 142 62 134 76 C 116 80 84 80 68 80 C 57 88 47 96 36 104 C 39 96 41 88 44 80 C 28 78 20 68 18 52 C 16 34 20 24 28 20 Z"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 4"/>
 
-  <!-- Main hand-drawn speech bubble body -->
-  <path d="M 26 16
-           C 54 12, 106 12, 132 16
-           C 142 28, 142 60, 134 74
-           C 112 80, 84 78, 66 78
-           L 36 102
-           L 44 78
-           C 26 76, 18 66, 16 50
-           C 14 32, 18 22, 26 16 Z"
-        fill="#ffde00"
-        stroke="#383838"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
+  <!-- Main Canary Yellow Speech Bubble Body -->
+  <path d="M 26 16 C 52 12 104 12 128 16 C 138 24 138 56 130 70 C 112 74 82 74 66 74 C 56 82 46 90 36 98 C 39 90 41 82 44 74 C 28 72 20 62 18 46 C 16 28 20 20 26 16 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Dialogue lines inside the bubble -->
-  <path d="M 40 36 C 58 34, 94 34, 114 36" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 40 48 C 54 47, 82 47, 102 48" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 40 60 C 50 59, 66 59, 76 60" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- White speech bubble gloss / reflection crescent on top-left -->
+  <path d="M 32 22 C 54 18 96 18 118 22"
+        stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Accent dot inside dialogue -->
-  <circle cx="86" cy="60" r="3" fill="#ff9538"/>
+  <!-- Inside Content: Developer dialogue / CFP lines -->
+  <!-- Line 1: Code prompt > -->
+  <path d="M 38 34 C 40 36 41 37 43 38 C 41 39 40 41 38 42"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 48 38 C 60 38 72 38 84 38"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 90 38 C 92 36 94 36 94 38 C 94 40 91 40 90 38 Z"
+        fill="#ff9538"/>
 
-  <!-- Ambient notebook doodle marks -->
-  <path d="M 138 26 L 144 22" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="14" cy="24" r="2.5" fill="#ff9538"/>
+  <!-- Line 2: Dialogue text line in Wet Cement blue & White -->
+  <path d="M 38 50 C 51 50 63 50 76 50"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 82 50 C 92 50 102 50 112 50"
+        stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Line 3: Closing code tag / cursor -->
+  <path d="M 38 62 C 47 62 57 62 66 62"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 72 58 C 74 58 76 58 77 58 C 77 61 77 63 77 66 C 75 66 73 66 72 66 C 72 63 72 61 72 58 Z"
+        fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Playful conversation spark dots outside -->
+  <path d="M 134 24 C 136 22 138 23 138 25 C 137 27 134 26 134 24 Z"
+        fill="#ff9538"/>
+  <path d="M 134 16 C 135 15 137 13 138 12"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 142 28 C 143 29 145 29 146 30"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

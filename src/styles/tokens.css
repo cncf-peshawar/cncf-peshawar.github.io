@@ -91,6 +91,7 @@
   /* SHAPES, BORDERS & SHADOWS (MotherDuck Neo-Brutalist 2px)                    */
   /* -------------------------------------------------------------------------- */
   --radius: 2px;                      /* Universal 2px radius */
+  --radius-brutal: var(--radius);
   --radius-xs: var(--radius);
   --radius-sm: var(--radius);
   --radius-md: var(--radius);

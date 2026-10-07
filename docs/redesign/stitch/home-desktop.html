@@ -385,10 +385,10 @@
       line-height: 1.5;
     }
 
-    /* Mascot & Doodles placement (§5.4 bleed past container) */
-    .hero-mascot-standing {
+    /* Doodles placement (§5.4 bleed past container) */
+    .hero-doodle-robot {
       position: absolute;
-      bottom: -25px; right: -20px; width: 220px; height: 220px;
+      bottom: -25px; right: -20px; width: 200px; height: 200px;
       z-index: 5;
       pointer-events: none;
       opacity: 0.95;
@@ -1013,10 +1013,11 @@
     .social-btn:hover {
       background: var(--color-sky-crayon);
     }
-    .footer-mascot-sitting {
+    .footer-doodle-img {
       position: absolute;
-      bottom: 60px; right: 35px; width: 130px; height: 130px;
+      bottom: 60px; right: 35px; width: 110px; height: 125px;
       pointer-events: none;
+      z-index: 10;
       opacity: 0.9;
     }
     .footer-bottom-bar {
@@ -1209,150 +1210,82 @@
         </p>
       </div>
 
-      <!-- Mascot Standing Bleeding Edge -->
-      <div class="hero-mascot-standing" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" aria-hidden="true">
-  <title>CNCF Peshawar snow leopard mascot</title>
+            <!-- Terminal Robot Doodle Bleeding Edge -->
+      <div class="hero-doodle-robot" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+  <!-- Echo sketch shadow offset behind (Wet Cement blue dashed) -->
+  <path d="M 44 44 C 44 40, 114 40, 114 44 L 114 96 C 114 100, 44 100, 44 96 Z"
+        stroke="#54b4de" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/>
+  
+  <!-- Antenna with spark indicator -->
+  <path d="M 80 38 L 80 18" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="80" cy="14" r="6" fill="#ffde00" stroke="#383838" stroke-width="2.5"/>
+  <circle cx="80" cy="14" r="2.5" fill="#ff9538"/>
+  <path d="M 88 10 L 94 6" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 72 10 L 66 6" stroke="#ff9538" stroke-width="2" stroke-linecap="round"/>
 
-  
-  <path d="M 40 182 C 70 183, 130 183, 160 182" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 64 188 L 88 188" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 116 188 L 140 188" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <!-- Left ear bolt -->
+  <rect x="34" y="58" width="6" height="14" rx="2" fill="#ff9538" stroke="#383838" stroke-width="2"/>
+  <!-- Right ear antenna spool -->
+  <rect x="120" y="58" width="6" height="14" rx="2" fill="#ffde00" stroke="#383838" stroke-width="2"/>
 
-  
-  <path d="M 68 142
-           C 40 146, 22 134, 20 106
-           C 18 84, 34 76, 42 82
-           C 50 88, 44 104, 38 114
-           C 36 126, 48 134, 72 132 Z"
-        fill="#ffffff"
-        stroke="#383838"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
-  
-  <circle cx="28" cy="98" r="3" fill="#383838"/>
-  <circle cx="34" cy="94" r="2.5" fill="#383838"/>
-  <circle cx="31" cy="116" r="3" fill="#383838"/>
-  <circle cx="38" cy="118" r="2.5" fill="#383838"/>
-  <circle cx="48" cy="132" r="3.5" fill="#383838"/>
-  <circle cx="56" cy="135" r="2.5" fill="#383838"/>
-
-  
-  
-  <path d="M 58 130 C 52 144, 52 164, 56 178 C 58 181, 72 181, 74 178 L 74 160"
+  <!-- Robot Head / CRT Monitor (Outer Frame) -->
+  <rect x="40" y="38" width="80" height="54" rx="4"
         fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   
-  <path d="M 142 130 C 148 144, 148 164, 144 178 C 142 181, 128 181, 126 178 L 126 160"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- CRT Screen (Charcoal Terminal Display) -->
+  <rect x="48" y="44" width="64" height="42" rx="3"
+        fill="#383838" stroke="#383838" stroke-width="1.5"/>
 
-  
-  <path d="M 72 96
-           C 62 108, 60 134, 64 156
-           C 66 164, 82 166, 92 166
-           C 108 166, 124 164, 126 156
-           C 130 134, 128 108, 118 96 Z"
-        fill="#ffffff"
-        stroke="#383838"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
+  <!-- Terminal Face: Smiling terminal prompt eyes and mouth -->
+  <!-- Left Eye: > prompt -->
+  <path d="M 56 56 L 62 60 L 56 64" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right Eye: > prompt -->
+  <path d="M 94 56 L 100 60 L 94 64" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Blinking Cursor Nose -->
+  <rect x="76" y="58" width="5" height="6" fill="#ffde00"/>
+  <!-- Happy terminal mouth smile: _ -->
+  <path d="M 68 74 C 74 78, 84 78, 90 74" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
 
-  
-  
-  <path d="M 76 112 L 74 176 C 74 180, 92 180, 92 176 L 90 126"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <line x1="80" y1="174" x2="80" y2="179" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <line x1="86" y1="174" x2="86" y2="179" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <!-- Neck Joint -->
+  <rect x="72" y="92" width="16" height="8" rx="2" fill="#ff9538" stroke="#383838" stroke-width="2"/>
 
-  
-  <path d="M 114 126 L 112 176 C 112 180, 130 180, 130 176 L 128 112"
+  <!-- Robot Body / Torso -->
+  <rect x="48" y="100" width="64" height="38" rx="3"
         fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   
-  <line x1="118" y1="174" x2="118" y2="179" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <line x1="124" y1="174" x2="124" y2="179" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <!-- Torso Gauge / Meter Display (Canary yellow badge) -->
+  <rect x="56" y="106" width="30" height="16" rx="2"
+        fill="#ffde00" stroke="#383838" stroke-width="1.5"/>
+  <path d="M 60 114 L 68 110 L 74 116 L 82 110" stroke="#383838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Torso Buttons -->
+  <circle cx="98" cy="111" r="3.5" fill="#ff9538" stroke="#383838" stroke-width="1.5"/>
+  <circle cx="98" cy="120" r="3.5" fill="#54b4de" stroke="#383838" stroke-width="1.5"/>
 
-  
-  <path d="M 86 100 C 86 114, 114 114, 114 100" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Left Arm (Waving hello) -->
+  <path d="M 48 106 C 34 100, 24 86, 26 72" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Left hand clamp -->
+  <path d="M 22 72 C 22 66, 32 66, 30 72" stroke="#383838" stroke-width="2" fill="#ffde00" stroke-linecap="round"/>
+  <!-- Wave motion lines -->
+  <path d="M 16 68 C 14 62, 16 56, 20 52" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 24 50 L 28 46" stroke="#ff9538" stroke-width="2" stroke-linecap="round"/>
 
-  
-  
-  <circle cx="68" cy="122" r="3" fill="#383838"/>
-  <circle cx="73" cy="119" r="2.5" fill="#383838"/>
-  <circle cx="70" cy="126" r="2.5" fill="#383838"/>
-  <circle cx="66" cy="144" r="3" fill="#383838"/>
-  <circle cx="71" cy="147" r="2.5" fill="#383838"/>
-  
-  <circle cx="132" cy="122" r="3" fill="#383838"/>
-  <circle cx="127" cy="119" r="2.5" fill="#383838"/>
-  <circle cx="130" cy="126" r="2.5" fill="#383838"/>
-  <circle cx="134" cy="144" r="3" fill="#383838"/>
-  <circle cx="129" cy="147" r="2.5" fill="#383838"/>
+  <!-- Right Arm (Resting at side) -->
+  <path d="M 112 106 C 122 112, 126 120, 124 130" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="124" cy="132" r="4" fill="#ff9538" stroke="#383838" stroke-width="2"/>
 
-  
-  <rect x="74" y="92" width="52" height="9" rx="2" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linejoin="round"/>
-  
-  <polygon points="100,101 106,108 100,115 94,108" fill="#ffde00" stroke="#383838" stroke-width="2" stroke-linejoin="round"/>
-  <circle cx="100" cy="108" r="2" fill="#383838"/>
+  <!-- Legs / Treads -->
+  <!-- Left Leg & Foot -->
+  <path d="M 62 138 L 62 148" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="54" y="146" width="16" height="8" rx="2" fill="#383838"/>
+  <!-- Right Leg & Foot -->
+  <path d="M 98 138 L 98 148" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="90" y="146" width="16" height="8" rx="2" fill="#383838"/>
 
-  
-  
-  <path d="M 72 48 C 66 32, 70 20, 82 25 C 88 28, 88 40, 86 46"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <path d="M 72 27 C 76 24, 80 25, 82 25" stroke="#383838" stroke-width="3" stroke-linecap="round"/>
-  <path d="M 76 34 C 76 30, 80 30, 82 34" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-
-  
-  <path d="M 128 48 C 134 32, 130 20, 118 25 C 112 28, 112 40, 114 46"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <path d="M 128 27 C 124 24, 120 25, 118 25" stroke="#383838" stroke-width="3" stroke-linecap="round"/>
-  <path d="M 124 34 C 124 30, 120 30, 118 34" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-
-  
-  <path d="M 84 42
-           C 92 38, 108 38, 116 42
-           C 130 46, 140 58, 140 72
-           C 140 86, 128 96, 100 96
-           C 72 96, 60 86, 60 72
-           C 60 58, 70 46, 84 42 Z"
-        fill="#ffffff"
-        stroke="#383838"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
-
-  
-  <circle cx="95" cy="46" r="2" fill="#383838"/>
-  <circle cx="100" cy="44" r="2.5" fill="#383838"/>
-  <circle cx="105" cy="46" r="2" fill="#383838"/>
-  <circle cx="92" cy="52" r="2" fill="#383838"/>
-  <circle cx="108" cy="52" r="2" fill="#383838"/>
-
-  
-  
-  <ellipse cx="84" cy="62" rx="7" ry="9" fill="#54b4de" stroke="#383838" stroke-width="2"/>
-  <ellipse cx="84" cy="62" rx="4" ry="7" fill="#383838"/>
-  <circle cx="82" cy="59" r="2" fill="#ffffff"/>
-  
-  <ellipse cx="116" cy="62" rx="7" ry="9" fill="#54b4de" stroke="#383838" stroke-width="2"/>
-  <ellipse cx="116" cy="62" rx="4" ry="7" fill="#383838"/>
-  <circle cx="114" cy="59" r="2" fill="#ffffff"/>
-
-  
-  
-  <polygon points="100,74 105,69 95,69" fill="#383838" stroke="#383838" stroke-width="1.5" stroke-linejoin="round"/>
-  
-  <path d="M 100 74 L 100 79" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 94 78 C 96 82, 100 82, 100 79 C 100 82, 104 82, 106 78" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-
-  
-  <line x1="74" y1="74" x2="62" y2="72" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="74" y1="78" x2="62" y2="80" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="126" y1="74" x2="138" y2="72" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="126" y1="78" x2="138" y2="80" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Ground sketch baseline -->
+  <path d="M 42 156 C 68 155, 112 155, 138 156" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 52 158 C 72 159, 94 159, 106 158" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
 </svg>
       </div>
     </section>
@@ -1806,136 +1739,81 @@ Best regards,
         </div>
       </div>
 
-      <!-- Mascot Sitting Bottom Corner -->
-      <div class="footer-mascot-sitting" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" aria-hidden="true">
-  <title>CNCF Peshawar snow leopard mascot</title>
+      <!-- Chai Cup Doodle Bottom Corner -->
+            <div class="footer-doodle-img" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none" aria-hidden="true">
+  <!-- Whimsical swirling steam plumes -->
+  <g>
+    <!-- Left steam plume -->
+    <path d="M 44 48 C 38 36, 48 26, 42 16 C 38 8, 44 2, 40 0"
+          stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Center steam plume with loop -->
+    <path d="M 58 44 C 64 34, 52 24, 60 14 C 64 8, 58 2, 60 0"
+          stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Right steam plume -->
+    <path d="M 72 48 C 78 36, 68 26, 76 16 C 80 8, 74 2, 76 0"
+          stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Aromatic tea sparks / scent dots -->
+    <circle cx="34" cy="22" r="1.5" fill="#ffde00"/>
+    <circle cx="84" cy="24" r="2" fill="#ff9538"/>
+  </g>
 
-  
-  <path d="M 32 184 C 65 185, 135 185, 168 184" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 54 190 L 80 190" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <!-- SAUCER DISH (Solid white surface resting on table) -->
+  <path d="M 20 114
+           C 20 108, 96 108, 96 114
+           C 96 122, 20 122, 20 114 Z"
+        fill="#ffffff"
+        stroke="#383838"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+  <!-- Inner saucer well groove -->
+  <path d="M 32 114 C 38 116, 78 116, 84 114" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
 
-  
-  
-  <path d="M 64 124 C 44 134, 42 162, 54 176 C 60 180, 74 180, 80 176"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <circle cx="52" cy="144" r="3" fill="#383838"/>
-  <circle cx="58" cy="142" r="2.5" fill="#383838"/>
-  <circle cx="54" cy="150" r="2.5" fill="#383838"/>
+  <!-- CUP BODY (Tapered glass resting firmly inside saucer) -->
+  <!-- Cup base and body fill with rich chai color -->
+  <path d="M 36 56
+           C 36 78, 42 102, 46 114
+           C 52 116, 64 116, 70 114
+           C 74 102, 80 78, 80 56 Z"
+        fill="#ff9538"
+        stroke="#383838"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
 
-  
-  <path d="M 136 124 C 156 134, 158 162, 146 176 C 140 180, 126 180, 120 176"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <circle cx="148" cy="144" r="3" fill="#383838"/>
-  <circle cx="142" cy="142" r="2.5" fill="#383838"/>
-  <circle cx="146" cy="150" r="2.5" fill="#383838"/>
+  <!-- White glass highlight reflection strip on left edge -->
+  <path d="M 40 62 C 40 78, 45 98, 48 110" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
 
-  
-  <path d="M 74 98
-           C 66 112, 68 140, 72 160
-           L 128 160
-           C 132 140, 134 112, 126 98 Z"
+  <!-- Hot chai liquid surface ellipse at rim -->
+  <ellipse cx="58" cy="56" rx="22" ry="7" fill="#ffde00" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <!-- Rich tea center & foam bubbles -->
+  <ellipse cx="58" cy="57" rx="17" ry="5" fill="#ff9538"/>
+  <circle cx="52" cy="56" r="1.5" fill="#ffffff"/>
+  <circle cx="64" cy="57" r="1.5" fill="#ffffff"/>
+
+  <!-- Hand-drawn glass fluting / facet lines -->
+  <path d="M 48 64 L 51 110" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 58 64 L 58 112" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 68 64 L 65 110" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Decorative golden rim band -->
+  <path d="M 37 62 C 46 66, 70 66, 79 62" stroke="#ffde00" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Ergonomic Cup Handle on right -->
+  <path d="M 79 66
+           C 96 66, 98 94, 76 98
+           C 74 98, 74 94, 76 92
+           C 90 90, 88 72, 79 72"
         fill="#ffffff"
         stroke="#383838"
         stroke-width="2.5"
         stroke-linecap="round"
         stroke-linejoin="round"/>
 
-  
-  
-  <path d="M 80 114 L 80 172 C 80 176, 96 176, 96 172 L 96 128"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="85" y1="170" x2="85" y2="175" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <line x1="91" y1="170" x2="91" y2="175" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-
-  
-  <path d="M 104 128 L 104 172 C 104 176, 120 176, 120 172 L 120 114"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="109" y1="170" x2="109" y2="175" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <line x1="115" y1="170" x2="115" y2="175" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-
-  
-  <path d="M 48 160
-           C 40 174, 52 184, 80 184
-           C 114 184, 150 184, 166 176
-           C 176 168, 172 150, 160 148
-           C 148 146, 146 160, 154 166
-           C 146 170, 120 172, 86 172
-           C 66 172, 54 168, 56 160 Z"
-        fill="#ffffff"
-        stroke="#383838"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
-  
-  <circle cx="70" cy="179" r="2.5" fill="#383838"/>
-  <circle cx="96" cy="179" r="3" fill="#383838"/>
-  <circle cx="124" cy="179" r="3" fill="#383838"/>
-  <circle cx="150" cy="175" r="2.5" fill="#383838"/>
-  <circle cx="162" cy="158" r="3" fill="#383838"/>
-
-  
-  <path d="M 88 102 C 88 116, 112 116, 112 102" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-
-  
-  <rect x="74" y="93" width="52" height="9" rx="2" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linejoin="round"/>
-  <polygon points="100,102 106,109 100,116 94,109" fill="#ffde00" stroke="#383838" stroke-width="2" stroke-linejoin="round"/>
-  <circle cx="100" cy="109" r="2" fill="#383838"/>
-
-  
-  
-  <path d="M 70 46 C 64 30, 68 18, 80 23 C 86 26, 86 38, 84 44"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M 70 25 C 74 22, 78 23, 80 23" stroke="#383838" stroke-width="3" stroke-linecap="round"/>
-  <path d="M 74 32 C 74 28, 78 28, 80 32" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-
-  
-  <path d="M 130 46 C 136 30, 132 18, 120 23 C 114 26, 114 38, 116 44"
-        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M 130 25 C 126 22, 122 23, 120 23" stroke="#383838" stroke-width="3" stroke-linecap="round"/>
-  <path d="M 126 32 C 126 28, 122 28, 120 32" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-
-  
-  <path d="M 84 40
-           C 92 36, 108 36, 116 40
-           C 130 44, 140 56, 140 70
-           C 140 84, 128 95, 100 95
-           C 72 95, 60 84, 60 70
-           C 60 56, 70 44, 84 40 Z"
-        fill="#ffffff"
-        stroke="#383838"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
-
-  
-  <circle cx="95" cy="44" r="2" fill="#383838"/>
-  <circle cx="100" cy="42" r="2.5" fill="#383838"/>
-  <circle cx="105" cy="44" r="2.5" fill="#383838"/>
-  <circle cx="92" cy="50" r="2" fill="#383838"/>
-  <circle cx="108" cy="50" r="2" fill="#383838"/>
-
-  
-  <circle cx="84" cy="62" r="8" fill="#54b4de" stroke="#383838" stroke-width="2"/>
-  <circle cx="84" cy="62" r="4.5" fill="#383838"/>
-  <circle cx="82" cy="59" r="2" fill="#ffffff"/>
-
-  <circle cx="116" cy="62" r="8" fill="#54b4de" stroke="#383838" stroke-width="2"/>
-  <circle cx="116" cy="62" r="4.5" fill="#383838"/>
-  <circle cx="114" cy="59" r="2" fill="#ffffff"/>
-
-  
-  <polygon points="100,73 105,68 95,68" fill="#383838" stroke="#383838" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M 100 73 L 100 78" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 94 77 C 96 81, 100 81, 100 78 C 100 81, 104 81, 106 77" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-
-  
-  <line x1="74" y1="73" x2="62" y2="71" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="74" y1="77" x2="62" y2="79" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="126" y1="73" x2="138" y2="71" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="126" y1="77" x2="138" y2="79" stroke="#383838" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Ground table shadow line -->
+  <path d="M 12 126 C 36 127, 86 127, 104 126" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 28 131 C 44 132, 76 132, 88 131" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
 </svg>
       </div>
 

@@ -1,45 +1,95 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" aria-hidden="true">
   <!-- Ground sketch marks -->
-  <path d="M 16 148 C 40 149, 120 149, 146 148" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 34 154 L 64 154" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 104 154 L 132 154" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 14 148 C 38 149 124 149 148 148"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 32 153 C 44 154 58 153 68 153"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 98 153 C 112 154 126 153 136 153"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- BOTTOM LEFT CONTAINER -->
-  <!-- Top Face -->
-  <polygon points="50,78 78,92 50,106 22,92" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- BOTTOM-LEFT CONTAINER (C1) -->
+  <!-- Top Roof -->
+  <path d="M 18 92 C 28 88 38 84 48 80 C 58 84 68 89 76 94 C 66 98 56 102 48 106 C 38 101 28 97 18 92 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   <!-- Left Face -->
-  <polygon points="22,92 50,106 50,142 22,128" fill="none" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 18 92 C 28 97 38 101 48 106 C 48 116 48 128 48 138 C 38 133 28 129 18 124 C 18 114 18 102 18 92 Z"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   <!-- Right Face -->
-  <polygon points="50,106 78,92 78,128 50,142" fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Corrugated ridges on left face -->
-  <line x1="31" y1="99" x2="31" y2="133" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <line x1="41" y1="104" x2="41" y2="138" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 48 106 C 58 102 68 98 76 94 C 76 104 76 116 76 126 C 68 130 58 134 48 138 C 48 128 48 116 48 106 Z"
+        fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Corrugation Ribs on Left Face -->
+  <path d="M 28 97 C 28 107 28 118 28 129"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 38 101 C 38 111 38 122 38 133"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Corrugation Ribs on Right Face -->
+  <path d="M 58 102 C 58 112 58 123 58 134"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 68 98 C 68 108 68 119 68 130"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- BOTTOM RIGHT CONTAINER -->
-  <!-- Top Face -->
-  <polygon points="110,78 138,92 110,106 82,92" fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- BOTTOM-RIGHT CONTAINER (C2) -->
+  <!-- Top Roof -->
+  <path d="M 76 94 C 86 90 96 86 106 82 C 116 86 126 91 136 96 C 126 100 116 104 106 108 C 96 103 86 99 76 94 Z"
+        fill="#ffffff" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   <!-- Left Face -->
-  <polygon points="82,92 110,106 110,142 82,128" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 76 94 C 86 99 96 103 106 108 C 106 118 106 130 106 140 C 96 135 86 131 76 126 C 76 116 76 104 76 94 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   <!-- Right Face -->
-  <polygon points="110,106 138,92 138,128 110,142" fill="none" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Door lines on right face -->
-  <line x1="124" y1="101" x2="124" y2="135" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
-  <line x1="117" y1="118" x2="120" y2="119" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 106 108 C 116 104 126 100 136 96 C 136 106 136 118 136 128 C 126 132 116 136 106 140 C 106 130 106 118 106 108 Z"
+        fill="#54b4de" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Container Doors Details on Left Face -->
+  <path d="M 91 101 C 91 111 91 122 91 133"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 85 116 C 86 117 87 117 88 118"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 95 117 C 96 118 97 118 98 119"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Corrugation Ribs on Right Face -->
+  <path d="M 116 104 C 116 114 116 125 116 136"
+        stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 126 100 C 126 110 126 121 126 132"
+        stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- TOP CONTAINER (Stacked on top) -->
-  <!-- Top Face -->
-  <polygon points="80,18 108,32 80,46 52,32" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- TOP CONTAINER (C3) -->
+  <!-- Top Roof -->
+  <path d="M 48 50 C 58 45 68 40 78 36 C 88 41 98 45 108 50 C 98 55 88 59 78 64 C 68 59 58 55 48 50 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   <!-- Left Face -->
-  <polygon points="52,32 80,46 80,82 52,68" fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 48 50 C 58 55 68 59 78 64 C 78 74 78 86 78 96 C 68 91 58 87 48 82 C 48 72 48 60 48 50 Z"
+        fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   <!-- Right Face -->
-  <polygon points="80,46 108,32 108,68 80,82" fill="none" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Ridges on left face -->
-  <line x1="61" y1="39" x2="61" y2="73" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <line x1="71" y1="44" x2="71" y2="78" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <!-- Handle/latch detail on right face -->
-  <line x1="94" y1="41" x2="94" y2="75" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 78 64 C 88 59 98 55 108 50 C 108 60 108 72 108 82 C 98 87 88 91 78 96 C 78 86 78 74 78 64 Z"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Accent float sparks -->
-  <path d="M 36 28 L 42 22 M 42 28 L 36 22" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="128" cy="24" r="3" fill="#ffde00"/>
+  <!-- Details on Top Container -->
+  <!-- Ribs on Left Face -->
+  <path d="M 58 55 C 58 65 58 76 58 87"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 68 59 C 68 69 68 80 68 91"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Shipping Badge / Label on Right Face (organic path instead of rect) -->
+  <path d="M 86 63 C 90 62 96 62 100 63 C 101 66 100 70 100 72 C 96 73 90 73 86 72 C 85 69 85 66 86 63 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 89 67 C 92 67 95 67 97 67"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Lock rods on right face -->
+  <path d="M 83 60 C 83 70 83 80 83 90"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 103 54 C 103 64 103 74 103 84"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Corner casting bracket blobs (organic paths instead of circles) -->
+  <path d="M 46 50 C 48 48 50 49 50 51 C 49 53 47 52 46 50 Z" fill="#383838"/>
+  <path d="M 76 64 C 78 62 80 63 80 65 C 79 67 77 66 76 64 Z" fill="#383838"/>
+  <path d="M 106 50 C 108 48 110 49 110 51 C 109 53 107 52 106 50 Z" fill="#383838"/>
+  <path d="M 46 82 C 48 80 50 81 50 83 C 49 85 47 84 46 82 Z" fill="#383838"/>
+  <path d="M 76 96 C 78 94 80 95 80 97 C 79 99 77 98 76 96 Z" fill="#383838"/>
+  <path d="M 106 82 C 108 80 110 81 110 83 C 109 85 107 84 106 82 Z" fill="#383838"/>
+
+  <!-- Playful hand-drawn sparks / energy -->
+  <path d="M 22 74 C 23 72 25 71 27 69"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 134 76 C 135 74 137 73 139 71"
+        stroke="#ff9538" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

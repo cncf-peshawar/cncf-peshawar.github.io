@@ -1,40 +1,64 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none" aria-hidden="true">
-  <!-- STEAM PLUMES (Loose hand-drawn curling ribbons) -->
-  <path d="M 46 48 C 42 38, 48 30, 44 20 C 40 12, 46 6, 42 2" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 60 46 C 64 36, 56 26, 62 16 C 66 8, 60 4, 62 2" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 74 48 C 78 38, 72 30, 76 20 C 80 12, 74 6, 76 2" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Swirling aromatic steam plumes -->
+  <path d="M 44 48 C 38 35 49 26 42 16 C 38 8 45 2 40 0"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 58 44 C 65 33 51 23 60 14 C 65 8 57 2 61 0"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 72 48 C 79 36 67 25 76 16 C 81 8 73 2 77 0"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- CUP LIQUID SURFACE -->
-  <ellipse cx="60" cy="58" rx="26" ry="7" fill="#ffde00" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <ellipse cx="60" cy="60" rx="22" ry="5" fill="#ff9538"/>
+  <!-- Aromatic tea scent dots / sparks -->
+  <path d="M 33 22 C 35 20 37 22 36 24 C 35 25 33 25 32 23 C 32 22 33 22 33 22 Z"
+        fill="#ffde00"/>
+  <path d="M 83 24 C 85 22 88 23 87 26 C 86 28 83 27 82 25 C 82 24 83 24 83 24 Z"
+        fill="#ff9538"/>
 
-  <!-- CUP BODY -->
-  <!-- Main glass/ceramic body with rich chai fill -->
-  <path d="M 34 58
-           C 34 76, 40 102, 44 112
-           C 46 114, 74 114, 76 112
-           C 80 102, 86 76, 86 58 Z"
-        fill="#ff9538"
-        stroke="#383838"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
+  <!-- SAUCER DISH (Hand-drawn white saucer) -->
+  <path d="M 21 114 C 20 107 97 107 97 114 C 96 122 21 122 21 114 Z"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Saucer groove curve -->
+  <path d="M 33 114 C 39 117 77 117 83 114"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Golden foam band accent at top -->
-  <path d="M 35 64 C 44 68, 76 68, 85 64" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+  <!-- CUP BODY (Tapered Peshawari chai glass) -->
+  <path d="M 36 56 C 36 78 41 102 46 114 C 52 116 64 116 70 114 C 75 102 80 78 80 56 Z"
+        fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Hand-drawn glass facet sketch lines -->
-  <path d="M 46 68 L 49 108" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 60 68 L 60 110" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 74 68 L 71 108" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <!-- Glass highlight reflection streak -->
+  <path d="M 40 62 C 40 78 44 98 47 110"
+        stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- CUP HANDLE -->
-  <path d="M 85 68 C 100 68, 102 96, 82 100" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Hot chai liquid surface ellipse at rim (organic path) -->
+  <path d="M 36 56 C 36 50 80 50 80 56 C 80 62 36 62 36 56 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Rich tea center accent -->
+  <path d="M 41 56 C 41 52 75 52 75 56 C 75 60 41 60 41 56 Z"
+        fill="#ff9538"/>
+  <!-- Foam bubbles (organic hand-drawn closed paths) -->
+  <path d="M 51 56 C 53 54 55 55 54 57 C 53 59 50 58 50 56 Z"
+        fill="#ffffff"/>
+  <path d="M 63 57 C 65 55 67 56 66 58 C 65 60 62 59 62 57 Z"
+        fill="#ffffff"/>
 
-  <!-- SAUCER BASE -->
-  <path d="M 22 120 C 22 114, 98 114, 98 120 C 98 128, 22 128, 22 120 Z" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M 38 126 C 50 128, 70 128, 82 126" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+  <!-- Hand-drawn glass fluting / facet lines -->
+  <path d="M 48 64 C 49 79 50 95 51 110"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 58 64 C 58 80 58 96 58 112"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 68 64 C 67 79 66 95 65 110"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- TABLE SURFACE SKETCH DASH -->
-  <path d="M 12 134 L 108 134" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Decorative golden rim band -->
+  <path d="M 37 62 C 46 66 70 66 79 62"
+        stroke="#ffde00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Ergonomic Cup Handle on right -->
+  <path d="M 79 66 C 96 66 98 94 77 98 C 74 98 74 94 76 92 C 90 90 88 72 79 72"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Ground table shadow lines -->
+  <path d="M 13 126 C 36 127 85 127 105 126"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 29 131 C 44 132 75 132 87 131"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

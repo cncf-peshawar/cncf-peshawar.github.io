@@ -1,34 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 110" fill="none" aria-hidden="true">
-  <!-- Sun peek behind cloud -->
-  <circle cx="114" cy="38" r="16" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M114 14 L114 8" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M130 22 L136 16" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M136 38 L142 38" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M96 22 L92 18" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Sun behind cloud -->
+  <!-- Hand-sketched wobbly sun disc -->
+  <path d="M 100 34 C 100 24 109 16 119 16 C 129 16 137 24 137 34 C 137 44 128 52 118 52 C 108 52 100 44 100 34 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Warm orange inner sun crescent -->
+  <path d="M 112 22 C 124 22 130 28 128 38 C 124 32 118 28 112 26 Z"
+        fill="#ff9538"/>
+  <!-- Wobbly radiating sun rays -->
+  <path d="M 118 10 C 118 8 118 6 118 3"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 134 18 C 136 16 138 14 141 12"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 140 34 C 143 34 146 34 149 34"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 134 49 C 136 51 138 54 141 57"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 102 18 C 100 16 99 14 97 11"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Warm accent badge dot -->
-  <circle cx="124" cy="52" r="4" fill="#ff9538"/>
+  <!-- Main hand-drawn cloud puff body -->
+  <path d="M 34 82 C 18 82 10 68 14 54 C 16 42 28 34 42 36 C 46 22 64 16 80 22 C 92 18 106 22 112 34 C 126 32 140 44 142 58 C 144 72 132 82 116 82 C 102 84 48 84 34 82 Z"
+        fill="#ffffff" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Main cloud outline - hand-drawn loose lobes -->
-  <path d="M 38 82
-           C 20 82, 10 68, 14 52
-           C 16 38, 28 32, 42 34
-           C 46 18, 66 12, 82 18
-           C 96 14, 114 22, 118 36
-           C 134 36, 146 50, 142 66
-           C 140 80, 126 84, 112 82
-           C 96 85, 54 85, 38 82 Z"
-        stroke="#54b4de"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
+  <!-- Organic hand-drawn charcoal sketch accents -->
+  <path d="M 36 84 C 20 84 12 70 16 56 C 18 44 30 36 43 38"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 72 23 C 86 19 102 23 110 34"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Inner sketch accent curves -->
-  <path d="M 32 56 C 36 46, 46 44, 54 48" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 72 26 C 80 24, 90 28, 96 34" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 116 46 C 122 46, 130 52, 128 60" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+  <!-- Hand-drawn inner volume curves -->
+  <path d="M 34 54 C 40 46 52 46 58 52"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 68 28 C 76 26 86 30 90 38"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 112 46 C 118 46 124 52 122 60"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Hand-drawn breeze lines underneath -->
-  <path d="M 22 96 C 40 98, 64 94, 86 96" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 5"/>
-  <path d="M 98 96 C 112 98, 128 95, 140 93" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Warm orange accent droplet on cloud flank -->
+  <path d="M 120 70 C 122 68 125 69 125 72 C 124 75 120 74 119 72 C 119 71 120 70 120 70 Z"
+        fill="#ff9538"/>
+
+  <!-- Sketched breeze / wind lines -->
+  <path d="M 20 96 C 44 98 70 94 92 96"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5"/>
+  <path d="M 102 96 C 118 98 132 95 144 94"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 46 102 C 64 103 84 101 100 102"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
