@@ -1,0 +1,135 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { currentPath = Astro.url.pathname } = Astro.props;
+
+const navLinks = [
+  { name: 'Home', href: `${base}/` },
+  { name: 'Events', href: `${base}/events` },
+  { name: 'Speak', href: `${base}/speak` },
+  { name: 'Sponsors', href: `${base}/sponsors` },
+  { name: 'Team', href: `${base}/team` },
+  { name: 'Blog', href: `${base}/blog` },
+];
+---
+
+<nav class="desktop-nav" aria-label="Main Navigation">
+  <ul class="desktop-nav-list" role="list">
+    {navLinks.map((link) => {
+      const isHome = link.href === `${base}/` || link.href === '/';
+      const isActive = isHome
+        ? currentPath === '/' || currentPath === '' || currentPath === `${base}/` || currentPath === base
+        : currentPath === link.href || currentPath.startsWith(`${link.href}/`);
+      return (
+        <li>
+          <a
+            href={link.href}
+            class={`nav-item-link ${isActive ? 'is-active' : ''}`}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {link.name}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+  <div class="nav-cta-wrapper">
+    <a
+      href="https://ocgroups.dev/cncf/group/6vwk2n4"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="nav-cta-btn"
+    >
+      Join on OCG
+    </a>
+  </div>
+</nav>
+
+<style>
+  .desktop-nav {
+    display: none;
+    align-items: center;
+    gap: 20px;
+  }
+
+  @media (min-width: 900px) {
+    .desktop-nav {
+      display: flex;
+    }
+  }
+
+  .desktop-nav-list {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item-link {
+    color: var(--color-charcoal-ink, #383838);
+    text-decoration: none;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 6px 8px;
+    border-bottom: 2px solid transparent;
+    transition: border-color var(--transition-fast, 0.1s ease);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .nav-item-link:hover,
+  .nav-item-link.is-active {
+    border-bottom-color: var(--color-charcoal-ink, #383838);
+    font-weight: 700;
+  }
+
+  .nav-item-link:focus-visible,
+  .nav-cta-btn:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink, #383838);
+    outline-offset: 3px;
+  }
+
+  .nav-cta-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--color-charcoal-ink, #383838);
+    background-color: var(--color-sky-crayon, #6fc2ff);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    padding: 8px 16px;
+    box-shadow: -4px 4px 0px 0px var(--color-charcoal-ink, #383838);
+    transition: transform var(--transition-fast, 0.1s ease), box-shadow var(--transition-fast, 0.1s ease);
+    min-height: 44px;
+  }
+
+  .nav-cta-btn:hover {
+    transform: translate(1px, -1px);
+    box-shadow: -5px 5px 0px 0px var(--color-charcoal-ink, #383838);
+  }
+
+  .nav-cta-btn:active {
+    transform: translate(-3px, 3px);
+    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink, #383838);
+  }
+</style>
