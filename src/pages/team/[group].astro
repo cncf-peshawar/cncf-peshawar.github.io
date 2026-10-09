@@ -26,36 +26,46 @@ const initials = (name: string) =>
   title={`${group.title} | CNCF Peshawar Team`}
   description={`Meet the ${group.members.length} volunteers on the CNCF Peshawar ${group.title}. ${group.desc}`}
 >
-  <!-- Breadcrumb -->
-  <div class="breadcrumb container">
-    <a href={`${base}/`}>Home</a>
-    <span>/</span>
-    <a href={`${base}/team`}>Team</a>
-    <span>/</span>
-    <span>{group.title}</span>
+  <!-- Breadcrumb & Top Navigation -->
+  <div class="breadcrumb-container" data-reveal>
+    <div class="breadcrumb-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href={`${base}/`}>Home</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <a href={`${base}/team`}>Team</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">{group.title}</span>
+      </nav>
+      <a href={`${base}/team`} class="btn btn--outline btn--sm back-nav-btn">
+        <span aria-hidden="true">←</span> Back to All Teams
+      </a>
+    </div>
   </div>
 
-  <!-- Group Header -->
-  <section class="page-header section">
-    <div class="container">
-      <div class="group-header">
-        <div class="group-header__badge">{group.title.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}</div>
-        <div>
-          <span class="group-header__code">{group.code}</span>
-          <h1 class="page-header__title">{group.title}</h1>
-        </div>
+  <!-- Group Header / Hero -->
+  <section class="page-hero" data-reveal>
+    <div class="page-hero__inner">
+      <div class="page-hero__eyebrow">
+        <span class={`badge badge--${group.slug === 'tech-team' ? 'lilac' : group.slug === 'events-team' ? 'orange' : group.slug === 'community-outreach' ? 'mint' : 'periwinkle'}`}>
+          {group.title.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()} // {group.code}
+        </span>
+        <span class="eyebrow-text">WORKING GROUP</span>
       </div>
-      <p class="page-header__desc">{group.desc}</p>
-      <span class="badge badge--live">{group.members.length} Member{group.members.length === 1 ? '' : 's'}</span>
+      <h1 class="page-hero__title">{group.title}.</h1>
+      <p class="page-hero__desc">{group.desc}</p>
+      <span class="badge badge--live">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        {group.members.length} ACTIVE VOLUNTEER{group.members.length === 1 ? '' : 'S'}
+      </span>
     </div>
   </section>
 
   <!-- Member Grid -->
-  <section class="section section--subtle">
-    <div class="container">
-      <div class="member-grid">
-        {group.members.map(member => (
-          <article class="member-card">
+  <section class="section-wrap" data-reveal>
+    <div class="member-grid">
+      {group.members.map(member => (
+        <article class="member-card brutal-card">
+          <div class="member-card__header">
             <div class="member-card__photo">
               {getAvatarSrc(member.data.avatar || member.data.photo) ? (
                 <img
@@ -68,287 +78,418 @@ const initials = (name: string) =>
               <span class="member-card__initials" style={(member.data.avatar || member.data.photo) ? 'display: none;' : ''}>
                 {initials(member.data.name)}
               </span>
-              {member.data.linkedin && (
-                <a
-                  href={member.data.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="member-card__overlay"
-                  aria-label={`Connect with ${member.data.name} on LinkedIn`}
-                >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                    <rect x="2" y="9" width="4" height="12"/>
-                    <circle cx="4" cy="4" r="2"/>
-                  </svg>
-                  <span>Connect on LinkedIn</span>
-                </a>
-              )}
             </div>
-            <div class="member-card__info">
+            <div class="member-card__identity">
               <h3 class="member-card__name">{member.data.name}</h3>
-              <p class="member-card__team">{member.data.role || member.data.team}</p>
-              {(member.data.university || member.data.company) && (
-                <p class="member-card__org">{member.data.university || member.data.company}</p>
-              )}
-              <div class="member-card__links">
-                {member.data.github && (
-                  <a href={member.data.github} target="_blank" rel="noopener noreferrer" aria-label={`${member.data.name} on GitHub`}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                    </svg>
-                  </a>
-                )}
-                {member.data.linkedin && (
-                  <a href={member.data.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${member.data.name} on LinkedIn`}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                      <rect x="2" y="9" width="4" height="12"/>
-                      <circle cx="4" cy="4" r="2"/>
-                    </svg>
-                  </a>
-                )}
-                {member.data.email && (
-                  <a href={`mailto:${member.data.email}`} aria-label={`Email ${member.data.name}`}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <rect x="2" y="4" width="20" height="16" rx="2"/>
-                      <path d="m22 7-10 6L2 7"/>
-                    </svg>
-                  </a>
-                )}
-              </div>
+              <p class="member-card__role">{member.data.role || member.data.team}</p>
             </div>
-          </article>
-        ))}
-      </div>
+          </div>
 
-      <!-- Back to All Team -->
-      <div class="back-row">
-        <a href={`${base}/team`} class="back-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-          </svg>
-          <span>Back to All Team &amp; Organizers</span>
-        </a>
-      </div>
+          {(member.data.university || member.data.company) && (
+            <p class="member-card__org">{member.data.university || member.data.company}</p>
+          )}
+
+          <div class="member-card__links">
+            {member.data.linkedin && (
+              <a
+                href={member.data.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--outline btn--sm member-link"
+                aria-label={`${member.data.name} on LinkedIn`}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            )}
+            {member.data.github && (
+              <a
+                href={member.data.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--outline btn--sm member-link"
+                aria-label={`${member.data.name} on GitHub`}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                </svg>
+                <span>GitHub</span>
+              </a>
+            )}
+            {member.data.email && (
+              <a
+                href={`mailto:${member.data.email}`}
+                class="btn btn--outline btn--sm member-link"
+                aria-label={`Email ${member.data.name}`}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="m22 7-10 6L2 7"/>
+                </svg>
+                <span>Email</span>
+              </a>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Bottom Back to All Team -->
+    <div class="back-row">
+      <a href={`${base}/team`} class="btn btn--outline back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>Back to All Team &amp; Organizers</span>
+      </a>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .breadcrumb {
+  /* ------------------------------------------------------------------ */
+  /* BREADCRUMB & HEADER STYLES                                         */
+  /* ------------------------------------------------------------------ */
+  .breadcrumb-container {
+    background-color: var(--color-cream-paper);
+    padding: var(--spacing-20) var(--spacing-24) 0;
+  }
+
+  .breadcrumb-inner {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: var(--space-2xs);
-    padding-top: var(--space-lg);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-subtle);
+    gap: var(--spacing-16);
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-8);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    color: var(--color-text-muted);
   }
 
   .breadcrumb a {
-    color: var(--color-ink-muted);
+    color: var(--color-charcoal-ink);
     text-decoration: none;
+    font-weight: 500;
   }
 
   .breadcrumb a:hover {
-    color: var(--color-accent);
+    text-decoration: underline;
   }
 
-  .page-header {
-    padding-bottom: var(--space-lg);
+  .breadcrumb .sep {
+    color: var(--color-text-muted);
   }
 
-  .page-header__title {
-    font-size: var(--font-size-4xl);
-    color: var(--color-ink);
+  .back-nav-btn {
+    text-transform: uppercase;
   }
 
-  .page-header__desc {
-    font-size: var(--font-size-lg);
-    color: var(--color-ink-muted);
-    max-width: var(--container-prose);
-    margin-bottom: var(--space-md);
+  /* ------------------------------------------------------------------ */
+  /* PAGE HERO SECTION                                                  */
+  /* ------------------------------------------------------------------ */
+  .page-hero {
+    padding: var(--spacing-48) var(--spacing-24) var(--spacing-48);
+    background-color: var(--color-cream-paper);
+    border-bottom: 2px solid var(--color-charcoal-ink);
+    position: relative;
   }
 
-  .group-header {
+  .page-hero__inner {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .page-hero__eyebrow {
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-12);
     display: flex;
     align-items: center;
-    gap: var(--space-md);
-    margin-bottom: var(--space-md);
+    gap: var(--spacing-8);
   }
 
-  .group-header__badge {
-    display: flex;
+  .eyebrow-text {
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+  }
+
+  .page-hero__title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-display);
+    font-weight: 700;
+    line-height: var(--line-height-snug);
+    letter-spacing: -0.02em;
+    color: var(--color-charcoal-ink);
+    margin-bottom: var(--spacing-16);
+    text-transform: uppercase;
+  }
+
+  .page-hero__desc {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-subheading);
+    color: var(--color-charcoal-ink);
+    max-width: var(--container-prose);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-20);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* SECTION LAYOUT & CARDS                                             */
+  /* ------------------------------------------------------------------ */
+  .section-wrap {
+    padding: var(--spacing-60) var(--spacing-24);
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .brutal-card {
+    background: var(--color-frost-white);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm);
+    padding: var(--spacing-20);
+    position: relative;
+    transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-6, 6px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius-brutal);
+    border: 1px solid var(--color-charcoal-ink);
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-tight);
+  }
+
+  .badge--lilac {
+    background: var(--color-lilac-sketch);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge--orange {
+    background: var(--color-duck-bill-orange);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge--mint {
+    background: var(--color-mint-sketch);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge--periwinkle {
+    background: var(--color-periwinkle-sketch);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge--live {
+    background: var(--color-ice-wash);
+    color: var(--color-charcoal-ink);
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-mint-sketch);
+    display: inline-block;
+    animation: livePulse 2s infinite ease-in-out;
+  }
+
+  @keyframes livePulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.6; }
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* BUTTONS & LINKS                                                    */
+  /* ------------------------------------------------------------------ */
+  .btn {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
-    flex-shrink: 0;
-    background: var(--gradient-brand);
-    border-radius: var(--radius-lg);
-    color: var(--color-accent-contrast);
-    font-family: var(--font-display);
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.04em;
-  }
-
-  .group-header__code {
-    display: block;
+    gap: var(--spacing-8);
     font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-accent);
-    letter-spacing: 0.06em;
-    margin-bottom: 2px;
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    padding: 11px 22px;
+    border-radius: var(--radius-brutal);
+    border: 2px solid var(--color-charcoal-ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    text-decoration: none;
+    box-shadow: var(--shadow-hard-sm);
+    transition: transform 120ms ease-in-out, box-shadow 120ms ease-in-out;
+    user-select: none;
+    min-height: 44px;
+    box-sizing: border-box;
   }
 
+  .btn:hover {
+    transform: translate(7px, -7px);
+    box-shadow: var(--shadow-hard);
+  }
+
+  .btn:active {
+    transform: none;
+    transition: transform 30ms;
+  }
+
+  .btn:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  .btn--outline {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+  }
+
+  .btn--sm {
+    padding: 7px 14px;
+    font-size: var(--font-size-caption);
+    min-height: 44px;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* MEMBER GRID & CARDS                                                */
+  /* ------------------------------------------------------------------ */
   .member-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
+    grid-template-columns: 1fr;
+    gap: var(--spacing-20);
   }
 
-  @media (min-width: 560px) {
+  @media (min-width: 640px) {
+    .member-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
     .member-grid {
       grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-lg);
-    }
-  }
-
-  @media (min-width: 900px) {
-    .member-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .member-grid {
-      grid-template-columns: repeat(6, 1fr);
     }
   }
 
   .member-card {
     display: flex;
     flex-direction: column;
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    justify-content: space-between;
   }
 
   .member-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--color-border-hover);
-    box-shadow: var(--shadow-md);
+    transform: translate(3px, -3px);
+    box-shadow: var(--shadow-hard);
+  }
+
+  .member-card__header {
+    display: flex;
+    gap: var(--spacing-12);
+    align-items: center;
+    margin-bottom: var(--spacing-12);
   }
 
   .member-card__photo {
-    position: relative;
-    aspect-ratio: 1 / 1;
-    background-color: var(--color-accent-subtle);
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--color-cream-paper);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
   }
 
   .member-card__photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--transition-base);
-  }
-
-  .member-card:hover .member-card__photo img {
-    transform: scale(1.04);
+    display: block;
   }
 
   .member-card__initials {
-    font-family: var(--font-display);
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-accent);
-  }
-
-  .member-card__overlay {
-    position: absolute;
-    inset: 0;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body);
+    font-weight: 700;
+    color: var(--color-charcoal-ink);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-2xs);
-    background: linear-gradient(180deg, oklch(0.56 0.18 248 / 0.85), oklch(0.16 0.02 260 / 0.92));
-    color: var(--color-accent-contrast);
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity var(--transition-base), transform var(--transition-base);
   }
 
-  .member-card__overlay span {
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    letter-spacing: 0.02em;
-  }
-
-  .member-card:hover .member-card__overlay,
-  .member-card:focus-within .member-card__overlay {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .member-card__info {
-    padding: var(--space-xs) var(--space-sm) var(--space-md);
-    text-align: center;
+  .member-card__identity {
+    flex: 1;
+    min-width: 0;
   }
 
   .member-card__name {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-ink);
-    letter-spacing: -0.01em;
-    margin-bottom: 2px;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-subheading);
+    font-weight: 700;
+    color: var(--color-charcoal-ink);
+    margin: 0;
   }
 
-  .member-card__team {
+  .member-card__role {
     font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-accent);
+    font-size: var(--font-size-caption);
+    color: var(--color-text-muted);
+    margin: 0;
   }
 
   .member-card__org {
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-subtle);
-    margin-top: 2px;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    color: var(--color-charcoal-ink);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--spacing-12);
+    flex-grow: 1;
   }
 
   .member-card__links {
     display: flex;
-    justify-content: center;
-    gap: var(--space-2xs);
-    margin-top: var(--space-xs);
+    flex-wrap: wrap;
+    gap: var(--spacing-8);
   }
 
-  .member-card__links a {
-    display: flex;
+  .member-link {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xs);
-    color: var(--color-ink-muted);
-    transition: border-color var(--transition-fast), color var(--transition-fast);
+    gap: var(--spacing-6, 6px);
   }
 
-  .member-card__links a:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-  }
-
+  /* ------------------------------------------------------------------ */
+  /* BACK ROW                                                           */
+  /* ------------------------------------------------------------------ */
   .back-row {
-    margin-top: var(--space-2xl);
+    margin-top: var(--spacing-48);
     display: flex;
     justify-content: center;
   }
@@ -356,13 +497,23 @@ const initials = (name: string) =>
   .back-link {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-accent);
+    gap: var(--spacing-8);
   }
 
-  .back-link:hover {
-    text-decoration: underline;
+  /* ------------------------------------------------------------------ */
+  /* PREFERS-REDUCED-MOTION (PRM)                                       */
+  /* ------------------------------------------------------------------ */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .pulse-dot {
+      animation: none !important;
+    }
+    .btn:hover, .member-card:hover {
+      transform: none !important;
+    }
   }
 </style>
