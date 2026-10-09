@@ -1,0 +1,413 @@
+---
+/**
+ * Mascot.astro
+ * Ported from page-mascot (MIT © Kamran Ahmed <https://kamran.fyi>)
+ * Vanilla Astro component: div-based sprite stepping via background-position.
+ * Zero external JS dependencies.
+ */
+interface Props {
+  directions?: string;
+  reactions?: string;
+  size?: number;
+  class?: string;
+  showBubble?: boolean;
+  bubbleText?: string;
+}
+
+const {
+  directions = '/mascots/penguin-directions.webp',
+  reactions = '/mascots/penguin-reactions.webp',
+  size = 140,
+  class: className = '',
+  showBubble = true,
+  bubbleText = '100% free & open to all',
+} = Astro.props;
+---
+
+<div
+  class:list={['mascot-root', className]}
+  aria-hidden="true"
+  data-mascot-root
+  data-directions={directions}
+  data-reactions={reactions}
+  style={`--mascot-size: ${size}px;`}
+>
+  {showBubble && (
+    <div class="mascot-bubble" data-mascot-bubble>
+      <span class="mascot-bubble-text">{bubbleText}</span>
+    </div>
+  )}
+
+  <div class="mascot-bob">
+    <button
+      type="button"
+      class="mascot-btn"
+      tabindex="-1"
+      aria-hidden="true"
+      data-mascot-btn
+    >
+      <span class="mascot-squash" data-mascot-squash>
+        <span
+          class="mascot-layer mascot-layer-directions"
+          style={`background-image: url('${directions}');`}
+          data-layer-directions
+        ></span>
+        <span
+          class="mascot-layer mascot-layer-reactions"
+          style={`background-image: url('${reactions}');`}
+          data-layer-reactions
+        ></span>
+      </span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .mascot-root {
+    position: relative;
+    display: inline-block;
+    width: var(--mascot-size, 140px);
+    height: var(--mascot-size, 140px);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .mascot-bubble {
+    position: absolute;
+    bottom: calc(100% - 10px);
+    right: calc(100% - 34px);
+    background-color: var(--color-canary-banner);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    padding: 5px 10px;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.3;
+    color: var(--color-charcoal-ink);
+    white-space: nowrap;
+    box-shadow: -2px 2px 0px 0px var(--color-charcoal-ink);
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  .mascot-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 18px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 2px solid transparent;
+    border-top: 8px solid var(--color-charcoal-ink);
+  }
+
+  .mascot-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 2px solid transparent;
+    border-top: 6px solid var(--color-canary-banner);
+    z-index: 1;
+  }
+
+  .mascot-bob {
+    width: 100%;
+    height: 100%;
+    animation: mascot-idle-bob 2.2s ease-in-out infinite;
+  }
+
+  @keyframes mascot-idle-bob {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+
+  .mascot-btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+    pointer-events: auto;
+  }
+
+  .mascot-squash {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-origin: 50% 78%;
+  }
+
+  .mascot-layer {
+    position: absolute;
+    inset: 0;
+    background-size: 300% 300%;
+    background-repeat: no-repeat;
+    transition: opacity 120ms ease;
+  }
+
+  /* Default CSS fallback: static front-facing pose (center cell: index 4 = 50% 50%) */
+  .mascot-layer-directions {
+    background-position: 50% 50%;
+    opacity: 1;
+  }
+
+  .mascot-layer-reactions {
+    background-position: 0% 0%;
+    opacity: 0;
+  }
+
+  /* Reduced motion invariants */
+  :global(html.motion-reduced) .mascot-bob {
+    animation: none !important;
+  }
+
+  :global(html.motion-reduced) .mascot-layer {
+    transition: none !important;
+  }
+
+  :global(html.motion-reduced) .mascot-layer-directions {
+    background-position: 50% 50% !important;
+  }
+
+  :global(html.motion-reduced) .mascot-layer-reactions {
+    opacity: 0 !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mascot-bob {
+      animation: none !important;
+    }
+
+    .mascot-layer {
+      transition: none !important;
+    }
+
+    .mascot-layer-directions {
+      background-position: 50% 50% !important;
+    }
+
+    .mascot-layer-reactions {
+      opacity: 0 !important;
+    }
+  }
+</style>
+
+<script>
+  // Scoped vanilla mascot orchestration
+  function setupMascot() {
+    const mascots = document.querySelectorAll<HTMLElement>('[data-mascot-root]');
+    if (!mascots.length) return;
+
+    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    mascots.forEach((mascot) => {
+      // Prevent duplicate attachment across navigations
+      if (mascot.dataset.mascotInitialized === 'true') return;
+      mascot.dataset.mascotInitialized = 'true';
+
+      const button = mascot.querySelector<HTMLElement>('[data-mascot-btn]');
+      const squash = mascot.querySelector<HTMLElement>('[data-mascot-squash]');
+      const directionsLayer = mascot.querySelector<HTMLElement>('[data-layer-directions]');
+      const reactionsLayer = mascot.querySelector<HTMLElement>('[data-layer-reactions]');
+
+      if (!button || !squash || !directionsLayer || !reactionsLayer) return;
+
+      const btnEl: HTMLElement = button;
+      const squashEl: HTMLElement = squash;
+      const dirLayer: HTMLElement = directionsLayer;
+      const reactLayer: HTMLElement = reactionsLayer;
+
+      // If user prefers reduced motion, leave static front pose and skip listeners
+      if (isReduced) return;
+
+      const DIRECTIONS = [
+        'up-left',
+        'up',
+        'up-right',
+        'left',
+        'center',
+        'right',
+        'down-left',
+        'down',
+        'down-right',
+      ];
+
+      const REACTIONS = [
+        'blink',
+        'heart',
+        'sparkle',
+        'surprised',
+        'wink',
+        'bashful',
+        'sleepy',
+        'dizzy',
+        'delighted',
+      ];
+
+      const CLOCKWISE = [
+        'right',
+        'down-right',
+        'down',
+        'down-left',
+        'left',
+        'up-left',
+        'up',
+        'up-right',
+      ];
+
+      const SECTOR = (Math.PI * 2) / CLOCKWISE.length;
+      const HYSTERESIS = 0.12;
+      const DEAD_ZONE = 70;
+      const PAYOFFS = ['heart', 'sparkle', 'delighted'];
+      const BOOP_PAYOFF = 120;
+      const BOOP_END = 560;
+      const SQUASH_MS = 420;
+      const DIZZY_AFTER = 4;
+      const DIZZY_WINDOW = 1600;
+      const DIZZY_END = 1100;
+
+      const SQUASH_KEYFRAMES = [
+        { transform: 'scale(1, 1)', easing: 'ease-in' },
+        { transform: 'scale(1.10, 0.86)', offset: 0.18, easing: 'ease-out' },
+        { transform: 'scale(0.95, 1.08)', offset: 0.45, easing: 'ease-in-out' },
+        { transform: 'scale(1.03, 0.97)', offset: 0.72, easing: 'ease-in-out' },
+        { transform: 'scale(1, 1)' },
+      ];
+
+      function cellPosition(index: number): string {
+        const x = (index % 3) * 50;
+        const y = Math.floor(index / 3) * 50;
+        return `${x}% ${y}%`;
+      }
+
+      function wrap(angle: number): number {
+        return Math.atan2(Math.sin(angle), Math.cos(angle));
+      }
+
+      let currentDirection = 'center';
+      let currentReaction: string | null = null;
+      let sector = -1;
+      let pointer: { x: number; y: number } | null = null;
+      let rafId: number | null = null;
+      const timers: number[] = [];
+      const boops = { count: 0, at: 0 };
+
+      function setDirection(dir: string) {
+        if (currentDirection === dir) return;
+        currentDirection = dir;
+        const idx = DIRECTIONS.indexOf(dir);
+        if (idx !== -1) {
+          dirLayer.style.backgroundPosition = cellPosition(idx);
+        }
+      }
+
+      function setReaction(react: string | null) {
+        currentReaction = react;
+        if (react) {
+          const idx = REACTIONS.indexOf(react);
+          if (idx !== -1) {
+            reactLayer.style.backgroundPosition = cellPosition(idx);
+          }
+          reactLayer.style.opacity = '1';
+          dirLayer.style.opacity = '0';
+        } else {
+          reactLayer.style.opacity = '0';
+          dirLayer.style.opacity = '1';
+        }
+      }
+
+      const aim = () => {
+        if (!pointer || currentReaction !== null) return;
+
+        const box = btnEl.getBoundingClientRect();
+        const dx = pointer.x - (box.left + box.width / 2);
+        const dy = pointer.y - (box.top + box.height / 2);
+
+        if (Math.hypot(dx, dy) < DEAD_ZONE) {
+          sector = -1;
+          setDirection('center');
+          return;
+        }
+
+        const angle = Math.atan2(dy, dx);
+        if (sector !== -1 && Math.abs(wrap(angle - sector * SECTOR)) < SECTOR / 2 + HYSTERESIS) {
+          return;
+        }
+
+        sector = (Math.round(angle / SECTOR) + CLOCKWISE.length) % CLOCKWISE.length;
+        setDirection(CLOCKWISE[sector]);
+      };
+
+      if (isFinePointer) {
+        const onPointerMove = (e: PointerEvent) => {
+          pointer = { x: e.clientX, y: e.clientY };
+          if (rafId === null) {
+            rafId = window.requestAnimationFrame(() => {
+              aim();
+              rafId = null;
+            });
+          }
+        };
+
+        window.addEventListener('pointermove', onPointerMove, { passive: true });
+        window.addEventListener('scroll', aim, { passive: true });
+      }
+
+      // Boop interaction (click / poke)
+      btnEl.addEventListener('click', () => {
+        timers.forEach((id) => window.clearTimeout(id));
+        timers.length = 0;
+
+        const later = (ms: number, next: string | null) => {
+          const timerId = window.setTimeout(() => setReaction(next), ms);
+          timers.push(timerId);
+        };
+
+        const now = Date.now();
+        boops.count = now - boops.at < DIZZY_WINDOW ? boops.count + 1 : 1;
+        boops.at = now;
+
+        if (boops.count >= DIZZY_AFTER) {
+          boops.count = 0;
+          setReaction('dizzy');
+          later(DIZZY_END, null);
+        } else {
+          setReaction('blink');
+          const payoff = PAYOFFS[(boops.count - 1) % PAYOFFS.length];
+          later(BOOP_PAYOFF, payoff);
+          later(BOOP_END, null);
+        }
+
+        if (!isReduced && typeof squashEl.animate === 'function') {
+          squashEl.animate(SQUASH_KEYFRAMES, { duration: SQUASH_MS, easing: 'linear' });
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMascot);
+  } else {
+    setupMascot();
+  }
+
+  document.addEventListener('astro:page-load', setupMascot);
+</script>

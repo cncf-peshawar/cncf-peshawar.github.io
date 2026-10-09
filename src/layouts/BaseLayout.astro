@@ -1,6 +1,7 @@
 ---
 import '../styles/tokens.css';
 import '../styles/base.css';
+import '../styles/motion.css';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 
@@ -76,6 +77,7 @@ const fullTitle = title.includes("Cloud Native Peshawar") || title.includes("CNC
       <slot />
     </main>
     <Footer />
+    <script src="../scripts/motion.ts"></script>
   </body>
 </html>
 

@@ -1,0 +1,364 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Badge from '../ui/Badge.astro';
+
+interface Props {
+  event: CollectionEntry<'events'>;
+  featured?: boolean;
+}
+
+const { event, featured = false } = Astro.props;
+const { data, slug } = event;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Format Date safely
+const parsedDate = new Date(data.date);
+const eventDate = !isNaN(parsedDate.getTime())
+  ? parsedDate.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    })
+  : (data.date || 'Date TBA');
+
+const isUpcoming = data.status === 'upcoming';
+---
+
+<article class:list={['event-card', isUpcoming ? 'event-card--upcoming' : 'event-card--archive', featured && 'event-card--featured']}>
+  <div class="event-card__header">
+    <div class="event-card__meta">
+      <span class="event-card__date">{eventDate}</span>
+      {data.time && (
+        <span class="event-card__divider" aria-hidden="true">·</span>
+        <span class="event-card__time">{data.time}</span>
+      )}
+    </div>
+    
+    {isUpcoming ? (
+      <Badge variant="white">
+        UPCOMING MEETUP{data.capacity ? ` · CAP: ${data.capacity}` : ''}
+      </Badge>
+    ) : (
+      <Badge variant="mint">
+        COMPLETED LAB
+      </Badge>
+    )}
+  </div>
+
+  <h3 class="event-card__title">
+    <a href={`${base}/events/${slug}`}>{data.title}</a>
+  </h3>
+
+  {data.venue && (
+    <p class="event-card__venue">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+      <span>{data.venue}{data.location ? `, ${data.location}` : ''}</span>
+    </p>
+  )}
+
+  {data.summary && (
+    <p class="event-card__summary">{data.summary}</p>
+  )}
+
+  <!-- Tags -->
+  {data.tags && data.tags.length > 0 && (
+    <div class="event-card__tags">
+      {data.tags.map((tag) => (
+        <span class="event-card__tag">#{tag}</span>
+      ))}
+    </div>
+  )}
+
+  <!-- Footer Actions -->
+  <div class="event-card__actions">
+    {isUpcoming ? (
+      <div class="event-card__rsvp-group">
+        {data.rsvpUrl && (
+          <a 
+            href={data.rsvpUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn-sky btn-sm"
+          >
+            <span>RSVP on Open Community Groups</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        )}
+
+        {data.lumaUrl && (
+          <a 
+            href={data.lumaUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn-outline btn-sm"
+          >
+            <span>Luma Link ↗</span>
+          </a>
+        )}
+
+        <a href={`${base}/events/${slug}`} class="event-card__detail-link">
+          <span>Agenda & Details →</span>
+        </a>
+      </div>
+    ) : (
+      <div class="event-card__past-actions">
+        {data.slidesUrl && (
+          <a 
+            href={data.slidesUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn-outline btn-sm"
+          >
+            <span>View Slides ↗</span>
+          </a>
+        )}
+        {data.recordingUrl && (
+          <a 
+            href={data.recordingUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn-outline btn-sm"
+          >
+            <span>Watch Recording ↗</span>
+          </a>
+        )}
+        <a href={`${base}/events/${slug}`} class="event-card__detail-link">
+          <span>View Recap →</span>
+        </a>
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .event-card {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(20px, 4vw, 32px);
+    border-radius: var(--radius-brutal);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+    transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .event-card--upcoming {
+    background-color: var(--color-canary-banner);
+  }
+
+  .event-card--archive {
+    background-color: var(--color-frost-white);
+  }
+
+  .event-card:hover {
+    transform: translate(3px, -3px);
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+  }
+
+  .event-card:active {
+    transform: none;
+    transition: transform 30ms ease-in-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .event-card,
+    .event-card:hover,
+    .event-card:active {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
+  .event-card__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-8, 8px);
+    margin-bottom: var(--spacing-12, 12px);
+  }
+
+  .event-card__meta {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-charcoal-ink);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--font-weight-medium, 500);
+  }
+
+  .event-card__date {
+    font-weight: var(--font-weight-semibold, 600);
+  }
+
+  .event-card__divider {
+    color: var(--color-graphite);
+  }
+
+  .event-card__title {
+    font-family: var(--font-mono);
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-weight: var(--font-weight-semibold, 600);
+    line-height: var(--line-height-snug, 1.25);
+    margin-top: 0;
+    margin-bottom: var(--spacing-8, 8px);
+    color: var(--color-charcoal-ink);
+  }
+
+  .event-card__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .event-card__title a:hover {
+    text-decoration: underline;
+  }
+
+  .event-card__venue {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-12, 12px);
+  }
+
+  .event-card__venue svg {
+    flex-shrink: 0;
+    color: var(--color-charcoal-ink);
+  }
+
+  .event-card__summary {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    color: var(--color-charcoal-ink);
+    line-height: var(--line-height-relaxed, 1.6);
+    margin-bottom: var(--spacing-16, 16px);
+    flex-grow: 1;
+  }
+
+  .event-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--spacing-20, 20px);
+  }
+
+  .event-card__tag {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-charcoal-ink);
+    background-color: rgba(56, 56, 56, 0.08);
+    border: 1px solid rgba(56, 56, 56, 0.2);
+    padding: 2px 8px;
+    border-radius: var(--radius-brutal);
+    white-space: nowrap;
+  }
+
+  .event-card__actions {
+    margin-top: auto;
+    padding-top: var(--spacing-16, 16px);
+    border-top: 1px solid rgba(56, 56, 56, 0.15);
+  }
+
+  .event-card__rsvp-group,
+  .event-card__past-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-12, 12px);
+  }
+
+  .event-card__detail-link {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-semibold, 600);
+    color: var(--color-charcoal-ink);
+    text-decoration: underline;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  .event-card__detail-link:hover {
+    text-decoration: none;
+  }
+
+  /* Buttons inside EventCard */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-semibold, 600);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide, 0.02em);
+    text-decoration: none !important;
+    border-radius: var(--radius-brutal);
+    border-width: var(--border-width, 2px);
+    border-style: solid;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    transition: transform 120ms ease-in-out;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .btn-sm {
+    padding: 7px 14px;
+    min-height: 34px;
+    box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+  }
+
+  .btn:hover {
+    transform: translate(7px, -7px);
+  }
+
+  .btn:active {
+    transform: none;
+    transition: transform 30ms ease-in-out;
+  }
+
+  .btn:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+
+  .btn-sky {
+    background-color: var(--color-sky-crayon);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-sky:hover {
+    background-color: var(--color-sky-crayon);
+  }
+
+  .btn-outline {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-ice-wash);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn:hover,
+    .btn:active {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>

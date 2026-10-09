@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'astro/types';
 
 export interface Props extends HTMLAttributes<'span'> {
-  variant?: 'canary' | 'yellow' | 'mint' | 'orange' | 'charcoal';
+  variant?: 'canary' | 'yellow' | 'mint' | 'orange' | 'charcoal' | 'white' | 'lilac';
   class?: string;
 }
 
@@ -60,6 +60,18 @@ const activeVariant = variant === 'yellow' ? 'canary' : variant;
   .badge--charcoal {
     background-color: var(--color-charcoal-ink);
     color: var(--color-frost-white);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--white {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--lilac {
+    background-color: var(--color-lilac-sketch);
+    color: var(--color-charcoal-ink);
     border-color: var(--color-charcoal-ink);
   }
 </style>

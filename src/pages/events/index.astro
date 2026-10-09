@@ -1,8 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import EventCard from '../../components/EventCard.astro';
-import CFPBanner from '../../components/CFPBanner.astro';
+import EventCard from '../../components/events/EventCard.astro';
+import CfpBand from '../../components/CfpBand.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Marquee from '../../components/ui/Marquee.astro';
 
 const allEvents = await getCollection('events');
 const getTimestamp = (dateStr: string) => {
@@ -12,102 +14,255 @@ const getTimestamp = (dateStr: string) => {
 const sortedEvents = allEvents.sort((a, b) => getTimestamp(b.data.date) - getTimestamp(a.data.date));
 const upcomingEvents = sortedEvents.filter(e => e.data.status === 'upcoming');
 const pastEvents = sortedEvents.filter(e => e.data.status === 'completed');
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout 
   title="Events & Meetups | CNCF Peshawar" 
   description="Explore upcoming and past Cloud Native meetups, Kubernetes workshops, and distributed systems labs in Peshawar."
 >
-  <!-- Page Header -->
-  <section class="page-header section">
-    <div class="container">
-      <span class="badge badge--live">Community Gatherings</span>
-      <h1 class="page-header__title">Events & Technical Labs.</h1>
-      <p class="page-header__desc">
-        All CNCF Peshawar meetups and workshops are 100% free, community-driven, and open to all engineers, researchers, and students.
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-hero-eyebrow" data-hero-eyebrow>
+        <Badge variant="canary">00 // SCHEDULE</Badge>
+        <span class="hero-eyebrow-text">COMMUNITY GATHERINGS</span>
+      </div>
+      <h1 class="page-hero-title">Events & Technical Labs.</h1>
+      <p class="page-hero-desc" data-hero-lede>
+        All CNCF Peshawar meetups and workshops are 100% free, community-driven, and open to all engineers, researchers, and students in Khyber Pakhtunkhwa.
+      </p>
+      <div class="page-hero-actions" data-hero-actions>
+        <a href="#upcoming" class="btn btn-sky">Upcoming Meetup</a>
+        <a href={`${base}/speak`} class="btn btn-outline">Submit Talk (CFP)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Featured Event -->
+  <section class="section-wrap upcoming-section" id="upcoming" data-reveal>
+    <div class="section-header-box">
+      <span class="section-eyebrow">01 // UPCOMING</span>
+      <h2 class="section-headline">Next In-Person Meetup.</h2>
+      <p class="section-subtext">
+        Seats are strictly limited to venue capacity. RSVP early on Open Community Groups (OCG) or Luma.
       </p>
     </div>
-  </section>
 
-  <!-- Upcoming Events -->
-  {upcomingEvents.length > 0 && (
-    <section class="section section--subtle">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-header__num">01 // UPCOMING</span>
-          <h2 class="section-header__title">Next In-Person Meetup.</h2>
-          <p class="section-header__desc">
-            Seats are limited to venue capacity. RSVP early on Open Community Groups (OCG) or Luma.
-          </p>
+    {upcomingEvents.length > 0 ? (
+      <div class="events-list" data-reveal-group>
+        {upcomingEvents.map(event => (
+          <div data-reveal-item>
+            <EventCard event={event} featured={true} />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="empty-upcoming-card" data-reveal-item>
+        <div class="empty-badge-row">
+          <Badge variant="charcoal">NOTICE // SCHEDULE IN PROGRESS</Badge>
+          <span class="empty-status">COMMUNITY GATHERINGS</span>
         </div>
-
-        <div class="events-list">
-          {upcomingEvents.map(event => (
-            <EventCard event={event} />
-          ))}
+        <h3 class="empty-title">No Upcoming Meetups Currently Scheduled</h3>
+        <p class="empty-desc">
+          We are currently planning our next hands-on technical workshop and community meetup. Explore our previous session recordings below, or propose a talk to take the stage at our next gathering.
+        </p>
+        <div class="empty-actions">
+          <a href={`${base}/speak`} class="btn btn-sky btn-sm">Submit a Talk (CFP)</a>
+          <a href="#archive" class="btn btn-outline btn-sm">Browse Past Archives →</a>
         </div>
       </div>
-    </section>
-  )}
+    )}
+  </section>
 
-  <!-- Past Events Archive -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-header__num">02 // ARCHIVE</span>
-        <h2 class="section-header__title">Past Meetup Archives.</h2>
-        <p class="section-header__desc">
-          Explore slide decks, video recordings, and summaries from our previous sessions.
+  <!-- Past Meetup Archive Grid -->
+  <section class="section-wrap archive-section" id="archive" data-reveal>
+    <div class="section-header-box">
+      <span class="section-eyebrow">02 // ARCHIVE</span>
+      <h2 class="section-headline">Past Meetup Archives.</h2>
+      <p class="section-subtext">
+        Explore slide decks, video recordings, code repositories, and summaries from our previous sessions.
+      </p>
+    </div>
+
+    {pastEvents.length > 0 ? (
+      <div class="events-grid" data-reveal-group>
+        {pastEvents.map(event => (
+          <div data-reveal-item>
+            <EventCard event={event} />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="empty-archive-card" data-reveal-item>
+        <p class="empty-archive-text">
+          Our inaugural meetup is upcoming! Recordings, slide decks, and code repositories will be archived here immediately following the Genesis session.
         </p>
       </div>
-
-      {pastEvents.length > 0 ? (
-        <div class="events-grid">
-          {pastEvents.map(event => (
-            <EventCard event={event} />
-          ))}
-        </div>
-      ) : (
-        <div class="empty-archive-box">
-          <p>
-            Our inaugural meetup is upcoming! Recordings, slide decks, and code repositories will be archived here immediately following the Genesis session.
-          </p>
-        </div>
-      )}
-    </div>
+    )}
   </section>
 
-  <!-- CFP Banner -->
-  <CFPBanner />
+  <!-- CFP Band -->
+  <CfpBand />
+
+  <!-- Marquee Banner Strip -->
+  <Marquee 
+    items={[
+      'KUBERNETES',
+      'DEVOPS',
+      'MLOPS',
+      'DISTRIBUTED SYSTEMS',
+      'AGENTIC AI',
+      '100% FREE COMMUNITY',
+      'OPEN TO ALL BUILDERS',
+      'KHYBER PAKHTUNKHWA'
+    ]} 
+    speed="24s" 
+    label="Community Topics Marquee" 
+  />
 </BaseLayout>
 
 <style>
-  .page-header {
-    padding-bottom: var(--space-xl);
+  /* Page Hero */
+  .page-hero {
+    padding: clamp(36px, 6vw, 64px) clamp(16px, 4vw, 32px) clamp(32px, 5vw, 48px);
+    background-color: var(--color-cream-paper);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  .page-header__title {
-    font-size: var(--font-size-5xl);
-    margin-top: var(--space-xs);
-    margin-bottom: var(--space-md);
+  .page-hero-inner {
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    position: relative;
   }
 
-  .page-header__desc {
-    font-size: var(--font-size-lg);
-    color: var(--color-ink-muted);
-    max-width: var(--container-prose);
+  .page-hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide, 0.08em);
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-12, 12px);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8, 8px);
+    flex-wrap: wrap;
   }
 
+  .hero-eyebrow-text {
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-text-muted);
+  }
+
+  .page-hero-title {
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: var(--font-weight-bold, 700);
+    line-height: var(--line-height-snug, 1.15);
+    letter-spacing: var(--letter-spacing-tight, -0.02em);
+    margin-top: 0;
+    margin-bottom: var(--spacing-16, 16px);
+    text-transform: uppercase;
+    color: var(--color-charcoal-ink);
+  }
+
+  .page-hero-desc {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+    color: var(--color-charcoal-ink);
+    max-width: 760px;
+    line-height: var(--line-height-relaxed, 1.6);
+    margin-top: 0;
+    margin-bottom: var(--spacing-24, 24px);
+  }
+
+  .page-hero-actions {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-12, 12px);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 639px) {
+    .page-hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  /* Section Wrapper */
+  .section-wrap {
+    padding: clamp(36px, 6vw, 60px) clamp(16px, 4vw, 32px);
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .upcoming-section {
+    background-color: var(--color-chalk-gray);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    max-width: 100%;
+    padding-inline: max(clamp(16px, 4vw, 32px), calc((100% - var(--container-max, 1200px)) / 2));
+  }
+
+  .archive-section {
+    background-color: var(--color-cream-paper);
+  }
+
+  .section-header-box {
+    margin-bottom: clamp(24px, 4vw, 36px);
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-text-muted);
+    letter-spacing: var(--letter-spacing-wide, 0.06em);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-6, 6px);
+    display: block;
+  }
+
+  .section-headline {
+    font-family: var(--font-mono);
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: var(--font-weight-bold, 700);
+    letter-spacing: var(--letter-spacing-tight, -0.01em);
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: var(--spacing-10, 10px);
+    color: var(--color-charcoal-ink);
+  }
+
+  .section-subtext {
+    font-family: var(--font-mono);
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: var(--color-text-muted);
+    max-width: 680px;
+    line-height: var(--line-height-relaxed, 1.5);
+    margin: 0;
+  }
+
+  /* Lists and Grids */
   .events-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    gap: var(--spacing-20, 20px);
   }
 
   .events-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: clamp(16px, 3vw, 24px);
   }
 
   @media (min-width: 768px) {
@@ -116,18 +271,146 @@ const pastEvents = sortedEvents.filter(e => e.data.status === 'completed');
     }
   }
 
-  .empty-archive-box {
-    padding: var(--space-xl);
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+  /* Empty States */
+  .empty-upcoming-card,
+  .empty-archive-card {
+    background-color: var(--color-frost-white);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+    padding: clamp(24px, 5vw, 40px);
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .empty-badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-8, 8px);
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-16, 16px);
+  }
+
+  .empty-status {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-text-muted);
+    letter-spacing: var(--letter-spacing-wide, 0.05em);
+    text-transform: uppercase;
+  }
+
+  .empty-title {
+    font-family: var(--font-mono);
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-charcoal-ink);
+    margin-top: 0;
+    margin-bottom: var(--spacing-12, 12px);
+  }
+
+  .empty-desc,
+  .empty-archive-text {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed, 1.6);
+    max-width: 68ch;
+    margin-top: 0;
+    margin-bottom: var(--spacing-20, 20px);
+  }
+
+  .empty-archive-card {
     text-align: center;
   }
 
-  .empty-archive-box p {
-    font-size: var(--font-size-base);
-    color: var(--color-ink-muted);
-    max-width: 60ch;
+  .empty-archive-text {
     margin-inline: auto;
+    margin-bottom: 0;
+  }
+
+  .empty-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-12, 12px);
+    align-items: center;
+  }
+
+  /* Shared Button Styles in Page */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8, 8px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    font-weight: var(--font-weight-medium, 500);
+    line-height: var(--line-height-snug, 1.2);
+    letter-spacing: var(--letter-spacing-normal, 0.02em);
+    padding: 10px 24px;
+    min-height: 44px;
+    border-radius: var(--radius-brutal);
+    border-width: var(--border-width, 2px);
+    border-style: solid;
+    border-color: var(--color-charcoal-ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+    transition: transform 120ms ease-in-out;
+    user-select: none;
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .btn-sm {
+    padding: 7px 14px;
+    font-size: var(--font-size-caption, 0.75rem);
+    min-height: 34px;
+    box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+  }
+
+  .btn:hover {
+    transform: translate(7px, -7px);
+  }
+
+  .btn:active {
+    transform: none;
+    transition: transform 30ms ease-in-out;
+  }
+
+  .btn:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+
+  .btn-sky {
+    background-color: var(--color-sky-crayon);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-sky:hover {
+    background-color: var(--color-sky-crayon);
+  }
+
+  .btn-outline {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-ice-wash);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn:hover,
+    .btn:active {
+      transform: none !important;
+      transition: none !important;
+    }
   }
 </style>

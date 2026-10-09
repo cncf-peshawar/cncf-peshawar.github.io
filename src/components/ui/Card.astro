@@ -48,7 +48,7 @@ const {
   }
 
   .card--shadow {
-    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+    box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
   }
 
   /* Surfaces */
@@ -88,21 +88,33 @@ const {
   /* Interactive behavior */
   .card--interactive {
     cursor: pointer;
-    transition: var(--transition-press, transform 0.1s ease, box-shadow 0.1s ease);
+    box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+    transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
   }
 
   .card--interactive:hover {
-    transform: translate(-2px, 2px);
+    transform: translate(3px, -3px);
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
     background-color: var(--color-ice-wash);
   }
 
   .card--interactive:active {
-    transform: var(--press-transform, translate(-6px, 6px));
-    box-shadow: var(--shadow-hard-pressed, 0 0 0 0 var(--color-charcoal-ink));
+    transform: translate(0, 0);
+    box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+    transition: transform 60ms ease-in-out, box-shadow 60ms ease-in-out;
   }
 
   .card--interactive:focus-visible {
     outline: 3px solid var(--color-charcoal-ink);
     outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card--interactive,
+    .card--interactive:hover,
+    .card--interactive:active {
+      transform: none !important;
+      transition: none !important;
+    }
   }
 </style>

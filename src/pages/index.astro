@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GenesisCountdown from '../components/GenesisCountdown.astro';
+import Mascot from '../components/ui/Mascot.astro';
+import CfpBand from '../components/CfpBand.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -26,7 +28,7 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
   <!-- Hero Section -->
   <section class="hero-section">
     <!-- Doodles in Hero -->
-    <div class="hero-doodle-cloud" aria-hidden="true">
+    <div class="hero-doodle-cloud" data-hero-doodle aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 110" fill="none" aria-hidden="true">
         <circle cx="114" cy="38" r="16" fill="var(--color-canary-banner)" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M114 14 L114 8" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
@@ -44,15 +46,15 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
     </div>
 
     <div class="hero-container">
-      <span class="hero-eyebrow">00 // CNCF COMMUNITY CHAPTER</span>
+      <span class="hero-eyebrow" data-hero-eyebrow>00 // CNCF COMMUNITY CHAPTER</span>
       <h1 class="hero-headline">
         Building Peshawar's <strong>Cloud Native</strong> Future.
       </h1>
-      <p class="hero-lede">
+      <p class="hero-lede" data-hero-lede>
         Empowering local engineers, developers, and students through hands-on Kubernetes, distributed systems, and open-source collaboration in Khyber Pakhtunkhwa.
       </p>
 
-      <div class="hero-ctas">
+      <div class="hero-ctas" data-hero-actions>
         <a href="https://ocgroups.dev/cncf/group/6vwk2n4" target="_blank" rel="noopener noreferrer" class="btn btn-sky">
           <span>Join Chapter on Open Community Groups (OCG)</span>
           <span class="hero-doodle-arrow" aria-hidden="true">
@@ -73,6 +75,16 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
         </a>
       </div>
 
+      <!-- Hero Mascot (Penguin) - Flow below CTAs for <1024px; Flank anchored for >=1024px -->
+      <div class="hero-mascot-container" data-hero-doodle>
+        <Mascot
+          directions={`${base}/mascots/penguin-directions.webp`}
+          reactions={`${base}/mascots/penguin-reactions.webp`}
+          size={140}
+          bubbleText="100% free & open to all"
+        />
+      </div>
+
       <div>
         <a href={`${base}/sponsors`} class="hero-sublink">Sponsor Us</a>
       </div>
@@ -83,7 +95,7 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
     </div>
 
     <!-- Terminal Robot Doodle Bleeding Edge -->
-    <div class="hero-doodle-robot" aria-hidden="true">
+    <div class="hero-doodle-robot" data-hero-doodle aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" aria-hidden="true">
         <path d="M 44 44 C 44 40, 114 40, 114 44 L 114 96 C 114 100, 44 100, 44 96 Z"
               stroke="var(--color-wet-cement)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/>
@@ -134,7 +146,7 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
   </div>
 
   <!-- Chapter Charter Block -->
-  <section class="charter-section" id="charter-section">
+  <section class="charter-section" id="charter-section" data-reveal>
     <div class="charter-card">
       <div class="doodle-stack" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" aria-hidden="true">
@@ -180,26 +192,26 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
   </section>
 
   <!-- Key Facts -->
-  <section class="facts-section">
+  <section class="facts-section" data-reveal>
     <span class="section-eyebrow">01 // COMMUNITY FUNDAMENTALS</span>
     <h2 class="section-title">Key Community Facts & Verifiable Commitments</h2>
-    <div class="facts-grid">
-      <div class="fact-card">
+    <div class="facts-grid" data-reveal-group>
+      <div class="fact-card" data-reveal-item>
         <span class="fact-num">100%</span>
         <h3 class="fact-title">100% Free & Open</h3>
         <span class="fact-label">ACCESS // Zero barrier to entry for students & practitioners</span>
       </div>
-      <div class="fact-card">
+      <div class="fact-card" data-reveal-item>
         <span class="fact-num">#01</span>
         <h3 class="fact-title">Official CNCF Chapter</h3>
         <span class="fact-label">AFFILIATION // Recognized community under CNCF & Linux Foundation</span>
       </div>
-      <div class="fact-card">
+      <div class="fact-card" data-reveal-item>
         <span class="fact-num">100%</span>
         <h3 class="fact-title">Hands-On & Practical</h3>
         <span class="fact-label">MISSION // Real clusters, real architectures, zero slides-only filler</span>
       </div>
-      <div class="fact-card">
+      <div class="fact-card" data-reveal-item>
         <span class="fact-num">500+</span>
         <h3 class="fact-title">Open Community</h3>
         <span class="fact-label">COLLABORATION // Growing network of developers across Khyber Pakhtunkhwa</span>
@@ -208,28 +220,28 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
   </section>
 
   <!-- Featured Meetup (.countdown-card) -->
-  <section class="featured-section" id="featured-meetup">
+  <section class="featured-section" id="featured-meetup" data-reveal>
     <GenesisCountdown event={nextFeaturedEvent} />
   </section>
 
   <!-- Pillars (4 Rainbow Outline Borders) -->
-  <section class="pillars-section">
+  <section class="pillars-section" data-reveal>
     <span class="section-eyebrow">02 // CORE PILLARS</span>
     <h2 class="section-title">How We Empower the Community.</h2>
-    <div class="pillars-grid">
-      <div class="pillar-card border-lime">
+    <div class="pillars-grid" data-reveal-group>
+      <div class="pillar-card border-lime" data-reveal-item>
         <h3 class="pillar-title">Production-Grade Deep Dives</h3>
         <p class="pillar-desc">Kubernetes internals, eBPF telemetry, service meshes, and GitOps deployments discussed by architects who run production clusters.</p>
       </div>
-      <div class="pillar-card border-peach">
+      <div class="pillar-card border-peach" data-reveal-item>
         <h3 class="pillar-title">Hands-On Labs</h3>
         <p class="pillar-desc">Bring your laptop. Interactive workshop sessions covering containerization, Helm templating, and cloud native CI/CD pipelines.</p>
       </div>
-      <div class="pillar-card border-mint">
+      <div class="pillar-card border-mint" data-reveal-item>
         <h3 class="pillar-title">Mentorship & CFP</h3>
         <p class="pillar-desc">First-time speakers welcomed. We provide talk mentoring, slide reviews, and open CFP review cycles for engineers in Peshawar.</p>
       </div>
-      <div class="pillar-card border-sky">
+      <div class="pillar-card border-sky" data-reveal-item>
         <h3 class="pillar-title">Sponsor Visibility & Talent Bridge</h3>
         <p class="pillar-desc">Connecting forward-looking tech companies and global ecosystem partners with top engineering talent across Khyber Pakhtunkhwa.</p>
       </div>
@@ -237,7 +249,7 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
   </section>
 
   <!-- Past Meetups -->
-  <section class="past-meetups-section" id="past-meetups">
+  <section class="past-meetups-section" id="past-meetups" data-reveal>
     <div class="past-doodle-cup" aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none" aria-hidden="true">
         <path d="M 46 48 C 42 38, 48 30, 44 20 C 40 12, 46 6, 42 2" stroke="var(--color-wet-cement)" stroke-width="2.5" stroke-linecap="round"/>
@@ -258,20 +270,20 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
     </div>
     <span class="section-eyebrow">03 // ARCHIVE & RECAPS</span>
     <h2 class="section-title">Past Meetups & Technical Labs.</h2>
-    <div class="past-grid">
-      <div class="past-card">
+    <div class="past-grid" data-reveal-group>
+      <div class="past-card" data-reveal-item>
         <span class="past-date">SEP 04, 2026 · INAUGURAL</span>
         <h3 class="past-name">CNCF Peshawar Genesis</h3>
         <p class="past-summary">The inaugural chapter gathering introducing cloud native open-source foundations and local community roadmap.</p>
         <a href={`${base}/events/01-cncf-peshawar-genesis`} class="past-link">Read Details →</a>
       </div>
-      <div class="past-card">
+      <div class="past-card" data-reveal-item>
         <span class="past-date">COMING OCT 2026</span>
         <h3 class="past-name">Container Security & eBPF Deep Dive</h3>
         <p class="past-summary">Hands-on threat analysis in Kubernetes clusters with Cilium, Tetragon, and runtime security controls.</p>
         <a href={`${base}/events`} class="past-link">View Full Meetup Archive</a>
       </div>
-      <div class="past-card">
+      <div class="past-card" data-reveal-item>
         <span class="past-date">COMING NOV 2026</span>
         <h3 class="past-name">GitOps at Scale with ArgoCD</h3>
         <p class="past-summary">Declarative infrastructure patterns, progressive rollouts, and disaster recovery blueprints.</p>
@@ -281,40 +293,26 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
   </section>
 
   <!-- CFP Band -->
-  <section class="cfp-band" id="cfp-section">
-    <div class="cfp-inner">
-      <span class="cfp-eyebrow">CALL FOR PROPOSALS (CFP) · ALWAYS OPEN</span>
-      <h2 class="cfp-headline">Have a Cloud Native Story or Architecture to Share?</h2>
-      <div class="cfp-chips">
-        <span class="cfp-chip">15-Min Lightning Talk</span>
-        <span class="cfp-chip">40-Min Deep Dive</span>
-        <span class="cfp-chip">90-Min Workshop</span>
-      </div>
-      <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
-        <a href={`${base}/speak`} class="btn btn-sky">Apply to Speak at CNCF Peshawar</a>
-        <a href={`${base}/speak`} class="btn btn-outline">Submit Talk Proposal</a>
-      </div>
-    </div>
-  </section>
+  <CfpBand />
 
   <!-- Sponsors Section -->
-  <section class="sponsors-section" id="sponsors-section">
+  <section class="sponsors-section" id="sponsors-section" data-reveal>
     <span class="section-eyebrow">04 // SPONSORS & PARTNERS</span>
     <h2 class="section-title">Supported by Visionary Partners.</h2>
-    <div class="sponsors-grid">
-      <div class="sponsor-card">
+    <div class="sponsors-grid" data-reveal-group>
+      <div class="sponsor-card" data-reveal-item>
         <span class="sponsor-type">EVENT SPONSOR PARTNER</span>
         <h3 class="sponsor-name">GitHub</h3>
         <p class="sponsor-desc">Supporting open-source tooling, workshops, and developer education worldwide.</p>
         <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="sponsor-link">Visit Website ↗</a>
       </div>
-      <div class="sponsor-card">
+      <div class="sponsor-card" data-reveal-item>
         <span class="sponsor-type">VENUE PARTNER</span>
         <h3 class="sponsor-name">National Incubation Center (NIC) Peshawar</h3>
         <p class="sponsor-desc">National Incubation Center Peshawar providing world-class gathering space.</p>
         <a href="https://nicpeshawar.com.pk" target="_blank" rel="noopener noreferrer" class="sponsor-link">Visit Website ↗</a>
       </div>
-      <div class="sponsor-card">
+      <div class="sponsor-card" data-reveal-item>
         <span class="sponsor-type">EVENT SPONSOR PARTNER</span>
         <h3 class="sponsor-name">nsave</h3>
         <p class="sponsor-desc">Fintech engineering team empowering high-performance distributed systems.</p>
@@ -328,7 +326,7 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
   </section>
 
   <!-- Sponsorship Email Builder Section (#email-builder & #tiers) -->
-  <section id="email-builder">
+  <section id="email-builder" data-reveal>
     <div id="tiers" class="builder-frame">
       <span class="section-eyebrow">05 // INTAKE & CONTACT</span>
       <h2 class="section-title" style="margin-bottom:12px;">Sponsorship Inquiry Generator.</h2>
@@ -526,12 +524,18 @@ Best regards,
   .hero-doodle-robot {
     position: absolute;
     bottom: -25px;
-    right: -20px;
-    width: clamp(120px, 20vw, 200px);
-    height: clamp(120px, 20vw, 200px);
+    left: -20px;
+    width: clamp(120px, 18vw, 180px);
+    height: clamp(120px, 18vw, 180px);
     z-index: 5;
     pointer-events: none;
     opacity: 0.95;
+  }
+
+  @media (max-width: 767px) {
+    .hero-doodle-robot {
+      display: none;
+    }
   }
 
   .hero-doodle-cloud {
@@ -551,6 +555,61 @@ Best regards,
     height: 36px;
     vertical-align: middle;
     margin-left: 8px;
+  }
+
+  /* Hero Mascot Placement */
+  .hero-mascot-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 600px;
+    margin: 4px auto 14px;
+    padding-right: 12px;
+    z-index: 12;
+    pointer-events: none;
+  }
+
+  .hero-mascot-container :global(.mascot-root) {
+    width: 100px;
+    height: 100px;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .hero-mascot-container {
+      margin: 8px auto 16px;
+      padding-right: 24px;
+    }
+
+    .hero-mascot-container :global(.mascot-root) {
+      width: 110px;
+      height: 110px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-mascot-container {
+      position: absolute;
+      top: 50px;
+      right: clamp(-180px, -13vw, -120px);
+      width: auto;
+      max-width: none;
+      margin: 0;
+      padding-right: 0;
+      display: block;
+      z-index: 15;
+    }
+
+    .hero-mascot-container :global(.mascot-root) {
+      width: 140px;
+      height: 140px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-mascot-container :global(.mascot-bubble) {
+      display: none !important;
+    }
   }
 
   /* Marquee Strip */
@@ -877,57 +936,6 @@ Best regards,
     pointer-events: none;
   }
 
-  /* CFP Band */
-  .cfp-band {
-    width: 100%;
-    background: var(--color-charcoal-ink);
-    color: var(--color-cream-paper);
-    padding: 56px clamp(16px, 4vw, 32px);
-    border-top: 2px solid var(--color-charcoal-ink);
-    border-bottom: 2px solid var(--color-charcoal-ink);
-    text-align: center;
-  }
-
-  .cfp-inner {
-    max-width: 760px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-  }
-
-  .cfp-eyebrow {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--color-canary-banner);
-    text-transform: uppercase;
-  }
-
-  .cfp-headline {
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    font-weight: 600;
-    color: var(--color-cream-paper);
-    line-height: 1.25;
-  }
-
-  .cfp-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin: 6px 0 12px;
-  }
-
-  .cfp-chip {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: var(--radius-brutal);
-    padding: 4px 10px;
-    font-size: 12px;
-    color: var(--color-cream-paper);
-  }
 
   /* Sponsors & Partners */
   .sponsors-section {

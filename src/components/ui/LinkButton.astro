@@ -52,23 +52,33 @@ const rainbowClass = variant === 'rainbow'
     cursor: pointer;
     user-select: none;
     white-space: nowrap;
-    transition: var(--transition-press, transform 0.1s ease, box-shadow 0.1s ease);
+    transition: transform 120ms ease-in-out;
     -webkit-font-smoothing: antialiased;
   }
 
   .btn:hover {
     text-decoration: none !important;
-    transform: translate(-2px, 2px);
+    transform: translate(7px, -7px);
+    transition: transform 120ms ease-in-out;
   }
 
   .btn:active {
-    transform: var(--press-transform, translate(-6px, 6px));
-    box-shadow: var(--shadow-hard-pressed, 0 0 0 0 var(--color-charcoal-ink));
+    transform: none;
+    transition: transform 30ms ease-in-out;
   }
 
   .btn:focus-visible {
     outline: 3px solid var(--color-charcoal-ink);
     outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn:hover,
+    .btn:active {
+      transform: none !important;
+      transition: none !important;
+    }
   }
 
   /* Sizes */

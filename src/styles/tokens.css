@@ -106,6 +106,7 @@
   --border-solid: var(--border-width) solid var(--color-charcoal-ink);
 
   --shadow-hard: -6px 6px 0px 0px var(--color-charcoal-ink);
+  --shadow-hard-sm: -4px 4px 0px 0px var(--color-charcoal-ink);
   --shadow-hard-pressed: 0px 0px 0px 0px var(--color-charcoal-ink);
   --shadow-subtle: -6px 6px 0px 0px var(--color-charcoal-ink);
   --shadow-sm: var(--shadow-hard);

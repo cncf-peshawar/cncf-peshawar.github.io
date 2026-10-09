@@ -1,0 +1,157 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section class="cfp-band" id="cfp-section" data-reveal>
+  <div class="cfp-inner">
+    <span class="cfp-eyebrow">CALL FOR PROPOSALS (CFP) · ALWAYS OPEN</span>
+    <h2 class="cfp-headline">Have a Cloud Native Story or Architecture to Share?</h2>
+    <div class="cfp-chips">
+      <span class="cfp-chip">15-Min Lightning Talk</span>
+      <span class="cfp-chip">40-Min Deep Dive</span>
+      <span class="cfp-chip">90-Min Workshop</span>
+    </div>
+    <div class="cfp-actions">
+      <a href={`${base}/speak`} class="btn btn-sky">Apply to Speak at CNCF Peshawar</a>
+      <a href={`${base}/speak`} class="btn btn-outline">Submit Talk Proposal</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cfp-band {
+    width: 100%;
+    background-color: var(--color-charcoal-ink);
+    color: var(--color-cream-paper);
+    padding: 56px clamp(16px, 4vw, 32px);
+    border-top: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .cfp-inner {
+    max-width: 760px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-16, 16px);
+    align-items: center;
+  }
+
+  .cfp-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    letter-spacing: var(--letter-spacing-wide, 0.1em);
+    color: var(--color-canary-banner);
+    text-transform: uppercase;
+  }
+
+  .cfp-headline {
+    font-family: var(--font-mono);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: var(--font-weight-semibold, 600);
+    color: var(--color-cream-paper);
+    line-height: var(--line-height-snug, 1.25);
+    letter-spacing: var(--letter-spacing-tight, -0.01em);
+    margin: 0;
+  }
+
+  .cfp-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 6px 0 12px;
+  }
+
+  .cfp-chip {
+    font-family: var(--font-mono);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-brutal);
+    padding: 4px 10px;
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-cream-paper);
+    white-space: nowrap;
+  }
+
+  .cfp-actions {
+    display: flex;
+    gap: var(--spacing-12, 12px);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8, 8px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    font-weight: var(--font-weight-medium, 500);
+    line-height: var(--line-height-snug, 1.2);
+    letter-spacing: var(--letter-spacing-normal, 0.02em);
+    padding: 10px 24px;
+    min-height: 44px;
+    border-radius: var(--radius-brutal);
+    border-width: var(--border-width, 2px);
+    border-style: solid;
+    border-color: var(--color-charcoal-ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+    transition: transform 120ms ease-in-out;
+    user-select: none;
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .btn:hover {
+    transform: translate(7px, -7px);
+  }
+
+  .btn:active {
+    transform: none;
+    transition: transform 30ms ease-in-out;
+  }
+
+  .btn:focus-visible {
+    outline: 3px solid var(--color-cream-paper);
+    outline-offset: 3px;
+  }
+
+  .btn-sky {
+    background-color: var(--color-sky-crayon);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-sky:hover {
+    background-color: var(--color-sky-crayon);
+  }
+
+  .btn-outline {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-ice-wash);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn:hover,
+    .btn:active {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>

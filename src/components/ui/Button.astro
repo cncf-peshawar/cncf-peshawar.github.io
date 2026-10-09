@@ -55,17 +55,18 @@ const rainbowClass = variant === 'rainbow'
     cursor: pointer;
     user-select: none;
     white-space: nowrap;
-    transition: var(--transition-press, transform 0.1s ease, box-shadow 0.1s ease);
+    transition: transform 120ms ease-in-out;
     -webkit-font-smoothing: antialiased;
   }
 
   .btn:hover:not(:disabled) {
-    transform: translate(-2px, 2px);
+    transform: translate(7px, -7px);
+    transition: transform 120ms ease-in-out;
   }
 
   .btn:active:not(:disabled) {
-    transform: var(--press-transform, translate(-6px, 6px));
-    box-shadow: var(--shadow-hard-pressed, 0 0 0 0 var(--color-charcoal-ink));
+    transform: none;
+    transition: transform 30ms ease-in-out;
   }
 
   .btn:focus-visible {
@@ -78,6 +79,15 @@ const rainbowClass = variant === 'rainbow'
     opacity: 0.6;
     box-shadow: none;
     transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn:hover:not(:disabled),
+    .btn:active:not(:disabled) {
+      transform: none !important;
+      transition: none !important;
+    }
   }
 
   /* Sizes */
