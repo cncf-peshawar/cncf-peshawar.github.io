@@ -392,6 +392,16 @@ const currentPath = Astro.url.pathname;
 
     if (!toggleBtn || !drawer) return;
 
+    // Astro runs this setup on the initial load and can run it again after
+    // view-transition navigations over the same, preserved header. Every run would
+    // otherwise stack another click/keydown/link listener onto the same nodes: the
+    // toggle would open and close in a single tap, Escape would fire N times over
+    // stale drawer references, and outside clicks would fight each other for focus.
+    // Marking the wired drawer makes the setup idempotent; a hard reload brings
+    // back a fresh drawer and a clean slate, so the guard never goes stale.
+    if (drawer.dataset.navReady === 'true') return;
+    drawer.dataset.navReady = 'true';
+
     let scrollY = 0;
 
     // The drawer is anchored below the sticky nav, so the space it may occupy is
@@ -466,6 +476,13 @@ const currentPath = Astro.url.pathname;
       drawer.scrollTop = 0;
       updateMaxHeight();
       drawer.classList.add('is-open');
+
+      // Opening the drawer passes focus to its first navigation link. Issue #11
+      // requires the open state to start at a clearly defined target inside the
+      // drawer rather than on the toggle behind it; with the focus trap wired up,
+      // Tab then cycles the drawer content until Escape, an outside click, or a
+      // link closes it and returns focus to the toggle.
+      drawer.querySelector<HTMLElement>('.nav-drawer__link')?.focus();
     }
 
     toggleBtn.addEventListener('click', (e) => {
@@ -478,10 +495,13 @@ const currentPath = Astro.url.pathname;
       }
     });
 
-    // Close on outside click
+    // Close on outside click. The click cannot be the toggle or another nav control
+    // (those stopPropagation), so the target is genuinely behind the drawer. Focus
+    // is handed back to the toggle: an Escape-like, predictable location, and the
+    // next Tab restarts the cycle instead of returning to an inert drawer link.
     document.addEventListener('click', (e) => {
       if (drawer.classList.contains('is-open') && !navWrapper?.contains(e.target as Node)) {
-        closeDrawer();
+        closeDrawer({ restoreFocus: true });
       }
     });
 
