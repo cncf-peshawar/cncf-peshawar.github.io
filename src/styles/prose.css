@@ -307,3 +307,39 @@
   font-size: var(--text-caption);
   color: var(--color-text-muted);
 }
+
+/* -------------------------------------------------------------------------- */
+/* T-3.4 BLOG & PROSE ADD-ONLY EXTENSIONS (Justified Per Element)              */
+/* -------------------------------------------------------------------------- */
+
+/* Measure centering: centers the 720px article measure in container */
+.prose--article {
+  margin-inline: auto;
+}
+
+/* Accessible focus visible: ensures high-contrast keyboard navigation */
+.prose a:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Overflow safety: prevents long URLs or raw strings from overflowing 390px */
+.prose p,
+.prose li,
+.prose a {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Code block safety: prevents pre blocks from exceeding container bounds */
+.prose pre {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Responsive table scrolling: ensures mobile viewports scroll wide tables */
+.prose table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}

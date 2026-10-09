@@ -8,62 +8,338 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   title="404 — Page Not Found | CNCF Peshawar" 
   description="The requested page could not be found on Cloud Native Peshawar."
 >
-  <section class="not-found-section section">
-    <div class="container text-center">
-      <span class="badge badge--accent">Error 404 // Resource Missing</span>
+  <section class="not-found-section" data-reveal>
+    <div class="not-found-card">
+      <!-- Searching Robot Doodle from public/illustrations/terminal-robot.svg -->
+      <div class="robot-404-searching" aria-label="Lost Container Robot Doodle">
+        <img
+          src={`${base}/illustrations/terminal-robot.svg`}
+          alt="Lost Container Robot Doodle"
+          width="180"
+          height="180"
+          loading="eager"
+        />
+      </div>
+
+      <span class="badge badge--yellow not-found-badge">ERROR 404 // RESOURCE MISSING</span>
       <h1 class="not-found-title">Page Not Found.</h1>
       <p class="not-found-desc">
-        The route or resource you are looking for has been moved, renamed, or is currently unavailable.
+        The route or container you are looking for has been moved, renamed, or is currently unavailable in the chapter cluster.
       </p>
 
+      <!-- Terminal Diagnostics Box -->
+      <div class="brutal-card terminal-box">
+        <div class="terminal-controls" aria-hidden="true">
+          <span class="control-dot dot--coral"></span>
+          <span class="control-dot dot--canary"></span>
+          <span class="control-dot dot--mint"></span>
+        </div>
+        <pre class="terminal-text"><code>HTTP/1.1 404 Not Found
+Host: cncfpeshawar.com
+Cluster-Status: healthy (0 pods failed)
+Error: Ingress route not registered in chapter routing table</code></pre>
+      </div>
+
       <div class="not-found-actions">
-        <a href={`${base}/`} class="btn btn--accent">
+        <a href={`${base}/`} class="btn btn--sky">
           <span>Return to Homepage</span>
         </a>
-        <a href={`${base}/events`} class="btn btn--secondary">
+        <a href={`${base}/events`} class="btn btn--outline">
           <span>Explore Events</span>
         </a>
-        <a href={`${base}/speak`} class="btn btn--secondary">
+        <a href={`${base}/speak`} class="btn btn--outline">
           <span>Speaker Hub (CFP)</span>
         </a>
       </div>
     </div>
   </section>
+
+  <!-- Marquee Strip -->
+  <div class="marquee-container" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>KUBERNETES</span><span>·</span>
+        <span>DEVOPS</span><span>·</span>
+        <span>MLOPS</span><span>·</span>
+        <span>DISTRIBUTED SYSTEMS</span><span>·</span>
+        <span>AGENTIC AI</span><span>·</span>
+        <span>100% FREE COMMUNITY</span><span>·</span>
+        <span>OPEN TO ALL BUILDERS</span><span>·</span>
+        <span>KHYBER PAKHTUNKHWA</span><span>·</span>
+      </div>
+      <div class="marquee-content">
+        <span>KUBERNETES</span><span>·</span>
+        <span>DEVOPS</span><span>·</span>
+        <span>MLOPS</span><span>·</span>
+        <span>DISTRIBUTED SYSTEMS</span><span>·</span>
+        <span>AGENTIC AI</span><span>·</span>
+        <span>100% FREE COMMUNITY</span><span>·</span>
+        <span>OPEN TO ALL BUILDERS</span><span>·</span>
+        <span>KHYBER PAKHTUNKHWA</span><span>·</span>
+      </div>
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
+  /* ------------------------------------------------------------------ */
+  /* 404 SECTION LAYOUT                                                 */
+  /* ------------------------------------------------------------------ */
   .not-found-section {
-    padding-block: clamp(var(--space-2xl), 10vw, var(--space-3xl));
+    padding: var(--spacing-80) var(--spacing-24);
+    background-color: var(--color-cream-paper);
+    min-height: calc(100vh - 350px);
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-grow: 1;
+    box-sizing: border-box;
   }
 
-  .text-center {
+  .not-found-card {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+  }
+
+  .robot-404-searching {
+    width: 180px;
+    height: 180px;
+    margin-bottom: var(--spacing-20);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .robot-404-searching img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .not-found-badge {
+    margin-bottom: var(--spacing-12);
   }
 
   .not-found-title {
-    font-size: clamp(2.25rem, 5vw, 3.75rem);
-    margin-top: var(--space-xs);
-    margin-bottom: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    line-height: var(--line-height-snug);
+    letter-spacing: -0.02em;
+    color: var(--color-charcoal-ink);
+    margin-bottom: var(--spacing-12);
+    text-transform: uppercase;
   }
 
   .not-found-desc {
-    font-size: var(--font-size-lg);
-    color: var(--color-ink-muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body-lg);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-28, 28px);
     max-width: var(--container-prose);
-    margin-bottom: var(--space-2xl);
   }
 
+  /* ------------------------------------------------------------------ */
+  /* TERMINAL DIAGNOSTICS BOX                                           */
+  /* ------------------------------------------------------------------ */
+  .brutal-card {
+    background: var(--color-frost-white);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm);
+    padding: var(--spacing-20);
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .terminal-box {
+    background: var(--color-terminal-bg);
+    color: var(--color-frost-white);
+    text-align: left;
+    width: 100%;
+    margin-bottom: var(--spacing-28, 28px);
+  }
+
+  .terminal-controls {
+    display: flex;
+    gap: var(--spacing-6, 6px);
+    margin-bottom: var(--spacing-12);
+  }
+
+  .control-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .dot--coral {
+    background: var(--color-coral-sketch);
+  }
+
+  .dot--canary {
+    background: var(--color-canary-banner);
+  }
+
+  .dot--mint {
+    background: var(--color-mint-sketch);
+  }
+
+  .terminal-text {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    line-height: var(--line-height-normal);
+    color: var(--color-pencil-gray);
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .terminal-text code {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* BUTTONS & ACTIONS                                                  */
+  /* ------------------------------------------------------------------ */
   .not-found-actions {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
+    gap: var(--spacing-12);
     justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    padding: 11px 22px;
+    border-radius: var(--radius-brutal);
+    border: 2px solid var(--color-charcoal-ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    text-decoration: none;
+    box-shadow: var(--shadow-hard-sm);
+    transition: transform 120ms ease-in-out, box-shadow 120ms ease-in-out;
+    user-select: none;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .btn:hover {
+    transform: translate(7px, -7px);
+    box-shadow: var(--shadow-hard);
+  }
+
+  .btn:active {
+    transform: none;
+    transition: transform 30ms;
+  }
+
+  .btn:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  .btn--sky {
+    background-color: var(--color-sky-crayon);
+    color: var(--color-charcoal-ink);
+  }
+
+  .btn--outline {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* BADGES                                                             */
+  /* ------------------------------------------------------------------ */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-6, 6px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius-brutal);
+    border: 1px solid var(--color-charcoal-ink);
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-tight);
+  }
+
+  .badge--yellow {
+    background: var(--color-canary-banner);
+    color: var(--color-charcoal-ink);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* MARQUEE STRIP                                                      */
+  /* ------------------------------------------------------------------ */
+  .marquee-container {
+    width: 100%;
+    background: var(--color-canary-banner);
+    border-top: 2px solid var(--color-charcoal-ink);
+    border-bottom: 2px solid var(--color-charcoal-ink);
+    overflow: hidden;
+    padding: 10px 0;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .marquee-track {
+    display: inline-flex;
+    animation: marqueeScroll 25s linear infinite;
+  }
+
+  .marquee-content {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-24);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    color: var(--color-charcoal-ink);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+    padding-right: var(--spacing-24);
+  }
+
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* PREFERS-REDUCED-MOTION (PRM)                                       */
+  /* ------------------------------------------------------------------ */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .marquee-track {
+      animation: none !important;
+    }
+    .btn:hover {
+      transform: none !important;
+    }
   }
 </style>

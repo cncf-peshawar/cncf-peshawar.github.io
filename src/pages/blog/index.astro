@@ -14,156 +14,416 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   title="Blog & Community Recaps | CNCF Peshawar" 
   description="Read official announcements, workshop recaps, and technical cloud native tutorials from CNCF Peshawar."
 >
-  <section class="page-header section">
-    <div class="container">
-      <span class="badge badge--live">Announcements & Tutorials</span>
-      <h1 class="page-header__title">Blog & Community Recaps.</h1>
-      <p class="page-header__desc">
-        Updates, workshop recaps, and technical articles written by CNCF Peshawar organizers and community contributors.
+  <!-- Page Hero -->
+  <section class="page-hero" data-reveal>
+    <div class="page-hero__inner">
+      <div class="page-hero__eyebrow">
+        <span class="badge badge--mint">00 // RECAPS &amp; ARTICLES</span>
+        <span class="eyebrow-text">COMMUNITY PUBLICATIONS</span>
+      </div>
+      <h1 class="page-hero__title">Blog &amp; Community Recaps.</h1>
+      <p class="page-hero__desc">
+        Official announcements, workshop recaps, and technical cloud-native tutorials written by CNCF Peshawar organizers and community contributors.
       </p>
     </div>
   </section>
 
-  <section class="section section--subtle">
-    <div class="container">
-      <div class="posts-grid">
-        {publishedPosts.map(post => {
-          const postDate = new Date(post.data.publishDate).toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-          });
+  <!-- Posts Grid -->
+  <section class="section-wrap" data-reveal>
+    <div class="posts-grid">
+      {publishedPosts.map((post, idx) => {
+        const postDate = new Date(post.data.publishDate).toLocaleDateString('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric'
+        });
+        const borderColors = ['coral', 'mint', 'periwinkle', 'peach', 'lilac'];
+        const borderColor = borderColors[idx % borderColors.length];
 
-          return (
-            <article class="post-card">
-              <div class="post-card__meta">
-                <span class="post-card__date">{postDate}</span>
-                <span class="post-card__author">by {post.data.author} ({post.data.authorRole})</span>
+        return (
+          <article class={`post-card brutal-card post-card--${borderColor}`}>
+            <div class="post-card__header">
+              <span class="post-card__date">{postDate}</span>
+              <span class="badge badge--white post-card__author">by {post.data.author} ({post.data.authorRole})</span>
+            </div>
+
+            <h2 class="post-card__title">
+              <a href={`${base}/blog/${post.slug}`}>{post.data.title}</a>
+            </h2>
+
+            <p class="post-card__desc">{post.data.description}</p>
+
+            <div class="post-card__footer">
+              <div class="post-card__tags">
+                {post.data.tags.map((t, tIdx) => {
+                  const tagColors = ['yellow', 'live', 'mint', 'orange'];
+                  const tagColor = tagColors[tIdx % tagColors.length];
+                  return <span class={`badge badge--${tagColor}`}>#{t}</span>;
+                })}
               </div>
 
-              <h2 class="post-card__title">
-                <a href={`${base}/blog/${post.slug}`}>{post.data.title}</a>
-              </h2>
-
-              <p class="post-card__desc">{post.data.description}</p>
-
-              <div class="post-card__footer">
-                <div class="post-card__tags">
-                  {post.data.tags.map(t => (
-                    <span class="post-tag">#{t}</span>
-                  ))}
-                </div>
-
-                <a href={`${base}/blog/${post.slug}`} class="post-card__link">
-                  <span>Read Article →</span>
-                </a>
-              </div>
-            </article>
-          );
-        })}
-      </div>
+              <a href={`${base}/blog/${post.slug}`} class="btn btn--outline btn--sm post-card__link">
+                <span>Read Article →</span>
+              </a>
+            </div>
+          </article>
+        );
+      })}
     </div>
   </section>
+
+  <!-- Marquee Strip -->
+  <div class="marquee-container" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>KUBERNETES</span><span>·</span>
+        <span>DEVOPS</span><span>·</span>
+        <span>MLOPS</span><span>·</span>
+        <span>DISTRIBUTED SYSTEMS</span><span>·</span>
+        <span>AGENTIC AI</span><span>·</span>
+        <span>100% FREE COMMUNITY</span><span>·</span>
+        <span>OPEN TO ALL BUILDERS</span><span>·</span>
+        <span>KHYBER PAKHTUNKHWA</span><span>·</span>
+      </div>
+      <div class="marquee-content">
+        <span>KUBERNETES</span><span>·</span>
+        <span>DEVOPS</span><span>·</span>
+        <span>MLOPS</span><span>·</span>
+        <span>DISTRIBUTED SYSTEMS</span><span>·</span>
+        <span>AGENTIC AI</span><span>·</span>
+        <span>100% FREE COMMUNITY</span><span>·</span>
+        <span>OPEN TO ALL BUILDERS</span><span>·</span>
+        <span>KHYBER PAKHTUNKHWA</span><span>·</span>
+      </div>
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
-  .page-header {
-    padding-bottom: var(--space-xl);
+  /* ------------------------------------------------------------------ */
+  /* HERO STYLES                                                        */
+  /* ------------------------------------------------------------------ */
+  .page-hero {
+    padding: var(--spacing-64) var(--spacing-24) var(--spacing-48);
+    background-color: var(--color-cream-paper);
+    border-bottom: 2px solid var(--color-charcoal-ink);
+    position: relative;
   }
 
-  .page-header__title {
-    font-size: var(--font-size-5xl);
-    margin-top: var(--space-xs);
-    margin-bottom: var(--space-md);
+  .page-hero__inner {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    position: relative;
   }
 
-  .page-header__desc {
-    font-size: var(--font-size-lg);
-    color: var(--color-ink-muted);
+  .page-hero__eyebrow {
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-12);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+  }
+
+  .eyebrow-text {
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+  }
+
+  .page-hero__title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-display);
+    font-weight: 700;
+    line-height: var(--line-height-snug);
+    letter-spacing: -0.02em;
+    color: var(--color-charcoal-ink);
+    margin-bottom: var(--spacing-16);
+    text-transform: uppercase;
+  }
+
+  .page-hero__desc {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-subheading);
+    color: var(--color-charcoal-ink);
     max-width: var(--container-prose);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* SECTION WRAP & POSTS GRID                                          */
+  /* ------------------------------------------------------------------ */
+  .section-wrap {
+    padding: var(--spacing-60) var(--spacing-24);
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    position: relative;
   }
 
   .posts-grid {
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    gap: var(--spacing-24);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* POST CARDS                                                         */
+  /* ------------------------------------------------------------------ */
+  .brutal-card {
+    background: var(--color-frost-white);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm);
+    padding: var(--spacing-28, 28px);
+    position: relative;
+    transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
   }
 
   .post-card {
-    padding: var(--space-xl);
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
+    display: flex;
+    flex-direction: column;
   }
 
   .post-card:hover {
-    border-color: var(--color-border-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translate(3px, -3px);
+    box-shadow: var(--shadow-hard);
   }
 
-  .post-card__meta {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-muted);
+  .post-card--coral {
+    border-left: var(--border-accent-width, 6px) solid var(--color-coral-sketch);
+  }
+
+  .post-card--mint {
+    border-left: var(--border-accent-width, 6px) solid var(--color-mint-sketch);
+  }
+
+  .post-card--periwinkle {
+    border-left: var(--border-accent-width, 6px) solid var(--color-periwinkle-sketch);
+  }
+
+  .post-card--peach {
+    border-left: var(--border-accent-width, 6px) solid var(--color-peach-sketch);
+  }
+
+  .post-card--lilac {
+    border-left: var(--border-accent-width, 6px) solid var(--color-lilac-sketch);
+  }
+
+  .post-card__header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-12);
     flex-wrap: wrap;
-    gap: var(--space-xs);
-    margin-bottom: var(--space-xs);
+    gap: var(--spacing-8);
   }
 
   .post-card__date {
-    color: var(--color-accent);
-    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    color: var(--color-text-muted);
+  }
+
+  .post-card__author {
+    font-size: var(--font-size-caption);
   }
 
   .post-card__title {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-heading-sm);
+    font-weight: 700;
     line-height: var(--line-height-snug);
+    margin-bottom: var(--spacing-8);
+    color: var(--color-charcoal-ink);
+  }
+
+  .post-card__title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.1s ease;
   }
 
   .post-card__title a:hover {
-    color: var(--color-accent);
+    color: var(--color-sky-crayon);
+    text-decoration: underline;
+  }
+
+  .post-card__title a:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 3px;
   }
 
   .post-card__desc {
-    font-size: var(--font-size-base);
-    color: var(--color-ink-muted);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    color: var(--color-charcoal-ink);
     line-height: var(--line-height-relaxed);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--spacing-20);
+    max-width: var(--container-prose);
   }
 
   .post-card__footer {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
-    gap: var(--space-sm);
-    padding-top: var(--space-sm);
-    border-top: 1px solid var(--color-border);
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-12);
+    margin-top: auto;
+    padding-top: var(--spacing-12);
+    border-top: 1px solid var(--color-chalk-gray);
   }
 
   .post-card__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: var(--spacing-6, 6px);
   }
 
-  .post-tag {
+  /* ------------------------------------------------------------------ */
+  /* BADGES & BUTTONS                                                   */
+  /* ------------------------------------------------------------------ */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-6, 6px);
     font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-subtle);
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius-brutal);
+    border: 1px solid var(--color-charcoal-ink);
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-tight);
   }
 
-  .post-card__link {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-accent);
+  .badge--white {
+    background: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
   }
 
-  .post-card__link:hover {
-    text-decoration: underline;
+  .badge--mint {
+    background: var(--color-mint-sketch);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge--yellow {
+    background: var(--color-canary-banner);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge--live {
+    background: var(--color-ice-wash);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge--orange {
+    background: var(--color-duck-bill-orange);
+    color: var(--color-charcoal-ink);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    padding: 11px 22px;
+    border-radius: var(--radius-brutal);
+    border: 2px solid var(--color-charcoal-ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    text-decoration: none;
+    box-shadow: var(--shadow-hard-sm);
+    transition: transform 120ms ease-in-out, box-shadow 120ms ease-in-out;
+    user-select: none;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .btn:hover {
+    transform: translate(7px, -7px);
+    box-shadow: var(--shadow-hard);
+  }
+
+  .btn:active {
+    transform: none;
+    transition: transform 30ms;
+  }
+
+  .btn:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  .btn--outline {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+  }
+
+  .btn--sm {
+    padding: 7px 14px;
+    font-size: var(--font-size-caption);
+    min-height: 44px;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* MARQUEE STRIP                                                      */
+  /* ------------------------------------------------------------------ */
+  .marquee-container {
+    width: 100%;
+    background: var(--color-canary-banner);
+    border-top: 2px solid var(--color-charcoal-ink);
+    border-bottom: 2px solid var(--color-charcoal-ink);
+    overflow: hidden;
+    padding: 10px 0;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .marquee-track {
+    display: inline-flex;
+    animation: marqueeScroll 25s linear infinite;
+  }
+
+  .marquee-content {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-24);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    color: var(--color-charcoal-ink);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+    padding-right: var(--spacing-24);
+  }
+
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* PREFERS-REDUCED-MOTION (PRM)                                       */
+  /* ------------------------------------------------------------------ */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .marquee-track {
+      animation: none !important;
+    }
+    .btn:hover, .post-card:hover {
+      transform: none !important;
+    }
   }
 </style>
