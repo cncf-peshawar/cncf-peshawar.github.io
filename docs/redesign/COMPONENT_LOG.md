@@ -84,6 +84,15 @@ Date: 2026-10-09
 | `src/pages/events/index.astro` | Events list page rebuild | Rebuilt to MotherDuck brutalist design. Preserved 100% functionally byte-identical frontmatter (`getCollection('events')`, sorting, filtering). Features brutalist hero with Schedule badge, upcoming events list with designed brutalist empty state (`empty-upcoming-card`), 2-column responsive past meetups archive grid, `<CfpBand />`, marquee, and motion reveal hooks (`data-reveal`, `data-reveal-group`, `data-reveal-item`). | Stitch ground truth & CONTRACT.md §5 |
 | `docs/redesign/evidence/t21/` | Visual & accessibility proof | Captured 4 full-page screenshots: `events-1280.png`, `events-768.png`, `events-390.png`, `events-reduced-motion.png`. | Acceptance Criteria & Evidence Gate |
 
+## T-2.2-EVENT-DETAIL Event Detail Page Rebuild Pass
+Date: 2026-10-09
+
+| Component / File | Identified Status | Bounded Implementation Applied | Ground Truth / Contract Ref |
+|---|---|---|---|
+| `src/pages/events/[slug].astro` | Event detail page rebuild | Rebuilt to MotherDuck two-column layout. Preserved 100% byte-identical frontmatter (`getStaticPaths`, `getCollection`, `render`). Desktop ($\ge 1024\text{px}$): 720px article prose on left, sticky info card on right (`top: 32px`, clearance $\ge 44\text{px}$). Mobile ($< 1024\text{px}$): single-column with info card in-flow (`order: -1`, `position: static`). Info card has white surface, 2px border, `-4px 4px` shadow, tabular-nums dates, venue, capacity, speakers, and MotherDuck button physics (`translate(7px, -7px)` hover, snap-back active). Consumes `.prose .prose--article` with zero hardcoded hex. | Stitch `event-detail-desktop.html` & `event-detail-mobile.html` ground truth, CONTRACT.md §5 |
+| `docs/redesign/evidence/t22/` | Visual, sticky & accessibility proof | Captured 5 screenshots: `events-detail-1280.png` (scrolled state proving sticky pin at `top: 32px`), `events-detail-768.png` (tablet stack), `events-detail-390.png` (mobile single column with 0 overflow), `events-detail-reduced-motion.png` (PRM proof), and `home-post-cfpband.png` (bonus visual gate confirming 0 CFP band drift on `/`). | Acceptance Criteria & Evidence Gate |
+
+
 
 
 

@@ -32,264 +32,602 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout title={`${data.title} | CNCF Peshawar`} description={data.summary}>
-  <article class="event-detail section">
-    <div class="container">
-      <!-- Breadcrumb / Header -->
-      <div class="event-detail__meta-top">
-        <a href={`${base}/events`} class="back-link">
-          ← Back to All Events
-        </a>
+  <!-- Top Breadcrumb Bar -->
+  <div class="breadcrumb-strip">
+    <div class="breadcrumb-inner">
+      <a href={`${base}/events`} class="back-link btn btn-outline btn-sm">
+        ← Back to All Events
+      </a>
+    </div>
+  </div>
+
+  <!-- Page Hero -->
+  <header class="event-hero" data-reveal>
+    <div class="event-hero-inner">
+      <div class="event-hero-eyebrow" data-hero-eyebrow>
         {data.status === 'upcoming' ? (
-          <span class="badge badge--live">Upcoming Meetup</span>
+          <span class="badge badge--live badge-canary">Upcoming Meetup</span>
         ) : (
-          <span class="badge">Completed Event</span>
+          <span class="badge badge-white">Completed Event</span>
         )}
+        <span class="hero-eyebrow-text">EVENT SPECIFICATION</span>
       </div>
+      <h1 class="event-detail__title event-hero-title">{data.title}</h1>
+      {data.summary && (
+        <p class="event-hero-desc">{data.summary}</p>
+      )}
+    </div>
+  </header>
 
-      <h1 class="event-detail__title">{data.title}</h1>
-
-      <!-- Key Info Box -->
-      <div class="info-card">
-        <div class="info-item">
-          <span class="info-label">DATE & TIME</span>
-          <span class="info-val">{eventDate}</span>
-          <span class="info-subval">{data.time}</span>
-        </div>
-
-        <div class="info-item">
-          <span class="info-label">VENUE & LOCATION</span>
-          <span class="info-val">{data.venue}</span>
-          <span class="info-subval">{data.location}</span>
-        </div>
-
-        {data.capacity && (
-          <div class="info-item">
-            <span class="info-label">SEATING CAPACITY</span>
-            <span class="info-val">{data.capacity} Seats</span>
-            <span class="info-subval">General Admission (Free)</span>
+  <!-- Two-Column Event Content -->
+  <section class="section-wrap" data-reveal>
+    <div class="event-layout-grid">
+      <!-- Left Column: Markdown Prose + Speakers -->
+      <div class="event-main-col">
+        <!-- Structured Speakers Listing -->
+        {data.speakers && data.speakers.length > 0 && (
+          <div class="event-speakers-box">
+            <span class="speakers-eyebrow">FEATURED ROSTER</span>
+            <h2 class="speakers-box-title">Featured Speakers & Instructors</h2>
+            <div class="speakers-chips">
+              {data.speakers.map((speakerName: string) => (
+                <div class="speaker-pill">
+                  <span class="speaker-pill__name">{speakerName}</span>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
-        <div class="info-actions">
-          {data.status === 'upcoming' ? (
-            <div class="rsvp-btn-group">
-              <a 
-                href={data.rsvpUrl} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="btn btn--accent"
-              >
-                <span>RSVP on Open Community Groups</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </a>
+        <!-- Markdown Body -->
+        <article class="event-prose prose prose--article">
+          <Content />
+        </article>
+      </div>
 
-              {data.lumaUrl && (
-                <a 
-                  href={data.lumaUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  class="btn btn--secondary"
-                >
-                  <span>Luma Event Page ↗</span>
-                </a>
-              )}
-            </div>
-          ) : (
-            <div class="past-links">
-              {data.slidesUrl && (
-                <a href={data.slidesUrl} target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
-                  <span>View Slides</span>
-                </a>
-              )}
-              {data.recordingUrl && (
-                <a href={data.recordingUrl} target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
-                  <span>Watch Recording</span>
-                </a>
-              )}
+      <!-- Right Column: Sticky Key Info Box -->
+      <aside class="event-sidebar-col">
+        <div class="info-card">
+          <div class="info-card-header">
+            <span class="badge badge-canary">KEY EVENT DETAILS</span>
+            {data.status === 'upcoming' && (
+              <span class="status-live-indicator">
+                <span class="status-pulse-dot" aria-hidden="true"></span>
+                <span>OPEN REGISTRATION</span>
+              </span>
+            )}
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">DATE & TIME</span>
+            <span class="info-val tabular-nums">{eventDate}</span>
+            <span class="info-subval tabular-nums">{data.time}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">VENUE & LOCATION</span>
+            <span class="info-val">{data.venue}</span>
+            <span class="info-subval">{data.location}</span>
+          </div>
+
+          {data.capacity && (
+            <div class="info-item">
+              <span class="info-label">SEATING CAPACITY</span>
+              <span class="info-val tabular-nums">{data.capacity} Seats</span>
+              <span class="info-subval">General Admission (Free)</span>
             </div>
           )}
-        </div>
-      </div>
 
-      <!-- Structured Speakers Listing -->
-      {data.speakers && data.speakers.length > 0 && (
-        <div class="event-speakers-box">
-          <h2 class="speakers-box-title">Featured Speakers & Instructors</h2>
-          <div class="speakers-chips">
-            {data.speakers.map((speakerName: string) => (
-              <div class="speaker-pill">
-                <span class="speaker-pill__name">{speakerName}</span>
+          {data.speakers && data.speakers.length > 0 && (
+            <div class="info-item info-item--speakers">
+              <span class="info-label">SPEAKERS</span>
+              <div class="info-speakers-list">
+                {data.speakers.map((s: string) => (
+                  <span class="info-speaker-name">{s}</span>
+                ))}
               </div>
-            ))}
+            </div>
+          )}
+
+          <div class="info-actions">
+            {data.status === 'upcoming' ? (
+              <div class="rsvp-btn-group">
+                {data.rsvpUrl && (
+                  <a
+                    href={data.rsvpUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sky btn-block"
+                  >
+                    <span>RSVP on Open Community Groups</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </a>
+                )}
+
+                {data.lumaUrl && (
+                  <a
+                    href={data.lumaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-outline btn-block"
+                  >
+                    <span>Luma Event Page ↗</span>
+                  </a>
+                )}
+              </div>
+            ) : (
+              <div class="past-links">
+                {data.slidesUrl && (
+                  <a
+                    href={data.slidesUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-outline btn-block"
+                  >
+                    <span>View Slides</span>
+                  </a>
+                )}
+                {data.recordingUrl && (
+                  <a
+                    href={data.recordingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-secondary btn-sky btn-block"
+                  >
+                    <span>Watch Recording</span>
+                  </a>
+                )}
+                {!data.slidesUrl && !data.recordingUrl && (
+                  <div class="archive-note">
+                    <span class="archive-note-text">Recap & session materials will be linked here once available.</span>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
-      )}
-
-      <!-- Markdown Body -->
-      <div class="event-prose">
-        <Content />
-      </div>
+      </aside>
     </div>
-  </article>
+  </section>
 </BaseLayout>
 
+<style is:global>
+  @import '../../styles/prose.css';
+</style>
+
 <style>
-  .event-detail__meta-top {
+  /* Tabular figures for dates and numbers */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Breadcrumb strip */
+  .breadcrumb-strip {
+    background-color: var(--color-cream-paper);
+    padding: var(--spacing-20, 20px) clamp(16px, 4vw, 32px) 0;
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .breadcrumb-inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--space-xs);
-    margin-bottom: var(--space-md);
   }
 
   .back-link {
-    font-size: var(--font-size-sm);
-    color: var(--color-accent);
-    font-weight: var(--font-weight-semibold);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-8, 8px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-medium, 500);
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: var(--letter-spacing-wide, 0.04em);
   }
 
-  .back-link:hover {
-    text-decoration: underline;
+  /* Hero */
+  .event-hero {
+    background-color: var(--color-cream-paper);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    padding: clamp(32px, 5vw, 56px) clamp(16px, 4vw, 32px);
+    position: relative;
+    box-sizing: border-box;
   }
 
-  .event-detail__title {
-    font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem);
-    line-height: var(--line-height-tight);
-    margin-bottom: var(--space-xl);
+  .event-hero-inner {
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  .info-card {
+  .event-hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8, 8px);
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-12, 12px);
+  }
+
+  .hero-eyebrow-text {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-text-muted);
+    letter-spacing: var(--letter-spacing-wide, 0.08em);
+    text-transform: uppercase;
+  }
+
+  .event-hero-title {
+    font-family: var(--font-mono);
+    font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+    font-weight: var(--font-weight-bold, 700);
+    line-height: var(--line-height-snug, 1.15);
+    letter-spacing: var(--letter-spacing-tight, -0.02em);
+    text-transform: uppercase;
+    color: var(--color-charcoal-ink);
+    margin-top: 0;
+    margin-bottom: var(--spacing-16, 16px);
+  }
+
+  .event-hero-desc {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+    color: var(--color-charcoal-ink);
+    max-width: 760px;
+    line-height: var(--line-height-relaxed, 1.6);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* Main section wrap */
+  .section-wrap {
+    padding: clamp(36px, 5vw, 60px) clamp(16px, 4vw, 32px);
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  /* Two-column layout */
+  .event-layout-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
-    padding: clamp(var(--space-md), 4vw, var(--space-xl));
-    background-color: var(--color-paper-subtle);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--space-2xl);
+    gap: clamp(28px, 4vw, 44px);
+    align-items: start;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  @media (min-width: 640px) and (max-width: 1023px) {
-    .info-card {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .info-actions {
-      grid-column: 1 / -1;
+  @media (max-width: 1023px) {
+    .event-sidebar-col {
+      order: -1;
+      position: static;
+      width: 100%;
     }
   }
 
   @media (min-width: 1024px) {
-    .info-card {
-      grid-template-columns: repeat(3, 1fr) auto;
-      align-items: center;
+    .event-layout-grid {
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: clamp(36px, 5vw, 56px);
     }
+
+    .event-sidebar-col {
+      position: sticky;
+      top: 32px;
+      width: 100%;
+    }
+  }
+
+  .event-main-col {
+    max-width: 720px;
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  /* Info Card */
+  .info-card {
+    background-color: var(--color-frost-white);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+    padding: clamp(20px, 3vw, 28px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-16, 16px);
+  }
+
+  .info-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-8, 8px);
+    flex-wrap: wrap;
+    padding-bottom: var(--spacing-12, 12px);
+    border-bottom: 1px solid var(--color-graphite);
+  }
+
+  .status-live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+  }
+
+  .status-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-mint-sketch);
+    display: inline-block;
   }
 
   .info-item {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
+    padding-bottom: var(--spacing-12, 12px);
+    border-bottom: 1px solid var(--color-chalk-gray);
   }
 
   .info-label {
     font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-accent);
-    letter-spacing: 0.05em;
+    font-size: 11px;
+    font-weight: var(--font-weight-bold, 700);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
   }
 
   .info-val {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.9375rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-charcoal-ink);
+    line-height: var(--line-height-snug, 1.25);
   }
 
   .info-subval {
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-normal, 1.4);
+  }
+
+  .info-item--speakers {
+    border-bottom: 1px solid var(--color-chalk-gray);
+  }
+
+  .info-speakers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  .info-speaker-name {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.8125rem);
+    font-weight: var(--font-weight-medium, 500);
+    color: var(--color-charcoal-ink);
+    line-height: 1.35;
   }
 
   .info-actions {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: var(--spacing-10, 10px);
+    padding-top: var(--spacing-4, 4px);
   }
 
-  .rsvp-btn-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-  }
-
+  .rsvp-btn-group,
   .past-links {
     display: flex;
-    gap: var(--space-xs);
+    flex-direction: column;
+    gap: var(--spacing-10, 10px);
+    width: 100%;
   }
 
-  /* Speakers Box */
+  .btn-block {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .archive-note {
+    padding: var(--spacing-10, 10px) var(--spacing-12, 12px);
+    background-color: var(--color-chalk-gray);
+    border: 1px dashed var(--color-pencil-gray);
+    border-radius: var(--radius-brutal);
+  }
+
+  .archive-note-text {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-normal, 1.4);
+  }
+
+  /* Speakers Box in main column */
   .event-speakers-box {
-    margin-bottom: var(--space-2xl);
-    padding: var(--space-lg);
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    margin-bottom: clamp(28px, 4vw, 40px);
+    padding: clamp(20px, 3vw, 28px);
+    background-color: var(--color-frost-white);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+  }
+
+  .speakers-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    letter-spacing: var(--letter-spacing-wide, 0.06em);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: var(--spacing-4, 4px);
   }
 
   .speakers-box-title {
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--space-sm);
-    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: clamp(1.2rem, 3vw, 1.45rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-charcoal-ink);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-tight, -0.01em);
+    margin-top: 0;
+    margin-bottom: var(--spacing-16, 16px);
   }
 
   .speakers-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-xs);
+    gap: var(--spacing-10, 10px);
   }
 
   .speaker-pill {
-    padding: 0.4rem 0.85rem;
-    background-color: var(--color-paper-subtle);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-ink);
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    background-color: var(--color-chalk-gray);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
   }
 
-  /* Prose Styling */
+  .speaker-pill__name {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    font-weight: var(--font-weight-medium, 500);
+    color: var(--color-charcoal-ink);
+  }
+
+  /* Badges */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--font-weight-bold, 700);
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius-brutal);
+    border: 1px solid var(--color-charcoal-ink);
+    letter-spacing: 0.04em;
+    user-select: none;
+    line-height: 1.2;
+  }
+
+  .badge-canary {
+    background-color: var(--color-canary-banner);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge-white {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge--live {
+    background-color: var(--color-ice-wash);
+    color: var(--color-charcoal-ink);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8, 8px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    font-weight: var(--font-weight-medium, 500);
+    line-height: var(--line-height-snug, 1.2);
+    letter-spacing: var(--letter-spacing-normal, 0.02em);
+    padding: 10px 20px;
+    min-height: 44px;
+    border-radius: var(--radius-brutal);
+    border-width: var(--border-width, 2px);
+    border-style: solid;
+    border-color: var(--color-charcoal-ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+    transition: transform 120ms ease-in-out;
+    user-select: none;
+    white-space: normal;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .btn-sm {
+    padding: 7px 14px;
+    font-size: var(--font-size-caption, 0.75rem);
+    min-height: 34px;
+    box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+  }
+
+  .btn:hover {
+    transform: translate(7px, -7px);
+  }
+
+  .btn:active {
+    transform: none;
+    transition: transform 30ms ease-in-out;
+  }
+
+  .btn:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+
+  .btn-sky {
+    background-color: var(--color-sky-crayon);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-outline {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-ice-wash);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn:hover,
+    .btn:active {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
+  /* Prose container wrapper */
   .event-prose {
-    max-width: var(--container-prose);
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-relaxed);
-    color: var(--color-ink);
-  }
-
-  .event-prose :global(h2) {
-    font-size: var(--font-size-2xl);
-    margin-top: var(--space-xl);
-    margin-bottom: var(--space-sm);
-  }
-
-  .event-prose :global(h3) {
-    font-size: var(--font-size-xl);
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-xs);
-  }
-
-  .event-prose :global(ul),
-  .event-prose :global(ol) {
-    margin-left: var(--space-lg);
-    margin-bottom: var(--space-md);
-  }
-
-  .event-prose :global(li) {
-    margin-bottom: var(--space-2xs);
-  }
-
-  .event-prose :global(p) {
-    margin-bottom: var(--space-md);
+    width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 </style>
