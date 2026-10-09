@@ -1,0 +1,140 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['speaker-mentor-doodle', className]} aria-label="Community Workshop Mentor Doodle" data-hero-doodle>
+  <div class="mentor-bubble" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 120" fill="none" aria-hidden="true">
+      <!-- Echo sketch shadow offset behind (Wet Cement blue dashed) -->
+      <path d="M 28 20 C 54 16, 106 16, 130 20 C 142 30, 142 62, 134 76 C 116 80, 84 80, 68 80 L 36 104 L 44 80 C 28 78, 20 68, 18 52 C 16 34, 20 24, 28 20 Z"
+            stroke="var(--color-wet-cement)"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-dasharray="6 4"/>
+
+      <!-- Main Canary Yellow Speech Bubble Body -->
+      <path d="M 26 16 C 52 12, 104 12, 128 16 C 138 24, 138 56, 130 70 C 112 74, 82 74, 66 74 L 36 98 L 44 74 C 28 72, 20 62, 18 46 C 16 28, 20 20, 26 16 Z"
+            fill="var(--color-canary-banner)"
+            stroke="var(--color-charcoal-ink)"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+
+      <!-- White speech bubble gloss / reflection crescent on top-left -->
+      <path d="M 32 22 C 54 18, 96 18, 118 22" stroke="var(--color-frost-white)" stroke-width="2.5" stroke-linecap="round"/>
+
+      <!-- Inside Content: Developer dialogue / CFP lines -->
+      <path d="M 38 34 L 43 38 L 38 42" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 48 38 L 84 38" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="92" cy="38" r="2.5" fill="var(--color-duck-bill-orange)"/>
+
+      <path d="M 38 50 L 76 50" stroke="var(--color-wet-cement)" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M 82 50 L 112 50" stroke="var(--color-frost-white)" stroke-width="2.5" stroke-linecap="round"/>
+
+      <path d="M 38 62 L 66 62" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
+      <rect x="72" y="58" width="5" height="8" rx="1" fill="var(--color-duck-bill-orange)" stroke="var(--color-charcoal-ink)" stroke-width="1"/>
+
+      <circle cx="136" cy="24" r="2.5" fill="var(--color-duck-bill-orange)"/>
+      <path d="M 134 16 L 138 12" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 142 28 L 146 30" stroke="var(--color-wet-cement)" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="mentor-robot" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+      <path d="M 44 44 C 44 40, 114 40, 114 44 L 114 96 C 114 100, 44 100, 44 96 Z"
+            stroke="var(--color-wet-cement)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/>
+      
+      <path d="M 80 38 L 80 18" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="80" cy="14" r="6" fill="var(--color-canary-banner)" stroke="var(--color-charcoal-ink)" stroke-width="2.5"/>
+      <circle cx="80" cy="14" r="2.5" fill="var(--color-duck-bill-orange)"/>
+      <path d="M 88 10 L 94 6" stroke="var(--color-wet-cement)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 72 10 L 66 6" stroke="var(--color-duck-bill-orange)" stroke-width="2" stroke-linecap="round"/>
+
+      <rect x="34" y="58" width="6" height="14" rx="2" fill="var(--color-duck-bill-orange)" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+      <rect x="120" y="58" width="6" height="14" rx="2" fill="var(--color-canary-banner)" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+
+      <rect x="40" y="38" width="80" height="54" rx="4"
+            fill="var(--color-frost-white)" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      <rect x="48" y="44" width="64" height="42" rx="3"
+            fill="var(--color-charcoal-ink)" stroke="var(--color-charcoal-ink)" stroke-width="1.5"/>
+
+      <path d="M 56 56 L 62 60 L 56 64" stroke="var(--color-wet-cement)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 94 56 L 100 60 L 94 64" stroke="var(--color-wet-cement)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="76" y="58" width="5" height="6" fill="var(--color-canary-banner)"/>
+      <path d="M 68 74 C 74 78, 84 78, 90 74" stroke="var(--color-frost-white)" stroke-width="2.5" stroke-linecap="round"/>
+
+      <rect x="72" y="92" width="16" height="8" rx="2" fill="var(--color-duck-bill-orange)" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+
+      <rect x="48" y="100" width="64" height="38" rx="3"
+            fill="var(--color-frost-white)" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      <rect x="56" y="106" width="30" height="16" rx="2"
+            fill="var(--color-canary-banner)" stroke="var(--color-charcoal-ink)" stroke-width="1.5"/>
+      <path d="M 60 114 L 68 110 L 74 116 L 82 110" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      <circle cx="98" cy="111" r="3.5" fill="var(--color-duck-bill-orange)" stroke="var(--color-charcoal-ink)" stroke-width="1.5"/>
+      <circle cx="98" cy="120" r="3.5" fill="var(--color-wet-cement)" stroke="var(--color-charcoal-ink)" stroke-width="1.5"/>
+
+      <path d="M 48 106 C 34 100, 24 86, 26 72" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M 22 72 C 22 66, 32 66, 30 72" stroke="var(--color-charcoal-ink)" stroke-width="2" fill="var(--color-canary-banner)" stroke-linecap="round"/>
+      <path d="M 16 68 C 14 62, 16 56, 20 52" stroke="var(--color-wet-cement)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 24 50 L 28 46" stroke="var(--color-duck-bill-orange)" stroke-width="2" stroke-linecap="round"/>
+
+      <path d="M 112 106 C 122 112, 126 120, 124 130" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="124" cy="132" r="4" fill="var(--color-duck-bill-orange)" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+
+      <path d="M 62 138 L 62 148" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
+      <rect x="54" y="146" width="16" height="8" rx="2" fill="var(--color-charcoal-ink)"/>
+      <path d="M 98 138 L 98 148" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
+      <rect x="90" y="146" width="16" height="8" rx="2" fill="var(--color-charcoal-ink)"/>
+
+      <path d="M 42 156 C 68 155, 112 155, 138 156" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 52 158 C 72 159, 94 159, 106 158" stroke="var(--color-wet-cement)" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+</div>
+
+<style>
+  .speaker-mentor-doodle {
+    position: relative;
+    width: clamp(160px, 20vw, 220px);
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  .mentor-bubble {
+    position: absolute;
+    top: -35px;
+    right: 0;
+    width: clamp(100px, 14vw, 140px);
+    z-index: 2;
+  }
+
+  .mentor-robot {
+    width: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .speaker-mentor-doodle {
+      width: 160px;
+      margin-top: var(--spacing-16, 16px);
+      margin-inline: auto;
+    }
+    .mentor-bubble {
+      top: -28px;
+      width: 100px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .speaker-mentor-doodle {
+      animation: none !important;
+    }
+  }
+</style>

@@ -2,6 +2,10 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SpeakerCard from '../components/SpeakerCard.astro';
+import Badge from '../components/ui/Badge.astro';
+import Card from '../components/ui/Card.astro';
+import Marquee from '../components/ui/Marquee.astro';
+import MentorDoodle from '../components/speak/MentorDoodle.astro';
 
 const allSpeakers = await getCollection('speakers');
 const featuredSpeakers = allSpeakers.filter(s => s.data.featured);
@@ -12,54 +16,64 @@ const regularSpeakers = allSpeakers.filter(s => !s.data.featured);
   title="Speaker Hub & Call for Proposals | CNCF Peshawar" 
   description="Submit a talk proposal for Cloud Native Peshawar. We support first-time and seasoned speakers with mentorship and slide reviews."
 >
-  <!-- Page Header / Hero -->
-  <section class="page-header section">
-    <div class="container">
-      <span class="badge badge--live">Open Call for Proposals (CFP)</span>
-      <h1 class="page-header__title">Share Your Knowledge.<br />Inspire Peshawar's Builders.</h1>
-      <p class="page-header__desc">
-        Whether you are a seasoned distributed systems architect or a student giving your very first tech talk, Cloud Native Peshawar offers an encouraging, vendor-neutral stage for you to share your journey.
-      </p>
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-hero-layout">
+        <div class="page-hero-content">
+          <div class="page-hero-eyebrow" data-hero-eyebrow>
+            <Badge variant="mint" pulse={true}>00 // CALL FOR PROPOSALS</Badge>
+            <span class="hero-eyebrow-text">COMMUNITY STAGE</span>
+          </div>
+          <h1 class="page-hero-title">Share Your Knowledge.<br />Inspire Peshawar's Builders.</h1>
+          <p class="page-hero-desc" data-hero-lede>
+            Whether you are a seasoned distributed systems architect or a student giving your very first tech talk, Cloud Native Peshawar offers an encouraging, vendor-neutral stage for you to share your journey.
+          </p>
+          <div class="page-hero-actions" data-hero-actions>
+            <a 
+              href="https://github.com/cncf-peshawar/cncf-peshawar.github.io/issues/new?template=cfp_proposal.yml" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="btn btn-sky"
+            >
+              <span>Submit Talk Proposal on GitHub (CFP)</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+            <a 
+              href="mailto:cncfpeshawar@gmail.com?subject=CNCF%20Peshawar%20CFP%20Inquiry" 
+              class="btn btn-outline"
+            >
+              <span>Email CFP Questions</span>
+            </a>
+          </div>
+        </div>
 
-      <div class="page-header__actions">
-        <a 
-          href="https://github.com/cncf-peshawar/cncf-peshawar.github.io/issues/new?template=cfp_proposal.yml" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="btn btn--accent"
-        >
-          <span>Submit Talk Proposal on GitHub (CFP)</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-        <a 
-          href="mailto:cncfpeshawar@gmail.com?subject=CNCF%20Peshawar%20CFP%20Inquiry" 
-          class="btn btn--secondary"
-        >
-          <span>Email CFP Questions</span>
-        </a>
+        <div class="page-hero-visual">
+          <MentorDoodle />
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Formats & Tracks Section -->
-  <section class="section section--subtle">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-header__num">01 // TALK FORMATS</span>
-        <div>
-          <h2 class="section-header__title">Session Formats We Host.</h2>
-          <p class="section-header__desc">
-            Choose the format that matches your topic depth and comfort level.
-          </p>
-        </div>
-      </div>
+  <!-- Talk Formats Section -->
+  <section class="section-wrap formats-section" id="formats" data-reveal>
+    <div class="section-header-box">
+      <span class="section-eyebrow">01 // TALK FORMATS</span>
+      <h2 class="section-headline">Session Formats We Host.</h2>
+      <p class="section-subtext">
+        Choose the session structure that matches your topic depth and comfort level.
+      </p>
+    </div>
 
-      <div class="formats-grid">
-        <!-- 15 min -->
-        <div class="format-card">
-          <div class="format-card__badge">15 MINUTES</div>
+    <div class="formats-grid" data-reveal-group>
+      <!-- 15 min Lightning Talk -->
+      <div data-reveal-item>
+        <Card variant="white" accentBorder="coral" accentPosition="top" interactive={true} class="format-card">
+          <div class="format-card__badge-wrap">
+            <Badge variant="canary" size="sm">15 MINUTES</Badge>
+          </div>
           <h3 class="format-card__title">Lightning Talk</h3>
           <p class="format-card__desc">
             Fast-paced, focused introduction to a single open-source tool, bug fix story, or lesson learned in production. Ideal for first-time speakers!
@@ -69,11 +83,15 @@ const regularSpeakers = allSpeakers.filter(s => !s.data.featured);
             <li>Live demo optional</li>
             <li>No Q&A required</li>
           </ul>
-        </div>
+        </Card>
+      </div>
 
-        <!-- 40 min -->
-        <div class="format-card format-card--featured">
-          <div class="format-card__badge">40 MINUTES</div>
+      <!-- 40 min Technical Deep Dive -->
+      <div data-reveal-item>
+        <Card variant="white" accentBorder="peach" accentPosition="top" interactive={true} class="format-card">
+          <div class="format-card__badge-wrap">
+            <Badge variant="orange" size="sm">40 MINUTES</Badge>
+          </div>
           <h3 class="format-card__title">Technical Deep Dive</h3>
           <p class="format-card__desc">
             In-depth architectural breakdown, code walkthrough, or real-world migration case study with 5-10 minutes of audience Q&A.
@@ -83,11 +101,15 @@ const regularSpeakers = allSpeakers.filter(s => !s.data.featured);
             <li>Production trade-offs</li>
             <li>Live Q&A session</li>
           </ul>
-        </div>
+        </Card>
+      </div>
 
-        <!-- 90 min -->
-        <div class="format-card">
-          <div class="format-card__badge">90 MINUTES</div>
+      <!-- 90 min Hands-on Workshop -->
+      <div data-reveal-item>
+        <Card variant="white" accentBorder="mint" accentPosition="top" interactive={true} class="format-card">
+          <div class="format-card__badge-wrap">
+            <Badge variant="mint" size="sm">90 MINUTES</Badge>
+          </div>
           <h3 class="format-card__title">Hands-on Workshop</h3>
           <p class="format-card__desc">
             Step-by-step interactive lab where attendees follow along on their own laptops to deploy, configure, or debug infrastructure.
@@ -97,43 +119,48 @@ const regularSpeakers = allSpeakers.filter(s => !s.data.featured);
             <li>Hands-on attendee tasks</li>
             <li>Co-mentors available to help</li>
           </ul>
-        </div>
+        </Card>
       </div>
     </div>
   </section>
 
-  <!-- Speaker Support / Mentorship -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-header__num">02 // SPEAKER SUPPORT</span>
-        <div>
-          <h2 class="section-header__title">First-Time Speaker? We Have Your Back.</h2>
-          <p class="section-header__desc">
-            Public speaking in front of technical peers can feel intimidating. Our organizers provide 1-on-1 mentorship to ensure your talk succeeds.
-          </p>
-        </div>
-      </div>
+  <!-- Speaker Support Steps -->
+  <section class="section-wrap support-section" id="support" data-reveal>
+    <div class="section-header-box">
+      <span class="section-eyebrow">02 // SPEAKER SUPPORT</span>
+      <h2 class="section-headline">First-Time Speaker? We Have Your Back.</h2>
+      <p class="section-subtext">
+        Public speaking in front of technical peers can feel intimidating. Our organizers provide 1-on-1 mentorship to ensure your talk succeeds.
+      </p>
+    </div>
 
-      <div class="support-grid">
-        <div class="support-item">
-          <div class="support-num">01</div>
+    <div class="support-grid" data-reveal-group>
+      <!-- Step 01 -->
+      <div data-reveal-item>
+        <div class="support-tile">
+          <div class="support-num support-num--sky">01</div>
           <h3 class="support-title">Abstract & Topic Refinement</h3>
           <p class="support-desc">
             Not sure if your topic is relevant? We will help shape your outline and tailor it to the local engineering audience.
           </p>
         </div>
+      </div>
 
-        <div class="support-item">
-          <div class="support-num">02</div>
+      <!-- Step 02 -->
+      <div data-reveal-item>
+        <div class="support-tile">
+          <div class="support-num support-num--canary">02</div>
           <h3 class="support-title">Slide Review & Dry Runs</h3>
           <p class="support-desc">
             Schedule a private 30-minute practice run with an organizer to test timing, slide legibility, and demo terminal setups.
           </p>
         </div>
+      </div>
 
-        <div class="support-item">
-          <div class="support-num">03</div>
+      <!-- Step 03 -->
+      <div data-reveal-item>
+        <div class="support-tile">
+          <div class="support-num support-num--orange">03</div>
           <h3 class="support-title">AV Setup & Live Recording</h3>
           <p class="support-desc">
             We provide HDMI/USB-C connectivity, high-quality audio, and record sessions for YouTube so you have a professional portfolio talk.
@@ -145,60 +172,223 @@ const regularSpeakers = allSpeakers.filter(s => !s.data.featured);
 
   <!-- Featured Speakers -->
   {allSpeakers.length > 0 && (
-    <section class="section section--subtle">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-header__num">03 // PAST & UPCOMING SPEAKERS</span>
-          <div>
-            <h2 class="section-header__title">Community Voices.</h2>
-            <p class="section-header__desc">
-              Meet the engineers and practitioners who share their knowledge with Cloud Native Peshawar.
-            </p>
-          </div>
-        </div>
+    <section class="section-wrap speakers-section" id="speakers" data-reveal>
+      <div class="section-header-box">
+        <span class="section-eyebrow">03 // PAST & UPCOMING SPEAKERS</span>
+        <h2 class="section-headline">Community Voices.</h2>
+        <p class="section-subtext">
+          Meet the engineers and practitioners who share their knowledge with Cloud Native Peshawar.
+        </p>
+      </div>
 
-        <div class="speakers-grid">
-          {featuredSpeakers.map((speaker) => (
+      <div class="speakers-grid" data-reveal-group>
+        {featuredSpeakers.map((speaker) => (
+          <div data-reveal-item>
             <SpeakerCard speaker={speaker} />
-          ))}
-          {regularSpeakers.map((speaker) => (
+          </div>
+        ))}
+        {regularSpeakers.map((speaker) => (
+          <div data-reveal-item>
             <SpeakerCard speaker={speaker} />
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   )}
+
+  <!-- Topics Marquee -->
+  <Marquee 
+    items={[
+      'KUBERNETES',
+      'DEVOPS',
+      'MLOPS',
+      'DISTRIBUTED SYSTEMS',
+      'AGENTIC AI',
+      '100% FREE COMMUNITY',
+      'OPEN TO ALL BUILDERS',
+      'KHYBER PAKHTUNKHWA'
+    ]} 
+    speed="24s" 
+    label="Community Topics Marquee" 
+  />
 </BaseLayout>
 
 <style>
-  .page-header {
-    padding-bottom: var(--space-xl);
+  /* Page Hero */
+  .page-hero {
+    padding: clamp(36px, 6vw, 64px) clamp(16px, 4vw, 32px) clamp(32px, 5vw, 48px);
+    background-color: var(--color-cream-paper);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  .page-header__title {
-    font-size: var(--font-size-5xl);
-    margin-top: var(--space-xs);
-    margin-bottom: var(--space-md);
+  .page-hero-inner {
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    position: relative;
   }
 
-  .page-header__desc {
-    font-size: var(--font-size-lg);
-    color: var(--color-ink-muted);
-    max-width: var(--container-prose);
-    margin-bottom: var(--space-xl);
-  }
-
-  .page-header__actions {
+  .page-hero-layout {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: clamp(24px, 4vw, 48px);
+  }
+
+  .page-hero-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .page-hero-visual {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 860px) {
+    .page-hero-layout {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .page-hero-visual {
+      align-self: center;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: var(--spacing-16, 16px);
+    }
+  }
+
+  .page-hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide, 0.08em);
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-12, 12px);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8, 8px);
     flex-wrap: wrap;
-    gap: var(--space-xs);
+  }
+
+  .hero-eyebrow-text {
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-text-muted);
+  }
+
+  .page-hero-title {
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: var(--font-weight-bold, 700);
+    line-height: var(--line-height-snug, 1.15);
+    letter-spacing: var(--letter-spacing-tight, -0.02em);
+    margin-top: 0;
+    margin-bottom: var(--spacing-16, 16px);
+    text-transform: uppercase;
+    color: var(--color-charcoal-ink);
+  }
+
+  .page-hero-desc {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+    color: var(--color-charcoal-ink);
+    max-width: 720px;
+    line-height: var(--line-height-relaxed, 1.6);
+    margin-top: 0;
+    margin-bottom: var(--spacing-24, 24px);
+  }
+
+  .page-hero-actions {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-12, 12px);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 639px) {
+    .page-hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+  }
+
+  /* Section Wrapper */
+  .section-wrap {
+    padding: clamp(36px, 6vw, 60px) clamp(16px, 4vw, 32px);
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .formats-section {
+    background-color: var(--color-cream-paper);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    max-width: 100%;
+    padding-inline: max(clamp(16px, 4vw, 32px), calc((100% - var(--container-max, 1200px)) / 2));
+  }
+
+  .support-section {
+    background-color: var(--color-chalk-gray);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    max-width: 100%;
+    padding-inline: max(clamp(16px, 4vw, 32px), calc((100% - var(--container-max, 1200px)) / 2));
+  }
+
+  .speakers-section {
+    background-color: var(--color-cream-paper);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    max-width: 100%;
+    padding-inline: max(clamp(16px, 4vw, 32px), calc((100% - var(--container-max, 1200px)) / 2));
+  }
+
+  .section-header-box {
+    margin-bottom: clamp(24px, 4vw, 36px);
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-text-muted);
+    letter-spacing: var(--letter-spacing-wide, 0.06em);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-6, 6px);
+    display: block;
+  }
+
+  .section-headline {
+    font-family: var(--font-mono);
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: var(--font-weight-bold, 700);
+    letter-spacing: var(--letter-spacing-tight, -0.01em);
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: var(--spacing-10, 10px);
+    color: var(--color-charcoal-ink);
+  }
+
+  .section-subtext {
+    font-family: var(--font-mono);
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: var(--color-text-muted);
+    max-width: 680px;
+    line-height: var(--line-height-relaxed, 1.5);
+    margin: 0;
   }
 
   /* Formats Grid */
   .formats-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: clamp(18px, 3vw, 24px);
   }
 
   @media (min-width: 768px) {
@@ -208,64 +398,67 @@ const regularSpeakers = allSpeakers.filter(s => !s.data.featured);
   }
 
   .format-card {
-    padding: var(--space-xl);
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    height: 100%;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
   }
 
-  .format-card--featured {
-    border-color: var(--color-accent);
-    background-color: var(--color-paper-elevated);
-    box-shadow: var(--shadow-md);
-  }
-
-  .format-card__badge {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-accent);
-    margin-bottom: var(--space-xs);
-    letter-spacing: 0.05em;
+  .format-card__badge-wrap {
+    margin-bottom: var(--spacing-12, 12px);
   }
 
   .format-card__title {
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-charcoal-ink);
+    margin-top: 0;
+    margin-bottom: var(--spacing-8, 8px);
   }
 
   .format-card__desc {
-    font-size: var(--font-size-sm);
-    color: var(--color-ink-muted);
-    line-height: var(--line-height-normal);
-    margin-bottom: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed, 1.5);
+    margin-top: 0;
+    margin-bottom: var(--spacing-16, 16px);
     flex-grow: 1;
   }
 
   .format-card__list {
     list-style: none;
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-subtle);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-charcoal-ink);
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding-top: var(--space-sm);
-    border-top: 1px solid var(--color-border);
+    gap: var(--spacing-6, 6px);
+    padding-top: var(--spacing-12, 12px);
+    margin: 0;
+    border-top: var(--border-width, 1px) dashed var(--color-pencil-gray);
+  }
+
+  .format-card__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-8, 8px);
+    line-height: var(--line-height-normal, 1.4);
   }
 
   .format-card__list li::before {
-    content: "✓ ";
-    color: var(--color-accent);
-    font-weight: bold;
+    content: "■";
+    font-size: 8px;
+    line-height: 1.8;
+    color: var(--color-charcoal-ink);
+    flex-shrink: 0;
   }
 
-  /* Support Grid */
+  /* Support Grid & Tiles */
   .support-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: clamp(16px, 3vw, 24px);
   }
 
   @media (min-width: 768px) {
@@ -274,37 +467,69 @@ const regularSpeakers = allSpeakers.filter(s => !s.data.featured);
     }
   }
 
-  .support-item {
-    padding: var(--space-xl);
-    background-color: var(--color-paper-subtle);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+  .support-tile {
+    background-color: var(--color-frost-white);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+    padding: clamp(20px, 3vw, 28px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+  }
+
+  .support-tile:hover {
+    transform: translate(3px, -3px);
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
   }
 
   .support-num {
     font-family: var(--font-mono);
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-accent);
-    margin-bottom: var(--space-xs);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: var(--font-weight-bold, 700);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    margin-bottom: var(--spacing-10, 10px);
+  }
+
+  .support-num--sky {
+    color: var(--color-sky-crayon);
+  }
+
+  .support-num--canary {
+    color: var(--color-canary-banner);
+  }
+
+  .support-num--orange {
+    color: var(--color-duck-bill-orange);
   }
 
   .support-title {
-    font-size: var(--font-size-lg);
-    margin-bottom: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-charcoal-ink);
+    margin-top: 0;
+    margin-bottom: var(--spacing-8, 8px);
+    line-height: var(--line-height-snug, 1.25);
   }
 
   .support-desc {
-    font-size: var(--font-size-sm);
-    color: var(--color-ink-muted);
-    line-height: var(--line-height-normal);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed, 1.55);
+    margin: 0;
+    flex-grow: 1;
   }
 
   /* Speakers Grid */
   .speakers-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: clamp(16px, 3vw, 24px);
   }
 
   @media (min-width: 768px) {
@@ -316,6 +541,87 @@ const regularSpeakers = allSpeakers.filter(s => !s.data.featured);
   @media (min-width: 1024px) {
     .speakers-grid {
       grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8, 8px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    font-weight: var(--font-weight-medium, 500);
+    line-height: var(--line-height-snug, 1.2);
+    letter-spacing: var(--letter-spacing-normal, 0.02em);
+    padding: 10px 24px;
+    min-height: 44px;
+    border-radius: var(--radius-brutal);
+    border-width: var(--border-width, 2px);
+    border-style: solid;
+    border-color: var(--color-charcoal-ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+    transition: transform 120ms ease-in-out;
+    user-select: none;
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+  }
+
+  .btn:hover {
+    transform: translate(7px, -7px);
+  }
+
+  .btn:active {
+    transform: none;
+    transition: transform 30ms ease-in-out;
+  }
+
+  .btn:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+
+  .btn-sky {
+    background-color: var(--color-sky-crayon);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-sky:hover {
+    background-color: var(--color-sky-crayon);
+  }
+
+  .btn-outline {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-ice-wash);
+  }
+
+  @media (max-width: 639px) {
+    .btn {
+      white-space: normal;
+      text-align: center;
+      padding: 10px 14px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn:hover,
+    .btn:active,
+    .support-tile,
+    .support-tile:hover {
+      transform: none !important;
+      transition: none !important;
     }
   }
 </style>
