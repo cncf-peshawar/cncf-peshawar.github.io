@@ -21,33 +21,34 @@ const initials = (name: string) =>
   title="Organizers & Team | CNCF Peshawar" 
   description="Meet the passionate engineers, community leads, and volunteers organizing the Cloud Native Chapter in Peshawar."
 >
-  <!-- Page Header -->
-  <section class="page-header section">
-    <div class="container">
-      <span class="badge badge--live">Chapter Leadership</span>
-      <h1 class="page-header__title">The Team Behind <span class="text-gradient">Cloud Native Peshawar</span>.</h1>
-      <p class="page-header__desc">
+  <!-- Page Hero -->
+  <section class="page-hero" data-reveal>
+    <div class="page-hero__inner">
+      <div class="page-hero__eyebrow">
+        <span class="badge badge--yellow">00 // LEADERSHIP</span>
+        <span class="eyebrow-text">COMMUNITY OPERATORS</span>
+      </div>
+      <h1 class="page-hero__title">The Team Behind Cloud Native Peshawar.</h1>
+      <p class="page-hero__desc">
         Cloud Native Peshawar is organized by passionate engineers, researchers, and open-source advocates dedicated to growing the cloud native ecosystem in Khyber Pakhtunkhwa.
       </p>
     </div>
   </section>
 
-  <!-- Executive Roster -->
-  <section class="section section--subtle">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-header__num">01 // EXECUTIVE TEAM</span>
-        <div>
-          <h2 class="section-header__title">Chapter Organizers.</h2>
-          <p class="section-header__desc">
-            The executive team coordinating sessions, speaker curation, partnerships, and community operations.
-          </p>
-        </div>
-      </div>
+  <!-- Section 01: Executive Team -->
+  <section class="section-wrap" data-reveal>
+    <div class="section-header-box">
+      <span class="section-eyebrow">01 // EXECUTIVE TEAM</span>
+      <h2 class="section-headline">Chapter Organizers.</h2>
+      <p class="section-subtext">
+        The executive team coordinating sessions, speaker curation, partnerships, and community operations.
+      </p>
+    </div>
 
-      <div class="exec-grid">
-        {sortedTeam.map(member => (
-          <article class="exec-card">
+    <div class="exec-grid">
+      {sortedTeam.map(member => (
+        <article class="exec-card brutal-card">
+          <div class="exec-card__header">
             <div class="exec-card__photo">
               {member.data.avatar ? (
                 <img
@@ -60,82 +61,83 @@ const initials = (name: string) =>
               <span class="exec-card__initials" style={member.data.avatar ? 'display: none;' : ''}>
                 {initials(member.data.name)}
               </span>
-              {member.data.isLead && <span class="exec-card__flag">LEAD</span>}
             </div>
-
-            <div class="exec-card__body">
-              <h3 class="exec-card__name">{member.data.name}</h3>
+            <div class="exec-card__identity">
+              <div class="exec-card__name-row">
+                <h3 class="exec-card__name">{member.data.name}</h3>
+                {member.data.isLead && <span class="badge badge--yellow exec-card__flag">LEAD</span>}
+              </div>
               <p class="exec-card__role">{member.data.role}</p>
               {member.data.company && <p class="exec-card__company">{member.data.company}</p>}
-              <p class="exec-card__bio">{member.data.bio}</p>
-
-              <div class="exec-card__links">
-                {member.data.linkedin && (
-                  <a href={member.data.linkedin} target="_blank" rel="noopener noreferrer" class="exec-link" aria-label={`${member.data.name} on LinkedIn`}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                      <rect x="2" y="9" width="4" height="12"/>
-                      <circle cx="4" cy="4" r="2"/>
-                    </svg>
-                    <span>LinkedIn</span>
-                  </a>
-                )}
-                {member.data.instagram && (
-                  <a href={member.data.instagram} target="_blank" rel="noopener noreferrer" class="exec-link" aria-label={`${member.data.name} on Instagram`}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <rect x="2" y="2" width="20" height="20" rx="5"/>
-                      <path d="M16 11.37a4 4 0 1 1-7.75 1.13 4 4 0 0 1 7.75-1.13z"/>
-                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                    </svg>
-                    <span>Instagram</span>
-                  </a>
-                )}
-                {member.data.github && (
-                  <a href={member.data.github} target="_blank" rel="noopener noreferrer" class="exec-link" aria-label={`${member.data.name} on GitHub`}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                    </svg>
-                    <span>GitHub</span>
-                  </a>
-                )}
-                {member.data.linuxFoundationUser && (
-                  <span class="lf-badge" title="Linux Foundation ID">
-                    LF: @{member.data.linuxFoundationUser}
-                  </span>
-                )}
-              </div>
             </div>
-          </article>
-        ))}
-      </div>
+          </div>
+
+          <p class="exec-card__bio">{member.data.bio}</p>
+
+          <div class="exec-card__links">
+            {member.data.linkedin && (
+              <a href={member.data.linkedin} target="_blank" rel="noopener noreferrer" class="btn btn--outline btn--sm exec-link" aria-label={`${member.data.name} on LinkedIn`}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+                <span>LinkedIn ↗</span>
+              </a>
+            )}
+            {member.data.github && (
+              <a href={member.data.github} target="_blank" rel="noopener noreferrer" class="btn btn--outline btn--sm exec-link" aria-label={`${member.data.name} on GitHub`}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                </svg>
+                <span>GitHub ↗</span>
+              </a>
+            )}
+            {member.data.instagram && (
+              <a href={member.data.instagram} target="_blank" rel="noopener noreferrer" class="btn btn--outline btn--sm exec-link" aria-label={`${member.data.name} on Instagram`}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="20" rx="5"/>
+                  <path d="M16 11.37a4 4 0 1 1-7.75 1.13 4 4 0 0 1 7.75-1.13z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+                <span>Instagram ↗</span>
+              </a>
+            )}
+            {member.data.linuxFoundationUser && (
+              <span class="lf-badge" title="Linux Foundation ID">
+                LF: @{member.data.linuxFoundationUser}
+              </span>
+            )}
+          </div>
+        </article>
+      ))}
     </div>
   </section>
 
-<!-- Working Groups Tabs -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-header__num">02 // WORKING GROUPS</span>
-        <div>
-          <h2 class="section-header__title">Find Your Squad.</h2>
-          <p class="section-header__desc">
-            Volunteer teams managing end-to-end community operations. Tap a group to explore its members.
-          </p>
-        </div>
-      </div>
+  <!-- Section 02: Working Groups (Find Your Squad) -->
+  <section class="section-wrap section-wrap--alt" data-reveal>
+    <div class="section-header-box">
+      <span class="section-eyebrow">02 // WORKING GROUPS</span>
+      <h2 class="section-headline">Find Your Squad.</h2>
+      <p class="section-subtext">
+        Volunteer teams managing end-to-end community operations. Tap a squad to explore its members.
+      </p>
+    </div>
 
-      <div class="wg-tabs">
-        {workingGroups.map(group => (
-          <a href={`${base}/team/${group.slug}`} class="wg-tab">
-            <div class="wg-tab__top">
-              <span class="wg-tab__badge">{group.title.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}</span>
-              <span class="wg-tab__code">{group.code}</span>
+    <div class="wg-container wg-tabs" aria-label="Open Community Groups">
+      {workingGroups.map(group => {
+        const groupColor = group.slug === 'tech-team' ? 'lilac' : group.slug === 'events-team' ? 'orange' : group.slug === 'community-outreach' ? 'mint' : 'periwinkle';
+        return (
+          <a href={`${base}/team/${group.slug}`} class={`wg-card brutal-card wg-card--${groupColor}`}>
+            <div class="wg-card__top">
+              <span class={`badge badge--${groupColor}`}>{group.code}</span>
+              <span class="wg-card__count">{group.members.length} {group.members.length === 1 ? 'MEMBER' : 'MEMBERS'}</span>
             </div>
-            <h3 class="wg-tab__title">{group.title}</h3>
-            <p class="wg-tab__desc">{group.desc}</p>
-            <div class="wg-tab__members">
+            <h3 class="wg-card__title">{group.title}</h3>
+            <p class="wg-card__desc">{group.desc}</p>
+            <div class="wg-card__members">
               {group.members.slice(0, 8).map(member => (
-                <span class="wg-tab__avatar" title={member.data.name}>
+                <span class="wg-card__avatar" title={member.data.name}>
                   {getAvatarSrc(member.data.avatar || member.data.photo) ? (
                     <img src={getAvatarSrc(member.data.avatar || member.data.photo)!} alt={member.data.name} loading="lazy" />
                   ) : (
@@ -143,70 +145,292 @@ const initials = (name: string) =>
                   )}
                 </span>
               ))}
-              {group.members.length > 8 && <span class="wg-tab__more">+{group.members.length - 8}</span>}
+              {group.members.length > 8 && <span class="wg-card__more">+{group.members.length - 8}</span>}
             </div>
-            <div class="wg-tab__footer">
-              <span class="wg-tab__count">{group.members.length} member{group.members.length === 1 ? '' : 's'}</span>
-              <span class="wg-tab__cta">
-                View Team
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </span>
+            <div class="wg-card__cta">
+              <span>Explore {group.title} →</span>
             </div>
           </a>
-        ))}
-      </div>
+        );
+      })}
     </div>
   </section>
 
-<!-- Volunteer Callout -->
-  <section class="section section--subtle">
-    <div class="container">
-      <div class="volunteer-box">
-        <span class="badge badge--accent">Join Our Team</span>
-        <h2 class="volunteer-title">Want to Volunteer as an Organizer or Ambassador?</h2>
-        <p class="volunteer-desc">
-          We welcome enthusiastic community members to help with event logistics, photography, AV recording, workshop mentorship, and university outreach in Peshawar.
-        </p>
-        <a 
-          href="mailto:cncfpeshawar@gmail.com?subject=Volunteer%20Application%20%7C%20CNCF%20Peshawar&body=Hi%20CNCF%20Peshawar%20Team%2C%0A%0AI%20would%20like%20to%20volunteer%20as%20an%20Organizer%20%2F%20Campus%20Ambassador.%0A%0AName%3A%20%0ARole%2FUniversity%3A%20%0ALinkedIn%2FGitHub%3A%20%0AAreas%20of%20Interest%20(Event%20Logistics%2C%20Design%2C%20AV%2C%20Workshop%20Mentorship)%3A%20%0A%0AThank%20you!" 
-          class="btn btn--accent"
-        >
-          <span>Apply to Volunteer</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-      </div>
+  <!-- Volunteer Callout -->
+  <section class="section-wrap" data-reveal>
+    <div class="volunteer-box brutal-card">
+      <span class="badge badge--yellow">Join Our Team</span>
+      <h2 class="volunteer-title">Want to Volunteer as an Organizer or Ambassador?</h2>
+      <p class="volunteer-desc">
+        We welcome enthusiastic community members to help with event logistics, photography, AV recording, workshop mentorship, and university outreach in Peshawar.
+      </p>
+      <a 
+        href="mailto:cncfpeshawar@gmail.com?subject=Volunteer%20Application%20%7C%20CNCF%20Peshawar&body=Hi%20CNCF%20Peshawar%20Team%2C%0A%0AI%20would%20like%20to%20volunteer%20as%20an%20Organizer%20%2F%20Campus%20Ambassador.%0A%0AName%3A%20%0ARole%2FUniversity%3A%20%0ALinkedIn%2FGitHub%3A%20%0AAreas%20of%20Interest%20(Event%20Logistics%2C%20Design%2C%20AV%2C%20Workshop%20Mentorship)%3A%20%0A%0AThank%20you!" 
+        class="btn btn--sky btn--lg"
+      >
+        <span>Apply to Volunteer</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
     </div>
   </section>
+
+  <!-- Marquee Strip -->
+  <div class="marquee-container" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>KUBERNETES</span><span>·</span>
+        <span>DEVOPS</span><span>·</span>
+        <span>MLOPS</span><span>·</span>
+        <span>DISTRIBUTED SYSTEMS</span><span>·</span>
+        <span>AGENTIC AI</span><span>·</span>
+        <span>100% FREE COMMUNITY</span><span>·</span>
+        <span>OPEN TO ALL BUILDERS</span><span>·</span>
+        <span>KHYBER PAKHTUNKHWA</span><span>·</span>
+      </div>
+      <div class="marquee-content">
+        <span>KUBERNETES</span><span>·</span>
+        <span>DEVOPS</span><span>·</span>
+        <span>MLOPS</span><span>·</span>
+        <span>DISTRIBUTED SYSTEMS</span><span>·</span>
+        <span>AGENTIC AI</span><span>·</span>
+        <span>100% FREE COMMUNITY</span><span>·</span>
+        <span>OPEN TO ALL BUILDERS</span><span>·</span>
+        <span>KHYBER PAKHTUNKHWA</span><span>·</span>
+      </div>
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
-  .page-header {
-    padding-bottom: var(--space-xl);
+  /* ------------------------------------------------------------------ */
+  /* MOTHERDUCK NEO-BRUTALIST ATOMIC BASE STYLES                        */
+  /* ------------------------------------------------------------------ */
+  .page-hero {
+    padding: var(--spacing-64) var(--spacing-24) var(--spacing-48);
+    background-color: var(--color-cream-paper);
+    border-bottom: 2px solid var(--color-charcoal-ink);
+    position: relative;
   }
 
-  .page-header__title {
-    font-size: var(--font-size-5xl);
-    margin-top: var(--space-xs);
-    margin-bottom: var(--space-md);
+  .page-hero__inner {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    position: relative;
   }
 
-  .page-header__desc {
-    font-size: var(--font-size-lg);
-    color: var(--color-ink-muted);
+  .page-hero__eyebrow {
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-12);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+  }
+
+  .eyebrow-text {
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+  }
+
+  .page-hero__title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-display);
+    font-weight: 700;
+    line-height: var(--line-height-snug);
+    letter-spacing: -0.02em;
+    color: var(--color-charcoal-ink);
+    margin-bottom: var(--spacing-16);
+    text-transform: uppercase;
+  }
+
+  .page-hero__desc {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-subheading);
+    color: var(--color-charcoal-ink);
     max-width: var(--container-prose);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .section-wrap {
+    padding: var(--spacing-60) var(--spacing-24);
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .section-wrap--alt {
+    max-width: 100%;
+    background-color: var(--color-chalk-gray);
+    border-top: 2px solid var(--color-charcoal-ink);
+    border-bottom: 2px solid var(--color-charcoal-ink);
+    padding-inline: calc((100% - var(--page-max-width)) / 2 + var(--spacing-24));
+  }
+
+  @media (max-width: 1248px) {
+    .section-wrap--alt {
+      padding-inline: var(--spacing-24);
+    }
+  }
+
+  .section-header-box {
+    margin-bottom: var(--spacing-36, 36px);
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    color: var(--color-text-muted);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-6, 6px);
+    display: block;
+  }
+
+  .section-headline {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-heading-lg);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-ink);
+    margin-bottom: var(--spacing-10, 10px);
+  }
+
+  .section-subtext {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body-lg);
+    color: var(--color-text-muted);
+    max-width: var(--container-prose);
+    line-height: var(--line-height-normal);
   }
 
   /* ------------------------------------------------------------------ */
-  /* EXECUTIVE ROSTER                                                   */
+  /* BRUTALIST CARDS & BADGES                                          */
+  /* ------------------------------------------------------------------ */
+  .brutal-card {
+    background: var(--color-frost-white);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm);
+    padding: var(--spacing-28, 28px);
+    position: relative;
+    transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-6, 6px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius-brutal);
+    border: 1px solid var(--color-charcoal-ink);
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-tight);
+  }
+
+  .badge--yellow {
+    background: var(--color-canary-banner);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge--lilac {
+    background: var(--color-lilac-sketch);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge--orange {
+    background: var(--color-duck-bill-orange);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge--mint {
+    background: var(--color-mint-sketch);
+    color: var(--color-charcoal-ink);
+  }
+
+  .badge--periwinkle {
+    background: var(--color-periwinkle-sketch);
+    color: var(--color-charcoal-ink);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* BUTTONS & LINKS                                                    */
+  /* ------------------------------------------------------------------ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    padding: 11px 22px;
+    border-radius: var(--radius-brutal);
+    border: 2px solid var(--color-charcoal-ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    text-decoration: none;
+    box-shadow: var(--shadow-hard-sm);
+    transition: transform 120ms ease-in-out, box-shadow 120ms ease-in-out;
+    user-select: none;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .btn:hover {
+    transform: translate(7px, -7px);
+    box-shadow: var(--shadow-hard);
+  }
+
+  .btn:active {
+    transform: none;
+    transition: transform 30ms;
+  }
+
+  .btn:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  .btn--sky {
+    background-color: var(--color-sky-crayon);
+    color: var(--color-charcoal-ink);
+  }
+
+  .btn--outline {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+  }
+
+  .btn--sm {
+    padding: 7px 14px;
+    font-size: var(--font-size-caption);
+    min-height: 44px;
+  }
+
+  .btn--lg {
+    padding: 14px 28px;
+    font-size: var(--font-size-body-lg);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* SECTION 01: EXECUTIVE GRID                                         */
   /* ------------------------------------------------------------------ */
   .exec-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: var(--spacing-24);
   }
 
   @media (min-width: 640px) {
@@ -217,321 +441,351 @@ const initials = (name: string) =>
 
   @media (min-width: 1024px) {
     .exec-grid {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
   .exec-card {
     display: flex;
     flex-direction: column;
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+    justify-content: space-between;
   }
 
   .exec-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--color-border-hover);
-    box-shadow: var(--shadow-lg);
+    transform: translate(3px, -3px);
+    box-shadow: var(--shadow-hard);
+  }
+
+  .exec-card__header {
+    display: flex;
+    gap: var(--spacing-14, 14px);
+    align-items: center;
+    margin-bottom: var(--spacing-14, 14px);
   }
 
   .exec-card__photo {
-    position: relative;
-    aspect-ratio: 1 / 1;
-    background: var(--gradient-brand);
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--color-cream-paper);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
   }
 
   .exec-card__photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
 
   .exec-card__initials {
-    font-family: var(--font-display);
-    font-size: clamp(var(--font-size-3xl), 6vw, var(--font-size-4xl));
-    font-weight: var(--font-weight-bold);
-    color: var(--color-accent-contrast);
-    letter-spacing: var(--letter-spacing-tight);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-subheading);
+    font-weight: 700;
+    color: var(--color-charcoal-ink);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .exec-card__flag {
-    position: absolute;
-    top: var(--space-xs);
-    right: var(--space-xs);
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.06em;
-    color: var(--color-accent);
-    background-color: var(--color-paper-elevated);
-    border: 1px solid var(--color-border);
-    padding: 0.2rem 0.5rem;
-    border-radius: var(--radius-full);
+  .exec-card__identity {
+    flex: 1;
+    min-width: 0;
   }
 
-  .exec-card__body {
+  .exec-card__name-row {
     display: flex;
-    flex-direction: column;
-    padding: var(--space-md);
-    flex-grow: 1;
+    align-items: center;
+    gap: var(--spacing-6, 6px);
+    flex-wrap: wrap;
   }
 
   .exec-card__name {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-ink);
-    letter-spacing: var(--letter-spacing-tight);
-    margin-bottom: 2px;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-subheading);
+    font-weight: 700;
+    color: var(--color-charcoal-ink);
+    margin: 0;
+  }
+
+  .exec-card__flag {
+    font-size: 10px;
+    padding: 2px 6px;
   }
 
   .exec-card__role {
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-accent);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: var(--space-2xs);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    color: var(--color-text-muted);
+    margin: 0;
   }
 
   .exec-card__company {
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-subtle);
-    margin-bottom: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    color: var(--color-text-muted);
+    margin: 0;
   }
 
   .exec-card__bio {
-    font-size: var(--font-size-sm);
-    color: var(--color-ink-muted);
-    line-height: var(--line-height-normal);
-    margin-bottom: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-charcoal-ink);
+    margin-bottom: var(--spacing-16);
     flex-grow: 1;
   }
 
   .exec-card__links {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2xs);
-    padding-top: var(--space-sm);
-    border-top: 1px solid var(--color-border);
-    margin-top: auto;
+    gap: var(--spacing-8);
+    font-size: var(--font-size-caption);
   }
 
   .exec-link {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-accent);
-    padding: 0.3rem 0.6rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xs);
-    background-color: var(--color-paper-subtle);
-    transition: border-color var(--transition-fast), background-color var(--transition-fast);
-  }
-
-  .exec-link:hover {
-    border-color: var(--color-accent);
-    background-color: var(--color-accent-subtle);
+    gap: var(--spacing-6, 6px);
   }
 
   .lf-badge {
     display: inline-flex;
     align-items: center;
     font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-muted);
-    background-color: var(--color-paper-subtle);
-    border: 1px solid var(--color-border);
-    padding: 0.3rem 0.6rem;
-    border-radius: var(--radius-xs);
+    font-size: var(--font-size-caption);
+    color: var(--color-text-muted);
+    background-color: var(--color-chalk-gray);
+    border: 1px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    padding: 4px 8px;
+    min-height: 44px;
+    box-sizing: border-box;
   }
 
   /* ------------------------------------------------------------------ */
-  /* WORKING GROUPS TABS                                                */
+  /* SECTION 02: WORKING GROUPS                                         */
   /* ------------------------------------------------------------------ */
-  .wg-tabs {
+  .wg-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: var(--spacing-20);
   }
 
-  @media (min-width: 640px) {
-    .wg-tabs {
+  @media (min-width: 768px) {
+    .wg-container {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  @media (min-width: 1100px) {
-    .wg-tabs {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  .wg-tab {
-    display: flex;
-    flex-direction: column;
-    padding: var(--space-lg);
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
+  .wg-card {
     text-decoration: none;
     color: inherit;
-    transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
-  }
-
-  .wg-tab:hover {
-    transform: translateY(-4px);
-    border-color: var(--color-border-hover);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .wg-tab__top {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    padding: var(--spacing-28, 28px);
+  }
+
+  .wg-card:hover {
+    transform: translate(3px, -3px);
+    box-shadow: var(--shadow-hard);
+  }
+
+  .wg-card:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  .wg-card--lilac {
+    border-left: var(--border-accent-width, 6px) solid var(--color-lilac-sketch);
+  }
+
+  .wg-card--orange {
+    border-left: var(--border-accent-width, 6px) solid var(--color-duck-bill-orange);
+  }
+
+  .wg-card--mint {
+    border-left: var(--border-accent-width, 6px) solid var(--color-mint-sketch);
+  }
+
+  .wg-card--periwinkle {
+    border-left: var(--border-accent-width, 6px) solid var(--color-periwinkle-sketch);
+  }
+
+  .wg-card__top {
+    display: flex;
     justify-content: space-between;
-    margin-bottom: var(--space-md);
-  }
-
-  .wg-tab__badge {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    background: var(--gradient-brand);
-    border-radius: var(--radius-md);
-    color: var(--color-accent-contrast);
-    font-family: var(--font-display);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.04em;
+    margin-bottom: var(--spacing-10, 10px);
   }
 
-  .wg-tab__code {
+  .wg-card__count {
     font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-accent);
-    letter-spacing: 0.06em;
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    color: var(--color-text-muted);
   }
 
-  .wg-tab__title {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-ink);
-    letter-spacing: var(--letter-spacing-tight);
-    margin-bottom: var(--space-2xs);
+  .wg-card__title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-subheading);
+    font-weight: 700;
+    color: var(--color-charcoal-ink);
+    margin-bottom: var(--spacing-6, 6px);
   }
 
-  .wg-tab__desc {
-    font-size: var(--font-size-sm);
-    color: var(--color-ink-muted);
+  .wg-card__desc {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    color: var(--color-charcoal-ink);
     line-height: var(--line-height-relaxed);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--spacing-16);
     flex-grow: 1;
   }
 
-  .wg-tab__members {
+  .wg-card__members {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 6px;
-    padding-top: var(--space-md);
-    border-top: 1px solid var(--color-border);
-    margin-bottom: var(--space-md);
+    gap: var(--spacing-6, 6px);
+    padding-top: var(--spacing-12);
+    border-top: 1px solid var(--color-charcoal-ink);
+    margin-bottom: var(--spacing-16);
   }
 
-  .wg-tab__avatar {
+  .wg-card__avatar {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-brutal);
     overflow: hidden;
-    background-color: var(--color-accent-subtle);
-    border: 1px solid var(--color-border);
+    background-color: var(--color-chalk-gray);
+    border: 1px solid var(--color-charcoal-ink);
     font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-accent);
+    font-size: var(--font-size-caption);
+    font-weight: 600;
+    color: var(--color-charcoal-ink);
   }
 
-  .wg-tab__avatar img {
+  .wg-card__avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .wg-tab__more {
+  .wg-card__more {
     font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-subtle);
+    font-size: var(--font-size-caption);
+    color: var(--color-text-muted);
+    font-weight: 700;
     padding-left: 2px;
   }
 
-  .wg-tab__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-sm);
-  }
-
-  .wg-tab__count {
+  .wg-card__cta {
     font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-subtle);
-  }
-
-  .wg-tab__cta {
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-charcoal-ink);
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-ink-muted);
-    transition: color var(--transition-fast);
+    gap: var(--spacing-4);
   }
 
-  .wg-tab:hover .wg-tab__cta,
-  .wg-tab:focus-within .wg-tab__cta {
-    color: var(--color-accent);
+  .wg-card:hover .wg-card__cta {
+    color: var(--color-sky-crayon);
   }
 
   /* ------------------------------------------------------------------ */
-  /* VOLUNTEER CALLOUT                                                  */
+  /* VOLUNTEER CALLOUT BOX                                              */
   /* ------------------------------------------------------------------ */
   .volunteer-box {
-    padding: clamp(var(--space-lg), 5vw, var(--space-2xl));
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: clamp(var(--spacing-32), 5vw, var(--spacing-64));
+    background: var(--color-frost-white);
   }
 
   .volunteer-title {
-    font-size: var(--font-size-3xl);
-    margin-top: var(--space-xs);
-    margin-bottom: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-heading-lg);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-charcoal-ink);
+    margin-top: var(--spacing-12);
+    margin-bottom: var(--spacing-12);
   }
 
   .volunteer-desc {
-    font-size: var(--font-size-base);
-    color: var(--color-ink-muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body-lg);
+    color: var(--color-text-muted);
     max-width: var(--container-prose);
-    margin-bottom: var(--space-xl);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--spacing-32);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* MARQUEE STRIP                                                      */
+  /* ------------------------------------------------------------------ */
+  .marquee-container {
+    width: 100%;
+    background: var(--color-canary-banner);
+    border-top: 2px solid var(--color-charcoal-ink);
+    border-bottom: 2px solid var(--color-charcoal-ink);
+    overflow: hidden;
+    padding: 10px 0;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .marquee-track {
+    display: inline-flex;
+    animation: marqueeScroll 25s linear infinite;
+  }
+
+  .marquee-content {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-24);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    color: var(--color-charcoal-ink);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+    padding-right: var(--spacing-24);
+  }
+
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* PREFERS-REDUCED-MOTION (PRM)                                       */
+  /* ------------------------------------------------------------------ */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .marquee-track {
+      animation: none !important;
+    }
+    .btn:hover, .exec-card:hover, .wg-card:hover {
+      transform: none !important;
+    }
   }
 </style>
