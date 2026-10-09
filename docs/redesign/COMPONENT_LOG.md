@@ -105,6 +105,52 @@ Date: 2026-10-09
 | `src/components/ui/Container.astro` | Lacked prose container size option for editorial / long-form text | Added `size="default"|"prose"|"full"` with `.container--prose` mapped to `var(--container-prose, 720px)` | Stitch `blog-post-desktop.html` & `code-of-conduct-desktop.html` (720px max-width) |
 | `src/pages/dev-kit.astro` | Dev kit catalog lacked live demonstrations of new variants | Documented and demonstrated all new variants across Buttons, LinkButtons, Badges, Tags, Cards (surfaces + accent borders + link cards), Frames (terminal/window), and Containers (default/prose) | Acceptance Criteria & Quality Gate |
 
+## T-3.1-SPEAK Speaker Portal Rebuild Pass
+Date: 2026-10-10
+
+| Component / File | Identified Status | Bounded Implementation Applied | Ground Truth / Contract Ref |
+|---|---|---|---|
+| `src/pages/speak.astro` | Page rebuild | Rebuilt to MotherDuck design system. Preserved 2 CTAs: PRIMARY GitHub issue form button (`https://github.com/cncf-peshawar/cncf-peshawar.github.io/issues/new?template=cfp_proposal.yml`) + SECONDARY mailto fallback (`mailto:cncfpeshawar@gmail.com?subject=CNCF%20Peshawar%20CFP%20Inquiry`). 3 talk format cards, 4 speaker support steps, responsive speaker roster grid (`getCollection('speakers')` fallback preserved), and marquee. 100% token styling. | Stitch `speak-desktop.html` / `speak-mobile.html`, CONTRACT.md §5 |
+| `src/components/speak/MentorDoodle.astro` | Mentorship doodle illustration | Created isolated robot mentor doodle with tokenized SVG paths, speech bubble, and zero hex literals. | Stitch speak screens |
+
+## T-3.2-SPONSORS Sponsorship Page Rebuild Pass
+Date: 2026-10-10
+
+| Component / File | Identified Status | Bounded Implementation Applied | Ground Truth / Contract Ref |
+|---|---|---|---|
+| `src/pages/sponsors.astro` | Page rebuild | Rebuilt to MotherDuck design system. Facts grid, why-partner strip, 4 partnership packages (Refreshment Partner highlighted with canary MOST POPULAR badge), prospectus download LinkButton (`/assets/sponsorship-prospectus.pdf`), partner cards, marquee. | Stitch `sponsors-desktop.html` / `sponsors-mobile.html` |
+| `src/components/TrackRecordStats.astro` | Restyling to tokens | Restyled community track record stats into MotherDuck brutalist cards using tokens only (`--color-*`, `--radius-brutal`, `--shadow-hard-sm`, `--font-mono`). | DESIGN.md §Tokens |
+| `src/components/sponsors/SponsorshipEmailBuilder.astro` | Interactive form & preview restyling | Restyled inline email builder keeping frozen form inside window Frame and live preview inside dark terminal Frame. All 12 test-asserted form IDs preserved (`#sponsor-form`, `#org-name`, `#contact-name`, `#contact-email`, `#tier-select`, `#timeline-select`, `#org-website`, `#scope-notes`, `#email-preview-text`, `#send-mailto-btn`, `#copy-template-btn`, `#copy-btn-text`) plus `#email-builder` and `?tier=` deep-link preselect. | CONTRACT.md §5 & live DevTools proof |
+| `src/components/sponsors/SponsorPencilDoodle.astro` | Vector doodle | Drafting pencil illustration with token strokes and zero hex. | Stitch sponsors screens |
+| `src/components/sponsors/{GithubLogo,NicLogo,NsaveLogo}.astro` | Partner logos deviation | CMS frontmatter in `src/content/sponsors/*.md` lacked logo fields. Implemented inline SVG wordmarks using `currentColor` under `src/components/sponsors/` (magic-21st not used). | T-3.2-SPONSORS Directive & Report |
+
+## T-3.4-BLOG Blog, Post, CoC, and 404 Rebuild Pass
+Date: 2026-10-10
+
+| Component / File | Identified Status | Bounded Implementation Applied | Ground Truth / Contract Ref |
+|---|---|---|---|
+| `src/pages/blog/index.astro` | Blog index rebuild | Rebuilt post list with rotating sketch left-borders (`coral`, `mint`, `periwinkle`, `peach`, `lilac`), author badge, date, tag chips, read CTA, marquee. Preserved byte-identical frontmatter. | Stitch `blog-desktop.html` / `blog-mobile.html` |
+| `src/pages/blog/[slug].astro` | Blog post article rebuild | Rebuilt article template with breadcrumbs, author badge, `.prose .prose--article` 720px centered measure, back navigation, marquee. Preserved byte-identical frontmatter. | Stitch `blog-post-desktop.html` / `blog-post-mobile.html` |
+| `src/pages/code-of-conduct.astro` | Code of Conduct rebuild | Rebuilt with standards hero, `.prose .prose--article` layout, brutalist incident reporting box, attribution, marquee. Preserved byte-identical frontmatter. | Stitch `code-of-conduct-desktop.html` / `code-of-conduct-mobile.html` |
+| `src/pages/404.astro` | 404 error page rebuild | Rebuilt error page with `/illustrations/terminal-robot.svg`, error badge, mono message, diagnostics panel with 3 colored control dots, action buttons (Return Home, Events, Speak), marquee. Byte-identical frontmatter. | Stitch `404-desktop.html` / `404-mobile.html` |
+| `src/styles/prose.css` | ADD-only prose stylesheet extensions | Appended `.prose--article` margin centering (`margin-inline: auto`), accessible focus rings on links (`:focus-visible`), overflow safety (`overflow-wrap: break-word`, `word-break: break-word`), `<pre>` bounds safety, and responsive table horizontal scrolling (`overflow-x: auto`). Zero legacy lines removed. | T-3.4-BLOG Prose Spec |
+
+## T-MERGE-A Prose.css Architecture & Consolidation Pass
+Date: 2026-10-10
+
+### 1. Prose.css Architecture & Import Pattern
+A comprehensive site-wide audit (`grep -rn "prose.css" src/`) confirms that there is exactly ONE canonical prose stylesheet: `src/styles/prose.css`.
+It is consumed by exactly three page-scoped templates:
+1. `src/pages/events/[slug].astro` (`@import '../../styles/prose.css';`)
+2. `src/pages/blog/[slug].astro` (`@import '../../styles/prose.css';`)
+3. `src/pages/code-of-conduct.astro` (`@import '../styles/prose.css';`)
+
+**Encapsulation Rule:** Prose styles are scoped to markdown/long-form content containers (`.prose`, `.prose--article`). Rather than centralizing `prose.css` into `BaseLayout.astro` (which would bloat global bundle CSS and risk unintended cascade leaks on landing routes), `prose.css` is imported strictly inside the scoped `<style>` blocks of pages rendering article content.
+
+### 2. Isolated UI Catalog Route (/dev-kit)
+The route `/dev-kit` (`src/pages/dev-kit.astro`) is an internal component showcase and testing ground. It is deliberately excluded from parity tests (`parity.mjs`) and will remain excluded from the final H4 Pull Request.
+
+
 
 
 
