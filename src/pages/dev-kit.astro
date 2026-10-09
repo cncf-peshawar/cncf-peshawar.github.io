@@ -9,6 +9,7 @@ import Frame from '../components/ui/Frame.astro';
 import Input from '../components/ui/Input.astro';
 import Textarea from '../components/ui/Textarea.astro';
 import Select from '../components/ui/Select.astro';
+import Container from '../components/ui/Container.astro';
 
 const rainbowColors = [
   'coral',
@@ -52,6 +53,8 @@ const selectOptions = [
           <div class="dev-kit__row">
             <Button variant="primary">Primary Action</Button>
             <Button variant="secondary">Secondary Outline</Button>
+            <Button variant="outline">Outline Alias</Button>
+            <Button variant="canary">Canary Yellow</Button>
             <Button variant="rainbow" rainbowColor="coral">Rainbow Coral</Button>
             <Button variant="rainbow" rainbowColor="mint">Rainbow Mint</Button>
           </div>
@@ -92,6 +95,8 @@ const selectOptions = [
         <div class="dev-kit__row">
           <LinkButton href="#section-buttons" variant="primary">Primary Link</LinkButton>
           <LinkButton href="#section-cards" variant="secondary">Secondary Link</LinkButton>
+          <LinkButton href="#section-cards" variant="outline">Outline Alias</LinkButton>
+          <LinkButton href="#section-cards" variant="canary">Canary Link</LinkButton>
           <LinkButton href="#section-badges" variant="rainbow" rainbowColor="lilac">Rainbow Lilac Link</LinkButton>
           <LinkButton href="#section-frames" variant="rainbow" rainbowColor="peach" size="sm">Small Peach Link</LinkButton>
         </div>
@@ -105,16 +110,37 @@ const selectOptions = [
         <Tag color="marigold">Status Pill</Tag>
       </div>
 
-      <Card variant="white" padding="md">
-        <h3 class="dev-kit__card-title">Badge Variants</h3>
-        <div class="dev-kit__row">
-          <Badge variant="canary">Canary Banner</Badge>
-          <Badge variant="yellow">Yellow Alias</Badge>
-          <Badge variant="mint">Signal Mint</Badge>
-          <Badge variant="orange">Duck Bill Orange</Badge>
-          <Badge variant="charcoal">Charcoal Ink</Badge>
-        </div>
-      </Card>
+      <div class="dev-kit__grid">
+        <Card variant="white" padding="md">
+          <h3 class="dev-kit__card-title">Status & Palette Variants</h3>
+          <div class="dev-kit__row">
+            <Badge variant="canary">Canary Banner</Badge>
+            <Badge variant="yellow">Yellow Alias</Badge>
+            <Badge variant="mint">Signal Mint</Badge>
+            <Badge variant="orange">Duck Bill Orange</Badge>
+            <Badge variant="charcoal">Charcoal Ink</Badge>
+            <Badge variant="white">Frost White</Badge>
+            <Badge variant="lilac">Lilac Sketch</Badge>
+            <Badge variant="live">Live Status</Badge>
+            <Badge variant="muted">Completed / Muted</Badge>
+          </div>
+        </Card>
+
+        <Card variant="white" padding="md">
+          <h3 class="dev-kit__card-title">Rainbow Sketch Palette & Small Sizes</h3>
+          <div class="dev-kit__row">
+            <Badge variant="coral">Coral</Badge>
+            <Badge variant="peach">Peach</Badge>
+            <Badge variant="lime">Lime</Badge>
+            <Badge variant="periwinkle">Periwinkle</Badge>
+            <Badge variant="slate">Slate</Badge>
+            <Badge variant="sky">Sky Crayon</Badge>
+            <Badge variant="canary" size="sm">Lead (sm)</Badge>
+            <Badge variant="white" size="sm">WG-01 (sm)</Badge>
+            <Badge variant="live" size="sm">Active (sm)</Badge>
+          </div>
+        </Card>
+      </div>
     </section>
 
     <!-- 4. TAGS -->
@@ -124,17 +150,30 @@ const selectOptions = [
         <Tag color="coral">Taxonomy</Tag>
       </div>
 
-      <Card variant="white" padding="md">
-        <h3 class="dev-kit__card-title">Tag Colors & Cycling</h3>
-        <div class="dev-kit__row">
-          {rainbowColors.map((color) => (
-            <Tag color={color}>#{color}</Tag>
-          ))}
-          <Tag color="charcoal">#charcoal</Tag>
-          <Tag>#auto-cycle-1</Tag>
-          <Tag>#auto-cycle-2</Tag>
-        </div>
-      </Card>
+      <div class="dev-kit__grid">
+        <Card variant="white" padding="md">
+          <h3 class="dev-kit__card-title">Tag Colors & Cycling</h3>
+          <div class="dev-kit__row">
+            {rainbowColors.map((color) => (
+              <Tag color={color}>#{color}</Tag>
+            ))}
+            <Tag color="charcoal">#charcoal</Tag>
+            <Tag>#auto-cycle-1</Tag>
+            <Tag>#auto-cycle-2</Tag>
+          </div>
+        </Card>
+
+        <Card variant="white" padding="md">
+          <h3 class="dev-kit__card-title">Active, Fill & Interactive Link Tags</h3>
+          <div class="dev-kit__row">
+            <Tag active={true}>#active-filter</Tag>
+            <Tag fill={true} color="coral">#fill-coral</Tag>
+            <Tag fill={true} color="mint">#fill-mint</Tag>
+            <Tag fill={true} color="canary">#fill-canary</Tag>
+            <Tag interactive={true} as="a" href="#section-tags">#interactive-link →</Tag>
+          </div>
+        </Card>
+      </div>
     </section>
 
     <!-- 5. CARDS -->
@@ -164,6 +203,47 @@ const selectOptions = [
           <h3 class="dev-kit__card-title">Interactive Card</h3>
           <p class="dev-kit__body">Click or press to observe active translate(-6px, 6px) physics into shadow.</p>
         </Card>
+
+        <Card variant="notebook" padding="md">
+          <h3 class="dev-kit__card-title">Notebook Card</h3>
+          <p class="dev-kit__body">Faint notebook-pale tint for featured sponsor tier or highlighted cards.</p>
+        </Card>
+
+        <Card variant="terminal" padding="md">
+          <h3 class="dev-kit__card-title">Terminal Card</h3>
+          <p class="dev-kit__body" style="color: var(--color-chalk-gray);">Dark terminal editor canvas for code diagnostics and email previews.</p>
+        </Card>
+
+        <Card variant="ice" padding="md">
+          <h3 class="dev-kit__card-title">Ice Wash Card</h3>
+          <p class="dev-kit__body">Subtle blue highlight tint for hovered or secondary highlights.</p>
+        </Card>
+      </div>
+
+      <div class="dev-kit__card-grid" style="margin-top: 24px;">
+        <Card accentBorder="coral" accentPosition="top" padding="md">
+          <Badge variant="coral">Coral Top</Badge>
+          <h3 class="dev-kit__card-title" style="margin-top: 8px;">15-Min Lightning Talk</h3>
+          <p class="dev-kit__body">6px solid coral accent on card top edge.</p>
+        </Card>
+
+        <Card accentBorder="orange" accentPosition="top" padding="md">
+          <Badge variant="orange">Orange Top</Badge>
+          <h3 class="dev-kit__card-title" style="margin-top: 8px;">40-Min Deep Dive</h3>
+          <p class="dev-kit__body">6px solid orange accent on card top edge.</p>
+        </Card>
+
+        <Card accentBorder="mint" accentPosition="top" padding="md">
+          <Badge variant="mint">Mint Top</Badge>
+          <h3 class="dev-kit__card-title" style="margin-top: 8px;">90-Min Workshop</h3>
+          <p class="dev-kit__body">6px solid mint accent on card top edge.</p>
+        </Card>
+
+        <Card as="a" href="#section-cards" accentBorder="lilac" accentPosition="left" interactive={true} padding="md">
+          <Badge variant="lilac">Lilac Left</Badge>
+          <h3 class="dev-kit__card-title" style="margin-top: 8px;">Tech Working Group →</h3>
+          <p class="dev-kit__body">Clickable anchor card with 6px solid lilac left border accent.</p>
+        </Card>
       </div>
     </section>
 
@@ -187,6 +267,27 @@ peshawar-worker-02    Ready    worker          42d   v1.31.1
 $ cncf-peshawar status --gate h2
 [STATUS] 9/9 Primitives Verified PASS</code></pre>
       </Frame>
+
+      <div class="dev-kit__grid" style="margin-top: 24px;">
+        <Frame title="window ~ docs/redesign/CONTRACT.md" variant="window">
+          <p style="color: var(--color-charcoal-ink); font-size: 13px; margin: 0;">
+            Window frame variant with frost-white body and dark charcoal text for docs and forms.
+          </p>
+        </Frame>
+
+        <Frame title="generator ~ email-preview" variant="terminal" headerVariant="dark">
+          <div slot="header-action">
+            <span style="font-size: 11px; color: var(--color-sky-crayon);">To: cncfpeshawar@gmail.com</span>
+          </div>
+          <p style="font-size: 12px; color: var(--color-chalk-gray); margin: 0;">
+            Subject: CNCF Peshawar Sponsorship Inquiry — Acme Corp
+          </p>
+          <div slot="footer">
+            <Button size="sm" variant="primary">Open in Email App</Button>
+            <Button size="sm" variant="secondary">Copy Template</Button>
+          </div>
+        </Frame>
+      </div>
     </section>
 
     <!-- 7. FORM CONTROLS -->
@@ -253,6 +354,30 @@ $ cncf-peshawar status --gate h2
           </div>
         </form>
       </Card>
+    </section>
+
+    <!-- 8. CONTAINER -->
+    <section class="dev-kit__section" id="section-containers">
+      <div class="dev-kit__section-header">
+        <h2 class="dev-kit__section-title">8. Container.astro</h2>
+        <Tag color="periwinkle">Layout Shell</Tag>
+      </div>
+
+      <div class="dev-kit__grid">
+        <Card variant="white" padding="md">
+          <h3 class="dev-kit__card-title">Default Container (1200px max-width)</h3>
+          <Container size="default" style="background: var(--color-chalk-gray); border: 1px dashed var(--color-charcoal-ink); padding: 12px; margin-top: 8px;">
+            <p class="dev-kit__body">Standard centered page grid with 1200px constraint and responsive horizontal padding.</p>
+          </Container>
+        </Card>
+
+        <Card variant="white" padding="md">
+          <h3 class="dev-kit__card-title">Prose Container (720px / 65ch max-width)</h3>
+          <Container size="prose" style="background: var(--color-chalk-gray); border: 1px dashed var(--color-charcoal-ink); padding: 12px; margin-top: 8px;">
+            <p class="dev-kit__body">Optimized editorial measure for long-form blog articles, event recaps, and Code of Conduct text.</p>
+          </Container>
+        </Card>
+      </div>
     </section>
   </main>
 </BaseLayout>

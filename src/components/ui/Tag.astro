@@ -2,14 +2,48 @@
 import type { HTMLAttributes } from 'astro/types';
 
 export interface Props extends HTMLAttributes<'span'> {
-  variant?: 'coral' | 'peach' | 'mint' | 'lilac' | 'lime' | 'periwinkle' | 'slate' | 'marigold' | 'charcoal';
-  color?: 'coral' | 'peach' | 'mint' | 'lilac' | 'lime' | 'periwinkle' | 'slate' | 'marigold' | 'charcoal';
+  variant?:
+    | 'coral'
+    | 'peach'
+    | 'mint'
+    | 'lilac'
+    | 'lime'
+    | 'periwinkle'
+    | 'slate'
+    | 'marigold'
+    | 'charcoal'
+    | 'canary'
+    | 'orange'
+    | 'sky';
+  color?:
+    | 'coral'
+    | 'peach'
+    | 'mint'
+    | 'lilac'
+    | 'lime'
+    | 'periwinkle'
+    | 'slate'
+    | 'marigold'
+    | 'charcoal'
+    | 'canary'
+    | 'orange'
+    | 'sky';
+  fill?: boolean;
+  active?: boolean;
+  interactive?: boolean;
+  as?: 'span' | 'a' | 'button';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
   class?: string;
 }
 
 const {
   variant,
   color,
+  fill = false,
+  active = false,
+  interactive = false,
+  as: Component = 'span',
   class: className = '',
   ...rest
 } = Astro.props;
@@ -18,9 +52,19 @@ const selectedColor = color || variant;
 const colorClass = selectedColor ? `tag--${selectedColor}` : 'tag--cycle';
 ---
 
-<span class:list={['tag', colorClass, className]} {...rest}>
+<Component
+  class:list={[
+    'tag',
+    colorClass,
+    fill && 'tag--fill',
+    active && 'tag--active',
+    interactive && 'tag--interactive',
+    className
+  ]}
+  {...rest}
+>
   <slot />
-</span>
+</Component>
 
 <style>
   .tag {
@@ -43,9 +87,15 @@ const colorClass = selectedColor ? `tag--${selectedColor}` : 'tag--cycle';
     white-space: nowrap;
     user-select: none;
     vertical-align: middle;
+    text-decoration: none;
   }
 
-  /* Specific color variants */
+  a.tag {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Specific color borders */
   .tag--coral { border-color: var(--color-coral-sketch); }
   .tag--peach { border-color: var(--color-peach-sketch); }
   .tag--mint { border-color: var(--color-mint-sketch); }
@@ -55,6 +105,54 @@ const colorClass = selectedColor ? `tag--${selectedColor}` : 'tag--cycle';
   .tag--slate { border-color: var(--color-slate-sketch); }
   .tag--marigold { border-color: var(--color-marigold-sketch); }
   .tag--charcoal { border-color: var(--color-charcoal-ink); }
+  .tag--canary { border-color: var(--color-canary-banner); }
+  .tag--orange { border-color: var(--color-duck-bill-orange); }
+  .tag--sky { border-color: var(--color-sky-crayon); }
+
+  /* Filled background variants */
+  .tag--fill.tag--coral { background-color: var(--color-coral-sketch); }
+  .tag--fill.tag--peach { background-color: var(--color-peach-sketch); }
+  .tag--fill.tag--mint { background-color: var(--color-mint-sketch); }
+  .tag--fill.tag--lilac { background-color: var(--color-lilac-sketch); }
+  .tag--fill.tag--lime { background-color: var(--color-lime-sketch); }
+  .tag--fill.tag--periwinkle { background-color: var(--color-periwinkle-sketch); }
+  .tag--fill.tag--slate { background-color: var(--color-slate-sketch); }
+  .tag--fill.tag--marigold { background-color: var(--color-marigold-sketch); }
+  .tag--fill.tag--canary { background-color: var(--color-canary-banner); }
+  .tag--fill.tag--orange { background-color: var(--color-duck-bill-orange); }
+  .tag--fill.tag--sky { background-color: var(--color-sky-crayon); }
+
+  /* Active / Selected state */
+  .tag--active {
+    background-color: var(--color-charcoal-ink) !important;
+    color: var(--color-frost-white) !important;
+    border-color: var(--color-charcoal-ink) !important;
+  }
+
+  /* Interactive hover */
+  .tag--interactive {
+    cursor: pointer;
+    transition: transform var(--transition-fast, 0.1s ease), box-shadow var(--transition-fast, 0.1s ease);
+  }
+
+  .tag--interactive:hover {
+    transform: translate(2px, -2px);
+    box-shadow: -2px 2px 0px 0px var(--color-charcoal-ink);
+  }
+
+  .tag--interactive:active {
+    transform: none;
+    box-shadow: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tag--interactive,
+    .tag--interactive:hover,
+    .tag--interactive:active {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
 
   /* Automatic cycling across the 8 sketch colors */
   .tag--cycle:nth-of-type(8n + 1) { border-color: var(--color-coral-sketch); }

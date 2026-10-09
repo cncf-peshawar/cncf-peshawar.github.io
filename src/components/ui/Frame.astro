@@ -3,20 +3,35 @@ import type { HTMLAttributes } from 'astro/types';
 
 export interface Props extends HTMLAttributes<'div'> {
   title?: string;
+  variant?: 'terminal' | 'window' | 'default';
+  headerVariant?: 'light' | 'dark';
+  bodyPadding?: 'none' | 'sm' | 'md' | 'lg';
   showControls?: boolean;
   class?: string;
 }
 
 const {
   title = 'terminal',
+  variant = 'terminal',
+  headerVariant = 'light',
+  bodyPadding = 'md',
   showControls = true,
   class: className = '',
   ...rest
 } = Astro.props;
+
+const activeVariant = variant === 'default' ? 'terminal' : variant;
 ---
 
-<div class:list={['frame', className]} {...rest}>
-  <div class="frame__header">
+<div
+  class:list={[
+    'frame',
+    `frame--${activeVariant}`,
+    className
+  ]}
+  {...rest}
+>
+  <div class:list={['frame__header', `frame__header--${headerVariant}`]}>
     {showControls && (
       <div class="frame__controls" aria-hidden="true">
         <span class="frame__dot frame__dot--close"></span>
@@ -30,9 +45,15 @@ const {
     </div>
   </div>
 
-  <div class="frame__body">
+  <div class:list={['frame__body', `frame__body--pad-${bodyPadding}`]}>
     <slot />
   </div>
+
+  {Astro.slots.has('footer') && (
+    <div class="frame__footer">
+      <slot name="footer" />
+    </div>
+  )}
 </div>
 
 <style>
@@ -54,6 +75,15 @@ const {
     background-color: var(--color-frost-white);
     border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
     min-height: 38px;
+  }
+
+  .frame__header--dark {
+    background-color: var(--color-terminal-bg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .frame__header--dark .frame__title {
+    color: var(--color-frost-white);
   }
 
   .frame__controls {
@@ -99,13 +129,50 @@ const {
   }
 
   .frame__body {
-    background-color: var(--color-charcoal-ink);
-    color: var(--color-frost-white);
-    padding: var(--spacing-20, 20px);
     font-family: var(--font-mono);
     font-size: var(--font-size-body, 0.875rem);
     line-height: var(--line-height-relaxed, 1.6);
     overflow-x: auto;
     flex-grow: 1;
+  }
+
+  .frame--terminal .frame__body {
+    background-color: var(--color-terminal-bg);
+    color: var(--color-frost-white);
+  }
+
+  .frame--window .frame__body {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+  }
+
+  .frame__body--pad-none {
+    padding: 0;
+  }
+
+  .frame__body--pad-sm {
+    padding: var(--spacing-12, 12px);
+  }
+
+  .frame__body--pad-md {
+    padding: var(--spacing-20, 20px);
+  }
+
+  .frame__body--pad-lg {
+    padding: var(--card-padding, 40px);
+  }
+
+  .frame__footer {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-12, 12px);
+    padding: var(--spacing-12, 12px) var(--spacing-16, 16px);
+    border-top: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    background-color: var(--color-frost-white);
+  }
+
+  .frame--terminal .frame__footer {
+    background-color: var(--color-terminal-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
   }
 </style>

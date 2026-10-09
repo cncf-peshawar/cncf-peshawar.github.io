@@ -217,4 +217,13 @@
   --section-gap: 80px;
   --card-padding: 40px;
   --element-gap: 8px;
+
+  /* -------------------------------------------------------------------------- */
+  /* T-3.0 PARALLEL WAVE ACCENT & STITCH TOKENS (ADD-ONLY)                      */
+  /* -------------------------------------------------------------------------- */
+  --border-accent-width: 6px;
+  --color-live-green: var(--color-mint-sketch);
+  --shadow-brutal: var(--shadow-hard);
+  --shadow-brutal-sm: var(--shadow-hard-sm);
+  --shadow-brutal-none: 0px 0px 0px 0px var(--color-charcoal-ink);
 }

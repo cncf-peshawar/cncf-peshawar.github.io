@@ -2,23 +2,48 @@
 import type { HTMLAttributes } from 'astro/types';
 
 export interface Props extends HTMLAttributes<'div'> {
-  variant?: 'white' | 'cream' | 'canary' | 'chalk';
+  variant?: 'white' | 'cream' | 'canary' | 'chalk' | 'notebook' | 'terminal' | 'ice';
   padding?: 'none' | 'sm' | 'md' | 'lg';
+  accentBorder?:
+    | 'coral'
+    | 'peach'
+    | 'mint'
+    | 'lilac'
+    | 'lime'
+    | 'periwinkle'
+    | 'slate'
+    | 'marigold'
+    | 'orange'
+    | 'yellow'
+    | 'sky'
+    | 'charcoal'
+    | 'none';
+  accentPosition?: 'top' | 'left';
   shadow?: boolean;
   interactive?: boolean;
-  as?: 'div' | 'article' | 'section' | 'li';
+  as?: 'div' | 'article' | 'section' | 'li' | 'a';
+  href?: string;
+  target?: string;
+  rel?: string;
   class?: string;
 }
 
 const {
   variant = 'white',
   padding = 'md',
+  accentBorder = 'none',
+  accentPosition = 'top',
   shadow = false,
   interactive = false,
   as: Component = 'div',
   class: className = '',
   ...rest
 } = Astro.props;
+
+const accentClass =
+  accentBorder && accentBorder !== 'none'
+    ? `card--accent-${accentPosition}-${accentBorder}`
+    : undefined;
 ---
 
 <Component
@@ -26,6 +51,7 @@ const {
     'card',
     `card--${variant}`,
     `card--pad-${padding}`,
+    accentClass,
     shadow && 'card--shadow',
     interactive && 'card--interactive',
     className
@@ -47,6 +73,12 @@ const {
     box-sizing: border-box;
   }
 
+  a.card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
   .card--shadow {
     box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
   }
@@ -66,6 +98,19 @@ const {
 
   .card--chalk {
     background-color: var(--color-chalk-gray);
+  }
+
+  .card--notebook {
+    background-color: var(--color-notebook-pale);
+  }
+
+  .card--terminal {
+    background-color: var(--color-terminal-bg);
+    color: var(--color-frost-white);
+  }
+
+  .card--ice {
+    background-color: var(--color-ice-wash);
   }
 
   /* Padding */
@@ -117,4 +162,32 @@ const {
       transition: none !important;
     }
   }
+
+  /* Accent Borders (Top) */
+  .card--accent-top-coral { border-top-width: var(--border-accent-width, 6px); border-top-color: var(--color-coral-sketch); }
+  .card--accent-top-peach { border-top-width: var(--border-accent-width, 6px); border-top-color: var(--color-peach-sketch); }
+  .card--accent-top-mint { border-top-width: var(--border-accent-width, 6px); border-top-color: var(--color-mint-sketch); }
+  .card--accent-top-lilac { border-top-width: var(--border-accent-width, 6px); border-top-color: var(--color-lilac-sketch); }
+  .card--accent-top-lime { border-top-width: var(--border-accent-width, 6px); border-top-color: var(--color-lime-sketch); }
+  .card--accent-top-periwinkle { border-top-width: var(--border-accent-width, 6px); border-top-color: var(--color-periwinkle-sketch); }
+  .card--accent-top-slate { border-top-width: var(--border-accent-width, 6px); border-top-color: var(--color-slate-sketch); }
+  .card--accent-top-marigold { border-top-width: var(--border-accent-width, 6px); border-top-color: var(--color-marigold-sketch); }
+  .card--accent-top-orange { border-top-width: var(--border-accent-width, 6px); border-top-color: var(--color-duck-bill-orange); }
+  .card--accent-top-yellow { border-top-width: var(--border-accent-width, 6px); border-top-color: var(--color-canary-banner); }
+  .card--accent-top-sky { border-top-width: var(--border-accent-width, 6px); border-top-color: var(--color-sky-crayon); }
+  .card--accent-top-charcoal { border-top-width: var(--border-accent-width, 6px); border-top-color: var(--color-charcoal-ink); }
+
+  /* Accent Borders (Left) */
+  .card--accent-left-coral { border-left-width: var(--border-accent-width, 6px); border-left-color: var(--color-coral-sketch); }
+  .card--accent-left-peach { border-left-width: var(--border-accent-width, 6px); border-left-color: var(--color-peach-sketch); }
+  .card--accent-left-mint { border-left-width: var(--border-accent-width, 6px); border-left-color: var(--color-mint-sketch); }
+  .card--accent-left-lilac { border-left-width: var(--border-accent-width, 6px); border-left-color: var(--color-lilac-sketch); }
+  .card--accent-left-lime { border-left-width: var(--border-accent-width, 6px); border-left-color: var(--color-lime-sketch); }
+  .card--accent-left-periwinkle { border-left-width: var(--border-accent-width, 6px); border-left-color: var(--color-periwinkle-sketch); }
+  .card--accent-left-slate { border-left-width: var(--border-accent-width, 6px); border-left-color: var(--color-slate-sketch); }
+  .card--accent-left-marigold { border-left-width: var(--border-accent-width, 6px); border-left-color: var(--color-marigold-sketch); }
+  .card--accent-left-orange { border-left-width: var(--border-accent-width, 6px); border-left-color: var(--color-duck-bill-orange); }
+  .card--accent-left-yellow { border-left-width: var(--border-accent-width, 6px); border-left-color: var(--color-canary-banner); }
+  .card--accent-left-sky { border-left-width: var(--border-accent-width, 6px); border-left-color: var(--color-sky-crayon); }
+  .card--accent-left-charcoal { border-left-width: var(--border-accent-width, 6px); border-left-color: var(--color-charcoal-ink); }
 </style>

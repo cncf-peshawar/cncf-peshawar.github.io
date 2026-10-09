@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'astro/types';
 
 export interface Props extends HTMLAttributes<'a'> {
   href: string;
-  variant?: 'primary' | 'secondary' | 'rainbow';
+  variant?: 'primary' | 'secondary' | 'outline' | 'canary' | 'rainbow';
   size?: 'sm' | 'md' | 'lg';
   rainbowColor?: 'coral' | 'peach' | 'mint' | 'lilac' | 'lime' | 'periwinkle' | 'slate' | 'marigold';
   class?: string;
@@ -18,7 +18,9 @@ const {
   ...rest
 } = Astro.props;
 
-const rainbowClass = variant === 'rainbow'
+const activeVariant = variant === 'outline' ? 'secondary' : variant;
+
+const rainbowClass = activeVariant === 'rainbow'
   ? rainbowColor
     ? `btn--rainbow-${rainbowColor}`
     : 'btn--rainbow-cycle'
@@ -27,7 +29,7 @@ const rainbowClass = variant === 'rainbow'
 
 <a
   href={href}
-  class:list={['btn', `btn--${variant}`, `btn--${size}`, rainbowClass, className]}
+  class:list={['btn', `btn--${activeVariant}`, `btn--${size}`, rainbowClass, className]}
   {...rest}
 >
   <slot />
@@ -119,6 +121,16 @@ const rainbowClass = variant === 'rainbow'
 
   .btn--secondary:hover {
     background-color: var(--color-ice-wash);
+  }
+
+  .btn--canary {
+    background-color: var(--color-canary-banner);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn--canary:hover {
+    background-color: var(--color-canary-banner);
   }
 
   .btn--rainbow {
