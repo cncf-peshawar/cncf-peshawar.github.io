@@ -325,17 +325,21 @@ const initials = (name: string) =>
 
   .member-card__links {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: var(--space-2xs);
     margin-top: var(--space-xs);
   }
 
   .member-card__links a {
+    /* Icon-only buttons grow to a full 44px touch target while the 15px glyph
+       inside stays unchanged. Wrapping (container flex-wrap) lets a card with
+       several links keep each hit area intact instead of being squeezed. */
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 44px;
+    height: 44px;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xs);
     color: var(--color-ink-muted);
@@ -356,6 +360,7 @@ const initials = (name: string) =>
   .back-link {
     display: inline-flex;
     align-items: center;
+    min-height: 44px;
     gap: 6px;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);

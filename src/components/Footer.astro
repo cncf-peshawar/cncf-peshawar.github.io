@@ -219,7 +219,9 @@ const currentYear = new Date().getFullYear();
   }
 
   .footer__email-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
@@ -238,6 +240,10 @@ const currentYear = new Date().getFullYear();
   }
 
   .social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
     padding: 0.3rem 0.6rem;
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);

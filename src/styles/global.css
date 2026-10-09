@@ -219,6 +219,10 @@ a {
   white-space: nowrap;
   text-decoration: none;
   user-select: none;
+  /* Every button, including the small modifier, stays a comfortable touch
+     target: the compact padding keeps the visual size tight, while min-height
+     guarantees a 44px hit area on phones (WCAG 2.5.8 target size). */
+  min-height: 44px;
   transition: transform var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
 }
 

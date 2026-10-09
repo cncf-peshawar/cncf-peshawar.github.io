@@ -178,15 +178,19 @@ const { data } = speaker;
 
   .speaker-card__links {
     display: flex;
-    gap: var(--space-2xs);
+    /* Icon-only buttons keep a 44px hit area each, so the gap must be wide
+       enough that adjacent expanded targets do not overlap. */
+    gap: var(--space-sm);
   }
 
   .social-icon-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    /* The 44px box is the touch target; the 16px glyph stays visually compact,
+       so the icon is not enlarged just to make the control tappable. */
+    width: 44px;
+    height: 44px;
     border-radius: var(--radius-xs);
     background-color: var(--color-paper-subtle);
     color: var(--color-ink-muted);
@@ -200,6 +204,9 @@ const { data } = speaker;
   }
 
   .speaker-card__slides {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
     color: var(--color-accent);

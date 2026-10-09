@@ -54,7 +54,9 @@ const postDate = new Date(data.publishDate).toLocaleDateString('en-US', {
   }
 
   .back-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     font-size: var(--font-size-sm);
     color: var(--color-accent);
     font-weight: var(--font-weight-semibold);
