@@ -3,32 +3,36 @@ const verifiableFacts = [
   {
     badge: "ACCESS",
     title: "100% Free & Open",
-    desc: "Zero ticket costs, paywalls, or membership fees for all meetups and workshops."
+    desc: "Zero ticket costs, paywalls, or membership fees for all meetups and workshops.",
+    accent: "coral"
   },
   {
     badge: "AFFILIATION",
     title: "Official CNCF Chapter",
-    desc: "Recognized community group under the Cloud Native Computing Foundation & Linux Foundation."
+    desc: "Recognized community group under the Cloud Native Computing Foundation & Linux Foundation.",
+    accent: "peach"
   },
   {
     badge: "MISSION",
     title: "Hands-On & Practical",
-    desc: "Focused on open-source cloud architectures, Kubernetes, containers, and Linux systems."
+    desc: "Focused on open-source cloud architectures, Kubernetes, containers, and Linux systems.",
+    accent: "mint"
   },
   {
     badge: "COLLABORATION",
     title: "Open Community",
-    desc: "Open to developers, DevOps engineers, university students, and community partners."
+    desc: "Open to developers, DevOps engineers, university students, and community partners.",
+    accent: "lilac"
   }
 ];
 ---
 
-<section class="stats-strip section--subtle">
-  <div class="container">
+<section class="stats-strip" data-reveal>
+  <div class="stats-container">
     <h2 class="sr-only">Key Community Facts & Verifiable Commitments</h2>
-    <div class="facts-grid">
+    <div class="facts-grid" data-reveal-group>
       {verifiableFacts.map((fact) => (
-        <div class="fact-item">
+        <div class={`fact-item fact-item--${fact.accent}`} data-reveal-item>
           <span class="fact-item__badge">{fact.badge}</span>
           <h3 class="fact-item__title">{fact.title}</h3>
           <p class="fact-item__desc">{fact.desc}</p>
@@ -40,65 +44,121 @@ const verifiableFacts = [
 
 <style>
   .stats-strip {
-    padding-block: var(--space-xl);
+    background-color: var(--color-chalk-gray);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    padding: clamp(32px, 5vw, 48px) clamp(16px, 4vw, 32px);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .stats-container {
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .facts-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-md);
+    gap: clamp(16px, 3vw, 24px);
   }
 
   @media (min-width: 600px) {
     .facts-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-lg);
     }
   }
 
   @media (min-width: 1024px) {
     .facts-grid {
       grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-md);
     }
   }
 
   .fact-item {
     display: flex;
     flex-direction: column;
-    padding: var(--space-lg);
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
+    padding: var(--spacing-20, 20px);
+    background-color: var(--color-frost-white);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm, -3px 3px 0px 0px var(--color-charcoal-ink));
+    transition: transform 200ms ease, box-shadow 200ms ease;
+    box-sizing: border-box;
   }
 
   .fact-item:hover {
-    border-color: var(--color-border-hover);
-    transform: translateY(-2px);
+    transform: translate(3px, -3px);
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+  }
+
+  .fact-item--coral {
+    border-top: 5px solid var(--color-coral-sketch);
+  }
+
+  .fact-item--peach {
+    border-top: 5px solid var(--color-peach-sketch);
+  }
+
+  .fact-item--mint {
+    border-top: 5px solid var(--color-mint-sketch);
+  }
+
+  .fact-item--lilac {
+    border-top: 5px solid var(--color-lilac-sketch);
   }
 
   .fact-item__badge {
     align-self: flex-start;
     font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-accent);
-    letter-spacing: 0.05em;
-    margin-bottom: var(--space-xs);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-charcoal-ink);
+    background-color: var(--color-cream-paper);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    padding: 2px 8px;
+    letter-spacing: var(--letter-spacing-wide, 0.05em);
+    margin-bottom: var(--spacing-12, 12px);
+    text-transform: uppercase;
   }
 
   .fact-item__title {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-ink);
-    margin-bottom: var(--space-3xs);
-    line-height: var(--line-height-snug);
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-charcoal-ink);
+    margin-top: 0;
+    margin-bottom: var(--spacing-8, 8px);
+    line-height: var(--line-height-snug, 1.25);
   }
 
   .fact-item__desc {
-    font-size: var(--font-size-sm);
-    color: var(--color-ink-muted);
-    line-height: var(--line-height-normal);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed, 1.55);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fact-item,
+    .fact-item:hover {
+      transform: none !important;
+      transition: none !important;
+    }
   }
 </style>

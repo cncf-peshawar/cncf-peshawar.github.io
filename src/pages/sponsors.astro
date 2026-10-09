@@ -1,9 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SponsorTierCard from '../components/SponsorTierCard.astro';
-import SponsorshipEmailBuilder from '../components/SponsorshipEmailBuilder.astro';
 import TrackRecordStats from '../components/TrackRecordStats.astro';
+import SponsorshipEmailBuilder from '../components/sponsors/SponsorshipEmailBuilder.astro';
+import SponsorPencilDoodle from '../components/sponsors/SponsorPencilDoodle.astro';
+import GithubLogo from '../components/sponsors/GithubLogo.astro';
+import NicLogo from '../components/sponsors/NicLogo.astro';
+import NsaveLogo from '../components/sponsors/NsaveLogo.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import Marquee from '../components/ui/Marquee.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const sponsors = await getCollection('sponsors');
@@ -20,7 +26,8 @@ const sponsorshipTiers = [
       "Co-branding on official CNCF Open Community Groups (OCG) chapter page",
       "Direct networking and connection with attending developers"
     ],
-    isFeatured: false
+    isFeatured: false,
+    accentBorder: "lilac" as const
   },
   {
     tierName: "Refreshment Partner",
@@ -33,7 +40,8 @@ const sponsorshipTiers = [
       "Social media acknowledgement on chapter LinkedIn & Twitter",
       "Option to place company stickers / flyers on refreshment tables"
     ],
-    isFeatured: true
+    isFeatured: true,
+    accentBorder: "peach" as const
   },
   {
     tierName: "Community Swag Partner",
@@ -46,7 +54,8 @@ const sponsorshipTiers = [
       "Listed as an active community partner on the website",
       "Direct mention in community announcements"
     ],
-    isFeatured: false
+    isFeatured: false,
+    accentBorder: "mint" as const
   },
   {
     tierName: "Annual Ecosystem Partner",
@@ -59,7 +68,8 @@ const sponsorshipTiers = [
       "Direct hiring and job board announcements shared with attendees",
       "Featured partner status across all CNCF Peshawar activities"
     ],
-    isFeatured: false
+    isFeatured: false,
+    accentBorder: "slate" as const
   }
 ];
 
@@ -88,128 +98,188 @@ Best regards,`
   title="Sponsorship Prospectus | CNCF Peshawar" 
   description="Partner with CNCF Peshawar. Help us keep cloud native education 100% free while connecting your organization with developers and open-source practitioners in KP."
 >
-  <!-- Page Header -->
-  <section class="page-header section">
-    <div class="container">
-      <span class="badge badge--live">Sponsorship Prospectus · 100% Free Community</span>
-      <h1 class="page-header__title">Partner with CNCF Peshawar.</h1>
-      <p class="page-header__desc">
-        We are a 100% free, community-organized chapter of the Cloud Native Computing Foundation. Every meetup is free for attendees thanks to our venue hosts and community partners.
-      </p>
+  <!-- Page Hero -->
+  <section class="page-hero" aria-labelledby="hero-title">
+    <div class="page-hero-inner">
+      <div class="page-hero-layout">
+        <div class="page-hero-content">
+          <div class="page-hero-eyebrow" data-hero-eyebrow>
+            <Badge variant="canary" size="sm">SPONSORSHIP PROSPECTUS</Badge>
+            <span class="hero-eyebrow-text">100% FREE COMMUNITY</span>
+          </div>
 
-      <div class="page-header__actions">
-        <a 
-          href="#email-builder" 
-          class="btn btn--accent"
-        >
-          <span>Draft Sponsorship Proposal</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-        <a 
-          href={generalMailto}
-          class="btn btn--secondary"
-        >
-          <span>Quick Email (cncfpeshawar@gmail.com)</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-        </a>
-        <a 
-          href={`${base}/assets/sponsorship-prospectus.pdf`} 
-          download="CNCF_Peshawar_Sponsorship_Prospectus.pdf" 
-          class="btn btn--secondary"
-        >
-          <span>Download Prospectus (PDF)</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-        </a>
+          <h1 id="hero-title" class="page-hero-title">Partner with CNCF Peshawar.</h1>
+
+          <p class="page-hero-desc" data-hero-lede>
+            We are a 100% free, community-organized chapter of the Cloud Native Computing Foundation. Every meetup is free for attendees thanks to our venue hosts and community partners.
+          </p>
+
+          <div class="page-hero-actions" data-hero-actions>
+            <a 
+              href="#email-builder" 
+              class="btn btn-sky"
+            >
+              <span>Draft Sponsorship Proposal</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+
+            <a 
+              href={generalMailto}
+              class="btn btn-outline"
+            >
+              <span>Quick Email (cncfpeshawar@gmail.com)</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </a>
+
+            <a 
+              href={`${base}/assets/sponsorship-prospectus.pdf`} 
+              download="CNCF_Peshawar_Sponsorship_Prospectus.pdf" 
+              class="btn btn-outline"
+            >
+              <span>Download Prospectus (PDF)</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="page-hero-visual">
+          <SponsorPencilDoodle />
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Verifiable Facts -->
+  <!-- Verifiable Facts (TrackRecordStats) -->
   <TrackRecordStats />
 
   <!-- Why Sponsor CNCF Peshawar? -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-header__num">01 // WHY PARTNER</span>
-        <h2 class="section-header__title">Why Support CNCF Peshawar?</h2>
-        <p class="section-header__desc">
-          Direct community engagement and support for local open-source technology education.
-        </p>
-      </div>
+  <section class="section-wrap why-section" data-reveal>
+    <div class="section-header-box">
+      <span class="section-eyebrow">01 // WHY PARTNER</span>
+      <h2 class="section-headline">Why Support CNCF Peshawar?</h2>
+      <p class="section-subtext">
+        Direct community engagement and support for local open-source technology education.
+      </p>
+    </div>
 
-      <div class="reasons-grid">
-        <div class="reason-card">
-          <div class="reason-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <div class="reasons-grid" data-reveal-group>
+      <div data-reveal-item>
+        <Card variant="white" accentBorder="coral" accentPosition="top" interactive={true} class="reason-card">
+          <div class="reason-icon reason-icon--coral" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
               <circle cx="9" cy="7" r="4"/>
               <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
               <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
           </div>
-          <h3>Local Tech Enablement</h3>
-          <p>Support free technical education for engineers, developers, and university students learning modern distributed systems in Khyber Pakhtunkhwa.</p>
-        </div>
+          <h3 class="reason-title">Local Tech Enablement</h3>
+          <p class="reason-desc">Support free technical education for engineers, developers, and university students learning modern distributed systems in Khyber Pakhtunkhwa.</p>
+        </Card>
+      </div>
 
-        <div class="reason-card">
-          <div class="reason-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <div data-reveal-item>
+        <Card variant="white" accentBorder="peach" accentPosition="top" interactive={true} class="reason-card">
+          <div class="reason-icon reason-icon--peach" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
               <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
             </svg>
           </div>
-          <h3>Brand Visibility</h3>
-          <p>Gain recognition across the official CNCF Open Community Groups (OCG) chapter, presentation decks, social media channels, and local tech circles.</p>
-        </div>
+          <h3 class="reason-title">Brand Visibility</h3>
+          <p class="reason-desc">Gain recognition across the official CNCF Open Community Groups (OCG) chapter, presentation decks, social media channels, and local tech circles.</p>
+        </Card>
+      </div>
 
-        <div class="reason-card">
-          <div class="reason-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <div data-reveal-item>
+        <Card variant="white" accentBorder="mint" accentPosition="top" interactive={true} class="reason-card">
+          <div class="reason-icon reason-icon--mint" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <circle cx="12" cy="12" r="10"/>
               <circle cx="12" cy="12" r="6"/>
               <circle cx="12" cy="12" r="2"/>
             </svg>
           </div>
-          <h3>Developer Engagement</h3>
-          <p>Connect directly with practicing engineers, open-source contributors, and university graduates passionate about cloud infrastructure.</p>
-        </div>
+          <h3 class="reason-title">Developer Engagement</h3>
+          <p class="reason-desc">Connect directly with practicing engineers, open-source contributors, and university graduates passionate about cloud infrastructure.</p>
+        </Card>
       </div>
     </div>
   </section>
 
-  <!-- Sponsorship Tiers Grid -->
-  <section id="tiers" class="section section--subtle">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-header__num">02 // PACKAGES</span>
-        <h2 class="section-header__title">Partnership Packages.</h2>
-        <p class="section-header__desc">
-          Flexible, transparent options for venue hosts, refreshments, swag, and ecosystem partners.
-        </p>
-      </div>
+  <!-- Sponsorship Tiers Grid (#tiers) -->
+  <section id="tiers" class="section-wrap tiers-section" data-reveal>
+    <div class="section-header-box">
+      <span class="section-eyebrow">02 // PACKAGES</span>
+      <h2 class="section-headline">Partnership Packages.</h2>
+      <p class="section-subtext">
+        Flexible, transparent options for venue hosts, refreshments, swag, and ecosystem partners.
+      </p>
+    </div>
 
-      <div class="tiers-grid">
-        {sponsorshipTiers.map(tier => (
-          <SponsorTierCard 
-            tierName={tier.tierName}
-            badge={tier.badge}
-            commitment={tier.commitment}
-            description={tier.description}
-            perks={tier.perks}
-            isFeatured={tier.isFeatured}
-          />
-        ))}
-      </div>
+    <div class="tiers-grid" data-reveal-group>
+      {sponsorshipTiers.map((tier) => (
+        <div data-reveal-item class="tier-card-wrapper">
+          <Card 
+            variant={tier.isFeatured ? 'notebook' : 'white'} 
+            accentBorder={tier.accentBorder} 
+            accentPosition="top" 
+            interactive={true} 
+            class="tier-card"
+          >
+            <div class="tier-card__header">
+              <div class="tier-card__badge-row">
+                <Badge variant={tier.isFeatured ? 'orange' : 'lilac'} size="sm">
+                  {tier.badge}
+                </Badge>
+                {tier.isFeatured && (
+                  <Badge variant="canary" size="sm">
+                    MOST POPULAR
+                  </Badge>
+                )}
+              </div>
+              <h3 class="tier-card__name">{tier.tierName}</h3>
+              <div class="tier-card__commitment">
+                <span class="commitment-val">{tier.commitment}</span>
+              </div>
+              <p class="tier-card__desc">{tier.description}</p>
+            </div>
+
+            <div class="tier-card__perks">
+              <span class="perks-label">SPONSORSHIP INCLUDES:</span>
+              <ul class="perks-list" role="list">
+                {tier.perks.map((perk) => (
+                  <li class="perk-item">
+                    <svg class="perk-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>{perk}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="tier-card__action">
+              <a 
+                href={`?tier=${encodeURIComponent(tier.tierName)}#email-builder`}
+                class={`btn ${tier.isFeatured ? 'btn-sky' : 'btn-outline'}`}
+                style="width: 100%;"
+              >
+                <span>Draft Proposal →</span>
+              </a>
+            </div>
+          </Card>
+        </div>
+      ))}
     </div>
   </section>
 
@@ -218,61 +288,255 @@ Best regards,`
 
   <!-- Existing Partners Wall (if any) -->
   {sponsors.length > 0 && (
-    <section class="section section--subtle">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-header__num">04 // PARTNERS</span>
-          <h2 class="section-header__title">Community Partners.</h2>
-          <p class="section-header__desc">
-            Organizations supporting our mission in Peshawar.
-          </p>
-        </div>
+    <section class="section-wrap partners-section" data-reveal>
+      <div class="section-header-box">
+        <span class="section-eyebrow">04 // PARTNERS</span>
+        <h2 class="section-headline">Community Partners.</h2>
+        <p class="section-subtext">
+          Organizations supporting our mission in Peshawar.
+        </p>
+      </div>
 
-        <div class="sponsors-grid">
-          {sponsors.map(sponsor => (
-            <div class="partner-box">
-              <span class="partner-tier">{sponsor.data.tier} Partner</span>
+      <div class="sponsors-grid" data-reveal-group>
+        {sponsors.map((sponsor) => (
+          <div data-reveal-item class="partner-card-wrapper">
+            <Card 
+              variant="white" 
+              accentBorder={
+                sponsor.data.name.includes('GitHub') ? 'coral' :
+                sponsor.data.name.includes('NIC') ? 'sky' : 'mint'
+              }
+              accentPosition="top"
+              interactive={true} 
+              class="partner-box"
+            >
+              <div class="partner-box__top">
+                <div class="partner-logo-box">
+                  {sponsor.data.name.includes('GitHub') && <GithubLogo size={32} class="partner-logo-svg" />}
+                  {sponsor.data.name.includes('NIC') && <NicLogo size={32} class="partner-logo-svg" />}
+                  {sponsor.data.name.includes('nsave') && <NsaveLogo size={32} class="partner-logo-svg" />}
+                </div>
+                <Badge variant={
+                  sponsor.data.name.includes('GitHub') ? 'canary' :
+                  sponsor.data.name.includes('NIC') ? 'sky' : 'mint'
+                } size="sm">
+                  {sponsor.data.tier} Partner
+                </Badge>
+              </div>
+
               <h3 class="partner-name">{sponsor.data.name}</h3>
               <p class="partner-desc">{sponsor.data.description}</p>
-              <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="partner-link">
-                <span>Visit Website ↗</span>
-              </a>
-            </div>
-          ))}
-        </div>
+              
+              <div class="partner-footer">
+                <a 
+                  href={sponsor.data.website} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="partner-link"
+                >
+                  <span>Visit Website ↗</span>
+                </a>
+              </div>
+            </Card>
+          </div>
+        ))}
       </div>
     </section>
   )}
+
+  <!-- Bottom Topics Marquee -->
+  <Marquee 
+    items={[
+      'KUBERNETES',
+      'DEVOPS',
+      'MLOPS',
+      'DISTRIBUTED SYSTEMS',
+      'AGENTIC AI',
+      '100% FREE COMMUNITY',
+      'OPEN TO ALL BUILDERS',
+      'KHYBER PAKHTUNKHWA'
+    ]} 
+    speed="24s" 
+    label="Community Topics Marquee" 
+  />
 </BaseLayout>
 
 <style>
-  .page-header {
-    padding-bottom: var(--space-xl);
+  /* Page Hero */
+  .page-hero {
+    padding: clamp(36px, 6vw, 64px) clamp(16px, 4vw, 32px) clamp(32px, 5vw, 48px);
+    background-color: var(--color-cream-paper);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  .page-header__title {
-    font-size: var(--font-size-5xl);
-    margin-top: var(--space-xs);
-    margin-bottom: var(--space-md);
+  .page-hero-inner {
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    position: relative;
   }
 
-  .page-header__desc {
-    font-size: var(--font-size-lg);
-    color: var(--color-ink-muted);
-    max-width: var(--container-prose);
-    margin-bottom: var(--space-xl);
-  }
-
-  .page-header__actions {
+  .page-hero-layout {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
+    justify-content: space-between;
+    align-items: center;
+    gap: clamp(24px, 4vw, 48px);
   }
 
+  .page-hero-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .page-hero-visual {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 860px) {
+    .page-hero-layout {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .page-hero-visual {
+      align-self: center;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: var(--spacing-16, 16px);
+    }
+  }
+
+  .page-hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide, 0.08em);
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-12, 12px);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8, 8px);
+    flex-wrap: wrap;
+  }
+
+  .hero-eyebrow-text {
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-text-muted);
+  }
+
+  .page-hero-title {
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: var(--font-weight-bold, 700);
+    line-height: var(--line-height-snug, 1.15);
+    letter-spacing: var(--letter-spacing-tight, -0.02em);
+    margin-top: 0;
+    margin-bottom: var(--spacing-16, 16px);
+    text-transform: uppercase;
+    color: var(--color-charcoal-ink);
+  }
+
+  .page-hero-desc {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+    color: var(--color-charcoal-ink);
+    max-width: 760px;
+    line-height: var(--line-height-relaxed, 1.6);
+    margin-top: 0;
+    margin-bottom: var(--spacing-24, 24px);
+  }
+
+  .page-hero-actions {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-12, 12px);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 639px) {
+    .page-hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+  }
+
+  /* Section Wrappers */
+  .section-wrap {
+    padding: clamp(36px, 6vw, 60px) clamp(16px, 4vw, 32px);
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .why-section {
+    background-color: var(--color-cream-paper);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    max-width: 100%;
+    padding-inline: max(clamp(16px, 4vw, 32px), calc((100% - var(--container-max, 1200px)) / 2));
+  }
+
+  .tiers-section {
+    background-color: var(--color-chalk-gray);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    max-width: 100%;
+    padding-inline: max(clamp(16px, 4vw, 32px), calc((100% - var(--container-max, 1200px)) / 2));
+  }
+
+  .partners-section {
+    background-color: var(--color-cream-paper);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    max-width: 100%;
+    padding-inline: max(clamp(16px, 4vw, 32px), calc((100% - var(--container-max, 1200px)) / 2));
+  }
+
+  .section-header-box {
+    margin-bottom: clamp(24px, 4vw, 36px);
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-text-muted);
+    letter-spacing: var(--letter-spacing-wide, 0.06em);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-6, 6px);
+    display: block;
+  }
+
+  .section-headline {
+    font-family: var(--font-mono);
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: var(--font-weight-bold, 700);
+    letter-spacing: var(--letter-spacing-tight, -0.01em);
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: var(--spacing-10, 10px);
+    color: var(--color-charcoal-ink);
+  }
+
+  .section-subtext {
+    font-family: var(--font-mono);
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: var(--color-text-muted);
+    max-width: 680px;
+    line-height: var(--line-height-relaxed, 1.5);
+    margin: 0;
+  }
+
+  /* Reasons Grid */
   .reasons-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: clamp(18px, 3vw, 24px);
   }
 
   @media (min-width: 768px) {
@@ -282,93 +546,314 @@ Best regards,`
   }
 
   .reason-card {
-    padding: clamp(var(--space-md), 4vw, var(--space-xl));
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
   }
 
   .reason-icon {
-    color: var(--color-accent);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--spacing-14, 14px);
   }
 
-  .reason-card h3 {
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--space-xs);
-    color: var(--color-ink);
+  .reason-icon--coral {
+    color: var(--color-coral-sketch);
   }
 
-  .reason-card p {
-    font-size: var(--font-size-sm);
-    color: var(--color-ink-muted);
-    line-height: var(--line-height-normal);
+  .reason-icon--peach {
+    color: var(--color-duck-bill-orange);
   }
 
+  .reason-icon--mint {
+    color: var(--color-mint-sketch);
+  }
+
+  .reason-title {
+    font-family: var(--font-mono);
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-charcoal-ink);
+    margin-top: 0;
+    margin-bottom: var(--spacing-8, 8px);
+    line-height: var(--line-height-snug, 1.25);
+  }
+
+  .reason-desc {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed, 1.6);
+    margin: 0;
+  }
+
+  /* Tiers Grid */
   .tiers-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: clamp(18px, 3vw, 24px);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 640px) {
     .tiers-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
+  @media (min-width: 1080px) {
+    .tiers-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .tier-card-wrapper {
+    height: 100%;
+  }
+
+  .tier-card {
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .tier-card__header {
+    margin-bottom: var(--spacing-16, 16px);
+  }
+
+  .tier-card__badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-8, 8px);
+    margin-bottom: var(--spacing-12, 12px);
+    flex-wrap: wrap;
+  }
+
+  .tier-card__name {
+    font-family: var(--font-mono);
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-charcoal-ink);
+    margin-top: 0;
+    margin-bottom: var(--spacing-6, 6px);
+  }
+
+  .tier-card__commitment {
+    margin-bottom: var(--spacing-10, 10px);
+  }
+
+  .commitment-val {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-duck-bill-orange);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide, 0.05em);
+  }
+
+  .tier-card__desc {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed, 1.55);
+    margin: 0;
+  }
+
+  .tier-card__perks {
+    flex-grow: 1;
+    margin-bottom: var(--spacing-20, 20px);
+  }
+
+  .perks-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: var(--font-weight-bold, 700);
+    letter-spacing: var(--letter-spacing-wide, 0.06em);
+    color: var(--color-charcoal-ink);
+    margin-bottom: var(--spacing-8, 8px);
+    display: block;
+  }
+
+  .perks-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6, 6px);
+  }
+
+  .perk-item {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-charcoal-ink);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-8, 8px);
+    line-height: var(--line-height-normal, 1.4);
+  }
+
+  .perk-check {
+    color: var(--color-mint-sketch);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .tier-card__action {
+    margin-top: auto;
+  }
+
+  /* Sponsors Grid */
   .sponsors-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: clamp(18px, 3vw, 24px);
   }
 
   @media (min-width: 768px) {
     .sponsors-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
+  .partner-card-wrapper {
+    height: 100%;
+  }
+
   .partner-box {
-    padding: clamp(var(--space-md), 4vw, var(--space-xl));
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    height: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
   }
 
-  .partner-tier {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-accent);
-    text-transform: uppercase;
-    margin-bottom: var(--space-xs);
+  .partner-box__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-14, 14px);
+  }
+
+  .partner-logo-box {
+    display: flex;
+    align-items: center;
+    color: var(--color-charcoal-ink);
+  }
+
+  .partner-logo-svg {
+    display: block;
   }
 
   .partner-name {
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--space-xs);
-    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-charcoal-ink);
+    margin-top: 0;
+    margin-bottom: var(--spacing-8, 8px);
   }
 
   .partner-desc {
-    font-size: var(--font-size-sm);
-    color: var(--color-ink-muted);
-    line-height: var(--line-height-normal);
-    margin-bottom: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed, 1.55);
+    margin: 0;
     flex-grow: 1;
+    margin-bottom: var(--spacing-16, 16px);
   }
 
-  .partner-link {
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-accent);
+  .partner-footer {
     margin-top: auto;
   }
 
-  .partner-link:hover {
+  .partner-link {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-charcoal-ink);
     text-decoration: underline;
+    text-underline-offset: 3px;
+    letter-spacing: var(--letter-spacing-wide, 0.04em);
+  }
+
+  .partner-link:hover {
+    color: var(--color-duck-bill-orange);
+  }
+
+  /* Brutalist Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8, 8px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    font-weight: var(--font-weight-medium, 500);
+    line-height: var(--line-height-snug, 1.2);
+    letter-spacing: var(--letter-spacing-normal, 0.02em);
+    padding: 10px 22px;
+    min-height: 44px;
+    border-radius: var(--radius-brutal);
+    border-width: var(--border-width, 2px);
+    border-style: solid;
+    border-color: var(--color-charcoal-ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+    transition: transform 120ms ease-in-out;
+    user-select: none;
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+  }
+
+  .btn:hover {
+    transform: translate(7px, -7px);
+  }
+
+  .btn:active {
+    transform: none;
+    transition: transform 30ms ease-in-out;
+  }
+
+  .btn:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+
+  .btn-sky {
+    background-color: var(--color-sky-crayon);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-outline {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-ice-wash);
+  }
+
+  @media (max-width: 639px) {
+    .btn {
+      white-space: normal;
+      text-align: center;
+      padding: 10px 14px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn:hover,
+    .btn:active {
+      transform: none !important;
+      transition: none !important;
+    }
   }
 </style>
