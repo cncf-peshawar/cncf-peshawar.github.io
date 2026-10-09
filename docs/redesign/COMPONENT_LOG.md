@@ -150,6 +150,37 @@ It is consumed by exactly three page-scoped templates:
 ### 2. Isolated UI Catalog Route (/dev-kit)
 The route `/dev-kit` (`src/pages/dev-kit.astro`) is an internal component showcase and testing ground. It is deliberately excluded from parity tests (`parity.mjs`) and will remain excluded from the final H4 Pull Request.
 
+## T-3.3-TEAM Team Page & Group Detail Rebuild Pass
+Date: 2026-10-10
+
+| Component / File | Identified Status | Bounded Implementation Applied | Ground Truth / Contract Ref |
+|---|---|---|---|
+| `src/pages/team.astro` | Page rebuild | Rebuilt to MotherDuck design system. 8 lead cards (square-cropped portrait or initials fallback logic strictly preserved, role, bio, LinkedIn/Instagram/GitHub links with exact hrefs & ARIA labels); 4 working-group cards in rotating sketch colors with member-name previews and member counts; volunteer mailto CTA with exact frozen href (`mailto:cncfpeshawar@gmail.com?...`); marquee strip. Byte-identical frontmatter. Tokens-only styling. | Stitch `team-desktop.html` / `team-mobile.html`, CONTRACT.md §5 |
+| `src/pages/team/[group].astro` | Dynamic group page rebuild | Rebuilt dynamic working-group pages (`tech-team`, `events-team`, `community-outreach`, `design-media`). Responsive member grids (GitHub avatar or local image with initials fallback preserved), role, company/university, icon links with exact hrefs, breadcrumb navigation, and top/bottom back links to `/team`. Byte-identical frontmatter & `getStaticPaths`. Tokens-only styling. | Stitch `team-group-desktop.html` / `team-group-mobile.html`, CONTRACT.md §5 |
+
+## T-MERGE-B Team Merge, Head Verification & Consolidation Pass
+Date: 2026-10-10
+
+### 1. Merge & Full Battery Verification
+- Branch `redesign/t-33` merged cleanly into `redesign/ui-motherduck` via `--no-ff`.
+- Full battery verified on merged HEAD:
+  - `npm run check && npm run build`: 0 errors, 17 pages generated.
+  - `npm test`: 119/119 tests passed (100% pass rate).
+  - `parity.mjs`: verified across 10 routes with exit code 0.
+  - `check:links`: 590 internal links verified with 0 broken links.
+  - Client JS bundle gzip size: 25,896 bytes (25.29 KB, Δ vs baseline ≈ 0).
+  - Protected files diff: completely empty.
+
+### 2. Prose.css Reconciliation Ruling
+- `git diff --stat b949179 HEAD -- src/styles/prose.css`: 36 insertions, 0 deletions.
+- Verdict: T-3.4's "append-only" claim is CONFIRMED TRUE.
+- Visual proof verified via full-page screenshots at 1280px of `/events/01-cncf-peshawar-genesis`, `/blog/announcing-cncf-peshawar`, and `/code-of-conduct` captured in `docs/redesign/evidence/tmergeb/`. All prose typography, lists, links, boxes, and tables render accurately in the MotherDuck design system.
+
+### 3. STATE.md Tracking Ruling (DoD Rationale)
+- `docs/redesign/STATE.md` untracked from git via `git rm --cached docs/redesign/STATE.md` and added to `.git/info/exclude`.
+- **DoD Rationale:** `STATE.md` serves as an active execution coordinator and scratchpad across parallel branches and tasks. Leaving it tracked caused false-positive file conflicts, merge friction, and spurious protected diff warnings during parallel wave rebases and merges. Keeping `STATE.md` exclusively on disk ensures agents maintain local historical state and queue awareness without polluting git commit trees or violating zero-diff invariants on shared specification files.
+
+
 
 
 
