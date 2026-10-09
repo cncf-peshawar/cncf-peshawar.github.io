@@ -41,6 +41,7 @@
   --color-text-muted: #6b6b6b;        /* §4.4 #1: AA contrast on white (5.3:1) and cream (4.7:1) */
   --color-text-disabled: var(--color-pencil-gray);
   --color-on-sky: var(--color-charcoal-ink); /* §4.4 #2: Charcoal text on sky fill (6:1) */
+  --color-charcoal-overlay: rgba(56, 56, 56, 0.45); /* Mobile drawer & modal backdrop */
 
   /* -------------------------------------------------------------------------- */
   /* SEMANTIC & MAPPED SYSTEM TOKENS                                            */

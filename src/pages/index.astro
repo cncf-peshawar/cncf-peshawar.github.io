@@ -1,12 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import TrackRecordStats from '../components/TrackRecordStats.astro';
-import BentoPillars from '../components/BentoPillars.astro';
-import EventCard from '../components/EventCard.astro';
-import SpeakerCard from '../components/SpeakerCard.astro';
-import CFPBanner from '../components/CFPBanner.astro';
 import GenesisCountdown from '../components/GenesisCountdown.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -17,351 +11,1167 @@ const getTimestamp = (dateStr: string) => {
   const ts = new Date(dateStr).getTime();
   return isNaN(ts) ? 0 : ts;
 };
-const sortedEvents = allEvents.sort((a, b) => getTimestamp(b.data.date) - getTimestamp(a.data.date));
-
 // Upcoming events sorted chronologically (nearest upcoming first)
 const upcomingEvents = allEvents
   .filter(e => e.data.status === 'upcoming')
   .sort((a, b) => getTimestamp(a.data.date) - getTimestamp(b.data.date));
 
-const pastEvents = sortedEvents.filter(e => e.data.status === 'completed');
-const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : null;
-const otherUpcomingEvents = upcomingEvents.length > 1 ? upcomingEvents.slice(1) : [];
-
-const allSpeakers = await getCollection('speakers');
-const featuredSpeakers = allSpeakers.filter(s => s.data.featured);
-const speakersToShow = featuredSpeakers.length > 0 ? featuredSpeakers : allSpeakers;
-const sponsors = await getCollection('sponsors');
+const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefined;
 ---
 
-<BaseLayout title="Cloud Native Peshawar — Official CNCF Community Group">
+<BaseLayout 
+  title="Cloud Native Peshawar — Official CNCF Community Group"
+  description="Building Peshawar's Cloud Native Future. Official CNCF Community Chapter empowering engineers and developers with Kubernetes, DevOps, MLOps, and Agentic AI."
+>
   <!-- Hero Section -->
-  <Hero />
+  <section class="hero-section">
+    <!-- Doodles in Hero -->
+    <div class="hero-doodle-cloud" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 110" fill="none" aria-hidden="true">
+        <circle cx="114" cy="38" r="16" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M114 14 L114 8" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M130 22 L136 16" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M136 38 L142 38" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M96 22 L92 18" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="124" cy="52" r="4" fill="#ff9538"/>
+        <path d="M 38 82 C 20 82, 10 68, 14 52 C 16 38, 28 32, 42 34 C 46 18, 66 12, 82 18 C 96 14, 114 22, 118 36 C 134 36, 146 50, 142 66 C 140 80, 126 84, 112 82 C 96 85, 54 85, 38 82 Z" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 32 56 C 36 46, 46 44, 54 48" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 72 26 C 80 24, 90 28, 96 34" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 116 46 C 122 46, 130 52, 128 60" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 22 96 C 40 98, 64 94, 86 96" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 5"/>
+        <path d="M 98 96 C 112 98, 128 95, 140 93" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
 
-  <!-- Track Record Stats Strip -->
-  <TrackRecordStats />
+    <div class="hero-container">
+      <span class="hero-eyebrow">00 // CNCF COMMUNITY CHAPTER</span>
+      <h1 class="hero-headline">
+        Building Peshawar's <strong>Cloud Native</strong> Future.
+      </h1>
+      <p class="hero-lede">
+        Empowering local engineers, developers, and students through hands-on Kubernetes, distributed systems, and open-source collaboration in Khyber Pakhtunkhwa.
+      </p>
 
-  <!-- Next / Upcoming Meetup Spotlight & Live Countdown -->
-  {nextFeaturedEvent ? (
-    <section class="section section--subtle">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-header__num">00 // UPCOMING MEETUP</span>
-          <h2 class="section-header__title">{nextFeaturedEvent.data.title}.</h2>
-          <p class="section-header__desc">
-            {nextFeaturedEvent.data.summary || 'Reserve your seat for our upcoming community gathering in Peshawar.'}
-          </p>
-        </div>
-
-        <!-- Real-time Countdown Card -->
-        <GenesisCountdown event={nextFeaturedEvent} />
-
-        {otherUpcomingEvents.length > 0 && (
-          <div class="events-list">
-            <h3 class="other-events-title">More Upcoming Gatherings</h3>
-            {otherUpcomingEvents.map(event => (
-              <EventCard event={event} />
-            ))}
-          </div>
-        )}
-      </div>
-    </section>
-  ) : (
-    <section class="section section--subtle">
-      <div class="container">
-        <div class="planning-box">
-          <div class="planning-box__header">
-            <span class="badge badge--live">MEETUP IN PLANNING</span>
-            <span class="planning-box__meta">Open Community Groups (OCG)</span>
-          </div>
-          <div class="planning-box__body">
-            <h2 class="planning-box__title">Our Next Meetup is in the Works.</h2>
-            <p class="planning-box__desc">
-              We are currently coordinating venues, hands-on workshop topics, and guest speakers for our upcoming session. Join our official community group on OCG to get notified as soon as registrations open.
-            </p>
-            <div class="planning-box__actions">
-              <a href="https://ocgroups.dev/cncf/group/6vwk2n4" target="_blank" rel="noopener noreferrer" class="btn btn--accent">
-                <span>Join CNCF Peshawar on OCG</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </a>
-              <a href={`${base}/speak`} class="btn btn--secondary">
-                <span>Submit a Talk / CFP</span>
-              </a>
-              <a href={`${base}/events`} class="btn btn--secondary">
-                <span>Explore Past Meetups</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- 01 Community Pillars (Bento Grid) -->
-  <BentoPillars />
-
-  <!-- 02 Recent Meetups & Track Record Archives (if past events exist) -->
-  {pastEvents.length > 0 && (
-    <section class="section section--subtle">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-header__num">02 // ARCHIVES</span>
-          <h2 class="section-header__title">Past Meetups & Technical Labs.</h2>
-          <p class="section-header__desc">
-            Explore slide decks, code repositories, and recordings from our previous sessions.
-          </p>
-        </div>
-
-        <div class="events-grid">
-          {pastEvents.slice(0, 2).map(event => (
-            <EventCard event={event} />
-          ))}
-        </div>
-
-        <div class="section-cta-center">
-          <a href={`${base}/events`} class="btn btn--secondary">
-            <span>View Full Meetup Archive</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+      <div class="hero-ctas">
+        <a href="https://ocgroups.dev/cncf/group/6vwk2n4" target="_blank" rel="noopener noreferrer" class="btn btn-sky">
+          <span>Join Chapter on Open Community Groups (OCG)</span>
+          <span class="hero-doodle-arrow" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+              <path d="M 28 82 C 22 42, 60 22, 90 32" stroke="#54b4de" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 6"/>
+              <path d="M 22 78 C 16 34, 62 14, 94 34" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+              <polygon points="98,22 108,38 88,42" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="98" cy="34" r="2.5" fill="#ff9538"/>
+              <path d="M 22 78 C 24 84, 20 88, 14 86 C 10 84, 12 78, 18 78" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+              <path d="M 104 14 L 108 8" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+              <path d="M 112 24 L 118 22" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+              <path d="M 106 46 L 112 50" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
             </svg>
-          </a>
+          </span>
+        </a>
+        <a href={`${base}/events`} class="btn btn-outline">
+          <span>Explore Meetups</span>
+        </a>
+      </div>
+
+      <div>
+        <a href={`${base}/sponsors`} class="hero-sublink">Sponsor Us</a>
+      </div>
+
+      <p class="hero-proof">
+        100% Free & Open Access · Powered by the Cloud Native Computing Foundation & community sponsors.
+      </p>
+    </div>
+
+    <!-- Terminal Robot Doodle Bleeding Edge -->
+    <div class="hero-doodle-robot" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+        <path d="M 44 44 C 44 40, 114 40, 114 44 L 114 96 C 114 100, 44 100, 44 96 Z"
+              stroke="#54b4de" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/>
+        <path d="M 80 38 L 80 18" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="80" cy="14" r="6" fill="#ffde00" stroke="#383838" stroke-width="2.5"/>
+        <circle cx="80" cy="14" r="2.5" fill="#ff9538"/>
+        <path d="M 88 10 L 94 6" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 72 10 L 66 6" stroke="#ff9538" stroke-width="2" stroke-linecap="round"/>
+        <rect x="34" y="58" width="6" height="14" rx="2" fill="#ff9538" stroke="#383838" stroke-width="2"/>
+        <rect x="120" y="58" width="6" height="14" rx="2" fill="#ffde00" stroke="#383838" stroke-width="2"/>
+        <rect x="40" y="38" width="80" height="54" rx="4" fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="48" y="44" width="64" height="42" rx="3" fill="#383838" stroke="#383838" stroke-width="1.5"/>
+        <path d="M 56 56 L 62 60 L 56 64" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 94 56 L 100 60 L 94 64" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="76" y="58" width="5" height="6" fill="#ffde00"/>
+        <path d="M 68 74 C 74 78, 84 78, 90 74" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="72" y="92" width="16" height="8" rx="2" fill="#ff9538" stroke="#383838" stroke-width="2"/>
+        <rect x="48" y="100" width="64" height="38" rx="3" fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="56" y="106" width="30" height="16" rx="2" fill="#ffde00" stroke="#383838" stroke-width="1.5"/>
+        <path d="M 60 114 L 68 110 L 74 116 L 82 110" stroke="#383838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="98" cy="111" r="3.5" fill="#ff9538" stroke="#383838" stroke-width="1.5"/>
+        <circle cx="98" cy="120" r="3.5" fill="#54b4de" stroke="#383838" stroke-width="1.5"/>
+        <path d="M 48 106 C 34 100, 24 86, 26 72" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M 22 72 C 22 66, 32 66, 30 72" stroke="#383838" stroke-width="2" fill="#ffde00" stroke-linecap="round"/>
+        <path d="M 16 68 C 14 62, 16 56, 20 52" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 24 50 L 28 46" stroke="#ff9538" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 112 106 C 122 112, 126 120, 124 130" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="124" cy="132" r="4" fill="#ff9538" stroke="#383838" stroke-width="2"/>
+        <path d="M 62 138 L 62 148" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="54" y="146" width="16" height="8" rx="2" fill="#383838"/>
+        <path d="M 98 138 L 98 148" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="90" y="146" width="16" height="8" rx="2" fill="#383838"/>
+        <path d="M 42 156 C 68 155, 112 155, 138 156" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 52 158 C 72 159, 94 159, 106 158" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Marquee Strip -->
+  <div class="marquee-strip" role="region" aria-label="Community Topics Marquee">
+    <div class="marquee-track" id="marquee-track">
+      <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
+      <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
+      <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
+      <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
+    </div>
+    <button type="button" class="marquee-pause-btn" id="marquee-toggle-btn" aria-label="Pause marquee">PAUSE</button>
+  </div>
+
+  <!-- Chapter Charter Block -->
+  <section class="charter-section" id="charter-section">
+    <div class="charter-card">
+      <div class="doodle-stack" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+          <path d="M 16 148 C 40 149, 120 149, 146 148" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M 34 154 L 64 154" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 104 154 L 132 154" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+          <polygon points="50,78 78,92 50,106 22,92" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon points="22,92 50,106 50,142 22,128" fill="none" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon points="50,106 78,92 78,128 50,142" fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="31" y1="99" x2="31" y2="133" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+          <line x1="41" y1="104" x2="41" y2="138" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+          <polygon points="110,78 138,92 110,106 82,92" fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon points="82,92 110,106 110,142 82,128" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon points="110,106 138,92 138,128 110,142" fill="none" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="124" y1="101" x2="124" y2="135" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+          <line x1="117" y1="118" x2="120" y2="119" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="80,18 108,32 80,46 52,32" fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon points="52,32 80,46 80,82 52,68" fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon points="80,46 108,32 108,68 80,82" fill="none" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="61" y1="39" x2="61" y2="73" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+          <line x1="71" y1="44" x2="71" y2="78" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+          <line x1="94" y1="41" x2="94" y2="75" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 36 28 L 42 22 M 42 28 L 36 22" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="128" cy="24" r="3" fill="#ffde00"/>
+        </svg>
+      </div>
+      <div class="charter-badge-row">
+        <span class="charter-active-badge">ACTIVE CNCF CHAPTER</span>
+        <span class="charter-meta">REGION: ASIA-SOUTH / PK</span>
+      </div>
+      <h3 class="charter-title">CORE TECHNICAL FOCUS</h3>
+      <div class="charter-terminal">
+        <span class="terminal-line"><span class="terminal-label">GROUP:</span> CNCF Peshawar</span>
+        <span class="terminal-line"><span class="terminal-label">REGION:</span> Khyber Pakhtunkhwa, Pakistan</span>
+        <span class="terminal-line"><span class="terminal-label">PLATFORM:</span> Cloud Native Computing Foundation</span>
+        <span class="terminal-line"><span class="terminal-label">STATUS:</span> Active CNCF Chapter</span>
+        <span class="terminal-line"><span class="terminal-label">FOUNDED:</span> September 2026 · Peshawar</span>
+      </div>
+      <div style="margin-top: 16px;">
+        <a href="https://github.com/cncf-peshawar" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Explore Lab Repositories</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Facts -->
+  <section class="facts-section">
+    <span class="section-eyebrow">01 // COMMUNITY FUNDAMENTALS</span>
+    <h2 class="section-title">Key Community Facts & Verifiable Commitments</h2>
+    <div class="facts-grid">
+      <div class="fact-card">
+        <span class="fact-num">100%</span>
+        <h3 class="fact-title">100% Free & Open</h3>
+        <span class="fact-label">ACCESS // Zero barrier to entry for students & practitioners</span>
+      </div>
+      <div class="fact-card">
+        <span class="fact-num">#01</span>
+        <h3 class="fact-title">Official CNCF Chapter</h3>
+        <span class="fact-label">AFFILIATION // Recognized community under CNCF & Linux Foundation</span>
+      </div>
+      <div class="fact-card">
+        <span class="fact-num">100%</span>
+        <h3 class="fact-title">Hands-On & Practical</h3>
+        <span class="fact-label">MISSION // Real clusters, real architectures, zero slides-only filler</span>
+      </div>
+      <div class="fact-card">
+        <span class="fact-num">500+</span>
+        <h3 class="fact-title">Open Community</h3>
+        <span class="fact-label">COLLABORATION // Growing network of developers across Khyber Pakhtunkhwa</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Meetup (.countdown-card) -->
+  <section class="featured-section" id="featured-meetup">
+    <GenesisCountdown event={nextFeaturedEvent} />
+  </section>
+
+  <!-- Pillars (4 Rainbow Outline Borders) -->
+  <section class="pillars-section">
+    <span class="section-eyebrow">02 // CORE PILLARS</span>
+    <h2 class="section-title">How We Empower the Community.</h2>
+    <div class="pillars-grid">
+      <div class="pillar-card border-lime">
+        <h3 class="pillar-title">Production-Grade Deep Dives</h3>
+        <p class="pillar-desc">Kubernetes internals, eBPF telemetry, service meshes, and GitOps deployments discussed by architects who run production clusters.</p>
+      </div>
+      <div class="pillar-card border-peach">
+        <h3 class="pillar-title">Hands-On Labs</h3>
+        <p class="pillar-desc">Bring your laptop. Interactive workshop sessions covering containerization, Helm templating, and cloud native CI/CD pipelines.</p>
+      </div>
+      <div class="pillar-card border-mint">
+        <h3 class="pillar-title">Mentorship & CFP</h3>
+        <p class="pillar-desc">First-time speakers welcomed. We provide talk mentoring, slide reviews, and open CFP review cycles for engineers in Peshawar.</p>
+      </div>
+      <div class="pillar-card border-sky">
+        <h3 class="pillar-title">Sponsor Visibility & Talent Bridge</h3>
+        <p class="pillar-desc">Connecting forward-looking tech companies and global ecosystem partners with top engineering talent across Khyber Pakhtunkhwa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Past Meetups -->
+  <section class="past-meetups-section" id="past-meetups">
+    <div class="past-doodle-cup" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none" aria-hidden="true">
+        <path d="M 46 48 C 42 38, 48 30, 44 20 C 40 12, 46 6, 42 2" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M 60 46 C 64 36, 56 26, 62 16 C 66 8, 60 4, 62 2" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M 74 48 C 78 38, 72 30, 76 20 C 80 12, 74 6, 76 2" stroke="#54b4de" stroke-width="2.5" stroke-linecap="round"/>
+        <ellipse cx="60" cy="58" rx="26" ry="7" fill="#ffde00" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="60" cy="60" rx="22" ry="5" fill="#ff9538"/>
+        <path d="M 34 58 C 34 76, 40 102, 44 112 C 46 114, 74 114, 76 112 C 80 102, 86 76, 86 58 Z" fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 35 64 C 44 68, 76 68, 85 64" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 46 68 L 49 108" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 60 68 L 60 110" stroke="#54b4de" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 74 68 L 71 108" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 85 68 C 100 68, 102 96, 82 100" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M 22 120 C 22 114, 98 114, 98 120 C 98 128, 22 128, 22 120 Z" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 38 126 C 50 128, 70 128, 82 126" stroke="#383838" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 12 134 L 108 134" stroke="#383838" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="section-eyebrow">03 // ARCHIVE & RECAPS</span>
+    <h2 class="section-title">Past Meetups & Technical Labs.</h2>
+    <div class="past-grid">
+      <div class="past-card">
+        <span class="past-date">SEP 04, 2026 · INAUGURAL</span>
+        <h3 class="past-name">CNCF Peshawar Genesis</h3>
+        <p class="past-summary">The inaugural chapter gathering introducing cloud native open-source foundations and local community roadmap.</p>
+        <a href={`${base}/events/01-cncf-peshawar-genesis`} class="past-link">Read Details →</a>
+      </div>
+      <div class="past-card">
+        <span class="past-date">COMING OCT 2026</span>
+        <h3 class="past-name">Container Security & eBPF Deep Dive</h3>
+        <p class="past-summary">Hands-on threat analysis in Kubernetes clusters with Cilium, Tetragon, and runtime security controls.</p>
+        <a href={`${base}/events`} class="past-link">View Full Meetup Archive</a>
+      </div>
+      <div class="past-card">
+        <span class="past-date">COMING NOV 2026</span>
+        <h3 class="past-name">GitOps at Scale with ArgoCD</h3>
+        <p class="past-summary">Declarative infrastructure patterns, progressive rollouts, and disaster recovery blueprints.</p>
+        <a href={`${base}/events`} class="past-link">Explore Meetups</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CFP Band -->
+  <section class="cfp-band" id="cfp-section">
+    <div class="cfp-inner">
+      <span class="cfp-eyebrow">CALL FOR PROPOSALS (CFP) · ALWAYS OPEN</span>
+      <h2 class="cfp-headline">Have a Cloud Native Story or Architecture to Share?</h2>
+      <div class="cfp-chips">
+        <span class="cfp-chip">15-Min Lightning Talk</span>
+        <span class="cfp-chip">40-Min Deep Dive</span>
+        <span class="cfp-chip">90-Min Workshop</span>
+      </div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+        <a href={`${base}/speak`} class="btn btn-sky">Apply to Speak at CNCF Peshawar</a>
+        <a href={`${base}/speak`} class="btn btn-outline">Submit Talk Proposal</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sponsors Section -->
+  <section class="sponsors-section" id="sponsors-section">
+    <span class="section-eyebrow">04 // SPONSORS & PARTNERS</span>
+    <h2 class="section-title">Supported by Visionary Partners.</h2>
+    <div class="sponsors-grid">
+      <div class="sponsor-card">
+        <span class="sponsor-type">EVENT SPONSOR PARTNER</span>
+        <h3 class="sponsor-name">GitHub</h3>
+        <p class="sponsor-desc">Supporting open-source tooling, workshops, and developer education worldwide.</p>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="sponsor-link">Visit Website ↗</a>
+      </div>
+      <div class="sponsor-card">
+        <span class="sponsor-type">VENUE PARTNER</span>
+        <h3 class="sponsor-name">National Incubation Center (NIC) Peshawar</h3>
+        <p class="sponsor-desc">National Incubation Center Peshawar providing world-class gathering space.</p>
+        <a href="https://nicpeshawar.com.pk" target="_blank" rel="noopener noreferrer" class="sponsor-link">Visit Website ↗</a>
+      </div>
+      <div class="sponsor-card">
+        <span class="sponsor-type">EVENT SPONSOR PARTNER</span>
+        <h3 class="sponsor-name">nsave</h3>
+        <p class="sponsor-desc">Fintech engineering team empowering high-performance distributed systems.</p>
+        <a href="https://nsave.com" target="_blank" rel="noopener noreferrer" class="sponsor-link">Visit Website ↗</a>
+      </div>
+    </div>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+      <a href={`${base}/sponsors`} class="btn btn-sky btn-sm">Become a Community Sponsor</a>
+      <a href={`${base}/sponsors`} class="btn btn-outline btn-sm">View Sponsorship Prospectus</a>
+    </div>
+  </section>
+
+  <!-- Sponsorship Email Builder Section (#email-builder & #tiers) -->
+  <section id="email-builder">
+    <div id="tiers" class="builder-frame">
+      <span class="section-eyebrow">05 // INTAKE & CONTACT</span>
+      <h2 class="section-title" style="margin-bottom:12px;">Sponsorship Inquiry Generator.</h2>
+      <p class="text-muted" style="font-size:13px; margin-bottom:24px;">
+        Fill out the details below to generate a pre-formatted sponsorship proposal, or copy the template directly into your email client.
+      </p>
+
+      <div class="builder-layout">
+        <!-- Form -->
+        <form id="sponsor-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="org-name" class="form-label">Organization / Company Name *</label>
+            <input type="text" id="org-name" class="form-input" placeholder="e.g. Acme Cloud Corp" required>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-name" class="form-label">Contact Person & Role *</label>
+            <input type="text" id="contact-name" class="form-input" placeholder="e.g. Jane Doe, VP Engineering" required>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-email" class="form-label">Work Email *</label>
+            <input type="email" id="contact-email" class="form-input" placeholder="e.g. contact@acme.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="tier-select" class="form-label">Preferred Sponsorship Tier *</label>
+            <select id="tier-select" class="form-select">
+              <option value="Venue Host Partner (In-Kind / Logistics)">Venue Host Partner (In-Kind / Logistics)</option>
+              <option value="Refreshment Partner (Community Hospitality)" selected>Refreshment Partner (Community Hospitality)</option>
+              <option value="Community Swag Partner (Merchandise / Vouchers)">Community Swag Partner (Merchandise / Vouchers)</option>
+              <option value="Annual Ecosystem Partner (Strategic Year-Round)">Annual Ecosystem Partner (Strategic Year-Round)</option>
+              <option value="Custom In-Kind / Technical Partner">Custom In-Kind / Technical Partner</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="timeline-select" class="form-label">Target Meetup / Timing *</label>
+            <select id="timeline-select" class="form-select">
+              <option value="Next Upcoming Meetup">Next Upcoming Meetup</option>
+              <option value="Upcoming Meetup Series">Upcoming Meetup Series</option>
+              <option value="Annual Ongoing Partnership">Annual Ongoing Partnership</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="org-website" class="form-label">Website & Logo Asset URL</label>
+            <input type="url" id="org-website" class="form-input" placeholder="e.g. https://acme.com">
+          </div>
+
+          <div class="form-group">
+            <label for="scope-notes" class="form-label">Partnership Scope / Notes</label>
+            <textarea id="scope-notes" class="form-textarea" rows="3" placeholder="e.g. We would like to provide refreshments for 120 attendees."></textarea>
+          </div>
+        </form>
+
+        <!-- Preview -->
+        <div class="preview-card">
+          <div class="preview-head">
+            <span>Email Structure Preview</span>
+            <span class="caption-text text-muted">To: cncfpeshawar@gmail.com</span>
+          </div>
+          <div class="preview-body">
+            <pre id="email-preview-text">Subject: CNCF Peshawar Sponsorship Inquiry
+
+Hi Cloud Native Peshawar Organizers,
+
+We would like to explore partnering with CNCF Peshawar to support free, high-quality cloud native and open-source education in Khyber Pakhtunkhwa.
+
+Organization Overview:
+- Organization / Company: [Organization / Company Name]
+- Primary Contact: [Contact Person, Role]
+- Contact Email: [Contact Email Address]
+- Website / Logo Link: [Website URL / Logo Asset Link]
+
+Sponsorship Interest:
+- Proposed Tier: Refreshment Partner (Community Hospitality)
+- Target Event / Timeline: Next Upcoming Meetup
+- Support Scope / Logistics:
+  [Details on venue capacity, refreshment contribution, or swag vouchers]
+
+We look forward to discussing the next steps and collaborating with the local cloud native community.
+
+Best regards,
+[Contact Person, Role]
+[Organization / Company Name]</pre>
+          </div>
+          <div class="preview-actions">
+            <a id="send-mailto-btn" href="mailto:cncfpeshawar@gmail.com" class="btn btn-sky btn-sm">Open in Email App</a>
+            <button type="button" id="copy-template-btn" class="btn btn-outline btn-sm">
+              <span id="copy-btn-text" aria-live="polite">Copy Email Text</span>
+            </button>
+          </div>
         </div>
       </div>
-    </section>
-  )}
+    </div>
+  </section>
 
-  <!-- 03 Speakers & Mentors -->
-  {speakersToShow.length > 0 && (
-    <section class="section">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-header__num">03 // SPEAKERS</span>
-          <h2 class="section-header__title">Learn from Industry Practitioners.</h2>
-          <p class="section-header__desc">
-            Engineers, researchers, and architects sharing real-world distributed systems experience.
-          </p>
-        </div>
-
-        <div class="speakers-grid">
-          {speakersToShow.slice(0, 3).map(speaker => (
-            <SpeakerCard speaker={speaker} />
-          ))}
-        </div>
-
-        <div class="section-cta-center">
-          <a href={`${base}/speak`} class="btn btn--secondary">
-            <span>Explore All Speakers & Submit a Talk</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- 04 Call for Proposals (CFP) Banner -->
-  <CFPBanner />
-
-  <!-- 05 Sponsors & Community Partners Wall -->
-  {sponsors.length > 0 && (
-    <section class="section section--subtle">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-header__num">05 // SPONSORS & PARTNERS</span>
-          <h2 class="section-header__title">Supported by Visionary Partners.</h2>
-          <p class="section-header__desc">
-            We are deeply grateful to our venue hosts, refreshment partners, and ecosystem supporters who keep Cloud Native Peshawar 100% free.
-          </p>
-        </div>
-
-        <div class="sponsors-grid">
-          {sponsors.map(sponsor => (
-            <div class="sponsor-card">
-              <span class="sponsor-card__tier">{sponsor.data.tier} Partner</span>
-              <h3 class="sponsor-card__name">{sponsor.data.name}</h3>
-              <p class="sponsor-card__desc">{sponsor.data.description}</p>
-              <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="sponsor-card__link">
-                <span>Visit Website ↗</span>
-              </a>
-            </div>
-          ))}
-        </div>
-
-        <div class="section-cta-center">
-          <a href={`${base}/sponsors`} class="btn btn--accent">
-            <span>Become a Community Sponsor</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  )}
+  <!-- Marquee Strip (Repeat) -->
+  <div class="marquee-strip" role="region" aria-label="Repeated Community Topics Marquee">
+    <div class="marquee-track">
+      <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
+      <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
+      <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
+      <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
-  .events-list {
+  /* Hero Section */
+  .hero-section {
+    padding: clamp(48px, 8vw, 72px) clamp(16px, 4vw, 32px) clamp(60px, 10vw, 84px);
+    position: relative;
+    overflow: hidden;
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-charcoal-ink, #383838);
+    background: var(--color-frost-white, #ffffff);
+    border: 1.5px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    padding: 3px 10px;
+    margin-bottom: 18px;
+  }
+
+  .hero-headline {
+    font-size: clamp(2rem, 5.5vw, 3.4rem);
+    font-weight: 300;
+    text-transform: uppercase;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--color-charcoal-ink, #383838);
+  }
+
+  .hero-headline strong {
+    font-weight: 700;
+  }
+
+  .hero-lede {
+    font-size: clamp(15px, 2vw, 17px);
+    line-height: 1.6;
+    color: var(--color-charcoal-ink, #383838);
+    margin-bottom: 28px;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-ctas {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .hero-sublink {
+    font-size: 13px;
+    color: var(--color-charcoal-ink, #383838);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+
+  .hero-proof {
+    font-size: 12px;
+    color: var(--color-text-muted, #6b6b6b);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* Doodles placement */
+  .hero-doodle-robot {
+    position: absolute;
+    bottom: -25px;
+    right: -20px;
+    width: clamp(120px, 20vw, 200px);
+    height: clamp(120px, 20vw, 200px);
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0.95;
+  }
+
+  .hero-doodle-cloud {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    width: clamp(80px, 15vw, 130px);
+    height: clamp(55px, 10vw, 85px);
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0.85;
+  }
+
+  .hero-doodle-arrow {
+    display: inline-block;
+    width: 44px;
+    height: 36px;
+    vertical-align: middle;
+    margin-left: 8px;
+  }
+
+  /* Marquee Strip */
+  .marquee-strip {
+    width: 100%;
+    background-color: var(--color-canary-banner, #ffde00);
+    border-top: 2px solid var(--color-charcoal-ink, #383838);
+    border-bottom: 2px solid var(--color-charcoal-ink, #383838);
+    padding: 11px 0;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+
+  .marquee-track {
+    display: inline-flex;
+    gap: 32px;
+    animation: marquee-scroll 24s linear infinite;
+  }
+
+  .marquee-strip:hover .marquee-track,
+  .marquee-strip:focus-within .marquee-track,
+  .marquee-track.is-paused {
+    animation-play-state: paused !important;
+  }
+
+  .marquee-item {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-charcoal-ink, #383838);
+  }
+
+  .marquee-pause-btn {
+    position: absolute;
+    right: 14px;
+    background: var(--color-frost-white, #ffffff);
+    border: 1.5px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    padding: 3px 9px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 20;
+    font-family: var(--font-aeonik-mono, 'JetBrains Mono', monospace);
+    color: var(--color-charcoal-ink, #383838);
+  }
+
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Chapter Charter Block */
+  .charter-section {
+    padding: clamp(36px, 6vw, 60px) clamp(16px, 4vw, 32px);
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .charter-card {
+    background: var(--color-frost-white, #ffffff);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    box-shadow: -6px 6px 0px 0px var(--color-charcoal-ink, #383838);
+    padding: clamp(20px, 4vw, 32px);
+    position: relative;
+  }
+
+  .charter-badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .charter-active-badge {
+    background: var(--color-canary-banner, #ffde00);
+    color: var(--color-charcoal-ink, #383838);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .charter-meta {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-muted, #6b6b6b);
+  }
+
+  .charter-title {
+    font-size: 18px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .charter-terminal {
+    background: #1a1a1a;
+    color: var(--color-wet-cement, #54b4de);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    padding: 18px 20px;
+    font-size: 13px;
+    line-height: 1.7;
+    border-radius: var(--radius, 2px);
+    overflow-x: auto;
+  }
+
+  .terminal-line {
+    display: block;
+  }
+
+  .terminal-label {
+    color: #818181;
+  }
+
+  .doodle-stack {
+    position: absolute;
+    top: -25px;
+    right: -20px;
+    width: clamp(70px, 12vw, 110px);
+    height: clamp(70px, 12vw, 110px);
+    pointer-events: none;
+  }
+
+  /* Key Facts */
+  .facts-section {
+    padding: 40px clamp(16px, 4vw, 32px) 60px;
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .facts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 550px) {
+    .facts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .fact-card {
+    background: var(--color-frost-white, #ffffff);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    padding: 20px 18px;
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    gap: 6px;
   }
 
-  .events-grid {
+  .fact-num {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--color-charcoal-ink, #383838);
+    line-height: 1.1;
+  }
+
+  .fact-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-charcoal-ink, #383838);
+  }
+
+  .fact-label {
+    font-size: 12px;
+    color: var(--color-text-muted, #6b6b6b);
+    line-height: 1.4;
+  }
+
+  /* Featured Meetup Section */
+  .featured-section {
+    padding: 50px clamp(16px, 4vw, 32px);
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Pillars */
+  .pillars-section {
+    padding: 50px clamp(16px, 4vw, 32px);
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .pillars-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-    margin-bottom: var(--space-xl);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 
-  @media (min-width: 768px) {
-    .events-grid {
-      grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 768px) {
+    .pillars-grid {
+      grid-template-columns: 1fr;
     }
   }
 
-  .speakers-grid {
+  .pillar-card {
+    background: var(--color-frost-white, #ffffff);
+    border-radius: var(--radius, 2px);
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pillar-card.border-lime {
+    border: 2px solid var(--color-lime-sketch, #b3c419);
+  }
+
+  .pillar-card.border-peach {
+    border: 2px solid var(--color-peach-sketch, #f5b161);
+  }
+
+  .pillar-card.border-mint {
+    border: 2px solid var(--color-mint-sketch, #38c1b0);
+  }
+
+  .pillar-card.border-sky {
+    border: 2px solid var(--color-sky-crayon, #6fc2ff);
+  }
+
+  .pillar-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-charcoal-ink, #383838);
+  }
+
+  .pillar-desc {
+    font-size: 13px;
+    color: var(--color-text-muted, #6b6b6b);
+    line-height: 1.5;
+  }
+
+  /* Past Meetups */
+  .past-meetups-section {
+    padding: 50px clamp(16px, 4vw, 32px);
+    max-width: 1240px;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+  }
+
+  .past-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-    margin-bottom: var(--space-xl);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 
-  @media (min-width: 768px) {
-    .speakers-grid {
-      grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 850px) {
+    .past-grid {
+      grid-template-columns: 1fr;
     }
   }
 
-  @media (min-width: 1024px) {
-    .speakers-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  .past-card {
+    background: var(--color-frost-white, #ffffff);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .past-date {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-muted, #6b6b6b);
+    text-transform: uppercase;
+  }
+
+  .past-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-charcoal-ink, #383838);
+    line-height: 1.3;
+  }
+
+  .past-summary {
+    font-size: 13px;
+    color: var(--color-text-muted, #6b6b6b);
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+
+  .past-link {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-charcoal-ink, #383838);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    display: inline-block;
+    margin-top: 6px;
+  }
+
+  .past-doodle-cup {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    pointer-events: none;
+  }
+
+  /* CFP Band */
+  .cfp-band {
+    width: 100%;
+    background: var(--color-charcoal-ink, #383838);
+    color: var(--color-cream-paper, #f4efea);
+    padding: 56px clamp(16px, 4vw, 32px);
+    border-top: 2px solid var(--color-charcoal-ink, #383838);
+    border-bottom: 2px solid var(--color-charcoal-ink, #383838);
+    text-align: center;
+  }
+
+  .cfp-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .cfp-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-canary-banner, #ffde00);
+    text-transform: uppercase;
+  }
+
+  .cfp-headline {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 600;
+    color: var(--color-cream-paper, #f4efea);
+    line-height: 1.25;
+  }
+
+  .cfp-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 6px 0 12px;
+  }
+
+  .cfp-chip {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius, 2px);
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--color-cream-paper, #f4efea);
+  }
+
+  /* Sponsors & Partners */
+  .sponsors-section {
+    padding: 56px clamp(16px, 4vw, 32px);
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .sponsors-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-    margin-bottom: var(--space-xl);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
   }
 
-  @media (min-width: 768px) {
+  @media (max-width: 800px) {
     .sponsors-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
     }
   }
 
   .sponsor-card {
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: clamp(var(--space-md), 4vw, var(--space-xl));
+    background: var(--color-frost-white, #ffffff);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    padding: 20px 18px;
     display: flex;
     flex-direction: column;
-    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    gap: 6px;
   }
 
-  .sponsor-card:hover {
-    border-color: var(--color-border-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-
-  .sponsor-card__tier {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-accent);
+  .sponsor-type {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-text-muted, #6b6b6b);
     text-transform: uppercase;
-    margin-bottom: var(--space-xs);
+    letter-spacing: 0.05em;
   }
 
-  .sponsor-card__name {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--space-xs);
-    color: var(--color-ink);
+  .sponsor-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-charcoal-ink, #383838);
   }
 
-  .sponsor-card__desc {
-    font-size: var(--font-size-sm);
-    color: var(--color-ink-muted);
-    line-height: var(--line-height-normal);
-    margin-bottom: var(--space-lg);
+  .sponsor-desc {
+    font-size: 12px;
+    color: var(--color-text-muted, #6b6b6b);
+    line-height: 1.4;
     flex-grow: 1;
   }
 
-  .sponsor-card__link {
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-accent);
-    margin-top: auto;
-  }
-
-  .sponsor-card__link:hover {
+  .sponsor-link {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-charcoal-ink, #383838);
     text-decoration: underline;
+    margin-top: 8px;
   }
 
-  .other-events-title {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-sm);
-    color: var(--color-ink-muted);
+  /* Sponsorship Email Builder */
+  #email-builder {
+    padding: 40px clamp(16px, 4vw, 32px);
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .builder-frame {
+    background: var(--color-chalk-gray, #f8f8f7);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    box-shadow: -6px 6px 0px 0px var(--color-charcoal-ink, #383838);
+    padding: clamp(20px, 4vw, 32px) clamp(16px, 4vw, 28px);
+  }
+
+  .builder-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 32px;
+  }
+
+  @media (max-width: 900px) {
+    .builder-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .form-label {
+    font-size: 12px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-xs);
+    color: var(--color-charcoal-ink, #383838);
+    letter-spacing: 0.03em;
   }
 
-  .planning-box {
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: clamp(var(--space-md), 4vw, var(--space-xl));
-    margin-bottom: var(--space-xl);
-    box-shadow: var(--shadow-sm);
+  .preview-card {
+    background: var(--color-frost-white, #ffffff);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
-  .planning-box__header {
+  .preview-head {
+    background: var(--color-cream-paper, #f4efea);
+    border-bottom: 2px solid var(--color-charcoal-ink, #383838);
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--space-xs);
-    margin-bottom: var(--space-md);
-    padding-bottom: var(--space-sm);
-    border-bottom: 1px solid var(--color-border);
   }
 
-  .planning-box__meta {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-muted);
+  .preview-body {
+    padding: 14px;
+    flex-grow: 1;
+    overflow-x: auto;
   }
 
-  .planning-box__title {
-    font-size: var(--font-size-3xl);
-    margin-bottom: var(--space-xs);
-    color: var(--color-ink);
+  #email-preview-text {
+    font-family: var(--font-aeonik-mono, 'JetBrains Mono', monospace);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--color-charcoal-ink, #383838);
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
-  .planning-box__desc {
-    font-size: var(--font-size-base);
-    color: var(--color-ink-muted);
-    line-height: var(--line-height-relaxed);
-    max-width: 65ch;
-    margin-bottom: var(--space-lg);
-  }
-
-  .planning-box__actions {
+  .preview-actions {
+    padding: 12px 14px;
+    border-top: 2px solid var(--color-charcoal-ink, #383838);
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-xs);
+    gap: 10px;
+    background: var(--color-chalk-gray, #f8f8f7);
   }
 
-  .section-cta-center {
-    display: flex;
-    justify-content: center;
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none !important;
+    }
   }
 </style>
+
+<script>
+  function initHomePage() {
+    // 1. Marquee Pause Toggle
+    const marqueeBtn = document.getElementById('marquee-toggle-btn');
+    const marqueeTrack = document.getElementById('marquee-track');
+    if (marqueeBtn && marqueeTrack) {
+      marqueeBtn.addEventListener('click', () => {
+        const isPaused = marqueeTrack.classList.toggle('is-paused');
+        marqueeBtn.textContent = isPaused ? 'PLAY' : 'PAUSE';
+      });
+    }
+
+    // 2. Sponsorship Email Builder
+    const orgInput = document.getElementById('org-name') as HTMLInputElement | null;
+    const contactInput = document.getElementById('contact-name') as HTMLInputElement | null;
+    const emailInput = document.getElementById('contact-email') as HTMLInputElement | null;
+    const tierSelect = document.getElementById('tier-select') as HTMLSelectElement | null;
+    const timelineSelect = document.getElementById('timeline-select') as HTMLSelectElement | null;
+    const websiteInput = document.getElementById('org-website') as HTMLInputElement | null;
+    const notesInput = document.getElementById('scope-notes') as HTMLTextAreaElement | null;
+    const previewEl = document.getElementById('email-preview-text');
+    const mailtoBtn = document.getElementById('send-mailto-btn') as HTMLAnchorElement | null;
+    const copyBtn = document.getElementById('copy-template-btn');
+    const copyText = document.getElementById('copy-btn-text');
+
+    function updatePreview() {
+      const org = orgInput?.value.trim() || '[Organization / Company Name]';
+      const contact = contactInput?.value.trim() || '[Contact Person, Role]';
+      const email = emailInput?.value.trim() || '[Contact Email Address]';
+      const tier = tierSelect?.value || 'Refreshment Partner (Community Hospitality)';
+      const timeline = timelineSelect?.value || 'Next Upcoming Meetup';
+      const website = websiteInput?.value.trim() || '[Website URL / Logo Asset Link]';
+      const notes = notesInput?.value.trim() || '[Details on venue capacity, refreshment contribution, or swag vouchers]';
+
+      const subject = 'CNCF Peshawar Sponsorship Inquiry — ' + org;
+      const body = 'Hi Cloud Native Peshawar Organizers,\n\n' +
+        'We would like to explore partnering with CNCF Peshawar to support free, high-quality cloud native and open-source education in Khyber Pakhtunkhwa.\n\n' +
+        'Organization Overview:\n' +
+        '- Organization / Company: ' + org + '\n' +
+        '- Primary Contact: ' + contact + '\n' +
+        '- Contact Email: ' + email + '\n' +
+        '- Website / Logo Link: ' + website + '\n\n' +
+        'Sponsorship Interest:\n' +
+        '- Proposed Tier: ' + tier + '\n' +
+        '- Target Event / Timeline: ' + timeline + '\n' +
+        '- Support Scope / Logistics:\n' +
+        '  ' + notes + '\n\n' +
+        'We look forward to discussing the next steps and collaborating with the local cloud native community.\n\n' +
+        'Best regards,\n' +
+        contact + '\n' +
+        org;
+
+      if (previewEl) {
+        previewEl.textContent = 'Subject: ' + subject + '\n\n' + body;
+      }
+      if (mailtoBtn) {
+        mailtoBtn.href = 'mailto:cncfpeshawar@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      }
+    }
+
+    [orgInput, contactInput, emailInput, tierSelect, timelineSelect, websiteInput, notesInput].forEach(el => {
+      if (el) {
+        el.addEventListener('input', updatePreview);
+        el.addEventListener('change', updatePreview);
+      }
+    });
+
+    if (copyBtn && copyText) {
+      copyBtn.addEventListener('click', async () => {
+        if (previewEl) {
+          try {
+            await navigator.clipboard.writeText(previewEl.textContent || '');
+            copyText.textContent = 'Copied to Clipboard!';
+            setTimeout(() => {
+              copyText.textContent = 'Copy Email Text';
+            }, 2000);
+          } catch (err) {
+            copyText.textContent = 'Copy Failed';
+          }
+        }
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHomePage);
+  } else {
+    initHomePage();
+  }
+  document.addEventListener('astro:page-load', initHomePage);
+</script>

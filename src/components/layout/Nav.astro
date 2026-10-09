@@ -71,9 +71,9 @@ const navLinks = [
   }
 
   .nav-item-link {
-    color: var(--color-charcoal-ink, #383838);
+    color: var(--color-charcoal-ink);
     text-decoration: none;
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-family: var(--font-mono);
     font-weight: 500;
     font-size: 13px;
     text-transform: uppercase;
@@ -88,13 +88,13 @@ const navLinks = [
 
   .nav-item-link:hover,
   .nav-item-link.is-active {
-    border-bottom-color: var(--color-charcoal-ink, #383838);
+    border-bottom-color: var(--color-charcoal-ink);
     font-weight: 700;
   }
 
   .nav-item-link:focus-visible,
   .nav-cta-btn:focus-visible {
-    outline: 3px solid var(--color-charcoal-ink, #383838);
+    outline: 3px solid var(--color-charcoal-ink);
     outline-offset: 3px;
   }
 
@@ -107,29 +107,28 @@ const navLinks = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     text-decoration: none;
-    color: var(--color-charcoal-ink, #383838);
-    background-color: var(--color-sky-crayon, #6fc2ff);
-    border: 2px solid var(--color-charcoal-ink, #383838);
-    border-radius: var(--radius, 2px);
+    color: var(--color-charcoal-ink);
+    background-color: var(--color-sky-crayon);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
     padding: 8px 16px;
-    box-shadow: -4px 4px 0px 0px var(--color-charcoal-ink, #383838);
+    box-shadow: -4px 4px 0px 0px var(--color-charcoal-ink);
     transition: transform var(--transition-fast, 0.1s ease), box-shadow var(--transition-fast, 0.1s ease);
     min-height: 44px;
   }
 
   .nav-cta-btn:hover {
-    transform: translate(1px, -1px);
-    box-shadow: -5px 5px 0px 0px var(--color-charcoal-ink, #383838);
+    transform: translate(-1px, 1px);
   }
 
   .nav-cta-btn:active {
-    transform: translate(-3px, 3px);
-    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink, #383838);
+    transform: translate(-4px, 4px);
+    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink);
   }
 </style>

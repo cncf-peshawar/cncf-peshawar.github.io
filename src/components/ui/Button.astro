@@ -59,9 +59,13 @@ const rainbowClass = variant === 'rainbow'
     -webkit-font-smoothing: antialiased;
   }
 
+  .btn:hover:not(:disabled) {
+    transform: translate(-2px, 2px);
+  }
+
   .btn:active:not(:disabled) {
     transform: var(--press-transform, translate(-6px, 6px));
-    box-shadow: 0 0 0 0 var(--color-charcoal-ink);
+    box-shadow: var(--shadow-hard-pressed, 0 0 0 0 var(--color-charcoal-ink));
   }
 
   .btn:focus-visible {
@@ -113,7 +117,7 @@ const rainbowClass = variant === 'rainbow'
   }
 
   .btn--secondary:hover:not(:disabled) {
-    background-color: var(--color-chalk-gray);
+    background-color: var(--color-ice-wash);
   }
 
   .btn--rainbow {
@@ -123,7 +127,7 @@ const rainbowClass = variant === 'rainbow'
   }
 
   .btn--rainbow:hover:not(:disabled) {
-    background-color: var(--color-chalk-gray);
+    background-color: var(--color-ice-wash);
   }
 
   /* Rainbow explicit color slots */

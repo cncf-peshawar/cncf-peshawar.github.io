@@ -2,22 +2,22 @@
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  event?: CollectionEntry<'events'>;
+  event?: CollectionEntry<'events'> | null;
   targetDate?: string;
 }
 
 const { event, targetDate } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-const title = event?.data.title ?? "CNCF Peshawar Genesis";
-const dateStr = event?.data.date ?? "2026-09-04";
+const title = event?.data.title ?? "The Cloud Native Launchpad: Docker, Kubernetes & Real Deployments.";
+const dateStr = event?.data.date ?? "2026-09-26";
 const timeStr = event?.data.time ?? "03:00 PM - 07:00 PM PKT";
 const venueStr = event?.data.venue ?? "NIC (National Incubation Center), South Canal Road, Peshawar";
-const rsvpUrl = event?.data.rsvpUrl ?? "https://ocgroups.dev/cncf/group/6vwk2n4/event/z7sb6wa";
+const rsvpUrl = event?.data.rsvpUrl ?? "https://ocgroups.dev/cncf/group/6vwk2n4/event/wpm4sp7";
 const lumaUrl = event?.data.lumaUrl;
-const eventSlug = event?.slug ?? "01-cncf-peshawar-genesis";
+const eventSlug = event?.slug ?? "02-the-cloud-native-launchpad-docker-kubernetes-real-deployments";
 
-// Format date nicely (e.g. SEP 4, 2026)
+// Format date nicely (e.g. SEP 26, 2026)
 const dateFormatted = new Date(dateStr).toLocaleDateString('en-US', {
   month: 'short',
   day: 'numeric',
@@ -25,7 +25,7 @@ const dateFormatted = new Date(dateStr).toLocaleDateString('en-US', {
 }).toUpperCase();
 
 // Form ISO target date string for countdown
-const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15:00:00+05:00` : "2026-09-04T15:00:00+05:00");
+const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15:00:00+05:00` : "2026-09-26T15:00:00+05:00");
 ---
 
 <div class="countdown-card" data-target={effectiveTarget}>
@@ -34,212 +34,208 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
       <span class="live-dot" id="cd-live-dot"></span>
       <span class="live-label" id="cd-live-label">COUNTDOWN TO {title.toUpperCase()}</span>
     </div>
-    <span class="countdown-card__date" id="cd-date-display">{dateFormatted} · {timeStr}</span>
+    <span class="section-eyebrow countdown-eyebrow">00 // UPCOMING MEETUP</span>
+    <h2 class="featured-title">{title}</h2>
+    <span id="cd-date-display">{dateFormatted} · {timeStr}</span>
   </div>
 
   <div class="countdown-grid" id="genesis-countdown">
     <div class="countdown-box">
-      <span class="countdown-num" id="cd-days">--</span>
+      <span id="cd-days">--</span>
       <span class="countdown-unit">DAYS</span>
     </div>
-    <div class="countdown-sep">:</div>
     <div class="countdown-box">
-      <span class="countdown-num" id="cd-hours">--</span>
+      <span id="cd-hours">--</span>
       <span class="countdown-unit">HOURS</span>
     </div>
-    <div class="countdown-sep">:</div>
     <div class="countdown-box">
-      <span class="countdown-num" id="cd-mins">--</span>
+      <span id="cd-mins">--</span>
       <span class="countdown-unit">MINUTES</span>
     </div>
-    <div class="countdown-sep">:</div>
     <div class="countdown-box">
-      <span class="countdown-num" id="cd-secs">--</span>
+      <span id="cd-secs">--</span>
       <span class="countdown-unit">SECONDS</span>
     </div>
   </div>
 
-  <div class="countdown-footer">
-    <div class="countdown-venue">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-        <circle cx="12" cy="10" r="3"/>
-      </svg>
-      <span>{venueStr}</span>
-    </div>
-    <div class="countdown-actions" id="cd-actions">
+  <div class="countdown-venue">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+    <span>{venueStr}</span>
+  </div>
+
+  <div class="countdown-actions" id="cd-actions">
+    <a href={`${base}/events/${eventSlug}`} class="btn btn-outline btn-sm">
+      <span>View Details →</span>
+    </a>
+    {rsvpUrl && (
       <a 
-        href={`${base}/events/${eventSlug}`} 
-        class="btn btn--secondary btn--sm"
+        href={rsvpUrl} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="btn btn-sky btn-sm"
+        id="cd-rsvp-btn"
       >
-        <span>View Details →</span>
+        <span>RSVP on OCG (Free)</span>
       </a>
-      {rsvpUrl && (
-        <a 
-          href={rsvpUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="btn btn--accent btn--sm"
-          id="cd-rsvp-btn"
-        >
-          <span>RSVP on OCG (Free)</span>
-        </a>
-      )}
-      {lumaUrl && (
-        <a 
-          href={lumaUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="btn btn--secondary btn--sm"
-        >
-          <span>Luma ↗</span>
-        </a>
-      )}
-    </div>
+    )}
+    {lumaUrl && (
+      <a 
+        href={lumaUrl} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="btn btn-outline btn-sm"
+      >
+        <span>Luma ↗</span>
+      </a>
+    )}
   </div>
 </div>
 
 <style>
   .countdown-card {
-    background-color: var(--color-paper-card);
-    border: 1px solid var(--color-accent);
-    border-radius: var(--radius-md);
-    padding: var(--space-lg);
-    box-shadow: 0 0 24px var(--color-accent-subtle);
-    margin-bottom: var(--space-2xl);
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    background: var(--color-canary-banner, #ffde00);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    box-shadow: -6px 6px 0px 0px var(--color-charcoal-ink, #383838);
+    padding: clamp(24px, 4vw, 36px) clamp(20px, 4vw, 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 24px;
+    transition: box-shadow 0.1s ease;
   }
 
   .countdown-card--concluded {
-    border-color: var(--color-border);
-    box-shadow: none;
+    background: var(--color-canary-banner, #ffde00);
+    box-shadow: -6px 6px 0px 0px var(--color-charcoal-ink, #383838);
   }
 
   .countdown-card__header {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-xs);
-    margin-bottom: var(--space-md);
-    padding-bottom: var(--space-sm);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .countdown-card__live-indicator {
-    display: inline-flex;
-    align-items: center;
+    flex-direction: column;
     gap: 6px;
   }
 
+  .countdown-card__live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .live-dot {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
+    background: var(--color-mint-sketch, #38c1b0);
+    border: 1.5px solid var(--color-charcoal-ink, #383838);
     border-radius: 50%;
-    background-color: var(--color-signal-green);
+    display: inline-block;
     animation: pulse-live 2s infinite ease-in-out;
   }
 
   .live-dot--concluded {
-    background-color: var(--color-ink-subtle);
+    background: var(--color-pencil-gray, #a1a1a1);
     animation: none;
   }
 
+  @keyframes pulse-live {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+  }
+
   .live-label {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    letter-spacing: 0.05em;
-    color: var(--color-ink);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-ink, #383838);
   }
 
-  .countdown-card__date {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-muted);
+  .countdown-eyebrow {
+    color: var(--color-charcoal-ink, #383838) !important;
+    margin-top: 4px;
+    margin-bottom: 0;
   }
 
-  .countdown-grid {
-    display: flex;
+  .featured-title {
+    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+    font-weight: 700;
+    color: var(--color-charcoal-ink, #383838);
+    line-height: 1.25;
+  }
+
+  #cd-date-display {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-charcoal-ink, #383838);
+    background: var(--color-frost-white, #ffffff);
+    padding: 4px 10px;
+    border: 1.5px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    display: inline-block;
+    width: fit-content;
+  }
+
+  /* Countdown Grid */
+  #genesis-countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
     align-items: center;
-    justify-content: center;
-    gap: clamp(var(--space-2xs), 2vw, var(--space-md));
-    margin-block: var(--space-md);
-    flex-wrap: wrap;
+  }
+
+  @media (max-width: 600px) {
+    #genesis-countdown {
+      gap: 8px;
+    }
   }
 
   .countdown-box {
+    background: var(--color-frost-white, #ffffff);
+    border: 2px solid var(--color-charcoal-ink, #383838);
+    border-radius: var(--radius, 2px);
+    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink, #383838);
+    padding: clamp(14px, 3vw, 20px) clamp(8px, 2vw, 14px);
+    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-paper-subtle);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    padding: clamp(var(--space-xs), 2vw, var(--space-sm)) clamp(var(--space-sm), 3vw, var(--space-md));
-    min-width: clamp(54px, 12vw, 84px);
+    gap: 4px;
   }
 
-  .countdown-num {
-    font-family: var(--font-mono);
-    font-size: clamp(1.75rem, 4vw, 3rem);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-ink);
+  #cd-days, #cd-hours, #cd-mins, #cd-secs {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--color-charcoal-ink, #383838);
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
 
   .countdown-unit {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-ink-subtle);
-    letter-spacing: 0.06em;
-    margin-top: 4px;
-  }
-
-  .countdown-sep {
-    font-family: var(--font-mono);
-    font-size: clamp(1.25rem, 3vw, 2rem);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-accent);
-    line-height: 1;
-    user-select: none;
-  }
-
-  .countdown-footer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-md);
-    margin-top: var(--space-md);
-    padding-top: var(--space-sm);
-    border-top: 1px solid var(--color-border);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-muted, #6b6b6b);
+    letter-spacing: 0.05em;
   }
 
   .countdown-venue {
     display: flex;
     align-items: center;
-    gap: var(--space-xs);
-    font-size: var(--font-size-xs);
-    color: var(--color-ink-muted);
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-charcoal-ink, #383838);
   }
 
   .countdown-venue svg {
-    color: var(--color-accent);
     flex-shrink: 0;
   }
 
-  .countdown-actions {
+  #cd-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2xs);
-  }
-
-  .btn--sm {
-    padding: 0.35rem 0.75rem;
-    font-size: var(--font-size-xs);
+    gap: 12px;
+    align-items: center;
   }
 </style>
 
@@ -248,7 +244,7 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
     const container = document.querySelector('.countdown-card');
     if (!container) return;
 
-    const targetDateStr = container.getAttribute('data-target') || '2026-09-04T15:00:00+05:00';
+    const targetDateStr = container.getAttribute('data-target') || '2026-09-26T15:00:00+05:00';
     const targetTime = new Date(targetDateStr).getTime();
 
     const daysEl = document.getElementById('cd-days');
@@ -278,7 +274,7 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
         if (hoursEl) hoursEl.innerText = '00';
         if (minsEl) minsEl.innerText = '00';
         if (secsEl) secsEl.innerText = '00';
-        if (liveLabel) liveLabel.textContent = 'EVENT CONCLUDED / ARCHIVED';
+        if (liveLabel) liveLabel.textContent = 'EVENT CONCLUDED · RECAPS AVAILABLE';
         if (liveDot) liveDot.classList.add('live-dot--concluded');
         container?.classList.add('countdown-card--concluded');
         if (rsvpBtn) {

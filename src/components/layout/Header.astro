@@ -15,10 +15,10 @@ const { currentPath = Astro.url.pathname } = Astro.props;
     <!-- Brand Logo -->
     <a href={`${base}/`} class="brand-logo" aria-label="CNCF Peshawar Home">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="var(--color-charcoal-ink, #383838)" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M12 22V12" stroke="var(--color-charcoal-ink, #383838)" stroke-width="2"/>
-        <path d="M22 7L12 12L2 7" stroke="var(--color-charcoal-ink, #383838)" stroke-width="2"/>
-        <circle cx="12" cy="12" r="3" fill="var(--color-sky-crayon, #6fc2ff)"/>
+        <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M12 22V12" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+        <path d="M22 7L12 12L2 7" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+        <circle cx="12" cy="12" r="3" fill="var(--color-sky-crayon)"/>
       </svg>
       <span class="brand-title">CNCF Peshawar</span>
       <span class="brand-badge">PK</span>
@@ -63,8 +63,8 @@ const { currentPath = Astro.url.pathname } = Astro.props;
   .site-header {
     width: 100%;
     position: relative;
-    background-color: var(--color-frost-white, #ffffff);
-    border-bottom: 1px solid var(--color-charcoal-ink, #383838);
+    background-color: var(--color-frost-white);
+    border-bottom: 1px solid var(--color-charcoal-ink);
     padding: 12px 24px;
     z-index: 1000;
   }
@@ -83,35 +83,35 @@ const { currentPath = Astro.url.pathname } = Astro.props;
     align-items: center;
     gap: 10px;
     text-decoration: none;
-    color: var(--color-charcoal-ink, #383838);
+    color: var(--color-charcoal-ink);
     min-height: 44px;
   }
 
   .brand-logo:focus-visible,
   .header-action-cta:focus-visible,
   .mobile-nav-toggle:focus-visible {
-    outline: 3px solid var(--color-charcoal-ink, #383838);
+    outline: 3px solid var(--color-charcoal-ink);
     outline-offset: 3px;
   }
 
   .brand-title {
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-family: var(--font-mono);
     font-weight: 700;
     font-size: 16px;
     letter-spacing: -0.02em;
     text-transform: uppercase;
-    color: var(--color-charcoal-ink, #383838);
+    color: var(--color-charcoal-ink);
   }
 
   .brand-badge {
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-family: var(--font-mono);
     font-size: 11px;
     padding: 2px 6px;
-    background: var(--color-canary-banner, #ffde00);
-    border: 1.5px solid var(--color-charcoal-ink, #383838);
-    border-radius: var(--radius, 2px);
+    background: var(--color-canary-banner);
+    border: 1px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
     font-weight: 700;
-    color: var(--color-charcoal-ink, #383838);
+    color: var(--color-charcoal-ink);
   }
 
   .header-actions {
@@ -124,18 +124,18 @@ const { currentPath = Astro.url.pathname } = Astro.props;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     text-decoration: none;
-    color: var(--color-charcoal-ink, #383838);
-    background-color: var(--color-sky-crayon, #6fc2ff);
-    border: 2px solid var(--color-charcoal-ink, #383838);
-    border-radius: var(--radius, 2px);
+    color: var(--color-charcoal-ink);
+    background-color: var(--color-sky-crayon);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
     padding: 8px 16px;
-    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink, #383838);
+    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink);
     transition: transform var(--transition-fast, 0.1s ease), box-shadow var(--transition-fast, 0.1s ease);
     min-height: 44px;
   }
@@ -147,13 +147,12 @@ const { currentPath = Astro.url.pathname } = Astro.props;
   }
 
   .header-action-cta:hover {
-    transform: translate(1px, -1px);
-    box-shadow: -4px 4px 0px 0px var(--color-charcoal-ink, #383838);
+    transform: translate(-1px, 1px);
   }
 
   .header-action-cta:active {
-    transform: translate(-2px, 2px);
-    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink, #383838);
+    transform: translate(-3px, 3px);
+    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink);
   }
 
   .mobile-nav-toggle {
@@ -164,11 +163,11 @@ const { currentPath = Astro.url.pathname } = Astro.props;
     height: 44px;
     min-width: 44px;
     min-height: 44px;
-    background-color: var(--color-frost-white, #ffffff);
-    border: 2px solid var(--color-charcoal-ink, #383838);
-    border-radius: var(--radius, 2px);
-    color: var(--color-charcoal-ink, #383838);
-    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink, #383838);
+    background-color: var(--color-frost-white);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    color: var(--color-charcoal-ink);
+    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink);
     cursor: pointer;
     transition: transform var(--transition-fast, 0.1s ease), box-shadow var(--transition-fast, 0.1s ease);
   }
@@ -179,8 +178,12 @@ const { currentPath = Astro.url.pathname } = Astro.props;
     }
   }
 
+  .mobile-nav-toggle:hover {
+    transform: translate(-1px, 1px);
+  }
+
   .mobile-nav-toggle:active {
-    transform: translate(-2px, 2px);
-    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink, #383838);
+    transform: translate(-3px, 3px);
+    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink);
   }
 </style>

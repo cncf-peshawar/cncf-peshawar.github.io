@@ -108,7 +108,7 @@ const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
   }
 
   .field__input::placeholder {
-    color: var(--color-pencil-gray);
+    color: var(--color-text-muted);
     font-family: var(--font-mono);
     opacity: 1;
   }
@@ -116,6 +116,7 @@ const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
   .field__input:focus-visible {
     outline: 3px solid var(--color-charcoal-ink);
     outline-offset: 3px;
+    border-color: var(--color-sky-crayon);
   }
 
   .field__input:disabled {

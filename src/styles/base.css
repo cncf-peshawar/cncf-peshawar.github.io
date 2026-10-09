@@ -16,17 +16,18 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-size: 16px;
-  background-color: var(--color-paper);
-  color: var(--color-ink);
+  background-color: var(--color-cream-paper);
+  color: var(--color-charcoal-ink);
   overflow-x: clip;
 }
 
 body {
-  background-color: var(--color-paper);
-  color: var(--color-ink);
+  background-color: var(--color-cream-paper);
+  color: var(--color-charcoal-ink);
   font-family: var(--font-mono);
   font-size: var(--font-size-body);
   line-height: 1.6;
+  letter-spacing: var(--letter-spacing-normal, 0.02em);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,8 +38,14 @@ body {
 /* INTERACTIVE ELEMENTS & ACCESSIBILITY                                       */
 /* -------------------------------------------------------------------------- */
 :focus-visible {
-  outline: var(--focus-ring);
+  outline: 3px solid var(--color-charcoal-ink);
   outline-offset: 3px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-mono);
+  color: var(--color-charcoal-ink);
+  letter-spacing: var(--letter-spacing-tight, 0.02em);
 }
 
 a {

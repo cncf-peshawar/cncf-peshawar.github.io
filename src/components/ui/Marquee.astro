@@ -103,9 +103,8 @@ const repeatedSequence = Array(4).fill(textSequence).join('');
 <style>
   .marquee {
     width: 100%;
-    background-color: var(--color-canary-banner, #ffde00);
-    border-top: var(--border-width, 2px) solid var(--color-charcoal-ink, #383838);
-    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink, #383838);
+    background-color: var(--color-canary-banner);
+    border: none;
     padding: var(--spacing-12, 12px) 0;
     position: relative;
     overflow: hidden;
@@ -140,7 +139,7 @@ const repeatedSequence = Array(4).fill(textSequence).join('');
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-charcoal-ink, #383838);
+    color: var(--color-charcoal-ink);
     line-height: 1;
     padding-right: var(--spacing-32, 32px);
   }
@@ -157,13 +156,13 @@ const repeatedSequence = Array(4).fill(textSequence).join('');
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-    background: var(--color-frost-white, #ffffff);
-    color: var(--color-charcoal-ink, #383838);
-    border: var(--border-width, 2px) solid var(--color-charcoal-ink, #383838);
-    border-radius: var(--radius, 2px);
-    box-shadow: -2px 2px 0px 0px var(--color-charcoal-ink, #383838);
+    background: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: -2px 2px 0px 0px var(--color-charcoal-ink);
     font-family: var(--font-mono);
-    font-size: var(--font-size-caption, 12px);
+    font-size: var(--font-size-caption);
     font-weight: 700;
     letter-spacing: 0.04em;
     padding: 4px 10px;
@@ -177,12 +176,12 @@ const repeatedSequence = Array(4).fill(textSequence).join('');
 
   .marquee__pause-btn:hover {
     transform: translateY(-50%) translate(-1px, 1px);
-    box-shadow: -1px 1px 0px 0px var(--color-charcoal-ink, #383838);
+    box-shadow: -1px 1px 0px 0px var(--color-charcoal-ink);
   }
 
   .marquee__pause-btn:focus-visible {
-    outline: var(--focus-ring, 3px solid #383838);
-    outline-offset: 2px;
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
   }
 
   .marquee__pause-icon {
@@ -201,7 +200,7 @@ const repeatedSequence = Array(4).fill(textSequence).join('');
 
   @media (prefers-reduced-motion: reduce) {
     .marquee__track {
-      animation: none;
+      animation: none !important;
     }
 
     .marquee__pause-btn {

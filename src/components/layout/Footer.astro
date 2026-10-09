@@ -76,7 +76,7 @@ const currentYear = new Date().getFullYear();
 
   .footer-statement {
     padding-bottom: var(--spacing-24);
-    border-bottom: 1px solid rgba(56, 56, 56, 0.2);
+    border-bottom: 1px solid var(--color-graphite);
     margin-bottom: var(--spacing-32);
   }
 
@@ -177,12 +177,14 @@ const currentYear = new Date().getFullYear();
     align-items: center;
     justify-content: center;
     padding: 6px 12px;
+    min-height: 44px;
+    min-width: 44px;
     font-family: var(--font-mono);
     font-size: var(--text-caption);
     font-weight: var(--font-weight-bold);
     background-color: var(--color-chalk-gray);
-    border: 1.5px solid var(--color-charcoal-ink);
-    border-radius: var(--radius);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
     color: var(--color-charcoal-ink);
     text-decoration: none;
     text-transform: uppercase;
@@ -194,7 +196,7 @@ const currentYear = new Date().getFullYear();
 
   .footer-bottom-bar {
     padding-top: var(--spacing-20);
-    border-top: 1px solid rgba(56, 56, 56, 0.2);
+    border-top: 1px solid var(--color-graphite);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-12);

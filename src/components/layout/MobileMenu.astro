@@ -71,7 +71,7 @@ const drawerLinks = [
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(56, 56, 56, 0.45);
+    background: var(--color-charcoal-overlay);
     backdrop-filter: blur(2px);
     z-index: 9998;
   }
@@ -88,8 +88,8 @@ const drawerLinks = [
     max-width: 85vw;
     height: 100vh;
     height: 100dvh;
-    background-color: var(--color-cream-paper, #f4efea);
-    border-left: 2px solid var(--color-charcoal-ink, #383838);
+    background-color: var(--color-cream-paper);
+    border-left: 2px solid var(--color-charcoal-ink);
     padding: 24px 20px;
     display: flex;
     flex-direction: column;
@@ -109,17 +109,17 @@ const drawerLinks = [
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid var(--color-charcoal-ink, #383838);
+    border-bottom: 2px solid var(--color-charcoal-ink);
     padding-bottom: 12px;
   }
 
   .drawer-heading {
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-family: var(--font-mono);
     font-weight: 700;
     font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--color-charcoal-ink, #383838);
+    color: var(--color-charcoal-ink);
   }
 
   .drawer-close-btn {
@@ -130,24 +130,28 @@ const drawerLinks = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--color-frost-white, #ffffff);
-    border: 2px solid var(--color-charcoal-ink, #383838);
-    border-radius: var(--radius, 2px);
-    color: var(--color-charcoal-ink, #383838);
+    background: var(--color-frost-white);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    color: var(--color-charcoal-ink);
     cursor: pointer;
-    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink, #383838);
+    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink);
     transition: transform 0.1s ease, box-shadow 0.1s ease;
   }
 
+  .drawer-close-btn:hover {
+    transform: translate(-1px, 1px);
+  }
+
   .drawer-close-btn:active {
-    transform: translate(-2px, 2px);
-    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink, #383838);
+    transform: translate(-3px, 3px);
+    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink);
   }
 
   .drawer-close-btn:focus-visible,
   .drawer-link:focus-visible,
   .drawer-cta-btn:focus-visible {
-    outline: 3px solid var(--color-charcoal-ink, #383838);
+    outline: 3px solid var(--color-charcoal-ink);
     outline-offset: 3px;
   }
 
@@ -165,39 +169,39 @@ const drawerLinks = [
   }
 
   .drawer-link {
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-family: var(--font-mono);
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     text-decoration: none;
-    color: var(--color-charcoal-ink, #383838);
+    color: var(--color-charcoal-ink);
     display: flex;
     align-items: center;
     padding: 10px 12px;
     min-height: 44px;
     border: 1px solid transparent;
-    border-radius: var(--radius, 2px);
-    border-bottom: 1px solid rgba(56, 56, 56, 0.15);
+    border-radius: var(--radius-brutal);
+    border-bottom: 1px solid var(--color-soft-silver);
     transition: background-color 0.1s ease, border-color 0.1s ease;
   }
 
   .drawer-link:hover {
-    background-color: var(--color-frost-white, #ffffff);
-    border-color: var(--color-charcoal-ink, #383838);
+    background-color: var(--color-frost-white);
+    border-color: var(--color-charcoal-ink);
   }
 
   .drawer-link.is-active {
-    background-color: var(--color-canary-banner, #ffde00);
-    border: 2px solid var(--color-charcoal-ink, #383838);
+    background-color: var(--color-canary-banner);
+    border: 2px solid var(--color-charcoal-ink);
     font-weight: 700;
-    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink, #383838);
+    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink);
   }
 
   .drawer-footer {
     margin-top: auto;
     padding-top: 16px;
-    border-top: 2px solid var(--color-charcoal-ink, #383838);
+    border-top: 2px solid var(--color-charcoal-ink);
   }
 
   .drawer-cta-btn {
@@ -206,29 +210,28 @@ const drawerLinks = [
     justify-content: center;
     width: 100%;
     min-height: 44px;
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-family: var(--font-mono);
     font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     text-decoration: none;
-    color: var(--color-charcoal-ink, #383838);
-    background-color: var(--color-sky-crayon, #6fc2ff);
-    border: 2px solid var(--color-charcoal-ink, #383838);
-    border-radius: var(--radius, 2px);
+    color: var(--color-charcoal-ink);
+    background-color: var(--color-sky-crayon);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
     padding: 10px 16px;
-    box-shadow: -4px 4px 0px 0px var(--color-charcoal-ink, #383838);
+    box-shadow: -4px 4px 0px 0px var(--color-charcoal-ink);
     transition: transform 0.1s ease, box-shadow 0.1s ease;
   }
 
   .drawer-cta-btn:hover {
-    transform: translate(1px, -1px);
-    box-shadow: -5px 5px 0px 0px var(--color-charcoal-ink, #383838);
+    transform: translate(-1px, 1px);
   }
 
   .drawer-cta-btn:active {
-    transform: translate(-3px, 3px);
-    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink, #383838);
+    transform: translate(-4px, 4px);
+    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink);
   }
 </style>
 
