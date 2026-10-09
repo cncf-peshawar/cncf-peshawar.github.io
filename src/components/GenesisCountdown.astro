@@ -96,10 +96,10 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
 
 <style>
   .countdown-card {
-    background: var(--color-canary-banner, #ffde00);
-    border: 2px solid var(--color-charcoal-ink, #383838);
-    border-radius: var(--radius, 2px);
-    box-shadow: -6px 6px 0px 0px var(--color-charcoal-ink, #383838);
+    background: var(--color-canary-banner);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: -6px 6px 0px 0px var(--color-charcoal-ink);
     padding: clamp(24px, 4vw, 36px) clamp(20px, 4vw, 32px);
     display: flex;
     flex-direction: column;
@@ -109,8 +109,8 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
   }
 
   .countdown-card--concluded {
-    background: var(--color-canary-banner, #ffde00);
-    box-shadow: -6px 6px 0px 0px var(--color-charcoal-ink, #383838);
+    background: var(--color-canary-banner);
+    box-shadow: -6px 6px 0px 0px var(--color-charcoal-ink);
   }
 
   .countdown-card__header {
@@ -128,15 +128,15 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
   .live-dot {
     width: 10px;
     height: 10px;
-    background: var(--color-mint-sketch, #38c1b0);
-    border: 1.5px solid var(--color-charcoal-ink, #383838);
+    background: var(--color-mint-sketch);
+    border: 1.5px solid var(--color-charcoal-ink);
     border-radius: 50%;
     display: inline-block;
     animation: pulse-live 2s infinite ease-in-out;
   }
 
   .live-dot--concluded {
-    background: var(--color-pencil-gray, #a1a1a1);
+    background: var(--color-pencil-gray);
     animation: none;
   }
 
@@ -150,11 +150,11 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-charcoal-ink, #383838);
+    color: var(--color-charcoal-ink);
   }
 
   .countdown-eyebrow {
-    color: var(--color-charcoal-ink, #383838) !important;
+    color: var(--color-charcoal-ink) !important;
     margin-top: 4px;
     margin-bottom: 0;
   }
@@ -162,18 +162,18 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
   .featured-title {
     font-size: clamp(1.4rem, 3.5vw, 1.8rem);
     font-weight: 700;
-    color: var(--color-charcoal-ink, #383838);
+    color: var(--color-charcoal-ink);
     line-height: 1.25;
   }
 
   #cd-date-display {
     font-size: 13px;
     font-weight: 600;
-    color: var(--color-charcoal-ink, #383838);
-    background: var(--color-frost-white, #ffffff);
+    color: var(--color-charcoal-ink);
+    background: var(--color-frost-white);
     padding: 4px 10px;
-    border: 1.5px solid var(--color-charcoal-ink, #383838);
-    border-radius: var(--radius, 2px);
+    border: 1.5px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
     display: inline-block;
     width: fit-content;
   }
@@ -193,10 +193,10 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
   }
 
   .countdown-box {
-    background: var(--color-frost-white, #ffffff);
-    border: 2px solid var(--color-charcoal-ink, #383838);
-    border-radius: var(--radius, 2px);
-    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink, #383838);
+    background: var(--color-frost-white);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink);
     padding: clamp(14px, 3vw, 20px) clamp(8px, 2vw, 14px);
     text-align: center;
     display: flex;
@@ -207,7 +207,7 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
   #cd-days, #cd-hours, #cd-mins, #cd-secs {
     font-size: clamp(1.6rem, 4vw, 2.4rem);
     font-weight: 700;
-    color: var(--color-charcoal-ink, #383838);
+    color: var(--color-charcoal-ink);
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
@@ -215,7 +215,7 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
   .countdown-unit {
     font-size: 11px;
     font-weight: 600;
-    color: var(--color-text-muted, #6b6b6b);
+    color: var(--color-text-muted);
     letter-spacing: 0.05em;
   }
 
@@ -224,7 +224,7 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
     align-items: center;
     gap: 8px;
     font-size: 13px;
-    color: var(--color-charcoal-ink, #383838);
+    color: var(--color-charcoal-ink);
   }
 
   .countdown-venue svg {

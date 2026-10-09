@@ -22,3 +22,15 @@ Date: 2026-10-09
 | `src/components/layout/Nav.astro` | Contained fallback hex literals; CTA button hover shifted away from shadow instead of toward origin | Purged all fallback hexes; set CTA hover to `translate(-1px, 1px)` and active to `translate(-4px, 4px)` with shadow collapse; verified 44px tap targets | DESIGN.md §Components (Top Navigation Bar) & CTO Guide §4.4 #2 |
 | `src/components/layout/MobileMenu.astro` | Overlay had hardcoded rgba; multiple fallback hexes in styles; button physics not aligned to tokens | Replaced overlay with `var(--color-charcoal-overlay)`; purged all fallback hexes; aligned close and CTA button press physics; verified 44px tap targets | DESIGN.md §Do's and Don'ts & CONTRACT.md §5 |
 | `src/components/layout/Footer.astro` | Dividing rules had hardcoded rgba; social link buttons were smaller than 44x44px minimum tap target | Replaced dividing rules with `1px solid var(--color-graphite)`; added `min-height: 44px; min-width: 44px;` and `2px solid var(--color-charcoal-ink)` to `.social-btn` | DESIGN.md §Components (Footer) & Antislop-layoutmobile (Tap targets >= 44x44px) |
+
+## T-1.1-VERIFY & T-GLOBAL-FIX Verification Pass
+Date: 2026-10-09
+
+| Component / File | Identified Gap | Bounded Fix Applied | DESIGN.md / Contract Ref |
+|---|---|---|---|
+| `src/styles/tokens.css` | Missing dark terminal surface and syntax highlighting tokens | Added `--color-terminal-bg: #1a1a1a`, `--color-terminal-text: #54b4de`, `--color-terminal-muted: #818181` | DESIGN.md §Tokens — Colors & `docs/redesign/stitch/home-desktop.html` |
+| `src/styles/global.css` | Legacy stylesheet with zero remaining references in `src/` | Deleted `src/styles/global.css` | Phase 1 Base Invariant: single source of truth (`tokens.css` + `base.css`) |
+| `src/pages/index.astro` | Inline SVG doodles and component styles contained hex literals (`#ffde00`, `#383838`, `#ff9538`, `#54b4de`, `#1a1a1a`, `#818181`) and radius fallbacks | Fully tokenized all SVG fills/strokes to `var(--color-*)`, bound terminal to `--color-terminal-*`, and replaced all fallback hexes and radius px fallbacks with tokens | DESIGN.md §Tokens & §Do's and Don'ts |
+| `src/components/GenesisCountdown.astro` | Contained fallback hex literals and `, 2px` radius fallbacks | Purged all fallback hexes to pure tokens; radius bound strictly to `var(--radius-brutal)` | DESIGN.md §Tokens — Borders & Shadows |
+| `docs/redesign/evidence/t11/` | Verification screenshots required for H2/H3 visual proof across viewports | Captured 10 full-page/viewport screenshots: `/dev-kit` (390, 768, 1280), `/` (390, 768, 1280), `/events` (390, 1280), `/team` (390, 1280) | Acceptance Criteria §6, §7 |
+

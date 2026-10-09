@@ -24,6 +24,9 @@
   --color-duck-bill-orange: #ff9538;  /* Orange highlight wash and doodle accents */
   --color-wet-cement: #54b4de;        /* Illustration strokes (water, cloud) */
   --color-peach-blush: #fdedda;       /* Soft warm illustrated section tint */
+  --color-terminal-bg: #1a1a1a;       /* Dark terminal editor surface */
+  --color-terminal-text: #54b4de;     /* Terminal primary code/label text */
+  --color-terminal-muted: #818181;    /* Terminal secondary/comment text */
 
   /* Rainbow Outlined Button Palette (Cycling accents) */
   --color-coral-sketch: #f38e84;
