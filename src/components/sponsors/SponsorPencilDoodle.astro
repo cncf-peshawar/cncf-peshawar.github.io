@@ -1,0 +1,102 @@
+---
+// Component: SponsorPencilDoodle.astro
+// Hand-drawn brutalist drafting pencil illustration for Sponsors page hero
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['sponsor-pencil-doodle', className]} aria-hidden="true" data-hero-doodle>
+  <svg viewBox="0 0 160 140" fill="none" class="pencil-svg" aria-hidden="true">
+    <!-- Dynamic hand-drawn sketch loop swirling out from pencil tip -->
+    <path 
+      d="M 38 108 C 22 120, 18 132, 34 134 C 54 136, 76 122, 68 104 C 62 90, 42 94, 38 106"
+      stroke="var(--color-wet-cement)" 
+      stroke-width="2" 
+      stroke-linecap="round" 
+      stroke-dasharray="5 4"
+    />
+    <path 
+      d="M 40 102 C 24 114, 20 126, 36 128 C 56 130, 78 116, 70 98 C 64 84, 44 88, 40 100"
+      stroke="var(--color-charcoal-ink)" 
+      stroke-width="2.5" 
+      stroke-linecap="round"
+    />
+
+    <!-- Spark lines and creative doodle marks around pencil point -->
+    <path d="M 28 86 L 22 80" stroke="var(--color-duck-bill-orange)" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M 18 98 L 10 98" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="20" cy="88" r="2.5" fill="var(--color-canary-banner)"/>
+    <circle cx="82" cy="116" r="3" fill="var(--color-duck-bill-orange)"/>
+    <path d="M 88 108 L 94 112" stroke="var(--color-wet-cement)" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- PENCIL BODY (Tilted at -40 deg drafting angle) -->
+    <g transform="rotate(-40 92 68)">
+      <!-- Eraser (Warm Orange) at top end -->
+      <path 
+        d="M 130 60 C 138 60, 142 64, 142 68 C 142 72, 138 76, 130 76 Z"
+        fill="var(--color-duck-bill-orange)" 
+        stroke="var(--color-charcoal-ink)" 
+        stroke-width="2.5" 
+        stroke-linejoin="round"
+      />
+      
+      <!-- Metal Ferrule Collar with embossed rings -->
+      <rect x="116" y="60" width="14" height="16" fill="var(--color-wet-cement)" stroke="var(--color-charcoal-ink)" stroke-width="2.5"/>
+      <path d="M 121 60 L 121 76" stroke="var(--color-frost-white)" stroke-width="1.5"/>
+      <path d="M 125 60 L 125 76" stroke="var(--color-charcoal-ink)" stroke-width="1.5"/>
+
+      <!-- Main Hexagonal Pencil Shaft (Canary Yellow) -->
+      <rect x="52" y="60" width="64" height="5" fill="var(--color-canary-banner)" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+      <rect x="52" y="65" width="64" height="6" fill="var(--color-frost-white)" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+      <rect x="52" y="71" width="64" height="5" fill="var(--color-canary-banner)" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+      
+      <path d="M 52 65 L 116 65" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+      <path d="M 52 71 L 116 71" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+
+      <!-- Sharpened Wooden Cone Collar -->
+      <polygon points="52,60 30,68 52,76" fill="var(--color-frost-white)" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M 52 60 C 48 64, 48 68, 52 68 C 48 68, 48 72, 52 76" stroke="var(--color-duck-bill-orange)" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- Graphite Lead Tip -->
+      <polygon points="38,65 30,68 38,71" fill="var(--color-charcoal-ink)" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Sparkles above eraser -->
+    <path d="M 134 22 L 134 14" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 130 18 L 138 18" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="146" cy="24" r="2.5" fill="var(--color-canary-banner)"/>
+    <circle cx="124" cy="30" r="2" fill="var(--color-wet-cement)"/>
+  </svg>
+</div>
+
+<style>
+  .sponsor-pencil-doodle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(140px, 18vw, 190px);
+    user-select: none;
+    transition: transform 300ms ease;
+  }
+
+  .sponsor-pencil-doodle:hover {
+    transform: rotate(-3deg) scale(1.04);
+  }
+
+  .pencil-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sponsor-pencil-doodle,
+    .sponsor-pencil-doodle:hover {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>
