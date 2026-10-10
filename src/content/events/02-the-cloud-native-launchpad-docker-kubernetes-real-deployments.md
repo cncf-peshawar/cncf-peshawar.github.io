@@ -4,7 +4,7 @@ date: "2026-10-09"
 time: "07:00 PM - 09:00 PM PKT"
 venue: "Virtual event"
 location: "Online"
-status: "upcoming"
+status: "completed"
 capacity: 500
 rsvpUrl: "https://ocgroups.dev/cncf/group/6vwk2n4/event/wpm4sp7"
 speakers:
