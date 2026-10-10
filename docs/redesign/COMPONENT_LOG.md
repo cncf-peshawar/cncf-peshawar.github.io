@@ -180,6 +180,10 @@ Date: 2026-10-10
 - `docs/redesign/STATE.md` untracked from git via `git rm --cached docs/redesign/STATE.md` and added to `.git/info/exclude`.
 - **DoD Rationale:** `STATE.md` serves as an active execution coordinator and scratchpad across parallel branches and tasks. Leaving it tracked caused false-positive file conflicts, merge friction, and spurious protected diff warnings during parallel wave rebases and merges. Keeping `STATE.md` exclusively on disk ensures agents maintain local historical state and queue awareness without polluting git commit trees or violating zero-diff invariants on shared specification files.
 
+## T-PUSH-1 Git Steward Pass
+- T-PUSH-1 identity + filter-branch authorship reset + origin backup push.
+
+
 
 
 
