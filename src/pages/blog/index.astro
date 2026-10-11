@@ -104,10 +104,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   /* HERO STYLES                                                        */
   /* ------------------------------------------------------------------ */
   .page-hero {
-    padding: var(--spacing-64) var(--spacing-24) var(--spacing-48);
+    padding-top: var(--spacing-80);
+    padding-bottom: var(--spacing-80);
+    padding-inline: var(--spacing-32);
     background-color: var(--color-cream-paper);
-    border-bottom: 2px solid var(--color-charcoal-ink);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
     position: relative;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .page-hero {
+      padding-top: var(--spacing-40);
+      padding-bottom: var(--spacing-60);
+      padding-inline: var(--spacing-16);
+    }
   }
 
   .page-hero__inner {
@@ -122,7 +134,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
     color: var(--color-text-muted);
-    margin-bottom: var(--spacing-12);
+    margin-bottom: var(--spacing-16);
     display: flex;
     align-items: center;
     gap: var(--spacing-8);
@@ -140,7 +152,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     line-height: var(--line-height-snug);
     letter-spacing: -0.02em;
     color: var(--color-charcoal-ink);
-    margin-bottom: var(--spacing-16);
+    margin-bottom: var(--spacing-20);
     text-transform: uppercase;
   }
 
@@ -150,6 +162,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     color: var(--color-charcoal-ink);
     max-width: var(--container-prose);
     line-height: var(--line-height-relaxed);
+    margin: 0;
   }
 
   /* ------------------------------------------------------------------ */
