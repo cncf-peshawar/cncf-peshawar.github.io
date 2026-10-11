@@ -183,6 +183,18 @@ Date: 2026-10-10
 ## T-PUSH-1 Git Steward Pass
 - T-PUSH-1 identity + filter-branch authorship reset + origin backup push.
 
+## T-FIX-1 Visual Remediation Pass
+Date: 2026-10-11
+
+| Component / File | Identified Defect | Bounded Fix Applied | Token Exception / Rationale |
+|---|---|---|---|
+| `src/pages/index.astro` (Hero CTAs) | D1: Hero CTAs rendered as unstyled bare links | Replaced with imported `LinkButton` primitives: OCG CTA converted to `LinkButton` (`variant="primary"`, sky fill `#6fc2ff`, charcoal text); Explore Meetups converted to `LinkButton` (`variant="outline"`); Sponsor Us converted to inline-flex text link with underline, arrow, and >=44px tap height. | DESIGN.md §Components (LinkButton, Primary & Secondary) |
+| `src/pages/index.astro` (Cloud Doodle) | D2: Cloud doodle body lacked white fill (transparent body) | Added `fill="#ffffff"` to cloud body path (`public/illustrations/cloud.svg` parity) | **Token Exception Logged:** `#ffffff` SVG fill literal permitted per directive D2 rule (corresponds to `--color-frost-white`) |
+| `src/components/ui/Mascot.astro` | D3: Canary bubble overlapped H1 text "CLOUD" | Repositioned `.mascot-bubble` coordinates: `bottom: calc(100% + 14px); right: calc(100% - 90px);` (H1 intersection = 0 at all viewports) | DESIGN.md §Tokens — Layout & Spacing |
+| `src/pages/index.astro` (Charter Frame) | D4: Cubes doodle overlapped header metadata row | Added `padding-right: clamp(80px, 14vw, 130px)` to `.charter-badge-row` and adjusted `.doodle-stack` to `top: -35px` (header text intersection = 0 at 1280px & 390px) | DESIGN.md §Tokens — Layout & Spacing |
+| `src/pages/index.astro` (Sponsor Band) | D5: Community sponsor and prospectus CTAs were unstyled raw anchors | Replaced with `LinkButton` primitives: "Become a Community Sponsor" with `variant="primary"` (sky), "View Sponsorship Prospectus" with `variant="outline"` (outlined). Hrefs byte-identical. | DESIGN.md §Components (LinkButton) |
+
+
 
 
 

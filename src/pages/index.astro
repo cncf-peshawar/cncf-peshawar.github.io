@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import GenesisCountdown from '../components/GenesisCountdown.astro';
 import Mascot from '../components/ui/Mascot.astro';
 import CfpBand from '../components/CfpBand.astro';
+import LinkButton from '../components/ui/LinkButton.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -36,7 +37,7 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
         <path d="M136 38 L142 38" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
         <path d="M96 22 L92 18" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
         <circle cx="124" cy="52" r="4" fill="var(--color-duck-bill-orange)"/>
-        <path d="M 38 82 C 20 82, 10 68, 14 52 C 16 38, 28 32, 42 34 C 46 18, 66 12, 82 18 C 96 14, 114 22, 118 36 C 134 36, 146 50, 142 66 C 140 80, 126 84, 112 82 C 96 85, 54 85, 38 82 Z" stroke="var(--color-wet-cement)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 38 82 C 20 82, 10 68, 14 52 C 16 38, 28 32, 42 34 C 46 18, 66 12, 82 18 C 96 14, 114 22, 118 36 C 134 36, 146 50, 142 66 C 140 80, 126 84, 112 82 C 96 85, 54 85, 38 82 Z" fill="#ffffff" stroke="var(--color-wet-cement)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M 32 56 C 36 46, 46 44, 54 48" stroke="var(--color-wet-cement)" stroke-width="2" stroke-linecap="round"/>
         <path d="M 72 26 C 80 24, 90 28, 96 34" stroke="var(--color-wet-cement)" stroke-width="2" stroke-linecap="round"/>
         <path d="M 116 46 C 122 46, 130 52, 128 60" stroke="var(--color-wet-cement)" stroke-width="2" stroke-linecap="round"/>
@@ -55,7 +56,12 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
       </p>
 
       <div class="hero-ctas" data-hero-actions>
-        <a href="https://ocgroups.dev/cncf/group/6vwk2n4" target="_blank" rel="noopener noreferrer" class="btn btn-sky">
+        <LinkButton
+          href="https://ocgroups.dev/cncf/group/6vwk2n4"
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="primary"
+        >
           <span>Join Chapter on Open Community Groups (OCG)</span>
           <span class="hero-doodle-arrow" aria-hidden="true">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" fill="none" aria-hidden="true">
@@ -63,16 +69,16 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
               <path d="M 22 78 C 16 34, 62 14, 94 34" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
               <polygon points="98,22 108,38 88,42" fill="var(--color-canary-banner)" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
               <circle cx="98" cy="34" r="2.5" fill="var(--color-duck-bill-orange)"/>
-              <path d="M 22 78 C 24 84, 20 88, 14 86 C 10 84, 12 78, 18 78" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linecap="round"/>
+              <path d="M 22 78 C 24 84, 20 88, 14 86 C 10 84, 12 78, 18 78" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round"/>
               <path d="M 104 14 L 108 8" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linecap="round"/>
               <path d="M 112 24 L 118 22" stroke="var(--color-wet-cement)" stroke-width="2" stroke-linecap="round"/>
               <path d="M 106 46 L 112 50" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </span>
-        </a>
-        <a href={`${base}/events`} class="btn btn-outline">
+        </LinkButton>
+        <LinkButton href={`${base}/events`} variant="outline">
           <span>Explore Meetups</span>
-        </a>
+        </LinkButton>
       </div>
 
       <!-- Hero Mascot (Penguin) - Flow below CTAs for <1024px; Flank anchored for >=1024px -->
@@ -86,7 +92,10 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
       </div>
 
       <div>
-        <a href={`${base}/sponsors`} class="hero-sublink">Sponsor Us</a>
+        <a href={`${base}/sponsors`} class="hero-sublink">
+          <span>Sponsor Us</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
       </div>
 
       <p class="hero-proof">
@@ -320,8 +329,8 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
       </div>
     </div>
     <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-      <a href={`${base}/sponsors`} class="btn btn-sky btn-sm">Become a Community Sponsor</a>
-      <a href={`${base}/sponsors`} class="btn btn-outline btn-sm">View Sponsorship Prospectus</a>
+      <LinkButton href={`${base}/sponsors`} variant="primary" size="sm">Become a Community Sponsor</LinkButton>
+      <LinkButton href={`${base}/sponsors`} variant="outline" size="sm">View Sponsorship Prospectus</LinkButton>
     </div>
   </section>
 
@@ -509,8 +518,12 @@ Best regards,
     text-decoration: underline;
     text-underline-offset: 4px;
     font-weight: 600;
-    display: inline-block;
-    margin-bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
   }
 
   .hero-proof {
@@ -690,6 +703,7 @@ Best regards,
     margin-bottom: 16px;
     flex-wrap: wrap;
     gap: 10px;
+    padding-right: clamp(80px, 14vw, 130px);
   }
 
   .charter-active-badge {
@@ -738,7 +752,7 @@ Best regards,
 
   .doodle-stack {
     position: absolute;
-    top: -25px;
+    top: -35px;
     right: -20px;
     width: clamp(70px, 12vw, 110px);
     height: clamp(70px, 12vw, 110px);
