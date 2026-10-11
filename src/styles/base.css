@@ -142,3 +142,82 @@ button {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* -------------------------------------------------------------------------- */
+/* T-STYLE-1: RATIFIED INTERACTIVE AFFORDANCES & LINK HIGHLIGHT UTILITY        */
+/* -------------------------------------------------------------------------- */
+
+/* Ratified link highlight utility & bare text links inside main */
+.link-highlight,
+.past-link,
+.sponsor-link,
+.partner-link,
+.event-card__detail-link,
+.hero-sublink,
+.breadcrumb a {
+  color: var(--color-charcoal-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background-color: transparent;
+  transition: background-color 120ms ease-in-out;
+}
+
+.link-highlight:hover,
+.past-link:hover,
+.sponsor-link:hover,
+.partner-link:hover,
+.event-card__detail-link:hover,
+.hero-sublink:hover,
+.breadcrumb a:hover,
+main a.partner-link:hover,
+main .post-card__title a:hover {
+  color: var(--color-charcoal-ink) !important;
+  background-color: var(--color-canary-banner) !important;
+  text-decoration: underline;
+}
+
+.link-highlight:focus-visible,
+.past-link:focus-visible,
+.sponsor-link:focus-visible,
+.partner-link:focus-visible,
+.event-card__detail-link:focus-visible,
+.hero-sublink:focus-visible,
+.breadcrumb a:focus-visible,
+main a.partner-link:focus-visible,
+main .post-card__title a:focus-visible {
+  color: var(--color-charcoal-ink) !important;
+  background-color: var(--color-canary-banner) !important;
+  outline: 3px solid var(--color-charcoal-ink);
+  outline-offset: 3px;
+}
+
+/* Ratified card hover physics per md-motion-spec */
+.tier-card {
+  box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+  transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+}
+
+.tier-card:hover {
+  transform: translate(3px, -3px);
+  box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+}
+
+.tier-card:active {
+  transform: none;
+  transition: transform 30ms ease-in-out;
+}
+
+.post-card:active {
+  transform: none;
+  transition: transform 30ms ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tier-card,
+  .tier-card:hover,
+  .tier-card:active,
+  .post-card:active {
+    transform: none !important;
+    transition: none !important;
+  }
+}

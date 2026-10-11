@@ -597,6 +597,11 @@ const initials = (name: string) =>
     box-shadow: var(--shadow-hard);
   }
 
+  .wg-card:active {
+    transform: none;
+    transition: transform 30ms ease-in-out;
+  }
+
   .wg-card:focus-visible {
     outline: var(--focus-ring);
     outline-offset: 3px;

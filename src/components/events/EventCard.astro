@@ -99,7 +99,7 @@ const isUpcoming = data.status === 'upcoming';
           </a>
         )}
 
-        <a href={`${base}/events/${slug}`} class="event-card__detail-link">
+        <a href={`${base}/events/${slug}`} class="event-card__detail-link link-highlight">
           <span>Agenda & Details →</span>
         </a>
       </div>
@@ -125,7 +125,7 @@ const isUpcoming = data.status === 'upcoming';
             <span>Watch Recording ↗</span>
           </a>
         )}
-        <a href={`${base}/events/${slug}`} class="event-card__detail-link">
+        <a href={`${base}/events/${slug}`} class="event-card__detail-link link-highlight">
           <span>View Recap →</span>
         </a>
       </div>
@@ -219,6 +219,7 @@ const isUpcoming = data.status === 'upcoming';
 
   .event-card__title a:hover {
     text-decoration: underline;
+    background-color: var(--color-canary-banner);
   }
 
   .event-card__venue {
@@ -288,7 +289,15 @@ const isUpcoming = data.status === 'upcoming';
   }
 
   .event-card__detail-link:hover {
-    text-decoration: none;
+    text-decoration: underline;
+    background-color: var(--color-canary-banner);
+  }
+
+  .event-card__detail-link:focus-visible {
+    text-decoration: underline;
+    background-color: var(--color-canary-banner);
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
   }
 
   /* Buttons inside EventCard */

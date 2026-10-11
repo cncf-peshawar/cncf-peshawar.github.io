@@ -92,7 +92,7 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
       </div>
 
       <div>
-        <a href={`${base}/sponsors`} class="hero-sublink">
+        <a href={`${base}/sponsors`} class="hero-sublink link-highlight">
           <span>Sponsor Us</span>
           <span aria-hidden="true">&rarr;</span>
         </a>
@@ -284,19 +284,19 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
         <span class="past-date">SEP 04, 2026 · INAUGURAL</span>
         <h3 class="past-name">CNCF Peshawar Genesis</h3>
         <p class="past-summary">The inaugural chapter gathering introducing cloud native open-source foundations and local community roadmap.</p>
-        <a href={`${base}/events/01-cncf-peshawar-genesis`} class="past-link">Read Details →</a>
+        <a href={`${base}/events/01-cncf-peshawar-genesis`} class="past-link link-highlight">Read Details →</a>
       </div>
       <div class="past-card" data-reveal-item>
         <span class="past-date">COMING OCT 2026</span>
         <h3 class="past-name">Container Security & eBPF Deep Dive</h3>
         <p class="past-summary">Hands-on threat analysis in Kubernetes clusters with Cilium, Tetragon, and runtime security controls.</p>
-        <a href={`${base}/events`} class="past-link">View Full Meetup Archive</a>
+        <a href={`${base}/events`} class="past-link link-highlight">View Full Meetup Archive</a>
       </div>
       <div class="past-card" data-reveal-item>
         <span class="past-date">COMING NOV 2026</span>
         <h3 class="past-name">GitOps at Scale with ArgoCD</h3>
         <p class="past-summary">Declarative infrastructure patterns, progressive rollouts, and disaster recovery blueprints.</p>
-        <a href={`${base}/events`} class="past-link">Explore Meetups</a>
+        <a href={`${base}/events`} class="past-link link-highlight">Explore Meetups</a>
       </div>
     </div>
   </section>
@@ -313,19 +313,19 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
         <span class="sponsor-type">EVENT SPONSOR PARTNER</span>
         <h3 class="sponsor-name">GitHub</h3>
         <p class="sponsor-desc">Supporting open-source tooling, workshops, and developer education worldwide.</p>
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="sponsor-link">Visit Website ↗</a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="sponsor-link link-highlight">Visit Website ↗</a>
       </div>
       <div class="sponsor-card" data-reveal-item>
         <span class="sponsor-type">VENUE PARTNER</span>
         <h3 class="sponsor-name">National Incubation Center (NIC) Peshawar</h3>
         <p class="sponsor-desc">National Incubation Center Peshawar providing world-class gathering space.</p>
-        <a href="https://nicpeshawar.com.pk" target="_blank" rel="noopener noreferrer" class="sponsor-link">Visit Website ↗</a>
+        <a href="https://nicpeshawar.com.pk" target="_blank" rel="noopener noreferrer" class="sponsor-link link-highlight">Visit Website ↗</a>
       </div>
       <div class="sponsor-card" data-reveal-item>
         <span class="sponsor-type">EVENT SPONSOR PARTNER</span>
         <h3 class="sponsor-name">nsave</h3>
         <p class="sponsor-desc">Fintech engineering team empowering high-performance distributed systems.</p>
-        <a href="https://nsave.com" target="_blank" rel="noopener noreferrer" class="sponsor-link">Visit Website ↗</a>
+        <a href="https://nsave.com" target="_blank" rel="noopener noreferrer" class="sponsor-link link-highlight">Visit Website ↗</a>
       </div>
     </div>
     <div style="display: flex; gap: 12px; flex-wrap: wrap;">
@@ -512,6 +512,14 @@ Best regards,
     flex-wrap: wrap;
   }
 
+  .hero-ctas :global(.btn:hover) {
+    transform: translate(7px, -7px) !important;
+  }
+
+  .hero-ctas :global(.btn:active) {
+    transform: none !important;
+  }
+
   .hero-sublink {
     font-size: 13px;
     color: var(--color-charcoal-ink);
@@ -524,6 +532,19 @@ Best regards,
     min-height: 44px;
     padding: 8px 12px;
     margin-bottom: 12px;
+    background-color: transparent;
+    transition: background-color 120ms ease-in-out;
+  }
+
+  .hero-sublink:hover {
+    background-color: var(--color-canary-banner);
+    text-decoration: underline;
+  }
+
+  .hero-sublink:focus-visible {
+    background-color: var(--color-canary-banner);
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
   }
 
   .hero-proof {
@@ -939,6 +960,19 @@ Best regards,
     text-underline-offset: 4px;
     display: inline-block;
     margin-top: 6px;
+    background-color: transparent;
+    transition: background-color 120ms ease-in-out;
+  }
+
+  .past-link:hover {
+    background-color: var(--color-canary-banner);
+    text-decoration: underline;
+  }
+
+  .past-link:focus-visible {
+    background-color: var(--color-canary-banner);
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
   }
 
   .past-doodle-cup {
@@ -1009,6 +1043,19 @@ Best regards,
     color: var(--color-charcoal-ink);
     text-decoration: underline;
     margin-top: 8px;
+    background-color: transparent;
+    transition: background-color 120ms ease-in-out;
+  }
+
+  .sponsor-link:hover {
+    background-color: var(--color-canary-banner);
+    text-decoration: underline;
+  }
+
+  .sponsor-link:focus-visible {
+    background-color: var(--color-canary-banner);
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
   }
 
   /* Sponsorship Email Builder */

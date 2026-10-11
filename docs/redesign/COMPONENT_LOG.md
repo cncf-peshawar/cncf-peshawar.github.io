@@ -194,11 +194,14 @@ Date: 2026-10-11
 | `src/pages/index.astro` (Charter Frame) | D4: Cubes doodle overlapped header metadata row | Added `padding-right: clamp(80px, 14vw, 130px)` to `.charter-badge-row` and adjusted `.doodle-stack` to `top: -35px` (header text intersection = 0 at 1280px & 390px) | DESIGN.md §Tokens — Layout & Spacing |
 | `src/pages/index.astro` (Sponsor Band) | D5: Community sponsor and prospectus CTAs were unstyled raw anchors | Replaced with `LinkButton` primitives: "Become a Community Sponsor" with `variant="primary"` (sky), "View Sponsorship Prospectus" with `variant="outline"` (outlined). Hrefs byte-identical. | DESIGN.md §Components (LinkButton) |
 
+## T-STYLE-1 Interaction Polish Pass
+Date: 2026-10-11
 
-
-
-
-
-
-
+| Component / File | Identified State | Bounded Implementation Applied | Ground Truth / Contract Ref |
+|---|---|---|---|
+| `src/styles/base.css` | Global styles & utilities | Appended additive block defining `.link-highlight` utility, bare text link hovers (canary banner background `var(--color-canary-banner)`, charcoal ink text `var(--color-charcoal-ink)`, underline), `:focus-visible` accessible rings + highlights, and unified card hover physics for `.tier-card` & `.post-card:active`. Zero modifications to existing lines. | md-motion-spec §1 & §3, DESIGN.md |
+| `src/components/events/EventCard.astro` | Events card component | Applied `.link-highlight` to detail links (`event-card__detail-link`); updated hover styles for title and detail links to show canary background highlight and underline; verified card rest (`-4px 4px`) and hover (`translate(3px, -3px)`, `-6px 6px`) physics. | md-motion-spec §3.4 |
+| `src/pages/index.astro` | Homepage interaction polish | Added `.link-highlight` to `.hero-sublink`, `.past-link`, and `.sponsor-link`; added scoped hover & focus-visible styles; restored hero CTA button hover parity (`translate(7px, -7px) !important`) overriding inline transition artifact. | md-motion-spec §3.1 & §3.4 |
+| `src/pages/team.astro` | Team page interaction polish | Added `.wg-card:active` snap-back state (`transform: none`, `transition: transform 30ms ease-in-out`) to working group cards; verified rest and hover physics. | md-motion-spec §3.4 |
+| `src/pages/team/[group].astro` | Team group page polish | Added canary background highlight and focus-visible styling to breadcrumb links (`.breadcrumb a`). | md-motion-spec §2 |
 

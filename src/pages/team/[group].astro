@@ -186,6 +186,14 @@ const initials = (name: string) =>
 
   .breadcrumb a:hover {
     text-decoration: underline;
+    background-color: var(--color-canary-banner);
+  }
+
+  .breadcrumb a:focus-visible {
+    text-decoration: underline;
+    background-color: var(--color-canary-banner);
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
   }
 
   .breadcrumb .sep {
