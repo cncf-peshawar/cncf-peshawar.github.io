@@ -204,4 +204,20 @@ Date: 2026-10-11
 | `src/pages/index.astro` | Homepage interaction polish | Added `.link-highlight` to `.hero-sublink`, `.past-link`, and `.sponsor-link`; added scoped hover & focus-visible styles; restored hero CTA button hover parity (`translate(7px, -7px) !important`) overriding inline transition artifact. | md-motion-spec §3.1 & §3.4 |
 | `src/pages/team.astro` | Team page interaction polish | Added `.wg-card:active` snap-back state (`transform: none`, `transition: transform 30ms ease-in-out`) to working group cards; verified rest and hover physics. | md-motion-spec §3.4 |
 | `src/pages/team/[group].astro` | Team group page polish | Added canary background highlight and focus-visible styling to breadcrumb links (`.breadcrumb a`). | md-motion-spec §2 |
+## T-52 Site-Wide A11y Remediation Pass
+Date: 2026-10-12
 
+| Component / File | Identified Violation / Gap | Bounded Implementation Applied | Ground Truth / Contract Ref |
+|---|---|---|---|
+| `src/components/layout/MobileMenu.astro` | `aria-hidden-focus` (serious): `#mobile-nav-drawer` links focusable while closed and `aria-hidden="true"` | Added `visibility: hidden;` when closed and `visibility: visible;` on `.mobile-nav-drawer.is-open` with `visibility 0.25s` transition | WCAG 2.1 AA §4.1.2 & §2.4.3 |
+| `src/components/speak/MentorDoodle.astro` | `aria-prohibited-attr` (serious): `.speaker-mentor-doodle` carried `aria-label` without role | Replaced `aria-label` with `aria-hidden="true"` on decorative illustration container | WCAG 2.1 AA §4.1.2 |
+| `src/components/ui/Badge.astro` | `color-contrast` (serious): `.badge--lilac` (4.47:1) and `.badge--periwinkle` (4.14:1) failed 4.5:1 AA contrast with `#383838` | Updated badge text color to approved token `var(--color-terminal-bg)` (`#1a1a1a`), yielding 6.63:1 (lilac) and 6.15:1 (periwinkle) | WCAG 2.1 AA §1.4.3 & DESIGN.md |
+| `src/pages/team.astro` & `src/pages/team/[group].astro` | `color-contrast`: Scoped `.badge--lilac` and `.badge--periwinkle` definitions | Aligned scoped badge color overrides to `var(--color-terminal-bg)` | WCAG 2.1 AA §1.4.3 |
+| `src/pages/team.astro` | 12px floor: `.exec-card__flag` computed font size was 10px | Increased `.exec-card__flag` font-size to 12px | WCAG 2.1 AA & Directive 12px floor |
+| `src/components/layout/Header.astro` | 12px floor: `.brand-badge` computed font size was 11px | Increased `.brand-badge` font-size to 12px | WCAG 2.1 AA & Directive 12px floor |
+| `src/pages/sponsors.astro` | 12px floor: `.perks-label` was 0.6875rem (11px); Tap targets: `.partner-link` was under 44px | Updated `.perks-label` font-size to 12px; added `display: inline-flex; align-items: center; min-height: 44px;` to `.partner-link` | WCAG 2.1 AA §2.5.5 |
+| `src/styles/base.css` | Tap targets: `.skip-link` height under 44px | Added `min-height: 44px; display: inline-flex; align-items: center; box-sizing: border-box;` | WCAG 2.1 AA §2.5.5 |
+| `src/components/layout/Footer.astro` | Tap targets: `.footer-links a`, `.footer-email`, and `.footer-meta a` under 44px | Added `display: inline-flex; align-items: center; min-height: 44px;` | WCAG 2.1 AA §2.5.5 |
+| `src/components/events/EventCard.astro` & `src/pages/events/index.astro` | Tap targets: `.btn-sm`, `.event-card__detail-link`, and `.event-card__title a` under 44px | Added `min-height: 44px;` and inline-flex alignment | WCAG 2.1 AA §2.5.5 |
+| `src/components/ui/Marquee.astro` | Tap targets: `.marquee__pause-btn` was under 44px | Enforced `min-height: 44px; min-width: 44px; padding: 6px 12px; box-sizing: border-box;` | WCAG 2.1 AA §2.5.5 |
+| `src/styles/motion.css` | PRM site-wide: Marquee, card, and button animations active under reduced motion | Added `@media (prefers-reduced-motion: reduce)` overrides enforcing `transform: none; transition: none; animation: none;` on `.marquee-track`, `.marquee-strip`, buttons, and cards | WCAG 2.1 AA §2.3.3 & md-motion-spec |

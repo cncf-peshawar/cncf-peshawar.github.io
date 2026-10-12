@@ -53,7 +53,22 @@ html.js-motion:not(.motion-reduced) .is-revealed {
   /* Marquee static fallback */
   .marquee,
   .marquee__content,
-  .marquee__track {
+  .marquee__track,
+  .marquee-strip,
+  .marquee-track {
     animation: none !important;
+  }
+
+  /* Interactive controls & cards static fallback */
+  button,
+  .btn,
+  .btn:hover,
+  .btn:active,
+  a.btn,
+  [class*="btn"],
+  .card,
+  [class*="card"] {
+    transform: none !important;
+    transition: none !important;
   }
 }

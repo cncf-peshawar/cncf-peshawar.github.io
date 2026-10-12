@@ -95,13 +95,15 @@ const drawerLinks = [
     flex-direction: column;
     gap: 20px;
     z-index: 9999;
+    visibility: hidden;
     transform: translateX(105%);
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
     overflow-y: auto;
   }
 
   .mobile-nav-drawer.is-open {
+    visibility: visible;
     transform: translateX(0);
   }
 
