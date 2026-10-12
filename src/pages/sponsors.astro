@@ -821,12 +821,21 @@ Best regards,`
   }
 
   .btn:hover {
-    transform: translate(7px, -7px);
+    transform: translate(7px, -7px) !important;
   }
 
   .btn:active {
-    transform: none;
-    transition: transform 30ms ease-in-out;
+    transform: none !important;
+    transition: transform 30ms ease-in-out !important;
+  }
+
+  .page-hero-actions .btn:hover {
+    transform: translate(7px, -7px) !important;
+  }
+
+  .page-hero-actions .btn:active {
+    transform: none !important;
+    transition: transform 30ms ease-in-out !important;
   }
 
   .btn:focus-visible {
@@ -861,7 +870,10 @@ Best regards,`
   @media (prefers-reduced-motion: reduce) {
     .btn,
     .btn:hover,
-    .btn:active {
+    .btn:active,
+    .page-hero-actions .btn,
+    .page-hero-actions .btn:hover,
+    .page-hero-actions .btn:active {
       transform: none !important;
       transition: none !important;
     }

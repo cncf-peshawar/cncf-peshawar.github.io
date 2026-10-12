@@ -353,25 +353,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
     text-decoration: none;
-    box-shadow: var(--shadow-hard-sm);
-    transition: transform 120ms ease-in-out, box-shadow 120ms ease-in-out;
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+    transition: transform 120ms ease-in-out;
     user-select: none;
     min-height: 44px;
     box-sizing: border-box;
   }
 
   .btn:hover {
-    transform: translate(7px, -7px);
-    box-shadow: var(--shadow-hard);
+    transform: translate(7px, -7px) !important;
   }
 
   .btn:active {
-    transform: none;
-    transition: transform 30ms;
+    transform: none !important;
+    transition: transform 30ms ease-in-out !important;
   }
 
   .btn:focus-visible {
-    outline: var(--focus-ring);
+    outline: 3px solid var(--color-charcoal-ink);
     outline-offset: 3px;
   }
 
