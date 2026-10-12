@@ -6,10 +6,10 @@ import Frame from '../ui/Frame.astro';
 
 <section id="email-builder" class="section-wrap email-builder-section" data-reveal>
   <div class="section-header-box">
-    <span class="section-eyebrow">03 // INTAKE & CONTACT</span>
+    <span class="section-eyebrow">05 // INTAKE & CONTACT</span>
     <h2 class="section-headline">Sponsorship Inquiry Generator.</h2>
     <p class="section-subtext">
-      Fill out the details below to generate a pre-formatted sponsorship proposal, or copy the template directly into your email client.
+      Fill out the fields below to generate a formatted sponsorship proposal, or copy the template directly into your email client.
     </p>
   </div>
 
@@ -21,97 +21,107 @@ import Frame from '../ui/Frame.astro';
       title="SPONSORSHIP INTAKE FORM" 
       class="builder-form-frame"
     >
-      <h3 class="form-title">1. Organization & Tier Details</h3>
-      
       <form id="sponsor-form" class="form-stack" onsubmit="return false;">
-        <div class="form-group">
-          <label for="org-name" class="form-label">
-            Organization / Company Name <span class="required-star">*</span>
-          </label>
-          <input 
-            type="text" 
-            id="org-name" 
-            placeholder="e.g. Acme Cloud Corp / Peshawar University" 
-            class="form-input" 
-            required 
-          />
-        </div>
 
-        <div class="form-row">
+        <!-- Group: Organization -->
+        <fieldset class="form-fieldset">
+          <legend class="form-group-label">Organization</legend>
           <div class="form-group">
-            <label for="contact-name" class="form-label">
-              Contact Person & Role <span class="required-star">*</span>
+            <label for="org-name" class="form-label">
+              Company Name <span class="required-star">*</span>
             </label>
             <input 
               type="text" 
-              id="contact-name" 
-              placeholder="e.g. John Doe, VP Engineering" 
+              id="org-name" 
+              placeholder="e.g. Acme Cloud Corp / Peshawar University" 
               class="form-input" 
               required 
             />
           </div>
-          <div class="form-group">
-            <label for="contact-email" class="form-label">
-              Work Email <span class="required-star">*</span>
+          <div class="form-group mt-fieldset">
+            <label for="org-website" class="form-label">
+              Website & Logo URL
             </label>
             <input 
-              type="email" 
-              id="contact-email" 
-              placeholder="e.g. contact@acme.com" 
+              type="url" 
+              id="org-website" 
+              placeholder="e.g. https://acme.com" 
               class="form-input" 
-              required 
             />
           </div>
-        </div>
+        </fieldset>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="tier-select" class="form-label">
-              Preferred Sponsorship Tier <span class="required-star">*</span>
-            </label>
-            <select id="tier-select" class="form-select">
-              <option value="Venue Host Partner (In-Kind / Logistics)">Venue Host Partner (In-Kind / Logistics)</option>
-              <option value="Refreshment Partner (Community Hospitality)" selected>Refreshment Partner (Community Hospitality)</option>
-              <option value="Community Swag Partner (Merchandise / Vouchers)">Community Swag Partner (Merchandise / Vouchers)</option>
-              <option value="Annual Ecosystem Partner (Strategic Year-Round)">Annual Ecosystem Partner (Strategic Year-Round)</option>
-              <option value="Custom In-Kind / Technical Partner">Custom In-Kind / Technical Partner</option>
-            </select>
+        <!-- Group: Contact -->
+        <fieldset class="form-fieldset">
+          <legend class="form-group-label">Contact</legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact-name" class="form-label">
+                Name & Role <span class="required-star">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="contact-name" 
+                placeholder="e.g. John Doe, VP Engineering" 
+                class="form-input" 
+                required 
+              />
+            </div>
+            <div class="form-group">
+              <label for="contact-email" class="form-label">
+                Work Email <span class="required-star">*</span>
+              </label>
+              <input 
+                type="email" 
+                id="contact-email" 
+                placeholder="e.g. contact@acme.com" 
+                class="form-input" 
+                required 
+              />
+            </div>
           </div>
-          <div class="form-group">
-            <label for="timeline-select" class="form-label">
-              Target Meetup / Timing <span class="required-star">*</span>
-            </label>
-            <select id="timeline-select" class="form-select">
-              <option value="Next Upcoming Meetup">Next Upcoming Meetup</option>
-              <option value="Upcoming Meetup Series">Upcoming Meetup Series</option>
-              <option value="Annual Ongoing Partnership">Annual Ongoing Partnership</option>
-            </select>
+        </fieldset>
+
+        <!-- Group: Interest -->
+        <fieldset class="form-fieldset">
+          <legend class="form-group-label">Interest</legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tier-select" class="form-label">
+                Preferred Tier <span class="required-star">*</span>
+              </label>
+              <select id="tier-select" class="form-select">
+                <option value="Venue Host Partner (In-Kind / Logistics)">Venue Host Partner (In-Kind / Logistics)</option>
+                <option value="Refreshment Partner (Community Hospitality)" selected>Refreshment Partner (Community Hospitality)</option>
+                <option value="Community Swag Partner (Merchandise / Vouchers)">Community Swag Partner (Merchandise / Vouchers)</option>
+                <option value="Annual Ecosystem Partner (Strategic Year-Round)">Annual Ecosystem Partner (Strategic Year-Round)</option>
+                <option value="Custom In-Kind / Technical Partner">Custom In-Kind / Technical Partner</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="timeline-select" class="form-label">
+                Target Timing <span class="required-star">*</span>
+              </label>
+              <select id="timeline-select" class="form-select">
+                <option value="Next Upcoming Meetup">Next Upcoming Meetup</option>
+                <option value="Upcoming Meetup Series">Upcoming Meetup Series</option>
+                <option value="Annual Ongoing Partnership">Annual Ongoing Partnership</option>
+              </select>
+            </div>
           </div>
-        </div>
+          <div class="form-group mt-fieldset">
+            <label for="scope-notes" class="form-label">
+              Scope & Special Requests
+            </label>
+            <textarea 
+              id="scope-notes" 
+              rows="3" 
+              placeholder="e.g. Venue space for 150 attendees, networking table at entrance."
+              class="form-textarea"
+            ></textarea>
+          </div>
+        </fieldset>
 
-        <div class="form-group">
-          <label for="org-website" class="form-label">
-            Website & Logo Asset URL
-          </label>
-          <input 
-            type="url" 
-            id="org-website" 
-            placeholder="e.g. https://acme.com (or logo asset link)" 
-            class="form-input" 
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="scope-notes" class="form-label">
-            Partnership Scope / Special Requests
-          </label>
-          <textarea 
-            id="scope-notes" 
-            rows="3" 
-            placeholder="e.g. We would like to provide venue space for 150 attendees and have a small networking table at the entrance."
-            class="form-textarea"
-          ></textarea>
-        </div>
       </form>
     </Frame>
 
@@ -350,20 +360,39 @@ ${org}`;
     }
   }
 
-  .form-title {
+  /* Fieldset groups */
+  .form-fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .form-stack > .form-fieldset + .form-fieldset {
+    margin-top: var(--spacing-20, 20px);
+    padding-top: var(--spacing-16, 16px);
+    border-top: 1px solid var(--color-pencil-gray);
+  }
+
+  .form-group-label {
     font-family: var(--font-mono);
-    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-size: var(--font-size-caption, 0.75rem);
     font-weight: var(--font-weight-bold, 700);
     text-transform: uppercase;
-    color: var(--color-charcoal-ink);
-    margin-top: 0;
-    margin-bottom: var(--spacing-16, 16px);
+    letter-spacing: var(--letter-spacing-wide, 0.08em);
+    color: var(--color-text-muted);
+    padding: 0;
+    margin-bottom: var(--spacing-10, 10px);
+    display: block;
+  }
+
+  .mt-fieldset {
+    margin-top: var(--spacing-12, 12px);
   }
 
   .form-stack {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-14, 14px);
+    gap: 0;
   }
 
   .form-group {
@@ -375,7 +404,7 @@ ${org}`;
   .form-row {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--spacing-14, 14px);
+    gap: var(--spacing-12, 12px);
   }
 
   @media (min-width: 600px) {
@@ -415,7 +444,7 @@ ${org}`;
   .form-select:focus-visible,
   .form-textarea:focus-visible {
     outline: 3px solid var(--color-charcoal-ink);
-    outline-offset: 2px;
+    outline-offset: 3px;
   }
 
   .form-textarea {
