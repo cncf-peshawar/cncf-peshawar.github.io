@@ -225,3 +225,16 @@ main .post-card__title a:focus-visible {
     transition: none !important;
   }
 }
+
+/* Third-party overlay interactive target size floor (WCAG 2.5.8 / Lighthouse) */
+.reticle-carousel-dot {
+  min-width: 24px !important;
+  min-height: 24px !important;
+}
+
+.reticle-promo-link {
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+

@@ -47,11 +47,11 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
     </div>
 
     <div class="hero-container">
-      <span class="hero-eyebrow" data-hero-eyebrow>00 // CNCF COMMUNITY CHAPTER</span>
+      <span class="hero-eyebrow">00 // CNCF COMMUNITY CHAPTER</span>
       <h1 class="hero-headline">
         Building Peshawar's <strong>Cloud Native</strong> Future.
       </h1>
-      <p class="hero-lede" data-hero-lede>
+      <p class="hero-lede">
         Empowering local engineers, developers, and students through hands-on Kubernetes, distributed systems, and open-source collaboration in Khyber Pakhtunkhwa.
       </p>
 
@@ -186,7 +186,7 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
         <span class="charter-active-badge">ACTIVE CNCF CHAPTER</span>
         <span class="charter-meta">REGION: ASIA-SOUTH / PK</span>
       </div>
-      <h3 class="charter-title">CORE TECHNICAL FOCUS</h3>
+      <h2 class="charter-title">CORE TECHNICAL FOCUS</h2>
       <div class="charter-terminal">
         <span class="terminal-line"><span class="terminal-label">GROUP:</span> CNCF Peshawar</span>
         <span class="terminal-line"><span class="terminal-label">REGION:</span> Khyber Pakhtunkhwa, Pakistan</span>
@@ -698,6 +698,17 @@ Best regards,
   @keyframes marquee-scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+  }
+
+  /* Offscreen sections layout deferral for main-thread performance */
+  .charter-section,
+  .facts-section,
+  .pillars-section,
+  .past-section,
+  .partners-section,
+  .inquiry-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
   }
 
   /* Chapter Charter Block */

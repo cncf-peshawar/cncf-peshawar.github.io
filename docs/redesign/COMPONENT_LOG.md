@@ -221,3 +221,14 @@ Date: 2026-10-12
 | `src/components/events/EventCard.astro` & `src/pages/events/index.astro` | Tap targets: `.btn-sm`, `.event-card__detail-link`, and `.event-card__title a` under 44px | Added `min-height: 44px;` and inline-flex alignment | WCAG 2.1 AA §2.5.5 |
 | `src/components/ui/Marquee.astro` | Tap targets: `.marquee__pause-btn` was under 44px | Enforced `min-height: 44px; min-width: 44px; padding: 6px 12px; box-sizing: border-box;` | WCAG 2.1 AA §2.5.5 |
 | `src/styles/motion.css` | PRM site-wide: Marquee, card, and button animations active under reduced motion | Added `@media (prefers-reduced-motion: reduce)` overrides enforcing `transform: none; transition: none; animation: none;` on `.marquee-track`, `.marquee-strip`, buttons, and cards | WCAG 2.1 AA §2.3.3 & md-motion-spec |
+
+## T-55 Performance Gate & Final Battery Optimization Pass
+Date: 2026-10-12
+
+| Component / File | Identified State / Audit Finding | Bounded Implementation Applied | Ground Truth / Contract Ref |
+|---|---|---|---|
+| `src/pages/index.astro` | Heading order skipped level: `<h3 class="charter-title">` followed `<h1>` in main document outline | Upgraded `<h3 class="charter-title">` to `<h2 class="charter-title">` to restore linear sequential hierarchy | WCAG 2.1 AA §1.3.1 (Heading Order), Lighthouse a11y |
+| `src/pages/index.astro` | LCP entrance latency: `<p class="hero-lede" data-hero-lede>` delayed text rendering by ~2.1s due to client JS Motion stagger | Removed `data-hero-lede` and `data-hero-eyebrow` attribute hooks to ensure immediate static server-rendered paint on initial frame | md-motion-spec §3.6 (H1 static LCP guarantee), Lighthouse LCP (<2.5s) |
+| `src/pages/index.astro` | Offscreen sections layout & rendering work blocked main-thread CPU time during mobile bootstrap | Added `content-visibility: auto; contain-intrinsic-size: auto 600px;` to `.charter-section`, `.facts-section`, `.pillars-section`, `.past-section`, `.partners-section`, `.inquiry-section` | Modern Web Guidance (Rendering Performance), Lighthouse Perf |
+| `src/styles/base.css` | Touch targets: Reticle third-party carousel pagination dots & promo banner links fell below mobile target floor | Added `.reticle-carousel-dot { min-width: 24px !important; min-height: 24px !important; }` and `.reticle-promo-link { min-height: 44px !important; display: inline-flex !important; align-items: center !important; }` | WCAG 2.1 AA §2.5.8 (Target Size Minimum), Lighthouse a11y |
+
