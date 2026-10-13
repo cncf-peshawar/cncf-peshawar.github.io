@@ -29,9 +29,39 @@ const eventDate = !isNaN(parsedDate.getTime())
   : (data.date || 'Date TBA');
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const isVirtual = /virtual/i.test(data.venue || '');
+const eventJsonLd = (data.title && data.date) ? {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: data.title,
+  startDate: data.date,
+  eventAttendanceMode: isVirtual
+    ? 'https://schema.org/OnlineEventAttendanceMode'
+    : 'https://schema.org/OfflineEventAttendanceMode',
+  location: isVirtual
+    ? {
+        '@type': 'VirtualLocation',
+        url: data.rsvpUrl
+      }
+    : {
+        '@type': 'Place',
+        name: data.venue,
+        address: data.location || 'Peshawar, KPK, Pakistan'
+      },
+  url: `https://cncf-peshawar.github.io/events/${event.slug}/`,
+  ...(data.summary ? { description: data.summary } : {}),
+  organizer: {
+    '@type': 'Organization',
+    name: 'CNCF Peshawar',
+    url: 'https://cncf-peshawar.github.io/'
+  },
+  isAccessibleForFree: true
+} : undefined;
 ---
 
 <BaseLayout title={`${data.title} | CNCF Peshawar`} description={data.summary}>
+  {eventJsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(eventJsonLd)} />}
   <!-- Top Breadcrumb Bar -->
   <div class="breadcrumb-strip">
     <div class="breadcrumb-inner">

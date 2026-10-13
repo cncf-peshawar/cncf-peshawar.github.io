@@ -20,12 +20,36 @@ const upcomingEvents = allEvents
   .sort((a, b) => getTimestamp(a.data.date) - getTimestamp(b.data.date));
 
 const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefined;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      name: 'CNCF Peshawar',
+      url: 'https://cncf-peshawar.github.io/',
+      sameAs: [
+        'https://ocgroups.dev/cncf/group/6vwk2n4',
+        'https://slack.cncf.io',
+        'https://github.com/cncf-peshawar',
+        'https://www.linkedin.com/company/cloud-native-cncf-peshawar/',
+        'https://www.instagram.com/cncfpeshawar/'
+      ]
+    },
+    {
+      '@type': 'WebSite',
+      name: 'CNCF Peshawar',
+      url: 'https://cncf-peshawar.github.io/'
+    }
+  ]
+};
 ---
 
 <BaseLayout 
   title="Cloud Native Peshawar — Official CNCF Community Group"
   description="Building Peshawar's Cloud Native Future. Official CNCF Community Chapter empowering engineers and developers with Kubernetes, DevOps, MLOps, and Agentic AI."
 >
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(graph)} />
   <section class="hero-section">
     <div class="hero-doodle-cloud" data-hero-doodle aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 110" fill="none" aria-hidden="true">
