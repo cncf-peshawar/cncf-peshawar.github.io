@@ -829,10 +829,22 @@ Best regards,
     background: var(--color-frost-white);
     border: 2px solid var(--color-charcoal-ink);
     border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm);
+    transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
     padding: 20px 18px;
     display: flex;
     flex-direction: column;
     gap: 6px;
+  }
+
+  .fact-card:hover {
+    transform: translate(3px, -3px) !important;
+    box-shadow: var(--shadow-hard);
+  }
+
+  .fact-card:active {
+    transform: none !important;
+    transition: transform 30ms ease-in-out;
   }
 
   .fact-num {
@@ -885,10 +897,22 @@ Best regards,
   .pillar-card {
     background: var(--color-frost-white);
     border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm);
+    transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
     padding: 22px 20px;
     display: flex;
     flex-direction: column;
     gap: 8px;
+  }
+
+  .pillar-card:hover {
+    transform: translate(3px, -3px) !important;
+    box-shadow: var(--shadow-hard);
+  }
+
+  .pillar-card:active {
+    transform: none !important;
+    transition: transform 30ms ease-in-out;
   }
 
   .pillar-card.border-lime {
@@ -944,10 +968,22 @@ Best regards,
     background: var(--color-frost-white);
     border: 2px solid var(--color-charcoal-ink);
     border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm);
+    transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
     padding: 20px 18px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+
+  .past-card:hover {
+    transform: translate(3px, -3px) !important;
+    box-shadow: var(--shadow-hard);
+  }
+
+  .past-card:active {
+    transform: none !important;
+    transition: transform 30ms ease-in-out;
   }
 
   .past-date {
@@ -1029,10 +1065,22 @@ Best regards,
     background: var(--color-frost-white);
     border: 2px solid var(--color-charcoal-ink);
     border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard-sm);
+    transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
     padding: 20px 18px;
     display: flex;
     flex-direction: column;
     gap: 6px;
+  }
+
+  .sponsor-card:hover {
+    transform: translate(3px, -3px) !important;
+    box-shadow: var(--shadow-hard);
+  }
+
+  .sponsor-card:active {
+    transform: none !important;
+    transition: transform 30ms ease-in-out;
   }
 
   .sponsor-type {
@@ -1165,9 +1213,32 @@ Best regards,
     background: var(--color-chalk-gray);
   }
 
+  html.js-motion:not(.motion-reduced) .fact-card.is-revealed,
+  html.js-motion:not(.motion-reduced) .pillar-card.is-revealed,
+  html.js-motion:not(.motion-reduced) .past-card.is-revealed,
+  html.js-motion:not(.motion-reduced) .sponsor-card.is-revealed {
+    transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .marquee-track {
       animation: none !important;
+    }
+
+    .fact-card,
+    .fact-card:hover,
+    .fact-card:active,
+    .pillar-card,
+    .pillar-card:hover,
+    .pillar-card:active,
+    .past-card,
+    .past-card:hover,
+    .past-card:active,
+    .sponsor-card,
+    .sponsor-card:hover,
+    .sponsor-card:active {
+      transform: none !important;
+      transition: none !important;
     }
   }
 </style>
