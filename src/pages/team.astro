@@ -36,8 +36,8 @@ const initials = (name: string) =>
   </section>
 
   <!-- Section 01: Executive Team -->
-  <section class="section-wrap" data-reveal>
-    <div class="section-header-box">
+  <section class="section-wrap">
+    <div class="section-header-box" data-reveal>
       <span class="section-eyebrow">01 // EXECUTIVE TEAM</span>
       <h2 class="section-headline">Chapter Organizers.</h2>
       <p class="section-subtext">
@@ -45,9 +45,9 @@ const initials = (name: string) =>
       </p>
     </div>
 
-    <div class="exec-grid">
+    <div class="exec-grid" data-reveal-group>
       {sortedTeam.map(member => (
-        <article class="exec-card brutal-card">
+        <article class="exec-card brutal-card" data-reveal-item>
           <div class="exec-card__header">
             <div class="exec-card__photo">
               {member.data.avatar ? (
@@ -55,6 +55,9 @@ const initials = (name: string) =>
                   src={member.data.avatar}
                   alt={member.data.name}
                   loading="lazy"
+                  decoding="async"
+                  width="80"
+                  height="80"
                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                 />
               ) : null}
@@ -115,8 +118,8 @@ const initials = (name: string) =>
   </section>
 
   <!-- Section 02: Working Groups (Find Your Squad) -->
-  <section class="section-wrap section-wrap--alt" data-reveal>
-    <div class="section-header-box">
+  <section class="section-wrap section-wrap--alt">
+    <div class="section-header-box" data-reveal>
       <span class="section-eyebrow">02 // WORKING GROUPS</span>
       <h2 class="section-headline">Find Your Squad.</h2>
       <p class="section-subtext">
@@ -124,11 +127,11 @@ const initials = (name: string) =>
       </p>
     </div>
 
-    <div class="wg-container wg-tabs" aria-label="Open Community Groups">
+    <div class="wg-container wg-tabs" data-reveal-group aria-label="Open Community Groups">
       {workingGroups.map(group => {
         const groupColor = group.slug === 'tech-team' ? 'lilac' : group.slug === 'events-team' ? 'orange' : group.slug === 'community-outreach' ? 'mint' : 'periwinkle';
         return (
-          <a href={`${base}/team/${group.slug}`} class={`wg-card brutal-card wg-card--${groupColor}`}>
+          <a href={`${base}/team/${group.slug}`} class={`wg-card brutal-card wg-card--${groupColor}`} data-reveal-item>
             <div class="wg-card__top">
               <span class={`badge badge--${groupColor}`}>{group.code}</span>
               <span class="wg-card__count">{group.members.length} {group.members.length === 1 ? 'MEMBER' : 'MEMBERS'}</span>
@@ -139,7 +142,7 @@ const initials = (name: string) =>
               {group.members.slice(0, 8).map(member => (
                 <span class="wg-card__avatar" title={member.data.name}>
                   {getAvatarSrc(member.data.avatar || member.data.photo) ? (
-                    <img src={getAvatarSrc(member.data.avatar || member.data.photo)!} alt={member.data.name} loading="lazy" />
+                    <img src={getAvatarSrc(member.data.avatar || member.data.photo)!} alt={member.data.name} loading="lazy" decoding="async" width="32" height="32" />
                   ) : (
                     <span>{initials(member.data.name)}</span>
                   )}
@@ -157,8 +160,8 @@ const initials = (name: string) =>
   </section>
 
   <!-- Volunteer Callout -->
-  <section class="section-wrap" data-reveal>
-    <div class="volunteer-box brutal-card">
+  <section class="section-wrap">
+    <div class="volunteer-box brutal-card" data-reveal>
       <span class="badge badge--yellow">Join Our Team</span>
       <h2 class="volunteer-title">Want to Volunteer as an Organizer or Ambassador?</h2>
       <p class="volunteer-desc">
@@ -684,6 +687,7 @@ const initials = (name: string) =>
     height: 32px;
     border-radius: var(--radius-brutal);
     overflow: hidden;
+    contain: strict;
     background-color: var(--color-chalk-gray);
     border: 1px solid var(--color-charcoal-ink);
     font-family: var(--font-mono);
@@ -696,6 +700,7 @@ const initials = (name: string) =>
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
 
   .wg-card__more {
