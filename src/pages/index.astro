@@ -578,6 +578,41 @@ Best regards,
     .hero-doodle-robot {
       display: none;
     }
+
+    .hero-ctas {
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero-ctas :global(.btn) {
+      white-space: normal;
+      text-align: center;
+      box-sizing: border-box;
+      max-width: 100%;
+      min-height: 44px;
+    }
+
+    .hero-doodle-arrow {
+      flex-shrink: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-ctas {
+      width: 100%;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-ctas :global(.btn) {
+      width: 100%;
+      max-width: 100%;
+      padding: 10px var(--spacing-16, 16px);
+      font-size: var(--font-size-body, 0.875rem);
+      line-height: var(--line-height-snug, 1.2);
+    }
   }
 
   .hero-doodle-cloud {
