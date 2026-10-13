@@ -115,7 +115,7 @@ function initReveals() {
     }
   });
 
-  // 3. Hero Secondary Entrance on load (Headline <h1> is strictly excluded for LCP protection)
+  // Hero Secondary Entrance on load (Headline <h1> is strictly excluded for LCP protection)
   const heroEyebrow = document.querySelector<HTMLElement>('[data-hero-eyebrow]');
   const heroLede = document.querySelector<HTMLElement>('[data-hero-lede]');
   const heroActions = document.querySelector<HTMLElement>('[data-hero-actions]');

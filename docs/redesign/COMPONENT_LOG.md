@@ -231,4 +231,9 @@ Date: 2026-10-12
 | `src/pages/index.astro` | LCP entrance latency: `<p class="hero-lede" data-hero-lede>` delayed text rendering by ~2.1s due to client JS Motion stagger | Removed `data-hero-lede` and `data-hero-eyebrow` attribute hooks to ensure immediate static server-rendered paint on initial frame | md-motion-spec §3.6 (H1 static LCP guarantee), Lighthouse LCP (<2.5s) |
 | `src/pages/index.astro` | Offscreen sections layout & rendering work blocked main-thread CPU time during mobile bootstrap | Added `content-visibility: auto; contain-intrinsic-size: auto 600px;` to `.charter-section`, `.facts-section`, `.pillars-section`, `.past-section`, `.partners-section`, `.inquiry-section` | Modern Web Guidance (Rendering Performance), Lighthouse Perf |
 | `src/styles/base.css` | Touch targets: Reticle third-party carousel pagination dots & promo banner links fell below mobile target floor | Added `.reticle-carousel-dot { min-width: 24px !important; min-height: 24px !important; }` and `.reticle-promo-link { min-height: 44px !important; display: inline-flex !important; align-items: center !important; }` | WCAG 2.1 AA §2.5.8 (Target Size Minimum), Lighthouse a11y |
+| `src/pages/index.astro` | Comment hygiene: 16 template scaffolding label comments | Removed all 16 redundant HTML label comments | T-55/P1 Part C comment hygiene |
+| `src/scripts/motion.ts` | Comment hygiene: numeric step prefix on LCP constraint comment | Stripped prefix, preserved LCP-protection constraint reason | T-55/P1 Part C comment hygiene |
+| `src/components/ui/Mascot.astro` | Token audit: canary color representation | Verified `#ffde00` consumed exclusively via `var(--color-canary-banner)` | T-55/P1 Part C token check |
+| `src/components/events/EventCard.astro` | Radius audit: brutalist card corners | Verified `border-radius: var(--radius-brutal)` strictly applied | T-55/P1 Part C GT check |
+
 

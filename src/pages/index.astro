@@ -26,9 +26,7 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
   title="Cloud Native Peshawar — Official CNCF Community Group"
   description="Building Peshawar's Cloud Native Future. Official CNCF Community Chapter empowering engineers and developers with Kubernetes, DevOps, MLOps, and Agentic AI."
 >
-  <!-- Hero Section -->
   <section class="hero-section">
-    <!-- Doodles in Hero -->
     <div class="hero-doodle-cloud" data-hero-doodle aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 110" fill="none" aria-hidden="true">
         <circle cx="114" cy="38" r="16" fill="var(--color-canary-banner)" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -81,7 +79,6 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
         </LinkButton>
       </div>
 
-      <!-- Hero Mascot (Penguin) - Flow below CTAs for <1024px; Flank anchored for >=1024px -->
       <div class="hero-mascot-container" data-hero-doodle>
         <Mascot
           directions={`${base}/mascots/penguin-directions.webp`}
@@ -103,7 +100,6 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
       </p>
     </div>
 
-    <!-- Terminal Robot Doodle Bleeding Edge -->
     <div class="hero-doodle-robot" data-hero-doodle aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" aria-hidden="true">
         <path d="M 44 44 C 44 40, 114 40, 114 44 L 114 96 C 114 100, 44 100, 44 96 Z"
@@ -143,7 +139,6 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
     </div>
   </section>
 
-  <!-- Marquee Strip -->
   <div class="marquee-strip" role="region" aria-label="Community Topics Marquee">
     <div class="marquee-track" id="marquee-track">
       <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
@@ -154,7 +149,6 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
     <button type="button" class="marquee-pause-btn" id="marquee-toggle-btn" aria-label="Pause marquee">PAUSE</button>
   </div>
 
-  <!-- Chapter Charter Block -->
   <section class="charter-section" id="charter-section" data-reveal>
     <div class="charter-card">
       <div class="doodle-stack" aria-hidden="true">
@@ -200,7 +194,6 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
     </div>
   </section>
 
-  <!-- Key Facts -->
   <section class="facts-section" data-reveal>
     <span class="section-eyebrow">01 // COMMUNITY FUNDAMENTALS</span>
     <h2 class="section-title">Key Community Facts & Verifiable Commitments</h2>
@@ -228,12 +221,10 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
     </div>
   </section>
 
-  <!-- Featured Meetup (.countdown-card) -->
   <section class="featured-section" id="featured-meetup" data-reveal>
     <GenesisCountdown event={nextFeaturedEvent} />
   </section>
 
-  <!-- Pillars (4 Rainbow Outline Borders) -->
   <section class="pillars-section" data-reveal>
     <span class="section-eyebrow">02 // CORE PILLARS</span>
     <h2 class="section-title">How We Empower the Community.</h2>
@@ -257,7 +248,6 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
     </div>
   </section>
 
-  <!-- Past Meetups -->
   <section class="past-meetups-section" id="past-meetups" data-reveal>
     <div class="past-doodle-cup" aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none" aria-hidden="true">
@@ -301,10 +291,8 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
     </div>
   </section>
 
-  <!-- CFP Band -->
   <CfpBand />
 
-  <!-- Sponsors Section -->
   <section class="sponsors-section" id="sponsors-section" data-reveal>
     <span class="section-eyebrow">04 // SPONSORS & PARTNERS</span>
     <h2 class="section-title">Supported by Visionary Partners.</h2>
@@ -334,7 +322,6 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
     </div>
   </section>
 
-  <!-- Sponsorship Email Builder Section (#email-builder & #tiers) -->
   <section id="email-builder" data-reveal>
     <div id="tiers" class="builder-frame">
       <span class="section-eyebrow">05 // INTAKE & CONTACT</span>
@@ -344,7 +331,6 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
       </p>
 
       <div class="builder-layout">
-        <!-- Form -->
         <form id="sponsor-form" onsubmit="return false;">
           <div class="form-group">
             <label for="org-name" class="form-label">Organization / Company Name *</label>
@@ -392,7 +378,6 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefi
           </div>
         </form>
 
-        <!-- Preview -->
         <div class="preview-card">
           <div class="preview-head">
             <span>Email Structure Preview</span>
@@ -434,7 +419,6 @@ Best regards,
     </div>
   </section>
 
-  <!-- Marquee Strip (Repeat) -->
   <div class="marquee-strip" role="region" aria-label="Repeated Community Topics Marquee">
     <div class="marquee-track">
       <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
