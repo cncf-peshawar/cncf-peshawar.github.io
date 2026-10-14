@@ -5,6 +5,7 @@ import GenesisCountdown from '../components/GenesisCountdown.astro';
 import Mascot from '../components/ui/Mascot.astro';
 import CfpBand from '../components/CfpBand.astro';
 import LinkButton from '../components/ui/LinkButton.astro';
+import Frame from '../components/ui/Frame.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -354,61 +355,126 @@ const graph = {
         Fill out the details below to generate a pre-formatted sponsorship proposal, or copy the template directly into your email client.
       </p>
 
-      <div class="builder-layout">
-        <form id="sponsor-form" onsubmit="return false;">
-          <div class="form-group">
-            <label for="org-name" class="form-label">Organization / Company Name *</label>
-            <input type="text" id="org-name" class="form-input" placeholder="e.g. Acme Cloud Corp" required>
+      <div class="builder-grid">
+        <!-- Form Frame (Window Variant) -->
+        <Frame 
+          variant="window" 
+          headerVariant="light" 
+          title="SPONSORSHIP INTAKE FORM" 
+          class="builder-form-frame"
+        >
+          <form id="sponsor-form" class="form-stack" onsubmit="return false;">
+
+            <!-- Group: Organization -->
+            <fieldset class="form-fieldset">
+              <legend class="form-group-label">Organization</legend>
+              <div class="form-group">
+                <label for="org-name" class="form-label">
+                  Company Name <span class="required-star">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="org-name" 
+                  class="form-input" 
+                  required 
+                />
+              </div>
+              <div class="form-group mt-fieldset">
+                <label for="org-website" class="form-label">
+                  Website & Logo URL
+                </label>
+                <input 
+                  type="url" 
+                  id="org-website" 
+                  class="form-input" 
+                />
+              </div>
+            </fieldset>
+
+            <!-- Group: Contact -->
+            <fieldset class="form-fieldset">
+              <legend class="form-group-label">Contact</legend>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contact-name" class="form-label">
+                    Name & Role <span class="required-star">*</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="contact-name" 
+                    class="form-input" 
+                    required 
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="contact-email" class="form-label">
+                    Work Email <span class="required-star">*</span>
+                  </label>
+                  <input 
+                    type="email" 
+                    id="contact-email" 
+                    class="form-input" 
+                    required 
+                  />
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Group: Interest -->
+            <fieldset class="form-fieldset">
+              <legend class="form-group-label">Interest</legend>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="tier-select" class="form-label">
+                    Preferred Tier <span class="required-star">*</span>
+                  </label>
+                  <select id="tier-select" class="form-select">
+                    <option value="Venue Host Partner (In-Kind / Logistics)">Venue Host Partner (In-Kind / Logistics)</option>
+                    <option value="Refreshment Partner (Community Hospitality)" selected>Refreshment Partner (Community Hospitality)</option>
+                    <option value="Community Swag Partner (Merchandise / Vouchers)">Community Swag Partner (Merchandise / Vouchers)</option>
+                    <option value="Annual Ecosystem Partner (Strategic Year-Round)">Annual Ecosystem Partner (Strategic Year-Round)</option>
+                    <option value="Custom In-Kind / Technical Partner">Custom In-Kind / Technical Partner</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="timeline-select" class="form-label">
+                    Target Timing <span class="required-star">*</span>
+                  </label>
+                  <select id="timeline-select" class="form-select">
+                    <option value="Next Upcoming Meetup">Next Upcoming Meetup</option>
+                    <option value="Upcoming Meetup Series">Upcoming Meetup Series</option>
+                    <option value="Annual Ongoing Partnership">Annual Ongoing Partnership</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group mt-fieldset">
+                <label for="scope-notes" class="form-label">
+                  Scope & Special Requests
+                </label>
+                <textarea 
+                  id="scope-notes" 
+                  rows="3" 
+                  class="form-textarea"
+                ></textarea>
+              </div>
+            </fieldset>
+
+          </form>
+        </Frame>
+
+        <!-- Terminal Preview Frame (Terminal Variant) -->
+        <Frame 
+          variant="terminal" 
+          headerVariant="dark" 
+          title="LIVE EMAIL STRUCTURE PREVIEW" 
+          class="builder-terminal-frame"
+        >
+          <div slot="header-action" class="terminal-header-meta">
+            <span class="terminal-recipient">To: cncfpeshawar@gmail.com</span>
           </div>
 
-          <div class="form-group">
-            <label for="contact-name" class="form-label">Contact Person & Role *</label>
-            <input type="text" id="contact-name" class="form-input" placeholder="e.g. Jane Doe, VP Engineering" required>
-          </div>
-
-          <div class="form-group">
-            <label for="contact-email" class="form-label">Work Email *</label>
-            <input type="email" id="contact-email" class="form-input" placeholder="e.g. contact@acme.com" required>
-          </div>
-
-          <div class="form-group">
-            <label for="tier-select" class="form-label">Preferred Sponsorship Tier *</label>
-            <select id="tier-select" class="form-select">
-              <option value="Venue Host Partner (In-Kind / Logistics)">Venue Host Partner (In-Kind / Logistics)</option>
-              <option value="Refreshment Partner (Community Hospitality)" selected>Refreshment Partner (Community Hospitality)</option>
-              <option value="Community Swag Partner (Merchandise / Vouchers)">Community Swag Partner (Merchandise / Vouchers)</option>
-              <option value="Annual Ecosystem Partner (Strategic Year-Round)">Annual Ecosystem Partner (Strategic Year-Round)</option>
-              <option value="Custom In-Kind / Technical Partner">Custom In-Kind / Technical Partner</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="timeline-select" class="form-label">Target Meetup / Timing *</label>
-            <select id="timeline-select" class="form-select">
-              <option value="Next Upcoming Meetup">Next Upcoming Meetup</option>
-              <option value="Upcoming Meetup Series">Upcoming Meetup Series</option>
-              <option value="Annual Ongoing Partnership">Annual Ongoing Partnership</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="org-website" class="form-label">Website & Logo Asset URL</label>
-            <input type="url" id="org-website" class="form-input" placeholder="e.g. https://acme.com">
-          </div>
-
-          <div class="form-group">
-            <label for="scope-notes" class="form-label">Partnership Scope / Notes</label>
-            <textarea id="scope-notes" class="form-textarea" rows="3" placeholder="e.g. We would like to provide refreshments for 120 attendees."></textarea>
-          </div>
-        </form>
-
-        <div class="preview-card">
-          <div class="preview-head">
-            <span>Email Structure Preview</span>
-            <span class="caption-text text-muted">To: cncfpeshawar@gmail.com</span>
-          </div>
-          <div class="preview-body">
-            <pre id="email-preview-text">Subject: CNCF Peshawar Sponsorship Inquiry
+          <div class="terminal-content-wrap">
+            <pre id="email-preview-text" class="email-preview-content">Subject: CNCF Peshawar Sponsorship Inquiry — [Organization / Company Name]
 
 Hi Cloud Native Peshawar Organizers,
 
@@ -432,13 +498,33 @@ Best regards,
 [Contact Person, Role]
 [Organization / Company Name]</pre>
           </div>
-          <div class="preview-actions">
-            <a id="send-mailto-btn" href="mailto:cncfpeshawar@gmail.com" class="btn btn-sky btn-sm">Open in Email App</a>
-            <button type="button" id="copy-template-btn" class="btn btn-outline btn-sm">
+
+          <div slot="footer" class="terminal-footer-actions">
+            <a 
+              id="send-mailto-btn" 
+              href="mailto:cncfpeshawar@gmail.com" 
+              class="btn btn-sky"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <span>Open in Email App</span>
+            </a>
+
+            <button 
+              type="button" 
+              id="copy-template-btn" 
+              class="btn btn-outline"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
               <span id="copy-btn-text" aria-live="polite">Copy Email Text</span>
             </button>
           </div>
-        </div>
+        </Frame>
       </div>
     </div>
   </section>
@@ -1160,92 +1246,238 @@ Best regards,
     outline-offset: 3px;
   }
 
-  /* Sponsorship Email Builder */
+  /* Sponsorship Email Builder (Section 05) */
   #email-builder {
     padding: 40px clamp(16px, 4vw, 32px);
     max-width: 1240px;
     margin: 0 auto;
     width: 100%;
+    box-sizing: border-box;
   }
 
   .builder-frame {
     background: var(--color-chalk-gray);
-    border: 2px solid var(--color-charcoal-ink);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
     border-radius: var(--radius-brutal);
-    box-shadow: -6px 6px 0px 0px var(--color-charcoal-ink);
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
     padding: clamp(20px, 4vw, 32px) clamp(16px, 4vw, 28px);
   }
 
-  .builder-layout {
+  .builder-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 32px;
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 4vw, 36px);
+    width: 100%;
+    align-items: stretch;
   }
 
-  @media (max-width: 900px) {
-    .builder-layout {
-      grid-template-columns: 1fr;
+  @media (min-width: 1024px) {
+    .builder-grid {
+      grid-template-columns: 1.1fr 0.9fr;
     }
+  }
+
+  /* Fieldset groups */
+  .form-fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .form-stack > .form-fieldset + .form-fieldset {
+    margin-top: var(--spacing-20, 20px);
+    padding-top: var(--spacing-16, 16px);
+    border-top: 1px solid var(--color-pencil-gray);
+  }
+
+  .form-group-label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide, 0.08em);
+    color: var(--color-text-muted);
+    padding: 0;
+    margin-bottom: var(--spacing-10, 10px);
+    display: block;
+  }
+
+  .mt-fieldset {
+    margin-top: var(--spacing-12, 12px);
+  }
+
+  .form-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
   .form-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    margin-bottom: 14px;
+    gap: var(--spacing-6, 6px);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-12, 12px);
+  }
+
+  @media (min-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   .form-label {
-    font-size: 12px;
-    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
     text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide, 0.05em);
     color: var(--color-charcoal-ink);
-    letter-spacing: 0.03em;
   }
 
-  .preview-card {
-    background: var(--color-frost-white);
-    border: 2px solid var(--color-charcoal-ink);
+  .required-star {
+    color: var(--color-duck-bill-orange);
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    background-color: var(--color-frost-white);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
     border-radius: var(--radius-brutal);
+    padding: 10px 14px;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    color: var(--color-charcoal-ink);
+    box-sizing: border-box;
+  }
+
+  .form-input:focus-visible,
+  .form-select:focus-visible,
+  .form-textarea:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 80px;
+    line-height: var(--line-height-normal, 1.4);
+  }
+
+  /* Terminal Preview Styling */
+  .terminal-recipient {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-medium, 500);
+    color: var(--color-sky-crayon);
+  }
+
+  .terminal-content-wrap {
+    height: 100%;
+    min-height: 260px;
     display: flex;
     flex-direction: column;
-    height: 100%;
   }
 
-  .preview-head {
-    background: var(--color-cream-paper);
-    border-bottom: 2px solid var(--color-charcoal-ink);
-    padding: 10px 14px;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .preview-body {
-    padding: 14px;
-    flex-grow: 1;
-    overflow-x: auto;
-  }
-
-  #email-preview-text {
-    font-family: var(--font-aeonik-mono, 'JetBrains Mono', monospace);
-    font-size: 12px;
-    line-height: 1.5;
-    color: var(--color-charcoal-ink);
+  .email-preview-content {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: var(--line-height-relaxed, 1.55);
+    color: var(--color-chalk-gray);
     white-space: pre-wrap;
     word-break: break-word;
+    margin: 0;
+    flex-grow: 1;
+    overflow-y: auto;
   }
 
-  .preview-actions {
-    padding: 12px 14px;
-    border-top: 2px solid var(--color-charcoal-ink);
+  .terminal-footer-actions {
     display: flex;
+    gap: var(--spacing-10, 10px);
     flex-wrap: wrap;
-    gap: 10px;
-    background: var(--color-chalk-gray);
+    width: 100%;
+  }
+
+  .terminal-footer-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8, 8px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    font-weight: var(--font-weight-medium, 500);
+    line-height: var(--line-height-snug, 1.2);
+    letter-spacing: var(--letter-spacing-normal, 0.02em);
+    padding: 10px 20px;
+    min-height: 44px;
+    border-radius: var(--radius-brutal);
+    border-width: var(--border-width, 2px);
+    border-style: solid;
+    border-color: var(--color-charcoal-ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+    transition: transform 120ms ease-in-out;
+    user-select: none;
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    flex: 1 1 180px;
+  }
+
+  .terminal-footer-actions .btn:hover {
+    transform: translate(7px, -7px);
+  }
+
+  .terminal-footer-actions .btn:active {
+    transform: none;
+    transition: transform 30ms ease-in-out;
+  }
+
+  .terminal-footer-actions .btn:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+
+  .terminal-footer-actions .btn-sky {
+    background-color: var(--color-sky-crayon);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .terminal-footer-actions .btn-outline {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .terminal-footer-actions .btn-outline:hover {
+    background-color: var(--color-ice-wash);
+  }
+
+  @media (max-width: 639px) {
+    .terminal-footer-actions .btn {
+      white-space: normal;
+      text-align: center;
+      padding: 10px 14px;
+      flex: 1 1 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .terminal-footer-actions .btn,
+    .terminal-footer-actions .btn:hover,
+    .terminal-footer-actions .btn:active {
+      transform: none !important;
+      transition: none !important;
+    }
   }
 
   html.js-motion:not(.motion-reduced) .fact-card.is-revealed,
