@@ -30,15 +30,8 @@ import {
 } from '../scripts/sync-ocg-events.mjs';
 
 import {
-  parseIssueSections,
   slugify,
   isValidUrl,
-  cleanValue,
-  parseRoleAndOrg,
-  extractSocialLinks,
-  extractTrackTags,
-  generateSpeakerFrontmatter,
-  generateEventFrontmatter,
   parseCfpIssue
 } from '../scripts/parse-cfp-issue.mjs';
 

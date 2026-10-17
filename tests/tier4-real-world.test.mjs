@@ -15,20 +15,15 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import YAML from 'yaml';
 import {
   TestHarness,
   extractFrontmatter,
   validateEventFrontmatter,
   validateSpeakerFrontmatter,
-  validateBlogFrontmatter,
-  verifyStaticLinks,
-  runCommand
+  verifyStaticLinks
 } from './test-utils.mjs';
 
 import {
-  parseOcgEventHtml,
-  parseOcgGroupHtml,
   syncEvents
 } from '../scripts/sync-ocg-events.mjs';
 
@@ -499,7 +494,7 @@ ${customBody}`;
       assert.equal(syncResult.created.length, 1);
 
       const eventPath = path.join(eventsDir, syncResult.created[0]);
-      const { frontmatter, body } = extractFrontmatter(fs.readFileSync(eventPath, 'utf-8'));
+      const { frontmatter } = extractFrontmatter(fs.readFileSync(eventPath, 'utf-8'));
 
       assert.ok(validateEventFrontmatter(frontmatter).success, 'Canceled event must satisfy EventSchema');
       assert.ok(frontmatter.title.includes('[CANCELED]'), 'Title must reflect cancellation');

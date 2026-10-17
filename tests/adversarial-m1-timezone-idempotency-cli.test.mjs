@@ -19,25 +19,12 @@ import path from 'node:path';
 import {
   convertUtcToPkt,
   normalizeTimeRange,
-  parseOcgEventHtml,
-  parseOcgGroupHtml,
-  syncEvents,
-  DEFAULT_TIMEZONE
+  syncEvents
 } from '../scripts/sync-ocg-events.mjs';
 
 function computeSha256(filePath) {
   const content = fs.readFileSync(filePath);
   return crypto.createHash('sha256').update(content).digest('hex');
-}
-
-function computeDirSha256Map(dirPath) {
-  if (!fs.existsSync(dirPath)) return {};
-  const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
-  const map = {};
-  for (const f of files) {
-    map[f] = computeSha256(path.join(dirPath, f));
-  }
-  return map;
 }
 
 const testResults = [];
@@ -290,7 +277,7 @@ try {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'genesis-idempotency-'));
   fs.copyFileSync('src/content/events/01-cncf-peshawar-genesis.md', path.join(tempDir, '01-cncf-peshawar-genesis.md'));
 
-  const pass1 = await syncEvents({ source: tempFile, eventsDir: tempDir });
+  await syncEvents({ source: tempFile, eventsDir: tempDir });
   const hash1 = computeSha256(path.join(tempDir, '01-cncf-peshawar-genesis.md'));
 
   const pass2 = await syncEvents({ source: tempFile, eventsDir: tempDir });
