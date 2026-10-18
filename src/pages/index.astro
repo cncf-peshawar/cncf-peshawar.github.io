@@ -9,6 +9,7 @@ import SpeakerCard from '../components/SpeakerCard.astro';
 import CFPBanner from '../components/CFPBanner.astro';
 import GenesisCountdown from '../components/GenesisCountdown.astro';
 import { selectPastEvents, selectUpcomingEvents } from '../lib/event-lifecycle.mjs';
+import { deduplicateSpeakers } from '../lib/speakers';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -23,8 +24,9 @@ const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : null;
 const otherUpcomingEvents = upcomingEvents.length > 1 ? upcomingEvents.slice(1) : [];
 
 const allSpeakers = await getCollection('speakers');
-const featuredSpeakers = allSpeakers.filter(s => s.data.featured);
-const speakersToShow = featuredSpeakers.length > 0 ? featuredSpeakers : allSpeakers;
+const uniqueSpeakers = deduplicateSpeakers(allSpeakers);
+const featuredSpeakers = uniqueSpeakers.filter(s => s.data.featured);
+const speakersToShow = featuredSpeakers.length > 0 ? featuredSpeakers : uniqueSpeakers;
 const sponsors = await getCollection('sponsors');
 ---
 

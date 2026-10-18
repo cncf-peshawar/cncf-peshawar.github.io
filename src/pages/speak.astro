@@ -2,10 +2,12 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SpeakerCard from '../components/SpeakerCard.astro';
+import { deduplicateSpeakers } from '../lib/speakers';
 
 const allSpeakers = await getCollection('speakers');
-const featuredSpeakers = allSpeakers.filter(s => s.data.featured);
-const regularSpeakers = allSpeakers.filter(s => !s.data.featured);
+const uniqueSpeakers = deduplicateSpeakers(allSpeakers);
+const featuredSpeakers = uniqueSpeakers.filter(s => s.data.featured);
+const regularSpeakers = uniqueSpeakers.filter(s => !s.data.featured);
 ---
 
 <BaseLayout 
@@ -144,7 +146,7 @@ const regularSpeakers = allSpeakers.filter(s => !s.data.featured);
   </section>
 
   <!-- Featured Speakers -->
-  {allSpeakers.length > 0 && (
+  {uniqueSpeakers.length > 0 && (
     <section class="section section--subtle">
       <div class="container">
         <div class="section-header">

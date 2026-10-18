@@ -50,7 +50,7 @@ collections:
       - { label: "Slides URL (GitHub / SlideShare)", name: "slidesUrl", widget: "string", required: false }
       - { label: "Recording URL (YouTube)", name: "recordingUrl", widget: "string", required: false }
       - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
-      - { label: "Speakers", name: "speakers", widget: "list", required: false }
+      - { label: "Speakers", name: "speakers", widget: "list", required: false, hint: "Enter a speaker slug (e.g. 'syed-hassan-tayyab') to link an approved profile, or enter a display name for guest speakers." }
       - { label: "Tags", name: "tags", widget: "list", default: ["Genesis", "Kubernetes", "CloudNative", "OpenSource"] }
       - { label: "Summary / Lede", name: "summary", widget: "text" }
       - { label: "Event Agenda & Body", name: "body", widget: "markdown" }

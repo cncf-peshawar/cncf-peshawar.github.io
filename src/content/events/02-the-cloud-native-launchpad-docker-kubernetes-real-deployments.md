@@ -8,8 +8,8 @@ status: "completed"
 capacity: 500
 rsvpUrl: "https://ocgroups.dev/cncf/group/6vwk2n4/event/wpm4sp7"
 speakers:
-  - "Hamid Naeem"
-  - "Syed Hassan Tayyab (Co Founder & AI Product Developer)"
+  - "hamid-naeem"
+  - "syed-hassan-tayyab"
 tags:
   - "Genesis"
   - "OpenSource"

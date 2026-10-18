@@ -110,6 +110,24 @@ export function normalizeTimeRange(raw) {
 }
 
 /**
+ * Normalizes speaker identifier for deduplication across slugs, honorifics, casing, and punctuation.
+ */
+export function normalizeSpeakerKey(raw) {
+  if (!raw || typeof raw !== 'string') return '';
+  return raw
+    .replace(/\(.*?\)/g, '')
+    .trim()
+    .replace(/^(?:dr|doctor|prof|professor|engr|engineer|mr|mrs|ms)(?:\.|\b)[\s-]*/i, '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/[\s-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+/**
  * Parses user profiles from <user-chip user='...'> elements.
  */
 export function parseUserChips(html) {
@@ -691,13 +709,17 @@ export async function syncEvents(options = {}) {
       // 7. Cover Image: STRICTLY PRESERVE manual cover image
       const mergedCoverImage = exFm.coverImage || ocgEvent.coverImage;
 
-      // 8. Speakers: Preserve manual speakers and union with new ones
+      // 8. Speakers: Preserve manual speakers and union with new ones without duplicates
       const existingSpeakers = Array.isArray(exFm.speakers) ? exFm.speakers : [];
       const ocgSpeakers = Array.isArray(ocgEvent.speakers) ? ocgEvent.speakers : [];
       const mergedSpeakers = [...existingSpeakers];
       for (const sp of ocgSpeakers) {
-        const spName = sp.split('(')[0].trim().toLowerCase();
-        const exists = existingSpeakers.some(s => s.split('(')[0].trim().toLowerCase() === spName);
+        const spKey = normalizeSpeakerKey(sp);
+        const exists = existingSpeakers.some(s => {
+          const sKey = normalizeSpeakerKey(s);
+          if (sKey && spKey && sKey === spKey) return true;
+          return s.split('(')[0].trim().toLowerCase() === sp.split('(')[0].trim().toLowerCase();
+        });
         if (!exists) {
           mergedSpeakers.push(sp);
         }
