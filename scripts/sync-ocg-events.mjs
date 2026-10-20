@@ -13,6 +13,9 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import YAML from 'yaml';
 import { CANCELED, UPCOMING, isEventCanceled, resolveEventStatus } from '../src/lib/event-lifecycle.mjs';
+import { normalizeSpeakerKey } from '../src/lib/speaker-key.mjs';
+
+export { normalizeSpeakerKey };
 
 export const DEFAULT_OCG_GROUP_URL = 'https://ocgroups.dev/cncf/group/6vwk2n4';
 export const DEFAULT_EVENTS_DIR = path.resolve(process.cwd(), 'src/content/events');
@@ -107,24 +110,6 @@ export function normalizeTimeRange(raw) {
     str = `${str} PKT`;
   }
   return str;
-}
-
-/**
- * Normalizes speaker identifier for deduplication across slugs, honorifics, casing, and punctuation.
- */
-export function normalizeSpeakerKey(raw) {
-  if (!raw || typeof raw !== 'string') return '';
-  return raw
-    .replace(/\(.*?\)/g, '')
-    .trim()
-    .replace(/^(?:dr|doctor|prof|professor|engr|engineer|mr|mrs|ms)(?:\.|\b)[\s-]*/i, '')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .trim()
-    .replace(/[\s-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
 }
 
 /**
