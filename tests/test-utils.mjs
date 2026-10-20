@@ -3,8 +3,7 @@
  * CNCF Peshawar Automation Suite
  */
 
-import assert from 'node:assert/strict';
-import { execFileSync, spawnSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import YAML from 'yaml';
@@ -255,11 +254,15 @@ export function verifyStaticLinks(dirPath) {
  * @param {import('node:child_process').SpawnSyncOptions} options 
  */
 export function runCommand(cmd, args = [], options = {}) {
-  const res = spawnSync(cmd, args, {
+  const isWindows = process.platform === 'win32';
+  const isNpmOrNpx = cmd === 'npm' || cmd === 'npx';
+  const resolvedCmd = isWindows && isNpmOrNpx ? `${cmd}.cmd` : cmd;
+  const res = spawnSync(resolvedCmd, args, {
     encoding: 'utf-8',
     cwd: options.cwd || process.cwd(),
     env: { ...process.env, ...options.env },
-    timeout: options.timeout || 120000
+    timeout: options.timeout || 120000,
+    shell: options.shell !== undefined ? options.shell : (isWindows && isNpmOrNpx)
   });
 
   return {
