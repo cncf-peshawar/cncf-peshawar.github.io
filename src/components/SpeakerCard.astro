@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { getSpeakerInitials } from '../lib/speakers';
 
 interface Props {
   speaker: CollectionEntry<'speakers'>;
@@ -7,19 +8,27 @@ interface Props {
 
 const { speaker } = Astro.props;
 const { data } = speaker;
+const initials = getSpeakerInitials(data.name);
 ---
 
 <div class="speaker-card">
   <div class="speaker-card__header">
     <div class="speaker-card__avatar">
       {data.avatar ? (
-        <img src={data.avatar} alt={data.name} class="avatar-img" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='flex';" />
+        <img 
+          src={data.avatar} 
+          alt={data.name} 
+          class="avatar-img" 
+          loading="lazy" 
+          decoding="async"
+          onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='flex';" 
+        />
         <span class="avatar-initials" style="display: none;">
-          {data.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+          {initials}
         </span>
       ) : (
         <span class="avatar-initials">
-          {data.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+          {initials}
         </span>
       )}
     </div>
@@ -41,14 +50,14 @@ const { data } = speaker;
   <div class="speaker-card__footer">
     <div class="speaker-card__links">
       {data.github && (
-        <a href={data.github} target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
+        <a href={data.github} target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label={`${data.name} on GitHub`}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
           </svg>
         </a>
       )}
       {data.linkedin && (
-        <a href={data.linkedin} target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+        <a href={data.linkedin} target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label={`${data.name} on LinkedIn`}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
             <rect x="2" y="9" width="4" height="12"/>
@@ -56,13 +65,27 @@ const { data } = speaker;
           </svg>
         </a>
       )}
+      {data.twitter && (
+        <a href={data.twitter} target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label={`${data.name} on Twitter / X`}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+          </svg>
+        </a>
+      )}
     </div>
 
-    {data.slidesUrl && (
-      <a href={data.slidesUrl} target="_blank" rel="noopener noreferrer" class="speaker-card__slides">
-        <span>View Slides →</span>
-      </a>
-    )}
+    <div class="speaker-card__media-links">
+      {data.slidesUrl && (
+        <a href={data.slidesUrl} target="_blank" rel="noopener noreferrer" class="speaker-card__slides">
+          <span>Slides →</span>
+        </a>
+      )}
+      {data.recordingUrl && (
+        <a href={data.recordingUrl} target="_blank" rel="noopener noreferrer" class="speaker-card__slides">
+          <span>Recording →</span>
+        </a>
+      )}
+    </div>
   </div>
 </div>
 
@@ -201,6 +224,13 @@ const { data } = speaker;
   .social-icon-btn:hover {
     color: var(--color-accent);
     border-color: var(--color-accent);
+  }
+
+  .speaker-card__media-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
   }
 
   .speaker-card__slides {

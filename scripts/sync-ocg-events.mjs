@@ -13,6 +13,9 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import YAML from 'yaml';
 import { CANCELED, UPCOMING, isEventCanceled, resolveEventStatus } from '../src/lib/event-lifecycle.mjs';
+import { normalizeSpeakerKey } from '../src/lib/speaker-key.mjs';
+
+export { normalizeSpeakerKey };
 
 export const DEFAULT_OCG_GROUP_URL = 'https://ocgroups.dev/cncf/group/6vwk2n4';
 export const DEFAULT_EVENTS_DIR = path.resolve(process.cwd(), 'src/content/events');
@@ -691,13 +694,17 @@ export async function syncEvents(options = {}) {
       // 7. Cover Image: STRICTLY PRESERVE manual cover image
       const mergedCoverImage = exFm.coverImage || ocgEvent.coverImage;
 
-      // 8. Speakers: Preserve manual speakers and union with new ones
+      // 8. Speakers: Preserve manual speakers and union with new ones without duplicates
       const existingSpeakers = Array.isArray(exFm.speakers) ? exFm.speakers : [];
       const ocgSpeakers = Array.isArray(ocgEvent.speakers) ? ocgEvent.speakers : [];
       const mergedSpeakers = [...existingSpeakers];
       for (const sp of ocgSpeakers) {
-        const spName = sp.split('(')[0].trim().toLowerCase();
-        const exists = existingSpeakers.some(s => s.split('(')[0].trim().toLowerCase() === spName);
+        const spKey = normalizeSpeakerKey(sp);
+        const exists = existingSpeakers.some(s => {
+          const sKey = normalizeSpeakerKey(s);
+          if (sKey && spKey && sKey === spKey) return true;
+          return s.split('(')[0].trim().toLowerCase() === sp.split('(')[0].trim().toLowerCase();
+        });
         if (!exists) {
           mergedSpeakers.push(sp);
         }

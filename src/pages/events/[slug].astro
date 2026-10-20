@@ -1,7 +1,9 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SpeakerCard from '../../components/SpeakerCard.astro';
 import { formatEventDateLabel, resolveEventStatus, CANCELED, UPCOMING } from '../../lib/event-lifecycle.mjs';
+import { resolveEventSpeakers } from '../../lib/speakers';
 
 export async function getStaticPaths() {
   const events = await getCollection('events');
@@ -18,6 +20,10 @@ interface Props {
 const { event } = Astro.props;
 const { data } = event;
 const { Content } = await event.render();
+
+// Resolve event speakers against approved profiles collection
+const allSpeakers = await getCollection('speakers');
+const resolvedSpeakers = resolveEventSpeakers(data.speakers, allSpeakers);
 
 // Lifecycle is derived from the schedule so stale `status` frontmatter cannot
 // present a concluded event with live registration calls to action.
@@ -115,17 +121,35 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </div>
 
       <!-- Structured Speakers Listing -->
-      {data.speakers && data.speakers.length > 0 && (
-        <div class="event-speakers-box">
-          <h2 class="speakers-box-title">Featured Speakers & Instructors</h2>
-          <div class="speakers-chips">
-            {data.speakers.map((speakerName: string) => (
-              <div class="speaker-pill">
-                <span class="speaker-pill__name">{speakerName}</span>
-              </div>
+      {resolvedSpeakers.length > 0 && (
+        <section class="event-speakers-box" aria-labelledby="event-speakers-heading">
+          <h2 id="event-speakers-heading" class="speakers-box-title">Featured Speakers & Instructors</h2>
+          <div class="event-speakers-grid">
+            {resolvedSpeakers.map((speaker) => (
+              speaker.entry ? (
+                <SpeakerCard speaker={speaker.entry} />
+              ) : (
+                <div class="speaker-card speaker-card--display-only">
+                  <div class="speaker-card__header">
+                    <div class="speaker-card__avatar">
+                      <span class="avatar-initials">
+                        {speaker.initials}
+                      </span>
+                    </div>
+
+                    <div class="speaker-card__profile">
+                      <h3 class="speaker-card__name">{speaker.name}</h3>
+                      <p class="speaker-card__role">{speaker.role}</p>
+                      {speaker.organization && (
+                        <p class="speaker-card__org">{speaker.organization}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )
             ))}
           </div>
-        </div>
+        </section>
       )}
 
       <!-- Markdown Body -->
@@ -232,7 +256,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     gap: var(--space-xs);
   }
 
-  /* Speakers Box */
+  /* Speakers Section */
   .event-speakers-box {
     margin-bottom: var(--space-2xl);
     padding: var(--space-lg);
@@ -243,24 +267,74 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   .speakers-box-title {
     font-size: var(--font-size-xl);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
     color: var(--color-ink);
   }
 
-  .speakers-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
+  .event-speakers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
   }
 
-  .speaker-pill {
-    padding: 0.4rem 0.85rem;
+  @media (min-width: 640px) {
+    .event-speakers-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
+
+  /* Display-only fallback card styles */
+  .speaker-card--display-only {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(var(--space-md), 4vw, var(--space-xl));
     background-color: var(--color-paper-subtle);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-md);
+  }
+
+  .speaker-card--display-only .speaker-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .speaker-card--display-only .speaker-card__avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--color-accent-subtle);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .speaker-card--display-only .avatar-initials {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-base);
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
+
+  .speaker-card--display-only .speaker-card__name {
+    font-size: var(--font-size-xl);
+    margin-bottom: 2px;
     color: var(--color-ink);
+  }
+
+  .speaker-card--display-only .speaker-card__role {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .speaker-card--display-only .speaker-card__org {
+    font-size: var(--font-size-xs);
+    font-family: var(--font-mono);
+    color: var(--color-accent);
   }
 
   /* Prose Styling */

@@ -624,8 +624,8 @@ export async function parseCfpIssue(params = {}) {
   const speakerFilePath = path.join(speakersDir, `${speakerSlug}.md`);
   const eventFilePath = path.join(eventsDir, `${eventSlug}.md`);
 
-  const relSpeakerPath = path.relative(baseDir, speakerFilePath);
-  const relEventPath = path.relative(baseDir, eventFilePath);
+  const relSpeakerPath = path.relative(baseDir, speakerFilePath).split(path.sep).join('/');
+  const relEventPath = path.relative(baseDir, eventFilePath).split(path.sep).join('/');
   const branchName = `cfp/issue-${issueNumber}-${speakerSlug}`;
   const prTitle = `[CFP] Proposal: ${talkTitle} - ${speakerName}`;
 

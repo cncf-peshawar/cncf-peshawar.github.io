@@ -30,12 +30,13 @@ import { runTier7Suite } from './tier7-mobile-header.test.mjs';
 import { runTier8Suite } from './tier8-nav-drawer-overflow.test.mjs';
 import { runTier9Suite } from './tier9-touch-targets.test.mjs';
 import { runTier10Suite } from './tier10-nav-drawer-a11y.test.mjs';
+import { runTier11Suite } from './tier11-speaker-profiles.test.mjs';
 
 async function main() {
   const globalStart = Date.now();
 
   console.log(`\n================================================================================`);
-  console.log(`🚀 STARTING CLOUD NATIVE PESHAWAR AUTOMATION 10-TIER E2E TEST RUNNER`);
+  console.log(`🚀 STARTING CLOUD NATIVE PESHAWAR AUTOMATION 11-TIER E2E TEST RUNNER`);
   console.log(`================================================================================\n`);
 
   const results = [];
@@ -138,6 +139,16 @@ async function main() {
   } catch (err) {
     console.error('Fatal error in Tier 10:', err);
     results.push({ name: 'Tier 10: Nav Drawer Keyboard Accessibility', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
+  }
+
+  // Run Tier 11
+  try {
+    const t11Start = Date.now();
+    const t11 = await runTier11Suite();
+    results.push({ name: 'Tier 11: Speaker Profiles & Event Refs', ...t11, timeMs: Date.now() - t11Start });
+  } catch (err) {
+    console.error('Fatal error in Tier 11:', err);
+    results.push({ name: 'Tier 11: Speaker Profiles & Event Refs', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
   }
 
   const globalDuration = Date.now() - globalStart;
