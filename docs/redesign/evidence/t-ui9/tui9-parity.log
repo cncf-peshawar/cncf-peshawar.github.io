@@ -1,0 +1,13 @@
+--- PER-ROUTE AUDIT ---
+PASS: / ("Cloud Native Peshawar — Official CNCF Community Group")
+PASS: /events/ ("Events & Meetups | CNCF Peshawar")
+PASS: /events/01-cncf-peshawar-genesis/ ("CNCF Peshawar Genesis | CNCF Peshawar")
+PASS: /events/02-the-cloud-native-launchpad-docker-kubernetes-real-deployments/ ("The Cloud Native Launchpad: Docker, Kubernetes & Real Deployments | CNCF Peshawar")
+PASS: /speak/ ("Speaker Hub & Call for Proposals | CNCF Peshawar")
+PASS: /sponsors/ ("Sponsorship Prospectus | CNCF Peshawar")
+PASS: /team/ ("Organizers & Team | CNCF Peshawar")
+PASS: /team/tech-team/ ("Tech Team | CNCF Peshawar Team")
+PASS: /blog/ ("Blog & Community Recaps | CNCF Peshawar")
+PASS: /code-of-conduct/ ("Code of Conduct | CNCF Peshawar")
+--- SUMMARY ---
+{"totalRoutesScanned":10,"successful":10,"failures":0,"exitCode":0}
