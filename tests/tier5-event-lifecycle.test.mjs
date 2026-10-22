@@ -42,7 +42,6 @@ import {
 } from '../src/lib/event-lifecycle.mjs';
 
 const EVENTS_DIR = path.resolve('src/content/events');
-const GENESIS_FILE = path.join(EVENTS_DIR, '01-cncf-peshawar-genesis.md');
 
 /** Wrap frontmatter in a minimal collection entry so the shared selectors can be used. */
 function asEntry(frontmatter, slug = 'test-event') {
