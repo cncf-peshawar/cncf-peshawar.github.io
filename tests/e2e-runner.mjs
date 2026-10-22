@@ -3,7 +3,7 @@
  * Master E2E Test Suite Runner
  * Cloud Native Peshawar Automation Suite
  * 
- * Orchestrates the comprehensive 10-tier opaque-box E2E test suite:
+ * Orchestrates the comprehensive 12-tier opaque-box E2E test suite:
  * - Tier 1: Feature Coverage (F1 - F8)
  * - Tier 2: Boundary & Corner Cases (F1 - F8)
  * - Tier 3: Cross-Feature Integration (F1 - F8)
@@ -31,12 +31,13 @@ import { runTier8Suite } from './tier8-nav-drawer-overflow.test.mjs';
 import { runTier9Suite } from './tier9-touch-targets.test.mjs';
 import { runTier10Suite } from './tier10-nav-drawer-a11y.test.mjs';
 import { runTier11Suite } from './tier11-speaker-profiles.test.mjs';
+import { runTier12Suite } from './tier12-contact-delivery.test.mjs';
 
 async function main() {
   const globalStart = Date.now();
 
   console.log(`\n================================================================================`);
-  console.log(`🚀 STARTING CLOUD NATIVE PESHAWAR AUTOMATION 11-TIER E2E TEST RUNNER`);
+  console.log(`🚀 STARTING CLOUD NATIVE PESHAWAR AUTOMATION 12-TIER E2E TEST RUNNER`);
   console.log(`================================================================================\n`);
 
   const results = [];
@@ -149,6 +150,16 @@ async function main() {
   } catch (err) {
     console.error('Fatal error in Tier 11:', err);
     results.push({ name: 'Tier 11: Speaker Profiles & Event Refs', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
+  }
+
+  // Run Tier 12
+  try {
+    const t12Start = Date.now();
+    const t12 = await runTier12Suite();
+    results.push({ name: 'Tier 12: Contact Delivery', ...t12, timeMs: Date.now() - t12Start });
+  } catch (err) {
+    console.error('Fatal error in Tier 12:', err);
+    results.push({ name: 'Tier 12: Contact Delivery', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
   }
 
   const globalDuration = Date.now() - globalStart;

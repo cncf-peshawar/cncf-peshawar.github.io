@@ -1,8 +1,7 @@
-# Contact Form Delivery & Relay Operational Runbook
+# Contact Form Delivery Runbook
 
-**Service Name:** CNCF Peshawar Contact Ingestion Flow  
 **Target Recipient:** `cncfpeshawar@gmail.com`  
-**Relay Mechanism:** FormSubmit.co AJAX Endpoint (`https://formsubmit.co/ajax/cncfpeshawar@gmail.com`)  
+**Relay:** FormSubmit.co AJAX endpoint (`https://formsubmit.co/ajax/cncfpeshawar@gmail.com`)
 **Public Route:** `/contact`
 
 ---
@@ -15,13 +14,13 @@
             ▼ (Browser JSON POST via AJAX)
 [https://formsubmit.co/ajax/cncfpeshawar@gmail.com]
             │
-            ▼ (Encrypted SMTP Relay)
+            ▼ (FormSubmit forwards the submission)
 [Organizer Inbox: cncfpeshawar@gmail.com]
 ```
 
-- **Client Implementation:** Pure browser-side fetch (`Accept: application/json`, `Content-Type: application/json`).
-- **No Private Keys / Secrets:** No API keys, passwords, or tokens are embedded in client-side bundles.
-- **Privacy Policy & Processing Disclosure:** The `/contact` page explicitly discloses that FormSubmit processes submitted data as a transmission relay to deliver email, does not retain database records or track visitors for advertising, and links directly to [FormSubmit Privacy Policy](https://formsubmit.co/privacy).
+- The browser sends JSON to FormSubmit with `Accept: application/json` and `Content-Type: application/json`.
+- The client bundle contains no API keys, passwords, or tokens.
+- FormSubmit processes each submission, forwards it to the organizer inbox, and may retain it for up to 30 days in a submission archive. See the [FormSubmit documentation](https://formsubmit.co/documentation) and [privacy policy](https://formsubmit.co/privacy).
 
 ---
 
@@ -35,7 +34,7 @@
 
 ---
 
-## 3. FormSubmit Recipient Activation Procedure
+## 3. FormSubmit Recipient Activation
 
 FormSubmit requires an initial one-time recipient verification to prevent unsolicited inbox spamming:
 
@@ -45,16 +44,16 @@ FormSubmit requires an initial one-time recipient verification to prevent unsoli
    - FormSubmit dispatches an email to `cncfpeshawar@gmail.com` with subject: `Action Required: Activate FormSubmit`.
 3. **Activation Confirmation:**
    - An organizer logged into `cncfpeshawar@gmail.com` clicks the **"Activate Form"** verification button.
-   - Once confirmed, FormSubmit automatically whitelists `cncfpeshawar@gmail.com` for incoming AJAX submissions originating from the website domain.
+   - FormSubmit then accepts submissions for `cncfpeshawar@gmail.com`.
 4. **Reactivation & Recovery:**
-   - If the recipient email is ever modified or domain authorization is reset, an organizer must repeat the activation link confirmation within 24 hours.
+   - If the recipient address changes or FormSubmit resets activation, an organizer repeats this procedure.
 
 ---
 
 ## 4. Spam Controls & Ingestion Rules
 
 - **Honeypot Field (`_honey`):** Hidden offscreen (`position: absolute; left: -9999px`), omitted from keyboard tab index (`tabindex="-1"`), and hidden from screen readers (`aria-hidden="true"`). Automated crawlers filling this field are silently dropped with no error feedback.
-- **`_captcha: false` Setting:** Suppresses HTML captcha interstitials during AJAX requests so the client receives a structured JSON payload rather than an unexpected redirect.
+- **`_captcha: false` Setting:** Disables FormSubmit's CAPTCHA. FormSubmit warns that disabling CAPTCHA can trigger service limits. Keep the honeypot and monitor legitimate delivery after changes.
 - **Form Fields Validated:** Full Name, Email Address, Subject, and Message are required before dispatch.
 
 ---
@@ -69,11 +68,18 @@ If the FormSubmit relay encounters an outage, network failure, or returns a non-
 
 ---
 
-## 6. Verification Checklist
+## 6. Verification Record
 
-- [x] Form submission succeeds and returns HTTP 200 with `{ "success": "true" }`.
-- [x] Success message displays only after positive response from relay.
-- [x] Direct email fallback is visible and operable on relay errors.
-- [x] Honeypot prevents spam without hindering legitimate users.
-- [x] Keyboard navigation and screen reader labels verified.
-- [x] Speaker-support / CFP promises aligned with actual volunteer and equipment availability.
+Automated tests cover response parsing, validation, and the fallback link. An organizer must complete the inbox checks after each production deployment that changes the form.
+
+| Check | Status | Date | Tester | Evidence |
+|---|---|---|---|---|
+| FormSubmit accepts a production submission from a non-organizer address | Pending | | | Record the response and test message identifier |
+| The message reaches `cncfpeshawar@gmail.com` | Pending | | | Record the inbox timestamp and subject; do not store message contents here |
+| The message avoids silent spam filtering | Pending | | | Check Inbox and Spam |
+| Keyboard navigation works on mobile and desktop | Pending | | | Record browsers and devices |
+| Screen-reader labels and status announcements work | Pending | | | Record screen reader and browser |
+| Relay failure shows the prefilled direct-email fallback | Covered by automated and browser tests | | | Link the CI run and browser-test note |
+| Success UI requires a valid positive FormSubmit response | Covered by automated tests | | | Link the CI run |
+
+Do not mark the production-delivery rows complete until the organizer confirms the message in the destination inbox.
