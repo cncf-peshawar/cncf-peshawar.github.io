@@ -45,9 +45,9 @@ const initials = (name: string) =>
       </p>
     </div>
 
-    <div class="exec-grid" data-reveal-group>
-      {sortedTeam.map(member => (
-        <article class="exec-card brutal-card" data-reveal-item>
+    <div class="exec-grid">
+      {sortedTeam.map((member, index) => (
+        <article class="exec-card brutal-card" data-reveal>
           <div class="exec-card__header">
             <div class="exec-card__photo">
               {member.data.avatar ? (
@@ -56,6 +56,7 @@ const initials = (name: string) =>
                   alt={member.data.name}
                   loading="lazy"
                   decoding="async"
+                  fetchpriority={index >= 3 ? "low" : "auto"}
                   width="80"
                   height="80"
                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
@@ -127,11 +128,11 @@ const initials = (name: string) =>
       </p>
     </div>
 
-    <div class="wg-container wg-tabs" data-reveal-group aria-label="Open Community Groups">
+    <div class="wg-container wg-tabs" aria-label="Open Community Groups">
       {workingGroups.map(group => {
         const groupColor = group.slug === 'tech-team' ? 'lilac' : group.slug === 'events-team' ? 'orange' : group.slug === 'community-outreach' ? 'mint' : 'periwinkle';
         return (
-          <a href={`${base}/team/${group.slug}`} class={`wg-card brutal-card wg-card--${groupColor}`} data-reveal-item>
+          <a href={`${base}/team/${group.slug}`} class={`wg-card brutal-card wg-card--${groupColor}`} data-reveal>
             <div class="wg-card__top">
               <span class={`badge badge--${groupColor}`}>{group.code}</span>
               <span class="wg-card__count">{group.members.length} {group.members.length === 1 ? 'MEMBER' : 'MEMBERS'}</span>
@@ -142,7 +143,7 @@ const initials = (name: string) =>
               {group.members.slice(0, 8).map(member => (
                 <span class="wg-card__avatar" title={member.data.name}>
                   {getAvatarSrc(member.data.avatar || member.data.photo) ? (
-                    <img src={getAvatarSrc(member.data.avatar || member.data.photo)!} alt={member.data.name} loading="lazy" decoding="async" width="32" height="32" />
+                    <img src={getAvatarSrc(member.data.avatar || member.data.photo)!} alt={member.data.name} loading="lazy" decoding="async" fetchpriority="low" width="32" height="32" />
                   ) : (
                     <span>{initials(member.data.name)}</span>
                   )}
@@ -277,6 +278,11 @@ const initials = (name: string) =>
     max-width: var(--page-max-width);
     margin: 0 auto;
     position: relative;
+  }
+
+  .section-wrap:not(:first-of-type) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
   }
 
   .section-wrap--alt {
@@ -486,6 +492,7 @@ const initials = (name: string) =>
     box-shadow: var(--shadow-hard-sm);
     overflow: hidden;
     flex-shrink: 0;
+    contain: strict;
     background: var(--color-cream-paper);
     display: flex;
     align-items: center;
