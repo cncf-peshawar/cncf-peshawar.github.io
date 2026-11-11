@@ -1,0 +1,494 @@
+
+> cncf-peshawar.github.io@1.0.0 check
+> astro check
+
+12:31:49 [content] Syncing content
+12:31:49 [WARN] [glob-loader] No files found matching "**/*{.md,.mdx},!**/_*/**/*{.md,.mdx},!**/_*{.md,.mdx}" in directory "src/content/speakers"
+12:31:49 [content] Synced content
+12:31:49 [types] Generated 476ms
+12:31:49 [check] Getting diagnostics for Astro files in /home/alucard/Documents/CNCF/cncf-peshawar.github.io-main...
+[96mtests/adversarial-m1-timezone-idempotency-cli.test.mjs[0m:[93m293[0m:[93m9[0m - [93mwarning[0m[90m ts(6133): [0m'pass1' is declared but its value is never read.
+
+[7m293[0m   const pass1 = await syncEvents({ source: tempFile, eventsDir: tempDir });
+[7m   [0m [93m        ~~~~~[0m
+[96mtests/adversarial-m1-timezone-idempotency-cli.test.mjs[0m:[93m33[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'computeDirSha256Map' is declared but its value is never read.
+
+[7m33[0m function computeDirSha256Map(dirPath) {
+[7m  [0m [93m         ~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/adversarial-m1-timezone-idempotency-cli.test.mjs[0m:[93m25[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'DEFAULT_TIMEZONE' is declared but its value is never read.
+
+[7m25[0m   DEFAULT_TIMEZONE
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~[0m
+[96mtests/adversarial-m1-timezone-idempotency-cli.test.mjs[0m:[93m23[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgGroupHtml' is declared but its value is never read.
+
+[7m23[0m   parseOcgGroupHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+[96mtests/adversarial-m1-timezone-idempotency-cli.test.mjs[0m:[93m22[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgEventHtml' is declared but its value is never read.
+
+[7m22[0m   parseOcgEventHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+
+[96mtests/test-utils.mjs[0m:[93m7[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'execFileSync' is declared but its value is never read.
+
+[7m7[0m import { execFileSync, spawnSync } from 'node:child_process';
+[7m [0m [93m         ~~~~~~~~~~~~[0m
+[96mtests/test-utils.mjs[0m:[93m6[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'assert' is declared but its value is never read.
+
+[7m6[0m import assert from 'node:assert/strict';
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m41[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'generateEventFrontmatter' is declared but its value is never read.
+
+[7m41[0m   generateEventFrontmatter,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m40[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'generateSpeakerFrontmatter' is declared but its value is never read.
+
+[7m40[0m   generateSpeakerFrontmatter,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m39[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'extractTrackTags' is declared but its value is never read.
+
+[7m39[0m   extractTrackTags,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~[0m
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m38[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'extractSocialLinks' is declared but its value is never read.
+
+[7m38[0m   extractSocialLinks,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m37[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseRoleAndOrg' is declared but its value is never read.
+
+[7m37[0m   parseRoleAndOrg,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~[0m
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m36[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'cleanValue' is declared but its value is never read.
+
+[7m36[0m   cleanValue,
+[7m  [0m [93m  ~~~~~~~~~~[0m
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m33[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseIssueSections' is declared but its value is never read.
+
+[7m33[0m   parseIssueSections,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~[0m
+
+[96mtests/tier2-boundary-corner.test.mjs[0m:[93m45[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'generateEventFrontmatter' is declared but its value is never read.
+
+[7m45[0m   generateEventFrontmatter,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier2-boundary-corner.test.mjs[0m:[93m44[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'generateSpeakerFrontmatter' is declared but its value is never read.
+
+[7m44[0m   generateSpeakerFrontmatter,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier2-boundary-corner.test.mjs[0m:[93m39[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'isValidUrl' is declared but its value is never read.
+
+[7m39[0m   isValidUrl,
+[7m  [0m [93m  ~~~~~~~~~~[0m
+[96mtests/tier2-boundary-corner.test.mjs[0m:[93m37[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseIssueSections' is declared but its value is never read.
+
+[7m37[0m   parseIssueSections,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier2-boundary-corner.test.mjs[0m:[93m21[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'runCommand' is declared but its value is never read.
+
+[7m21[0m   runCommand
+[7m  [0m [93m  ~~~~~~~~~~[0m
+[96mtests/tier2-boundary-corner.test.mjs[0m:[93m18[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'validateSpeakerFrontmatter' is declared but its value is never read.
+
+[7m18[0m   validateSpeakerFrontmatter,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96mtests/tier3-cross-feature.test.mjs[0m:[93m77[0m:[93m13[0m - [93mwarning[0m[90m ts(6133): [0m'parsed' is declared but its value is never read.
+
+[7m77[0m       const parsed = await parseCfpIssue({
+[7m  [0m [93m            ~~~~~~[0m
+[96mtests/tier3-cross-feature.test.mjs[0m:[93m56[0m:[93m30[0m - [93mwarning[0m[90m ts(6133): [0m'body' is declared but its value is never read.
+
+[7m56[0m         const { frontmatter, body } = extractFrontmatter(content);
+[7m  [0m [93m                             ~~~~[0m
+[96mtests/tier3-cross-feature.test.mjs[0m:[93m26[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgGroupHtml' is declared but its value is never read.
+
+[7m26[0m   parseOcgGroupHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier3-cross-feature.test.mjs[0m:[93m25[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgEventHtml' is declared but its value is never read.
+
+[7m25[0m   parseOcgEventHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier3-cross-feature.test.mjs[0m:[93m13[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'YAML' is declared but its value is never read.
+
+[7m13[0m import YAML from 'yaml';
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96mtests/tier4-real-world.test.mjs[0m:[93m502[0m:[93m28[0m - [93mwarning[0m[90m ts(6133): [0m'body' is declared but its value is never read.
+
+[7m502[0m       const { frontmatter, body } = extractFrontmatter(fs.readFileSync(eventPath, 'utf-8'));
+[7m   [0m [93m                           ~~~~[0m
+[96mtests/tier4-real-world.test.mjs[0m:[93m31[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgGroupHtml' is declared but its value is never read.
+
+[7m31[0m   parseOcgGroupHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier4-real-world.test.mjs[0m:[93m30[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgEventHtml' is declared but its value is never read.
+
+[7m30[0m   parseOcgEventHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier4-real-world.test.mjs[0m:[93m26[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'runCommand' is declared but its value is never read.
+
+[7m26[0m   runCommand
+[7m  [0m [93m  ~~~~~~~~~~[0m
+[96mtests/tier4-real-world.test.mjs[0m:[93m24[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'validateBlogFrontmatter' is declared but its value is never read.
+
+[7m24[0m   validateBlogFrontmatter,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier4-real-world.test.mjs[0m:[93m18[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'YAML' is declared but its value is never read.
+
+[7m18[0m import YAML from 'yaml';
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96mtests/tier5-adversarial-r3-cross-subsystem.test.mjs[0m:[93m25[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'resolveTargetFile' is declared but its value is never read.
+
+[7m25[0m   resolveTargetFile
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier5-adversarial-r3-cross-subsystem.test.mjs[0m:[93m24[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'isExternalOrIgnored' is declared but its value is never read.
+
+[7m24[0m   isExternalOrIgnored,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier5-adversarial-r3-cross-subsystem.test.mjs[0m:[93m23[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'extractElementIdentifiers' is declared but its value is never read.
+
+[7m23[0m   extractElementIdentifiers,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier5-adversarial-r3-cross-subsystem.test.mjs[0m:[93m22[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'extractLinksFromHtml' is declared but its value is never read.
+
+[7m22[0m   extractLinksFromHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier5-adversarial-r3-cross-subsystem.test.mjs[0m:[93m21[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseArgs' is declared but its value is never read.
+
+[7m21[0m   parseArgs,
+[7m  [0m [93m  ~~~~~~~~~[0m
+
+[96mtests/stress/run-stress-tests.mjs[0m:[93m15[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'loadExistingEvents' is declared but its value is never read.
+
+[7m15[0m   loadExistingEvents
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~[0m
+[96mtests/stress/run-stress-tests.mjs[0m:[93m14[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseUserChips' is declared but its value is never read.
+
+[7m14[0m   parseUserChips,
+[7m  [0m [93m  ~~~~~~~~~~~~~~[0m
+[96mtests/stress/run-stress-tests.mjs[0m:[93m13[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'normalizeTimeRange' is declared but its value is never read.
+
+[7m13[0m   normalizeTimeRange,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~[0m
+[96mtests/stress/run-stress-tests.mjs[0m:[93m12[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'convertUtcToPkt' is declared but its value is never read.
+
+[7m12[0m   convertUtcToPkt,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~[0m
+[96mtests/stress/run-stress-tests.mjs[0m:[93m11[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'slugify' is declared but its value is never read.
+
+[7m11[0m   slugify,
+[7m  [0m [93m  ~~~~~~~[0m
+[96mtests/stress/run-stress-tests.mjs[0m:[93m8[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgGroupHtml' is declared but its value is never read.
+
+[7m8[0m   parseOcgGroupHtml,
+[7m [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+
+Result (71 files): 
+- 0 errors
+- 0 warnings
+- 42 hints
+
+
+> cncf-peshawar.github.io@1.0.0 build
+> astro check && astro build
+
+12:32:02 [content] Syncing content
+12:32:02 [WARN] [glob-loader] No files found matching "**/*{.md,.mdx},!**/_*/**/*{.md,.mdx},!**/_*{.md,.mdx}" in directory "src/content/speakers"
+12:32:02 [content] Synced content
+12:32:02 [types] Generated 503ms
+12:32:02 [check] Getting diagnostics for Astro files in /home/alucard/Documents/CNCF/cncf-peshawar.github.io-main...
+[96mtests/adversarial-m1-timezone-idempotency-cli.test.mjs[0m:[93m293[0m:[93m9[0m - [93mwarning[0m[90m ts(6133): [0m'pass1' is declared but its value is never read.
+
+[7m293[0m   const pass1 = await syncEvents({ source: tempFile, eventsDir: tempDir });
+[7m   [0m [93m        ~~~~~[0m
+[96mtests/adversarial-m1-timezone-idempotency-cli.test.mjs[0m:[93m33[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'computeDirSha256Map' is declared but its value is never read.
+
+[7m33[0m function computeDirSha256Map(dirPath) {
+[7m  [0m [93m         ~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/adversarial-m1-timezone-idempotency-cli.test.mjs[0m:[93m25[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'DEFAULT_TIMEZONE' is declared but its value is never read.
+
+[7m25[0m   DEFAULT_TIMEZONE
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~[0m
+[96mtests/adversarial-m1-timezone-idempotency-cli.test.mjs[0m:[93m23[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgGroupHtml' is declared but its value is never read.
+
+[7m23[0m   parseOcgGroupHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+[96mtests/adversarial-m1-timezone-idempotency-cli.test.mjs[0m:[93m22[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgEventHtml' is declared but its value is never read.
+
+[7m22[0m   parseOcgEventHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+
+[96mtests/test-utils.mjs[0m:[93m7[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'execFileSync' is declared but its value is never read.
+
+[7m7[0m import { execFileSync, spawnSync } from 'node:child_process';
+[7m [0m [93m         ~~~~~~~~~~~~[0m
+[96mtests/test-utils.mjs[0m:[93m6[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'assert' is declared but its value is never read.
+
+[7m6[0m import assert from 'node:assert/strict';
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m41[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'generateEventFrontmatter' is declared but its value is never read.
+
+[7m41[0m   generateEventFrontmatter,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m40[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'generateSpeakerFrontmatter' is declared but its value is never read.
+
+[7m40[0m   generateSpeakerFrontmatter,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m39[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'extractTrackTags' is declared but its value is never read.
+
+[7m39[0m   extractTrackTags,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~[0m
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m38[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'extractSocialLinks' is declared but its value is never read.
+
+[7m38[0m   extractSocialLinks,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m37[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseRoleAndOrg' is declared but its value is never read.
+
+[7m37[0m   parseRoleAndOrg,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~[0m
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m36[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'cleanValue' is declared but its value is never read.
+
+[7m36[0m   cleanValue,
+[7m  [0m [93m  ~~~~~~~~~~[0m
+[96mtests/tier1-feature-coverage.test.mjs[0m:[93m33[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseIssueSections' is declared but its value is never read.
+
+[7m33[0m   parseIssueSections,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~[0m
+
+[96mtests/tier2-boundary-corner.test.mjs[0m:[93m45[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'generateEventFrontmatter' is declared but its value is never read.
+
+[7m45[0m   generateEventFrontmatter,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier2-boundary-corner.test.mjs[0m:[93m44[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'generateSpeakerFrontmatter' is declared but its value is never read.
+
+[7m44[0m   generateSpeakerFrontmatter,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier2-boundary-corner.test.mjs[0m:[93m39[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'isValidUrl' is declared but its value is never read.
+
+[7m39[0m   isValidUrl,
+[7m  [0m [93m  ~~~~~~~~~~[0m
+[96mtests/tier2-boundary-corner.test.mjs[0m:[93m37[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseIssueSections' is declared but its value is never read.
+
+[7m37[0m   parseIssueSections,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier2-boundary-corner.test.mjs[0m:[93m21[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'runCommand' is declared but its value is never read.
+
+[7m21[0m   runCommand
+[7m  [0m [93m  ~~~~~~~~~~[0m
+[96mtests/tier2-boundary-corner.test.mjs[0m:[93m18[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'validateSpeakerFrontmatter' is declared but its value is never read.
+
+[7m18[0m   validateSpeakerFrontmatter,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96mtests/tier3-cross-feature.test.mjs[0m:[93m77[0m:[93m13[0m - [93mwarning[0m[90m ts(6133): [0m'parsed' is declared but its value is never read.
+
+[7m77[0m       const parsed = await parseCfpIssue({
+[7m  [0m [93m            ~~~~~~[0m
+[96mtests/tier3-cross-feature.test.mjs[0m:[93m56[0m:[93m30[0m - [93mwarning[0m[90m ts(6133): [0m'body' is declared but its value is never read.
+
+[7m56[0m         const { frontmatter, body } = extractFrontmatter(content);
+[7m  [0m [93m                             ~~~~[0m
+[96mtests/tier3-cross-feature.test.mjs[0m:[93m26[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgGroupHtml' is declared but its value is never read.
+
+[7m26[0m   parseOcgGroupHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier3-cross-feature.test.mjs[0m:[93m25[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgEventHtml' is declared but its value is never read.
+
+[7m25[0m   parseOcgEventHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier3-cross-feature.test.mjs[0m:[93m13[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'YAML' is declared but its value is never read.
+
+[7m13[0m import YAML from 'yaml';
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96mtests/tier4-real-world.test.mjs[0m:[93m502[0m:[93m28[0m - [93mwarning[0m[90m ts(6133): [0m'body' is declared but its value is never read.
+
+[7m502[0m       const { frontmatter, body } = extractFrontmatter(fs.readFileSync(eventPath, 'utf-8'));
+[7m   [0m [93m                           ~~~~[0m
+[96mtests/tier4-real-world.test.mjs[0m:[93m31[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgGroupHtml' is declared but its value is never read.
+
+[7m31[0m   parseOcgGroupHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier4-real-world.test.mjs[0m:[93m30[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgEventHtml' is declared but its value is never read.
+
+[7m30[0m   parseOcgEventHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier4-real-world.test.mjs[0m:[93m26[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'runCommand' is declared but its value is never read.
+
+[7m26[0m   runCommand
+[7m  [0m [93m  ~~~~~~~~~~[0m
+[96mtests/tier4-real-world.test.mjs[0m:[93m24[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'validateBlogFrontmatter' is declared but its value is never read.
+
+[7m24[0m   validateBlogFrontmatter,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier4-real-world.test.mjs[0m:[93m18[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'YAML' is declared but its value is never read.
+
+[7m18[0m import YAML from 'yaml';
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96mtests/tier5-adversarial-r3-cross-subsystem.test.mjs[0m:[93m25[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'resolveTargetFile' is declared but its value is never read.
+
+[7m25[0m   resolveTargetFile
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier5-adversarial-r3-cross-subsystem.test.mjs[0m:[93m24[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'isExternalOrIgnored' is declared but its value is never read.
+
+[7m24[0m   isExternalOrIgnored,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier5-adversarial-r3-cross-subsystem.test.mjs[0m:[93m23[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'extractElementIdentifiers' is declared but its value is never read.
+
+[7m23[0m   extractElementIdentifiers,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier5-adversarial-r3-cross-subsystem.test.mjs[0m:[93m22[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'extractLinksFromHtml' is declared but its value is never read.
+
+[7m22[0m   extractLinksFromHtml,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~~~[0m
+[96mtests/tier5-adversarial-r3-cross-subsystem.test.mjs[0m:[93m21[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseArgs' is declared but its value is never read.
+
+[7m21[0m   parseArgs,
+[7m  [0m [93m  ~~~~~~~~~[0m
+
+[96mtests/stress/run-stress-tests.mjs[0m:[93m15[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'loadExistingEvents' is declared but its value is never read.
+
+[7m15[0m   loadExistingEvents
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~[0m
+[96mtests/stress/run-stress-tests.mjs[0m:[93m14[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseUserChips' is declared but its value is never read.
+
+[7m14[0m   parseUserChips,
+[7m  [0m [93m  ~~~~~~~~~~~~~~[0m
+[96mtests/stress/run-stress-tests.mjs[0m:[93m13[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'normalizeTimeRange' is declared but its value is never read.
+
+[7m13[0m   normalizeTimeRange,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~[0m
+[96mtests/stress/run-stress-tests.mjs[0m:[93m12[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'convertUtcToPkt' is declared but its value is never read.
+
+[7m12[0m   convertUtcToPkt,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~[0m
+[96mtests/stress/run-stress-tests.mjs[0m:[93m11[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'slugify' is declared but its value is never read.
+
+[7m11[0m   slugify,
+[7m  [0m [93m  ~~~~~~~[0m
+[96mtests/stress/run-stress-tests.mjs[0m:[93m8[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'parseOcgGroupHtml' is declared but its value is never read.
+
+[7m8[0m   parseOcgGroupHtml,
+[7m [0m [93m  ~~~~~~~~~~~~~~~~~[0m
+
+Result (71 files): 
+- 0 errors
+- 0 warnings
+- 42 hints
+
+12:32:14 [content] Syncing content
+12:32:14 [WARN] [glob-loader] No files found matching "**/*{.md,.mdx},!**/_*/**/*{.md,.mdx},!**/_*{.md,.mdx}" in directory "src/content/speakers"
+12:32:14 [content] Synced content
+12:32:14 [types] Generated 487ms
+12:32:14 [build] output: "static"
+12:32:14 [build] mode: "static"
+12:32:14 [build] directory: /home/alucard/Documents/CNCF/cncf-peshawar.github.io-main/dist/
+12:32:14 [build] Collecting build info...
+12:32:14 [build] ✓ Completed in 528ms.
+12:32:14 [build] Building static entrypoints...
+12:32:16 [vite] ✓ built in 2.71s
+12:32:16 [build] ✓ Completed in 2.76s.
+
+ building client (vite) 
+12:32:16 [vite] transforming...
+12:32:17 [vite] ✓ 296 modules transformed.
+12:32:17 [vite] rendering chunks...
+12:32:17 [vite] computing gzip size...
+12:32:17 [vite] dist/_astro/BaseLayout.astro_astro_type_script_index_0_lang.OX6IP19n.js  76.24 kB │ gzip: 25.95 kB
+12:32:17 [vite] ✓ built in 652ms
+
+ generating static routes 
+12:32:17 ▶ src/pages/404.astro
+12:32:17   └─ /404.html (+14ms) 
+12:32:17 ▶ src/pages/admin/index.astro
+12:32:17   └─ /admin/index.html (+37ms) 
+12:32:17 ▶ src/pages/blog/[slug].astro
+12:32:17   └─ /blog/announcing-cncf-peshawar/index.html (+5ms) 
+12:32:17 ▶ src/pages/blog/index.astro
+12:32:17   └─ /blog/index.html (+4ms) 
+12:32:17 ▶ src/pages/code-of-conduct.astro
+12:32:17   └─ /code-of-conduct/index.html (+3ms) 
+12:32:17 ▶ src/pages/dev-kit.astro
+12:32:17   └─ /dev-kit/index.html (+18ms) 
+12:32:17 ▶ src/pages/events/[slug].astro
+12:32:17   ├─ /events/01-cncf-peshawar-genesis/index.html (+3ms) 
+12:32:17   └─ /events/02-the-cloud-native-launchpad-docker-kubernetes-real-deployments/index.html (+2ms) 
+12:32:17 ▶ src/pages/events/index.astro
+12:32:17   └─ /events/index.html (+6ms) 
+12:32:17 ▶ src/pages/index.astro
+12:32:17   └─ /index.html (+5ms) 
+12:32:17 ▶ src/pages/speak.astro
+12:32:17   └─ /speak/index.htmlThe collection "speakers" does not exist or is empty. Please check your content config file for errors.
+ (+6ms) 
+12:32:17 ▶ src/pages/sponsors.astro
+12:32:17   └─ /sponsors/index.html (+8ms) 
+12:32:17 ▶ src/pages/team/[group].astro
+12:32:17   ├─ /team/tech-team/index.html (+4ms) 
+12:32:17   ├─ /team/events-team/index.html (+3ms) 
+12:32:17   ├─ /team/community-outreach/index.html (+2ms) 
+12:32:17   └─ /team/design-media/index.html (+2ms) 
+12:32:17 ▶ src/pages/team.astro
+12:32:17   └─ /team/index.html (+17ms) 
+12:32:17 ✓ Completed in 220ms.
+
+ generating optimized images 
+12:32:17   ▶ /_astro/ahmad-aziz-khattak.nNSNyBix_1afe3M.webp (reused cache entry) (+1ms) (1/54)
+12:32:17   ▶ /_astro/hamid-naeem.Cx5C67_S_ZPTkWp.webp (reused cache entry) (+1ms) (2/54)
+12:32:17   ▶ /_astro/syed-hassan-tayyab.BA9nrPMQ_1jxFTb.webp (reused cache entry) (+2ms) (3/54)
+12:32:17   ▶ /_astro/farza-shahzad.DupGI_AM_ZCzC0K.webp (reused cache entry) (+1ms) (4/54)
+12:32:17   ▶ /_astro/rayyan-shaheer.Dk_0VzGb_1CdQsx.webp (reused cache entry) (+1ms) (5/54)
+12:32:17   ▶ /_astro/warisha-danin-bilal.s9uqJFE3_7qHwU.webp (reused cache entry) (+2ms) (6/54)
+12:32:17   ▶ /_astro/zeerak-khan-khattak.n7i-_HXg_Z1zcYpR.webp (reused cache entry) (+2ms) (7/54)
+12:32:17   ▶ /_astro/anas-khan.CYI0ckWO_Z1VzGkF.webp (reused cache entry) (+2ms) (8/54)
+12:32:17   ▶ /_astro/hamid-naeem.Cx5C67_S_Z19V0JH.webp (reused cache entry) (+1ms) (9/54)
+12:32:17   ▶ /_astro/syed-hassan-tayyab.BA9nrPMQ_5yEbc.webp (reused cache entry) (+1ms) (10/54)
+12:32:17   ▶ /_astro/ahmad-aziz-khattak.nNSNyBix_rnDRV.webp (reused cache entry) (+2ms) (11/54)
+12:32:17   ▶ /_astro/farza-shahzad.DupGI_AM_1nLnVq.webp (reused cache entry) (+1ms) (12/54)
+12:32:17   ▶ /_astro/zeerak-khan-khattak.n7i-_HXg_Z2kNSFc.webp (reused cache entry) (+1ms) (13/54)
+12:32:17   ▶ /_astro/rayyan-shaheer.Dk_0VzGb_mmYuz.webp (reused cache entry) (+2ms) (14/54)
+12:32:17   ▶ /_astro/anas-khan.CYI0ckWO_xr89H.webp (reused cache entry) (+1ms) (15/54)
+12:32:17   ▶ /_astro/warisha-danin-bilal.s9uqJFE3_ZvCuY9.webp (reused cache entry) (+2ms) (16/54)
+12:32:17   ▶ /_astro/hammad-zeb-khan.Cb_FUxtq_ZzJQKH.webp (reused cache entry) (+1ms) (17/54)
+12:32:17   ▶ /_astro/sidra-tul-muntaha.BsMhZ6iK_Zq5tEc.webp (reused cache entry) (+1ms) (18/54)
+12:32:17   ▶ /_astro/zala-abbas.NoKtl1iT_Z1IRFLY.webp (reused cache entry) (+1ms) (19/54)
+12:32:17   ▶ /_astro/muhammad-ali.BLbeJ1UZ_Z3RYMp.webp (reused cache entry) (+1ms) (20/54)
+12:32:17   ▶ /_astro/raifa-shah.8B01Y4b6_Z1p0SWb.webp (reused cache entry) (+1ms) (21/54)
+12:32:17   ▶ /_astro/muskan.BZenEcpN_Z1BLwKc.webp (reused cache entry) (+1ms) (22/54)
+12:32:17   ▶ /_astro/jalwa-ghafar.CssqUujj_ZE0Vdw.webp (reused cache entry) (+1ms) (23/54)
+12:32:17   ▶ /_astro/syed-ahmad-ameer-shah-gillani.iXQCRcdS_ZwC829.webp (reused cache entry) (+1ms) (24/54)
+12:32:17   ▶ /_astro/hammad-zeb-khan.Cb_FUxtq_1erWUN.webp (reused cache entry) (+1ms) (25/54)
+12:32:17   ▶ /_astro/sidra-tul-muntaha.BsMhZ6iK_1ua9DX.webp (reused cache entry) (+1ms) (26/54)
+12:32:17   ▶ /_astro/zala-abbas.NoKtl1iT_Z1vlzXP.webp (reused cache entry) (+1ms) (27/54)
+12:32:17   ▶ /_astro/raifa-shah.8B01Y4b6_Z1btN92.webp (reused cache entry) (+1ms) (28/54)
+12:32:17   ▶ /_astro/muhammad-ali.BLbeJ1UZ_j2yd7.webp (reused cache entry) (+1ms) (29/54)
+12:32:17   ▶ /_astro/muskan.BZenEcpN_11hsI4.webp (reused cache entry) (+1ms) (30/54)
+12:32:17   ▶ /_astro/jalwa-ghafar.CssqUujj_1cOql0.webp (reused cache entry) (+1ms) (31/54)
+12:32:17   ▶ /_astro/syed-ahmad-ameer-shah-gillani.iXQCRcdS_1kdewn.webp (reused cache entry) (+1ms) (32/54)
+12:32:17   ▶ /_astro/ferdous-ali.shhA4PUD_ZjWlTr.webp (reused cache entry) (+1ms) (33/54)
+12:32:17   ▶ /_astro/hasnain-ahmad.BbauDwyv_Z2aRyjd.webp (reused cache entry) (+1ms) (34/54)
+12:32:17   ▶ /_astro/abdullah.L7gUMGDa_ZmuU8Q.webp (reused cache entry) (+1ms) (35/54)
+12:32:17   ▶ /_astro/aiman-shams.SMXw7uLA_YDDLV.webp (reused cache entry) (+1ms) (36/54)
+12:32:17   ▶ /_astro/zakirullah-khan.DTkHl997_1lkJSs.webp (reused cache entry) (+1ms) (37/54)
+12:32:17   ▶ /_astro/muhammad-mujtaba.2cD2zkjF_LbUzi.webp (reused cache entry) (+1ms) (38/54)
+12:32:17   ▶ /_astro/tehreem-jamil.Cbz1xSZr_9OhXd.webp (reused cache entry) (+1ms) (39/54)
+12:32:17   ▶ /_astro/javeria-khan.D9rB9FHQ_1kgbmG.webp (reused cache entry) (+1ms) (40/54)
+12:32:17   ▶ /_astro/ferdous-ali.shhA4PUD_1ae73l.webp (reused cache entry) (+1ms) (41/54)
+12:32:17   ▶ /_astro/hasnain-ahmad.BbauDwyv_2lF32I.webp (reused cache entry) (+1ms) (42/54)
+12:32:17   ▶ /_astro/abdullah.L7gUMGDa_2gy5kp.webp (reused cache entry) (+1ms) (43/54)
+12:32:17   ▶ /_astro/aiman-shams.SMXw7uLA_2tP7JI.webp (reused cache entry) (+1ms) (44/54)
+12:32:17   ▶ /_astro/muhammad-mujtaba.2cD2zkjF_ZQxTSB.webp (reused cache entry) (+1ms) (45/54)
+12:32:17   ▶ /_astro/zakirullah-khan.DTkHl997_26auXS.webp (reused cache entry) (+1ms) (46/54)
+12:32:17   ▶ /_astro/tehreem-jamil.Cbz1xSZr_ZnOetM.webp (reused cache entry) (+1ms) (47/54)
+12:32:17   ▶ /_astro/javeria-khan.D9rB9FHQ_F2idY.webp (reused cache entry) (+1ms) (48/54)
+12:32:17   ▶ /_astro/muhammad-anas.DYctDd3J_zAlc2.webp (reused cache entry) (+0ms) (49/54)
+12:32:17   ▶ /_astro/lyaba-farooq.BC9x6Bfa_LixKD.webp (reused cache entry) (+0ms) (50/54)
+12:32:17   ▶ /_astro/hamid-ali.BCnE7trE_Z1AK7hO.webp (reused cache entry) (+1ms) (51/54)
+12:32:17   ▶ /_astro/muhammad-anas.DYctDd3J_Z1Ws4oh.webp (reused cache entry) (+0ms) (52/54)
+12:32:17   ▶ /_astro/hamid-ali.BCnE7trE_Z1ne1tF.webp (reused cache entry) (+0ms) (53/54)
+12:32:17   ▶ /_astro/lyaba-farooq.BC9x6Bfa_Z1KJQOF.webp (reused cache entry) (+1ms) (54/54)
+12:32:17 ✓ Completed in 12ms.
+
+12:32:17 [build] 17 page(s) built in 4.21s
+12:32:17 [build] Complete!
