@@ -156,12 +156,12 @@ const isUpcoming = data.status === 'upcoming';
   }
 
   .event-card:hover {
-    transform: translate(3px, -3px);
+    transform: translate(3px, -3px) !important;
     box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
   }
 
   .event-card:active {
-    transform: none;
+    transform: none !important;
     transition: transform 30ms ease-in-out;
   }
 

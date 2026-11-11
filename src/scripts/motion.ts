@@ -87,16 +87,28 @@ function initReveals() {
     return;
   }
 
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+
   // 1. Single reveals
   const singleReveals = document.querySelectorAll<HTMLElement>('[data-reveal]:not([data-reveal-group] [data-reveal])');
   singleReveals.forEach((el) => {
-    inView(el, () => {
+    const trigger = () => {
       animate(el, { opacity: [0, 1], transform: ['translateY(100px)', 'none'] }, {
         duration: 0.4,
         ease: [0.16, 1, 0.3, 1],
+      }).then(() => {
+        el.style.transform = '';
+        el.style.opacity = '';
       });
       el.classList.add('is-revealed');
-    }, { margin: '0px 0px -15% 0px' });
+    };
+
+    const rect = el.getBoundingClientRect();
+    if (rect.top <= vh) {
+      trigger();
+    } else {
+      inView(el, trigger, { margin: '0px 0px -40px 0px' });
+    }
   });
 
   // 2. Staggered reveal groups (e.g. card grids, feature lists)
@@ -104,14 +116,27 @@ function initReveals() {
   revealGroups.forEach((group) => {
     const items = group.querySelectorAll<HTMLElement>('[data-reveal-item]');
     if (items.length > 0) {
-      inView(group, () => {
+      const trigger = () => {
         animate(items, { opacity: [0, 1], transform: ['translateY(100px)', 'none'] }, {
           delay: stagger(0.08),
           duration: 0.4,
           ease: [0.16, 1, 0.3, 1],
+        }).then(() => {
+          items.forEach((item) => {
+            item.style.transform = '';
+            item.style.opacity = '';
+          });
         });
         items.forEach((item) => item.classList.add('is-revealed'));
-      }, { margin: '0px 0px -15% 0px' });
+        group.classList.add('is-revealed');
+      };
+
+      const groupRect = group.getBoundingClientRect();
+      if (groupRect.top <= vh) {
+        trigger();
+      } else {
+        inView(group, trigger, { margin: '0px 0px -40px 0px' });
+      }
     }
   });
 
@@ -126,6 +151,9 @@ function initReveals() {
       duration: 0.3,
       delay: 0.06,
       ease: [0.16, 1, 0.3, 1],
+    }).then(() => {
+      heroEyebrow.style.transform = '';
+      heroEyebrow.style.opacity = '';
     });
   }
 
@@ -134,6 +162,9 @@ function initReveals() {
       duration: 0.3,
       delay: 0.12,
       ease: [0.16, 1, 0.3, 1],
+    }).then(() => {
+      heroLede.style.transform = '';
+      heroLede.style.opacity = '';
     });
   }
 
@@ -144,6 +175,11 @@ function initReveals() {
         duration: 0.35,
         delay: stagger(0.1, { startDelay: 0.18 }),
         ease: [0.16, 1, 0.3, 1],
+      }).then(() => {
+        actionChildren.forEach((child) => {
+          child.style.transform = '';
+          child.style.opacity = '';
+        });
       });
     }
   }
@@ -153,6 +189,11 @@ function initReveals() {
       duration: 0.45,
       delay: stagger(0.08, { startDelay: 0.24 }),
       ease: [0.16, 1, 0.3, 1],
+    }).then(() => {
+      heroDoodles.forEach((doodle) => {
+        doodle.style.transform = '';
+        doodle.style.opacity = '';
+      });
     });
   }
 }

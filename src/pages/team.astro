@@ -34,14 +34,14 @@ function getLocalTeamAsset(avatar?: string): ImageMetadata | null {
   description="Meet the passionate engineers, community leads, and volunteers organizing the Cloud Native Chapter in Peshawar."
 >
   <!-- Page Hero -->
-  <section class="page-hero" data-reveal>
+  <section class="page-hero">
     <div class="page-hero__inner">
-      <div class="page-hero__eyebrow">
+      <div class="page-hero__eyebrow" data-hero-eyebrow>
         <span class="badge badge--yellow">00 // LEADERSHIP</span>
         <span class="eyebrow-text">COMMUNITY OPERATORS</span>
       </div>
       <h1 class="page-hero__title">The Team Behind Cloud Native Peshawar.</h1>
-      <p class="page-hero__desc">
+      <p class="page-hero__desc" data-hero-lede>
         Cloud Native Peshawar is organized by passionate engineers, researchers, and open-source advocates dedicated to growing the cloud native ecosystem in Khyber Pakhtunkhwa.
       </p>
     </div>
@@ -542,11 +542,21 @@ function getLocalTeamAsset(avatar?: string): ImageMetadata | null {
   }
 
   .exec-card:hover {
-    transform: translate(3px, -3px);
+    transform: translate(3px, -3px) !important;
   }
 
   .exec-card:hover::after {
     opacity: 1;
+  }
+
+  .exec-card:active {
+    transform: none !important;
+    transition: transform 30ms ease-in-out;
+  }
+
+  .exec-card:active::after {
+    opacity: 0;
+    transition: opacity 30ms ease-in-out;
   }
 
   .exec-card__header {
@@ -687,7 +697,7 @@ function getLocalTeamAsset(avatar?: string): ImageMetadata | null {
   }
 
   .wg-card:hover {
-    transform: translate(3px, -3px);
+    transform: translate(3px, -3px) !important;
   }
 
   .wg-card:hover::after {
@@ -695,7 +705,7 @@ function getLocalTeamAsset(avatar?: string): ImageMetadata | null {
   }
 
   .wg-card:active {
-    transform: none;
+    transform: none !important;
     transition: transform 30ms ease-in-out;
   }
 

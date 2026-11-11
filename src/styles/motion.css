@@ -25,7 +25,8 @@ html.js-motion:not(.motion-reduced) [data-reveal-group] [data-reveal-item]:not(.
   will-change: transform, opacity;
 }
 
-html.js-motion:not(.motion-reduced) .is-revealed {
+html.js-motion:not(.motion-reduced) [data-reveal].is-revealed,
+html.js-motion:not(.motion-reduced) [data-reveal-group] [data-reveal-item].is-revealed {
   opacity: 1;
   transform: none;
   transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1), transform 400ms cubic-bezier(0.16, 1, 0.3, 1);

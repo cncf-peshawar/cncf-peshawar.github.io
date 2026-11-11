@@ -27,7 +27,7 @@ const postDate = new Date(data.publishDate).toLocaleDateString('en-US', {
 
 <BaseLayout title={`${data.title} | CNCF Peshawar`} description={data.description}>
   <!-- Top Breadcrumb & Back Link -->
-  <div class="breadcrumb-container" data-reveal>
+  <div class="breadcrumb-container">
     <div class="breadcrumb-inner">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/`}>Home</a>
@@ -43,9 +43,9 @@ const postDate = new Date(data.publishDate).toLocaleDateString('en-US', {
   </div>
 
   <!-- Article Header / Hero -->
-  <section class="page-hero" data-reveal>
+  <section class="page-hero">
     <div class="page-hero__inner">
-      <div class="page-hero__eyebrow">
+      <div class="page-hero__eyebrow" data-hero-eyebrow>
         <span class="badge badge--yellow">ANNOUNCEMENT</span>
         <span class="eyebrow-text">{postDate}</span>
       </div>

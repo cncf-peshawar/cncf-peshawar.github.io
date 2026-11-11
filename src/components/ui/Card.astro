@@ -138,13 +138,13 @@ const accentClass =
   }
 
   .card--interactive:hover {
-    transform: translate(3px, -3px);
+    transform: translate(3px, -3px) !important;
     box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
     background-color: var(--color-ice-wash);
   }
 
   .card--interactive:active {
-    transform: translate(0, 0);
+    transform: translate(0, 0) !important;
     box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
     transition: transform 60ms ease-in-out, box-shadow 60ms ease-in-out;
   }

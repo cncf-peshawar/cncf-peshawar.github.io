@@ -72,7 +72,7 @@ const eventJsonLd = (data.title && data.date) ? {
   </div>
 
   <!-- Page Hero -->
-  <header class="event-hero" data-reveal>
+  <header class="event-hero">
     <div class="event-hero-inner">
       <div class="event-hero-eyebrow" data-hero-eyebrow>
         {data.status === 'upcoming' ? (
@@ -615,11 +615,11 @@ const eventJsonLd = (data.title && data.date) ? {
   }
 
   .btn:hover {
-    transform: translate(7px, -7px);
+    transform: translate(7px, -7px) !important;
   }
 
   .btn:active {
-    transform: none;
+    transform: none !important;
     transition: transform 30ms ease-in-out;
   }
 
