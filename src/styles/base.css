@@ -238,3 +238,241 @@ main .post-card__title a:focus-visible {
   align-items: center !important;
 }
 
+/* -------------------------------------------------------------------------- */
+/* GLOBAL BUTTON PRIMITIVES & MOTHERDUCK TACTILE HOVER COLOR PHYSICS          */
+/* -------------------------------------------------------------------------- */
+.btn,
+a.btn,
+button.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8, 8px);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-body, 0.875rem);
+  font-weight: 600;
+  line-height: var(--line-height-snug, 1.2);
+  letter-spacing: var(--letter-spacing-normal, 0.02em);
+  padding: 10px 22px;
+  min-height: 44px;
+  border-radius: var(--radius-brutal, 2px);
+  border: 2px solid var(--color-charcoal-ink);
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+  user-select: none;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  transition: transform 120ms ease-in-out, background-color 150ms ease-in-out, box-shadow 120ms ease-in-out, color 150ms ease-in-out;
+}
+
+.btn:hover,
+a.btn:hover,
+button.btn:hover {
+  text-decoration: none !important;
+  transform: translate(2px, -2px);
+  box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+}
+
+.btn:active,
+a.btn:active,
+button.btn:active {
+  transform: translate(-2px, 2px);
+  box-shadow: 0px 0px 0px 0px transparent;
+  transition: transform 40ms ease-in-out, box-shadow 40ms ease-in-out;
+}
+
+.btn:focus-visible,
+a.btn:focus-visible,
+button.btn:focus-visible {
+  outline: 3px solid var(--color-charcoal-ink);
+  outline-offset: 3px;
+}
+
+/* Sizing Modifiers */
+.btn-sm,
+.btn--sm,
+a.btn-sm,
+a.btn--sm,
+button.btn-sm,
+button.btn--sm {
+  padding: 6px 14px;
+  font-size: var(--font-size-caption, 0.75rem);
+  min-height: 34px;
+  box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink);
+}
+
+.btn-sm:hover,
+.btn--sm:hover,
+a.btn-sm:hover,
+a.btn--sm:hover,
+button.btn-sm:hover,
+button.btn--sm:hover {
+  transform: translate(2px, -2px);
+  box-shadow: -4px 4px 0px 0px var(--color-charcoal-ink);
+}
+
+.btn-sm:active,
+.btn--sm:active,
+a.btn-sm:active,
+a.btn--sm:active,
+button.btn-sm:active,
+button.btn--sm:active {
+  transform: translate(-1px, 1px);
+  box-shadow: 0px 0px 0px 0px transparent;
+}
+
+.btn-lg,
+.btn--lg,
+a.btn-lg,
+a.btn--lg,
+button.btn-lg,
+button.btn--lg {
+  padding: 14px 30px;
+  font-size: var(--font-size-body-lg, 1rem);
+  min-height: 52px;
+  box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+}
+
+.btn-lg:hover,
+.btn--lg:hover,
+a.btn-lg:hover,
+a.btn--lg:hover,
+button.btn-lg:hover,
+button.btn--lg:hover {
+  transform: translate(3px, -3px);
+  box-shadow: -8px 8px 0px 0px var(--color-charcoal-ink);
+}
+
+.btn-block,
+.btn--block,
+a.btn-block,
+a.btn--block,
+button.btn-block,
+button.btn--block {
+  width: 100%;
+  display: flex;
+}
+
+/* Variant: Outline / Secondary (Default White Surface -> Sky Blue on Hover) */
+.btn-outline,
+.btn--outline,
+.btn-secondary,
+.btn--secondary,
+a.btn-outline,
+a.btn--outline,
+a.btn-secondary,
+a.btn--secondary,
+button.btn-outline,
+button.btn--outline,
+button.btn-secondary,
+button.btn--secondary {
+  background-color: var(--color-frost-white);
+  color: var(--color-charcoal-ink);
+  border-color: var(--color-charcoal-ink);
+}
+
+.btn-outline:hover,
+.btn--outline:hover,
+.btn-secondary:hover,
+.btn--secondary:hover,
+a.btn-outline:hover,
+a.btn--outline:hover,
+a.btn-secondary:hover,
+a.btn--secondary:hover,
+button.btn-outline:hover,
+button.btn--outline:hover,
+button.btn-secondary:hover,
+button.btn--secondary:hover {
+  background-color: var(--color-sky-crayon) !important;
+  color: var(--color-charcoal-ink) !important;
+}
+
+/* Variant: Sky / Primary (Sky Blue -> Canary Yellow on Hover) */
+.btn-sky,
+.btn--sky,
+.btn-primary,
+.btn--primary,
+.btn--accent,
+a.btn-sky,
+a.btn--sky,
+a.btn-primary,
+a.btn--primary,
+a.btn--accent,
+button.btn-sky,
+button.btn--sky,
+button.btn-primary,
+button.btn--primary,
+button.btn--accent {
+  background-color: var(--color-sky-crayon);
+  color: var(--color-charcoal-ink);
+  border-color: var(--color-charcoal-ink);
+}
+
+.btn-sky:hover,
+.btn--sky:hover,
+.btn-primary:hover,
+.btn--primary:hover,
+.btn--accent:hover,
+a.btn-sky:hover,
+a.btn--sky:hover,
+a.btn-primary:hover,
+a.btn--primary:hover,
+a.btn--accent:hover,
+button.btn-sky:hover,
+button.btn--sky:hover,
+button.btn-primary:hover,
+button.btn--primary:hover,
+button.btn--accent:hover {
+  background-color: var(--color-canary-banner) !important;
+  color: var(--color-charcoal-ink) !important;
+}
+
+/* Variant: Canary (Yellow Banner -> Sky Blue on Hover) */
+.btn-canary,
+.btn--canary,
+a.btn-canary,
+a.btn--canary,
+button.btn-canary,
+button.btn--canary {
+  background-color: var(--color-canary-banner);
+  color: var(--color-charcoal-ink);
+  border-color: var(--color-charcoal-ink);
+}
+
+.btn-canary:hover,
+.btn--canary:hover,
+a.btn-canary:hover,
+a.btn--canary:hover,
+button.btn-canary:hover,
+button.btn--canary:hover {
+  background-color: var(--color-sky-crayon) !important;
+  color: var(--color-charcoal-ink) !important;
+}
+
+/* Disabled State */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn:hover,
+  .btn:active,
+  a.btn,
+  a.btn:hover,
+  a.btn:active,
+  button.btn,
+  button.btn:hover,
+  button.btn:active {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
