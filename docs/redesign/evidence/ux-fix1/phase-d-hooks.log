@@ -1,0 +1,14 @@
+email-builder home= sponsors=section
+tiers home= sponsors=section
+sponsor-form home= sponsors=form
+org-name home= sponsors=input
+contact-name home= sponsors=input
+contact-email home= sponsors=input
+tier-select home= sponsors=select
+timeline-select home= sponsors=select
+org-website home= sponsors=input
+scope-notes home= sponsors=textarea
+email-preview-text home= sponsors=pre
+send-mailto-btn home= sponsors=a
+copy-template-btn home= sponsors=button
+copy-btn-text home= sponsors=span

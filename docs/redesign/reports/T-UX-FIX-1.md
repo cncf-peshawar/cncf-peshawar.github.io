@@ -2,7 +2,7 @@
 
 **Date:** 14 November 2026 (Asia/Karachi)  
 **Branch:** `redesign/ui-motherduck`  
-**Status:** Resumed under CTO Amendment 1; Phases A–C complete. The Phase 0 stop and its evidence remain below as a historical record.
+**Status:** Resumed under CTO Amendment 1; Phases A–D complete. The Phase 0 stop and its evidence remain below as a historical record.
 
 ## Stop condition
 
@@ -161,6 +161,34 @@ The local four-state probe records reduced rest/hover `none`, with blue → yell
 
 **Phase C battery:** [build](../evidence/ux-fix1/phase-c-build.log) 17 pages, Astro check 0 errors / 0 warnings / 42 hints; [unsandboxed tests](../evidence/ux-fix1/phase-c-tests.log) 119/119; [links](../evidence/ux-fix1/phase-c-links.log) 700 verified, 0 broken. No Phase C test amendment was needed.
 
+## Phase D — Sponsors builder
+
+**UX-03.** File: `src/components/sponsors/SponsorshipEmailBuilder.astro`. Both Copy Email Text and Open in Email App validate company, contact, and email before acting. Invalid fields receive visible per-field errors, `aria-invalid`, `aria-describedby`, a polite status message, and first-invalid focus. The static and dynamic mailto href stays on the local builder anchor until all three fields are valid. Valid copy retains a success label and live-region message.
+
+> “Empty or invalid input can never produce ‘Copied’ success or open a mailto; the first invalid field is identified to assistive-tech users; frozen hooks survive.”
+
+At 390px, the empty-copy and empty-mailto attempts focused `org-name`, left the clipboard empty and the URL at `/sponsors/`, and exposed all three field descriptions. The `invalid-email` attempt focused `contact-email`, with no copy. A valid email produced a mailto with the entered values and copied the full text. [Interaction log](../evidence/ux-fix1/phase-d-probes.json) · [invalid after](../evidence/ux-fix1/UX-03-sponsors-390-invalid-after.png) · [valid after](../evidence/ux-fix1/UX-03-sponsors-390-after.png) · [before](../evidence/ux-fix1/UX-03-sponsors-390-before.png). The [grep element-type proof](../evidence/ux-fix1/phase-d-hooks.log) shows all 14 canonical hooks on Sponsors and zero on Home.
+
+**UX-05.** Files: `src/pages/sponsors.astro`, `src/components/sponsors/SponsorshipEmailBuilder.astro`. Commitment text uses charcoal; all five marked field labels say `(required)` in words, with charcoal text.
+
+> “Measured ratios ≥ 4.5:1 for commitments (on white AND the featured surface) and required indicators; every required field is named in words.”
+
+Chrome measured 11.73:1 for commitments on white, 11.16:1 on the pale featured card, and 11.73:1 for each required label on white. [Computed ratios](../evidence/ux-fix1/phase-d-probes.json) · [before](../evidence/ux-fix1/UX-05-sponsors-390-before.png) / [after](../evidence/ux-fix1/UX-05-sponsors-390-after.png).
+
+**UX-10.** File: `src/components/sponsors/SponsorshipEmailBuilder.astro`. Visible option labels now use the tier-card names; detailed qualifiers remain in option values for proposal text, and associated help text explains the options below the control.
+
+> “At 390 and 360, the selected option's full label is visible with no clipping.”
+
+Every label fit the conservative control inner width, including the longest `Annual Ecosystem Partner` at 202.20px against 266px at 390 and 236px at 360. [Width measurements](../evidence/ux-fix1/phase-d-probes.json) · [audit before](../evidence/ux-fix1/UX-10-sponsors-390-audit-before.png) · [after 390](../evidence/ux-fix1/UX-10-sponsors-390-after.png) · [after 360](../evidence/ux-fix1/UX-10-sponsors-360-after.png).
+
+**UX-21.** Files: `src/components/sponsors/SponsorshipEmailBuilder.astro`, `src/scripts/motion.ts`. The preserved `section#email-builder` now sits in a stable, non-revealing wrapper. The existing deep-link URL remains intact; Lenis scrolls the wrapper with a 24px top offset, and native scrolling gets `scroll-margin-top`.
+
+> “Heading top `y ≥ 0` after settle, for both navigation paths, @390.”
+
+After both direct `?tier=Venue%20Host%20Partner#email-builder` load and a settled tier-CTA click, Chrome measured section y=23.66px, eyebrow y=59.66px, heading y=84.84px, with the correct tier selected. [Bounds and URL](../evidence/ux-fix1/phase-d-probes.json) · [direct after](../evidence/ux-fix1/UX-21-sponsors-direct-390-after.png) · [CTA after](../evidence/ux-fix1/UX-21-sponsors-cta-390-after.png) · [before](../evidence/ux-fix1/UX-21-sponsors-390-before.png).
+
+**Phase D battery:** [build](../evidence/ux-fix1/phase-d-build.log) 17 pages, Astro check 0 errors / 0 warnings / 42 hints; [unsandboxed tests](../evidence/ux-fix1/phase-d-tests.log) 119/119; [links](../evidence/ux-fix1/phase-d-links.log) 701 verified, 0 broken. No Phase D test amendment was needed. The +1 link-count delta is consistent with the builder's new local fragment href; no link-checker per-link breakdown was captured.
+
 ## Remaining work
 
-Phases D–G remain to be executed. The old stop report above describes the pre-amendment state and does not describe the current implementation status.
+Phases E–G remain to be executed. The old stop report above describes the pre-amendment state and does not describe the current implementation status.

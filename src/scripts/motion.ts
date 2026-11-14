@@ -26,7 +26,10 @@ function initLenis() {
       const hashTarget = document.querySelector(window.location.hash);
       if (hashTarget instanceof HTMLElement) {
         setTimeout(() => {
-          lenisInstance?.scrollTo(hashTarget, { offset: 0, immediate: true });
+          const scrollTarget = hashTarget.id === 'email-builder'
+            ? hashTarget.closest<HTMLElement>('.builder-anchor') ?? hashTarget
+            : hashTarget;
+          lenisInstance?.scrollTo(scrollTarget, { offset: hashTarget.id === 'email-builder' ? -24 : 0, immediate: true });
         }, 60);
       }
     }
@@ -56,7 +59,10 @@ function initLenis() {
         const dest = document.getElementById(targetId);
         if (dest) {
           event.preventDefault();
-          lenisInstance?.scrollTo(dest, { offset: 0 });
+          const scrollTarget = targetId === 'email-builder'
+            ? dest.closest<HTMLElement>('.builder-anchor') ?? dest
+            : dest;
+          lenisInstance?.scrollTo(scrollTarget, { offset: targetId === 'email-builder' ? -24 : 0 });
 
           // Maintain accessible keyboard focus without page jump
           dest.setAttribute('tabindex', '-1');
