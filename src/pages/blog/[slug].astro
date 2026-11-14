@@ -1,5 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
+import Marquee from '../../components/ui/Marquee.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
@@ -78,31 +79,7 @@ const postDate = new Date(data.publishDate).toLocaleDateString('en-US', {
     </div>
   </article>
 
-  <!-- Marquee Strip -->
-  <div class="marquee-container" aria-hidden="true">
-    <div class="marquee-track">
-      <div class="marquee-content">
-        <span>KUBERNETES</span><span>·</span>
-        <span>DEVOPS</span><span>·</span>
-        <span>MLOPS</span><span>·</span>
-        <span>DISTRIBUTED SYSTEMS</span><span>·</span>
-        <span>AGENTIC AI</span><span>·</span>
-        <span>100% FREE COMMUNITY</span><span>·</span>
-        <span>OPEN TO ALL BUILDERS</span><span>·</span>
-        <span>KHYBER PAKHTUNKHWA</span><span>·</span>
-      </div>
-      <div class="marquee-content">
-        <span>KUBERNETES</span><span>·</span>
-        <span>DEVOPS</span><span>·</span>
-        <span>MLOPS</span><span>·</span>
-        <span>DISTRIBUTED SYSTEMS</span><span>·</span>
-        <span>AGENTIC AI</span><span>·</span>
-        <span>100% FREE COMMUNITY</span><span>·</span>
-        <span>OPEN TO ALL BUILDERS</span><span>·</span>
-        <span>KHYBER PAKHTUNKHWA</span><span>·</span>
-      </div>
-    </div>
-  </div>
+  <Marquee label="Article Community Topics Marquee" speed="25s" items={["KUBERNETES", "DEVOPS", "MLOPS", "DISTRIBUTED SYSTEMS", "AGENTIC AI", "100% FREE COMMUNITY", "OPEN TO ALL BUILDERS", "KHYBER PAKHTUNKHWA"]} />
 </BaseLayout>
 
 <style>
@@ -330,43 +307,6 @@ const postDate = new Date(data.publishDate).toLocaleDateString('en-US', {
   }
 
   /* ------------------------------------------------------------------ */
-  /* MARQUEE STRIP                                                      */
-  /* ------------------------------------------------------------------ */
-  .marquee-container {
-    width: 100%;
-    background: var(--color-canary-banner);
-    border-top: 2px solid var(--color-charcoal-ink);
-    border-bottom: 2px solid var(--color-charcoal-ink);
-    overflow: hidden;
-    padding: 10px 0;
-    white-space: nowrap;
-    user-select: none;
-  }
-
-  .marquee-track {
-    display: inline-flex;
-    animation: marqueeScroll 25s linear infinite;
-  }
-
-  .marquee-content {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-24);
-    font-family: var(--font-mono);
-    font-size: var(--font-size-caption);
-    font-weight: 700;
-    color: var(--color-charcoal-ink);
-    letter-spacing: var(--letter-spacing-wide);
-    text-transform: uppercase;
-    padding-right: var(--spacing-24);
-  }
-
-  @keyframes marqueeScroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* ------------------------------------------------------------------ */
   /* PREFERS-REDUCED-MOTION (PRM)                                       */
   /* ------------------------------------------------------------------ */
   @media (prefers-reduced-motion: reduce) {
@@ -374,9 +314,6 @@ const postDate = new Date(data.publishDate).toLocaleDateString('en-US', {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
-    }
-    .marquee-track {
-      animation: none !important;
     }
     .btn:hover {
       transform: none !important;

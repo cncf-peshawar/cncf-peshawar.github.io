@@ -106,6 +106,7 @@ function initReveals() {
       }).then(() => {
         el.style.transform = '';
         el.style.opacity = '';
+        el.classList.add('reveal-settled');
       });
       el.classList.add('is-revealed');
     };
@@ -134,6 +135,7 @@ function initReveals() {
           pendingItems.forEach((item) => {
             item.style.transform = '';
             item.style.opacity = '';
+            item.classList.add('reveal-settled');
           });
         });
         pendingItems.forEach((item) => item.classList.add('is-revealed'));
@@ -214,6 +216,7 @@ function revealFocusedAncestors(event: FocusEvent) {
     if (element.matches('[data-reveal], [data-reveal-item]') && !element.classList.contains('is-revealed')) {
       element.getAnimations().forEach(animation => animation.cancel());
       element.classList.add('is-revealed');
+      element.classList.add('reveal-settled');
       element.style.transition = 'none';
       element.style.opacity = '1';
       element.style.transform = 'none';

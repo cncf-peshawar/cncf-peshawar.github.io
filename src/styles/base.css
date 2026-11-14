@@ -206,6 +206,11 @@ main .post-card__title a:focus-visible {
   box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
 }
 
+.tier-card-wrapper .tier-card:hover {
+  transform: none;
+  box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
+}
+
 .tier-card:active {
   transform: none;
   transition: transform 30ms ease-in-out;
@@ -302,6 +307,17 @@ button.btn--sm {
   font-size: var(--font-size-caption, 0.75rem);
   min-height: 34px;
   box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink);
+}
+
+@media (max-width: 768px) {
+  .btn-sm,
+  .btn--sm,
+  a.btn-sm,
+  a.btn--sm,
+  button.btn-sm,
+  button.btn--sm {
+    min-height: 44px;
+  }
 }
 
 .btn-sm:hover,

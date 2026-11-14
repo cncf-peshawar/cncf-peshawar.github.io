@@ -5,6 +5,7 @@ import GenesisCountdown from '../components/GenesisCountdown.astro';
 import Mascot from '../components/ui/Mascot.astro';
 import CfpBand from '../components/CfpBand.astro';
 import LinkButton from '../components/ui/LinkButton.astro';
+import Marquee from '../components/ui/Marquee.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -177,7 +178,7 @@ const graph = {
       <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
       <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
     </div>
-    <button type="button" class="marquee-pause-btn" id="marquee-toggle-btn" aria-label="Pause marquee">PAUSE</button>
+    <button type="button" class="marquee-pause-btn" id="marquee-toggle-btn" aria-label="PAUSE Community Topics Marquee" aria-pressed="false">PAUSE</button>
   </div>
 
   <section class="charter-section" id="charter-section" data-reveal>
@@ -348,18 +349,11 @@ const graph = {
     </div>
     <div style="display: flex; gap: 12px; flex-wrap: wrap;">
       <LinkButton href={`${base}/sponsors`} variant="primary" size="sm">Become a Community Sponsor</LinkButton>
-      <LinkButton href={`${base}/sponsors`} variant="outline" size="sm">View Sponsorship Prospectus</LinkButton>
+      <LinkButton href={`${base}/assets/sponsorship-prospectus.pdf`} download="CNCF_Peshawar_Sponsorship_Prospectus.pdf" variant="outline" size="sm">View Sponsorship Prospectus</LinkButton>
     </div>
   </section>
 
-  <div class="marquee-strip" role="region" aria-label="Repeated Community Topics Marquee">
-    <div class="marquee-track">
-      <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
-      <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
-      <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
-      <span class="marquee-item">KUBERNETES · DEVOPS · MLOPS · AGENTIC AI · 100% FREE · OPEN TO ALL</span>
-    </div>
-  </div>
+  <Marquee label="Community Topics Footer Marquee" speed="24s" />
 </BaseLayout>
 
 <style>
@@ -647,6 +641,8 @@ const graph = {
     z-index: 20;
     font-family: var(--font-aeonik-mono, 'JetBrains Mono', monospace);
     color: var(--color-charcoal-ink);
+    min-height: 44px;
+    min-width: 44px;
   }
 
   @keyframes marquee-scroll {
@@ -733,7 +729,7 @@ const graph = {
   }
 
   .terminal-label {
-    color: var(--color-terminal-muted);
+    color: #858585;
   }
 
   .doodle-stack {
@@ -1096,6 +1092,10 @@ const graph = {
       animation: none !important;
     }
 
+    .marquee-pause-btn {
+      display: none;
+    }
+
     .fact-card,
     .fact-card:hover,
     .fact-card:active,
@@ -1123,6 +1123,8 @@ const graph = {
       marqueeBtn.addEventListener('click', () => {
         const isPaused = marqueeTrack.classList.toggle('is-paused');
         marqueeBtn.textContent = isPaused ? 'PLAY' : 'PAUSE';
+        marqueeBtn.setAttribute('aria-pressed', String(isPaused));
+        marqueeBtn.setAttribute('aria-label', `${isPaused ? 'PLAY' : 'PAUSE'} Community Topics Marquee`);
       });
     }
 

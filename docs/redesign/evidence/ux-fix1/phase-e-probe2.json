@@ -1,0 +1,288 @@
+{
+  "venue": {
+    "text": "rgb(56, 56, 56)",
+    "bg": "rgb(255, 222, 0)",
+    "selector": "event-card__venue",
+    "ratio": 8.766706036122965
+  },
+  "terminal": {
+    "text": "rgb(133, 133, 133)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "valueColor": "rgb(84, 180, 222)",
+    "ratio": 5.6910116432201034
+  },
+  "targets": [
+    {
+      "width": 390,
+      "path": "/",
+      "selector": ".marquee-pause-btn",
+      "values": [
+        {
+          "height": 44,
+          "text": "PAUSE",
+          "cls": "marquee-pause-btn"
+        }
+      ],
+      "overflow": 0
+    },
+    {
+      "width": 390,
+      "path": "/",
+      "selector": ".countdown-actions .btn-sm",
+      "values": [],
+      "overflow": 0
+    },
+    {
+      "width": 390,
+      "path": "/",
+      "selector": ".sponsor-card+.sponsor-card",
+      "values": [
+        {
+          "height": 191.5625,
+          "text": "VENUE PARTNER National Incubation Center",
+          "cls": "sponsor-card"
+        },
+        {
+          "height": 165.96875,
+          "text": "EVENT SPONSOR PARTNER nsave Fintech engi",
+          "cls": "sponsor-card"
+        }
+      ],
+      "overflow": 0
+    },
+    {
+      "width": 390,
+      "path": "/",
+      "selector": ".sponsors-section .btn--sm",
+      "values": [
+        {
+          "height": 44,
+          "text": "Become a Community Sponsor",
+          "cls": "btn btn--primary btn--sm"
+        },
+        {
+          "height": 44,
+          "text": "View Sponsorship Prospectus",
+          "cls": "btn btn--secondary btn--sm"
+        }
+      ],
+      "overflow": 0
+    },
+    {
+      "width": 390,
+      "path": "/events/02-the-cloud-native-launchpad-docker-kubernetes-real-deployments",
+      "selector": ".back-link",
+      "values": [
+        {
+          "height": 34,
+          "text": "← Back to All Events",
+          "cls": "back-link btn btn-outline btn-sm"
+        }
+      ],
+      "overflow": 0
+    },
+    {
+      "width": 390,
+      "path": "/sponsors",
+      "selector": ".form-input",
+      "values": [
+        {
+          "height": 44,
+          "text": "",
+          "cls": "form-input"
+        },
+        {
+          "height": 44,
+          "text": "",
+          "cls": "form-input"
+        },
+        {
+          "height": 44,
+          "text": "",
+          "cls": "form-input"
+        },
+        {
+          "height": 44,
+          "text": "",
+          "cls": "form-input"
+        }
+      ],
+      "overflow": 0
+    },
+    {
+      "width": 390,
+      "path": "/sponsors",
+      "selector": ".form-select",
+      "values": [
+        {
+          "height": 44,
+          "text": "Venue Host Partner Refreshment Partner C",
+          "cls": "form-select"
+        },
+        {
+          "height": 44,
+          "text": "Next Upcoming Meetup Upcoming Meetup Ser",
+          "cls": "form-select"
+        }
+      ],
+      "overflow": 0
+    },
+    {
+      "width": 360,
+      "path": "/",
+      "selector": ".marquee-pause-btn",
+      "values": [
+        {
+          "height": 44,
+          "text": "PAUSE",
+          "cls": "marquee-pause-btn"
+        }
+      ],
+      "overflow": 0
+    },
+    {
+      "width": 360,
+      "path": "/",
+      "selector": ".countdown-actions .btn-sm",
+      "values": [],
+      "overflow": 0
+    },
+    {
+      "width": 360,
+      "path": "/",
+      "selector": ".sponsor-card+.sponsor-card",
+      "values": [
+        {
+          "height": 191.5625,
+          "text": "VENUE PARTNER National Incubation Center",
+          "cls": "sponsor-card"
+        },
+        {
+          "height": 165.96875,
+          "text": "EVENT SPONSOR PARTNER nsave Fintech engi",
+          "cls": "sponsor-card"
+        }
+      ],
+      "overflow": 0
+    },
+    {
+      "width": 360,
+      "path": "/",
+      "selector": ".sponsors-section .btn--sm",
+      "values": [
+        {
+          "height": 44,
+          "text": "Become a Community Sponsor",
+          "cls": "btn btn--primary btn--sm"
+        },
+        {
+          "height": 44,
+          "text": "View Sponsorship Prospectus",
+          "cls": "btn btn--secondary btn--sm"
+        }
+      ],
+      "overflow": 0
+    },
+    {
+      "width": 360,
+      "path": "/events/02-the-cloud-native-launchpad-docker-kubernetes-real-deployments",
+      "selector": ".back-link",
+      "values": [
+        {
+          "height": 34,
+          "text": "← Back to All Events",
+          "cls": "back-link btn btn-outline btn-sm"
+        }
+      ],
+      "overflow": 0
+    },
+    {
+      "width": 360,
+      "path": "/sponsors",
+      "selector": ".form-input",
+      "values": [
+        {
+          "height": 44,
+          "text": "",
+          "cls": "form-input"
+        },
+        {
+          "height": 44,
+          "text": "",
+          "cls": "form-input"
+        },
+        {
+          "height": 44,
+          "text": "",
+          "cls": "form-input"
+        },
+        {
+          "height": 44,
+          "text": "",
+          "cls": "form-input"
+        }
+      ],
+      "overflow": 0
+    },
+    {
+      "width": 360,
+      "path": "/sponsors",
+      "selector": ".form-select",
+      "values": [
+        {
+          "height": 44,
+          "text": "Venue Host Partner Refreshment Partner C",
+          "cls": "form-select"
+        },
+        {
+          "height": 44,
+          "text": "Next Upcoming Meetup Upcoming Meetup Ser",
+          "cls": "form-select"
+        }
+      ],
+      "overflow": 0
+    }
+  ],
+  "outlines": [
+    {
+      "slug": "tech-team",
+      "headings": [
+        "H1: Tech Team.",
+        "H2: Meet the Tech Team Volunteers",
+        "H3: Muhammad Saleh Khattak",
+        "H3: Hisham Khan"
+      ]
+    },
+    {
+      "slug": "events-team",
+      "headings": [
+        "H1: Events Team.",
+        "H2: Meet the Events Team Volunteers",
+        "H3: Hammad Zeb Khan",
+        "H3: Zala Abbas"
+      ]
+    },
+    {
+      "slug": "community-outreach",
+      "headings": [
+        "H1: Community & Outreach.",
+        "H2: Meet the Community & Outreach Volunteers",
+        "H3: Ferdous ali",
+        "H3: Hasnain Ahmad"
+      ]
+    },
+    {
+      "slug": "design-media",
+      "headings": [
+        "H1: Design & Media.",
+        "H2: Meet the Design & Media Volunteers",
+        "H3: Sahil Sajjad",
+        "H3: Tehreem Jamil"
+      ]
+    }
+  ],
+  "wg": {
+    "duration": "0.2s, 0.2s",
+    "settled": true
+  }
+}

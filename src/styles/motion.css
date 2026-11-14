@@ -32,6 +32,12 @@ html.js-motion:not(.motion-reduced) [data-reveal-group] [data-reveal-item].is-re
   transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1), transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Keep the entrance at 400 ms; interactive cards use the 200 ms hover rhythm once settled. */
+html.js-motion:not(.motion-reduced) :is(.exec-card, .wg-card)[data-reveal].is-revealed.reveal-settled,
+html.js-motion:not(.motion-reduced) :is(.member-card, .post-card)[data-reveal-item].is-revealed.reveal-settled {
+  transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+}
+
 /* Marquee track scoped transition */
 .marquee__track,
 .marquee-track {

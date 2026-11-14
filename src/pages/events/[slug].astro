@@ -615,6 +615,12 @@ const eventJsonLd = (data.title && data.date) ? {
     box-shadow: var(--shadow-hard-sm, -4px 4px 0px 0px var(--color-charcoal-ink));
   }
 
+  @media (max-width: 768px) {
+    .btn-sm {
+      min-height: 44px;
+    }
+  }
+
   .btn:hover {
     transform: translate(7px, -7px) !important;
   }

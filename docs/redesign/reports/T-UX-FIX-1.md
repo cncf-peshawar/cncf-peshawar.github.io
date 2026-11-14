@@ -2,7 +2,7 @@
 
 **Date:** 14 November 2026 (Asia/Karachi)  
 **Branch:** `redesign/ui-motherduck`  
-**Status:** Resumed under CTO Amendment 1; Phases A–D complete. The Phase 0 stop and its evidence remain below as a historical record.
+**Status:** Resumed under CTO Amendment 1; Phases A–E complete. The Phase 0 stop and its evidence remain below as a historical record.
 
 ## Stop condition
 
@@ -191,4 +191,26 @@ After both direct `?tier=Venue%20Host%20Partner#email-builder` load and a settle
 
 ## Remaining work
 
-Phases E–G remain to be executed. The old stop report above describes the pre-amendment state and does not describe the current implementation status.
+Phases F–G remain to be executed. The old stop report above describes the pre-amendment state and does not describe the current implementation status.
+
+## Phase E — affordance, structure, contrast, CTAs
+
+**UX-04.** `src/components/events/EventCard.astro`: the featured card's venue uses charcoal. “Measured ≥ 4.5:1 (expect ~8.8).” Chrome measured `rgb(56,56,56)` on canary `rgb(255,222,0)` at **8.77:1**. With no future event currently scheduled, the browser probe applied the featured class to an archive card to exercise the same CSS state. [Computed ratio](../evidence/ux-fix1/phase-e-probe2.json) · [screenshot](../evidence/ux-fix1/phase-e-venue-390.png).
+
+**UX-07.** `src/pages/index.astro`, `src/components/ui/Marquee.astro`, and the five Team/Blog/article/Conduct/404 pages: six formerly unpausable placements now use the shared Marquee; the Home upper custom control now keeps its text, accessible name, and `aria-pressed` in sync. “All six placements have a working persistent stop with accurate naming; under reduce, no running animation anywhere and no orphan controls.” Chrome exercised all seven controls (two on Home): each changed PAUSE/false to PLAY/true with a distinct accessible name. Under reduced motion every track's animation computed `none`, and every control computed `display:none`. [Control and reduced-motion states](../evidence/ux-fix1/phase-e-probe.json) · [Home reduced screenshot](../evidence/ux-fix1/phase-e-reduce-home.png).
+
+**UX-08.** `src/pages/index.astro`, `src/components/CfpBand.astro`: Home prospectus goes directly to the Sponsors PDF with matching download filename; the CFP band has one speaker CTA. “No two differently-labeled CTAs share a destination on Home/Events; the prospectus CTA returns HTTP 200 `application/pdf`.” The link probe found the PDF href and a single “Apply to Speak at CNCF Peshawar” CTA; local HTTP returned 200 and `application/pdf`. [Link probe](../evidence/ux-fix1/phase-e-probe.json) · [PDF response](../evidence/ux-fix1/phase-e-pdf-head.log).
+
+**UX-13.** `src/pages/index.astro`, `src/styles/base.css`, `src/components/ui/LinkButton.astro`, `src/components/sponsors/SponsorshipEmailBuilder.astro`, `src/pages/events/[slug].astro`: listed small controls and inputs have 44px mobile minimums. The event-detail page's local 34px override was found in the first browser probe and corrected. “Computed heights ≥ 44px at 390 and 360 for every listed control; no reflow damage (document scroll width equals viewport on all routes).” Home ticker, both joint sponsor actions, Sponsors inputs/selects, and detail back link measure 44px at both widths; sampled routes have zero horizontal overflow. The countdown actions are absent in today's empty-state path, but their shared `btn-sm` rule has the same 44px mobile minimum. Full-route overflow sweep follows in Phase G. [Initial and final geometry](../evidence/ux-fix1/phase-e-probe2.json) · [detail correction](../evidence/ux-fix1/phase-e-final-probe.json).
+
+**UX-14.** `src/pages/team/[group].astro`: added a section H2 before the member grid while keeping names H3. “Outline H1 → H2 → H3 on all four group pages.” All four group routes match that sequence. [Heading outlines](../evidence/ux-fix1/phase-e-probe2.json).
+
+**UX-15.** `src/pages/speak.astro`, `src/pages/sponsors.astro`, `src/styles/base.css`: removed the interactive Card treatment from Speak formats and Sponsor tiers, and neutralized the old global tier hover lift. “Cursor and computed transform on card centers are default/none; actions remain interactive.” Chrome measured `cursor:auto` and `transform:none` before and after hover on both card types. Their nested action links retain their button classes and pointer behavior. [Computed card states](../evidence/ux-fix1/phase-e-probe.json).
+
+**UX-17.** `src/scripts/motion.ts`, `src/styles/motion.css`: reveal targets gain `reveal-settled` after the existing 400ms entrance completes, then card hover uses 200ms; keyboard-immediate reveals settle at once. “Post-reveal, computed transform transition-duration on Team executive, working-group, member and Blog cards = 200 ms; entrance still animates.” Chrome measured `0.2s` on all four card classes and a 3px/-3px hover lift on executive, member, and Blog samples. The entrance's `duration: 0.4` code is unchanged. [Card timings](../evidence/ux-fix1/phase-e-probe.json) · [working-group timing](../evidence/ux-fix1/phase-e-probe2.json).
+
+**UX-20.** `src/pages/index.astro`: terminal metadata labels use `#858585` locally; adjacent values are unchanged. “Measured ≥ 4.5:1 live + local; the values beside the labels are unaffected.” The local label computes `rgb(133,133,133)` against `#1a1a1a`, **4.72:1**, versus the old `#818181` **4.47:1**. Live verification follows the push. [Computed color](../evidence/ux-fix1/phase-e-final-probe.json).
+
+**K5.** `src/components/layout/Nav.astro`: added the full “Code of Conduct” desktop link as the final item; this component has no client script. “Visible at 1280 and 1024 with no wrap or overflow; mobile drawer and footer unchanged.” Chrome measured all desktop items at y=12px at both widths, with the final link ending at x=957.94/829.94 and document widths exactly 1280/1024. The desktop nav hides at 768; mobile drawer source was untouched. [Nav bounds](../evidence/ux-fix1/phase-e-probe.json) · [1280 screenshot](../evidence/ux-fix1/phase-e-nav-1280.png) · [1024 screenshot](../evidence/ux-fix1/phase-e-nav-1024.png).
+
+**Phase E battery:** [build](../evidence/ux-fix1/phase-e-build.log) 17 pages; [Astro check](../evidence/ux-fix1/phase-e-check.log) 0 errors / 0 warnings / 42 hints; [unsandboxed tests](../evidence/ux-fix1/phase-e-tests.log) 119/119; [links](../evidence/ux-fix1/phase-e-links.log) 715 verified / 0 broken. The +14 links from Phase D are consistent with the new Code of Conduct desktop-nav link on static pages; the crawler output does not give a per-link breakdown. No Phase E test amendment was needed.

@@ -74,6 +74,7 @@ function getLocalTeamAsset(avatar?: string): ImageMetadata | null {
 
   <!-- Member Grid -->
   <section class="section-wrap">
+    <h2 class="member-section-title">Meet the {group.title} Volunteers</h2>
     <div class="member-grid" data-reveal-group>
       {group.members.map(member => (
         <article class="member-card brutal-card" data-reveal-item>
@@ -183,6 +184,12 @@ function getLocalTeamAsset(avatar?: string): ImageMetadata | null {
 </BaseLayout>
 
 <style>
+  .member-section-title {
+    font-family: var(--font-mono);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-charcoal-ink);
+    margin: 0 0 var(--spacing-24, 24px);
+  }
   /* ------------------------------------------------------------------ */
   /* BREADCRUMB & HEADER STYLES                                         */
   /* ------------------------------------------------------------------ */

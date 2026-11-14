@@ -33,6 +33,7 @@ const repeatedSequence = Array(4).fill(textSequence).join('');
   class:list={['marquee', className]}
   role="region"
   aria-label={label}
+  data-label={label}
   style={`--marquee-speed: ${speed};`}
   {...rest}
 >
@@ -52,7 +53,7 @@ const repeatedSequence = Array(4).fill(textSequence).join('');
   <button
     type="button"
     class="marquee__pause-btn"
-    aria-label="Pause marquee animation"
+    aria-label={`PAUSE ${label}`}
     aria-pressed="false"
   >
     <svg class="marquee__pause-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -79,7 +80,7 @@ const repeatedSequence = Array(4).fill(textSequence).join('');
 
         marquee.setAttribute('data-paused', String(nextPaused));
         btn.setAttribute('aria-pressed', String(nextPaused));
-        btn.setAttribute('aria-label', nextPaused ? 'Resume marquee animation' : 'Pause marquee animation');
+        btn.setAttribute('aria-label', `${nextPaused ? 'PLAY' : 'PAUSE'} ${marquee.dataset.label ?? 'marquee'}`);
 
         if (textSpan) {
           textSpan.textContent = nextPaused ? 'PLAY' : 'PAUSE';
