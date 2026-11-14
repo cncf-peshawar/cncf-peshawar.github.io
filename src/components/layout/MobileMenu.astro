@@ -21,7 +21,7 @@ const drawerLinks = [
 <!-- Mobile Drawer Overlay & Container -->
 <div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
 
-<aside id="mobile-nav-drawer" class="mobile-nav-drawer" aria-hidden="true" aria-label="Mobile Navigation Drawer">
+<aside id="mobile-nav-drawer" class="mobile-nav-drawer" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Mobile Navigation Drawer">
   <div class="drawer-header">
     <span class="drawer-heading">Navigation</span>
     <button id="close-nav-btn" class="drawer-close-btn" type="button" aria-label="Close navigation menu">
@@ -245,6 +245,15 @@ const drawerLinks = [
     const closeBtn = document.getElementById('close-nav-btn');
 
     if (!toggleBtn || !drawer) return;
+    const background = Array.from(document.body.children).filter((element): element is HTMLElement =>
+      element instanceof HTMLElement && element !== drawer && element !== overlay
+    );
+    const previousInert = new Map<HTMLElement, boolean>();
+    let previousOverflow = '';
+
+    const focusable = () => Array.from(drawer.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )).filter(element => element.getClientRects().length > 0);
 
     function openMenu() {
       if (!toggleBtn || !drawer) return;
@@ -252,10 +261,15 @@ const drawerLinks = [
       drawer.setAttribute('aria-hidden', 'false');
       drawer.classList.add('is-open');
       if (overlay) overlay.classList.add('is-open');
+      background.forEach(element => {
+        previousInert.set(element, element.inert);
+        element.inert = true;
+      });
+      previousOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
-      if (closeBtn) {
-        setTimeout(() => closeBtn.focus(), 50);
-      }
+      setTimeout(() => {
+        if (drawer.classList.contains('is-open')) closeBtn?.focus();
+      }, 50);
     }
 
     function closeMenu() {
@@ -264,7 +278,9 @@ const drawerLinks = [
       drawer.setAttribute('aria-hidden', 'true');
       drawer.classList.remove('is-open');
       if (overlay) overlay.classList.remove('is-open');
-      document.body.style.overflow = '';
+      background.forEach(element => { element.inert = previousInert.get(element) ?? false; });
+      previousInert.clear();
+      document.body.style.overflow = previousOverflow;
       toggleBtn.focus();
     }
 
@@ -296,8 +312,25 @@ const drawerLinks = [
 
     // Escape key
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+      if (!drawer.classList.contains('is-open')) return;
+      if (e.key === 'Escape') {
         closeMenu();
+      } else if (e.key === 'Tab') {
+        const stops = focusable();
+        if (stops.length === 0) {
+          e.preventDefault();
+          drawer.focus();
+          return;
+        }
+        const first = stops[0];
+        const last = stops[stops.length - 1];
+        if (e.shiftKey && (document.activeElement === first || !drawer.contains(document.activeElement))) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && (document.activeElement === last || !drawer.contains(document.activeElement))) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     });
 

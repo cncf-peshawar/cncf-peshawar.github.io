@@ -429,12 +429,14 @@ const graph = {
     flex-wrap: wrap;
   }
 
-  .hero-ctas :global(.btn:hover) {
-    transform: translate(7px, -7px) !important;
-  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-ctas :global(.btn:hover) {
+      transform: translate(7px, -7px) !important;
+    }
 
-  .hero-ctas :global(.btn:active) {
-    transform: none !important;
+    .hero-ctas :global(.btn:active) {
+      transform: none !important;
+    }
   }
 
   .hero-sublink {

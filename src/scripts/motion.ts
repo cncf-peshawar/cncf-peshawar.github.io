@@ -93,6 +93,7 @@ function initReveals() {
   const singleReveals = document.querySelectorAll<HTMLElement>('[data-reveal]:not([data-reveal-group] [data-reveal])');
   singleReveals.forEach((el) => {
     const trigger = () => {
+      if (el.classList.contains('is-revealed')) return;
       animate(el, { opacity: [0, 1], transform: ['translateY(100px)', 'none'] }, {
         duration: 0.4,
         ease: [0.16, 1, 0.3, 1],
@@ -117,17 +118,19 @@ function initReveals() {
     const items = group.querySelectorAll<HTMLElement>('[data-reveal-item]');
     if (items.length > 0) {
       const trigger = () => {
-        animate(items, { opacity: [0, 1], transform: ['translateY(100px)', 'none'] }, {
+        const pendingItems = Array.from(items).filter(item => !item.classList.contains('is-revealed'));
+        if (pendingItems.length === 0) return;
+        animate(pendingItems, { opacity: [0, 1], transform: ['translateY(100px)', 'none'] }, {
           delay: stagger(0.08),
           duration: 0.4,
           ease: [0.16, 1, 0.3, 1],
         }).then(() => {
-          items.forEach((item) => {
+          pendingItems.forEach((item) => {
             item.style.transform = '';
             item.style.opacity = '';
           });
         });
-        items.forEach((item) => item.classList.add('is-revealed'));
+        pendingItems.forEach((item) => item.classList.add('is-revealed'));
         group.classList.add('is-revealed');
       };
 
@@ -198,6 +201,27 @@ function initReveals() {
   }
 }
 
+function revealFocusedAncestors(event: FocusEvent) {
+  if (!document.documentElement.classList.contains('js-motion')) return;
+  let element = event.target instanceof HTMLElement ? event.target : null;
+  while (element) {
+    if (element.matches('[data-reveal], [data-reveal-item]') && !element.classList.contains('is-revealed')) {
+      element.getAnimations().forEach(animation => animation.cancel());
+      element.classList.add('is-revealed');
+      element.style.transition = 'none';
+      element.style.opacity = '1';
+      element.style.transform = 'none';
+      const revealed = element;
+      requestAnimationFrame(() => {
+        revealed.style.removeProperty('transition');
+        revealed.style.removeProperty('opacity');
+        revealed.style.removeProperty('transform');
+      });
+    }
+    element = element.parentElement;
+  }
+}
+
 export function initMotion() {
   if (typeof window === 'undefined') return;
 
@@ -219,6 +243,7 @@ export function initMotion() {
 
 // Initial bootstrap
 if (typeof document !== 'undefined') {
+  document.addEventListener('focusin', revealFocusedAncestors);
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initMotion);
   } else {

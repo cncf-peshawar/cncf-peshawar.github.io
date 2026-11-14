@@ -2,7 +2,7 @@
 
 **Date:** 14 November 2026 (Asia/Karachi)  
 **Branch:** `redesign/ui-motherduck`  
-**Status:** Resumed under CTO Amendment 1; Phases A–B complete. The Phase 0 stop and its evidence remain below as a historical record.
+**Status:** Resumed under CTO Amendment 1; Phases A–C complete. The Phase 0 stop and its evidence remain below as a historical record.
 
 ## Stop condition
 
@@ -133,6 +133,34 @@ Chrome found the update and the Genesis link once each; the detail URL returned 
 
 **Phase B battery:** [build](../evidence/ux-fix1/phase-b-build.log) 17 pages, Astro check 0 errors / 0 warnings / 42 hints; [unsandboxed tests](../evidence/ux-fix1/phase-b-tests.log) 119/119; [links](../evidence/ux-fix1/phase-b-links.log) 700 verified, 0 broken. No Phase B test amendment was needed. The link count rose by 2 from the rebased 698 baseline; the changed Home archive and event-state markup are the relevant source changes, but this count is not attributed to an individual link without a link-checker breakdown.
 
+## Phase C — focus and keyboard
+
+**UX-02.** File: `src/components/layout/MobileMenu.astro`. The drawer is a modal dialog, body siblings other than the dialog and overlay become inert while it is open, Tab and Shift+Tab wrap within its focusable controls, and Escape/overlay/trigger close paths restore focus to the trigger.
+
+> “With the drawer open, a full tab cycle in both directions never lands on the covered page; focus returns to the trigger after close.”
+
+At 390px, the Chrome probe recorded `role=dialog`, `aria-modal=true`, 7 inert background elements, 13 forward and 13 backward focus stops all inside the drawer, and trigger focus after Escape. [Full tab sequence](../evidence/ux-fix1/phase-c-probes.json) · [drawer after](../evidence/ux-fix1/UX-02-drawer-390-after.png) · [drawer before](../evidence/ux-audit/home-live-390-drawer-focus.png).
+
+**UX-11.** File: `src/scripts/motion.ts`. A `.js-motion`-gated `focusin` handler immediately reveals a focused control's unrevealed section and card ancestors. Pending observers skip already-revealed items so they do not hide the focused item again; remaining cards retain their entrance animation.
+
+> “Rapid Tab from the top with default motion never focuses a control whose ancestor reports `opacity: 0`.”
+
+The 32-stop keyboard probe at 390px recorded **0** focused reveal ancestors with opacity below 1. [Every stop and ancestor opacity](../evidence/ux-fix1/phase-c-probes.json) · [pre-fix audit sequence](../evidence/ux-audit/reveal-followup.json).
+
+**UX-16.** File: `src/components/layout/Header.astro`. The visible `PK` badge is decorative and the brand link's accessible name is `CNCF Peshawar PK Home`.
+
+> “The Lighthouse label-in-name check clears on every sampled page.”
+
+Chrome recorded visible text `CNCF Peshawar PK`, accessible name `CNCF Peshawar PK Home`, and `aria-hidden=true` on the badge. [Computed DOM probe](../evidence/ux-fix1/phase-c-probes.json). Lighthouse confirmation is part of Phase G.
+
+**UX-22.** File: `src/pages/index.astro`. The ratified hero CTA transform overrides remain intact inside `prefers-reduced-motion: no-preference`; the reduced-motion color cue remains.
+
+> “Reduce + hover → computed transform `none` while the color cue still applies; no-preference + hover → `(7,-7)` @ 120 ms with 30 ms snap.”
+
+The local four-state probe records reduced rest/hover `none`, with blue → yellow background, and default-motion hover `matrix(1,0,0,1,7,-7)` with a 0.12s transition. [Computed states](../evidence/ux-fix1/phase-c-probes.json) · [reduced hover](../evidence/ux-fix1/UX-22-home-1280-reduce-after.png) · [default hover](../evidence/ux-fix1/UX-22-home-1280-no-preference-after.png) · [pre-fix](../evidence/ux-fix1/UX-22-home-390-before.png). Active snap and live deployment confirmation remain in Phase G.
+
+**Phase C battery:** [build](../evidence/ux-fix1/phase-c-build.log) 17 pages, Astro check 0 errors / 0 warnings / 42 hints; [unsandboxed tests](../evidence/ux-fix1/phase-c-tests.log) 119/119; [links](../evidence/ux-fix1/phase-c-links.log) 700 verified, 0 broken. No Phase C test amendment was needed.
+
 ## Remaining work
 
-Phases C–G remain to be executed. The old stop report above describes the pre-amendment state and does not describe the current implementation status.
+Phases D–G remain to be executed. The old stop report above describes the pre-amendment state and does not describe the current implementation status.

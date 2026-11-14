@@ -13,7 +13,7 @@ const { currentPath = Astro.url.pathname } = Astro.props;
 <header class="site-header">
   <div class="header-inner">
     <!-- Brand Logo -->
-    <a href={`${base}/`} class="brand-logo" aria-label="CNCF Peshawar Home">
+    <a href={`${base}/`} class="brand-logo" aria-label="CNCF Peshawar PK Home">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linejoin="round"/>
         <path d="M12 22V12" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
@@ -21,7 +21,7 @@ const { currentPath = Astro.url.pathname } = Astro.props;
         <circle cx="12" cy="12" r="3" fill="var(--color-sky-crayon)"/>
       </svg>
       <span class="brand-title">CNCF Peshawar</span>
-      <span class="brand-badge">PK</span>
+      <span class="brand-badge" aria-hidden="true">PK</span>
     </a>
 
     <!-- Desktop Nav Component -->
