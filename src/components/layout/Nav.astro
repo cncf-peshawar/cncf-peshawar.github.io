@@ -81,7 +81,7 @@ const navLinks = [
     letter-spacing: 0.02em;
     padding: 6px 8px;
     border-bottom: 2px solid transparent;
-    transition: border-color var(--transition-fast, 0.1s ease);
+    transition: color 120ms ease-in-out, border-color 120ms ease-in-out;
     min-height: 44px;
     display: inline-flex;
     align-items: center;
@@ -89,8 +89,15 @@ const navLinks = [
 
   .nav-item-link:hover,
   .nav-item-link.is-active {
-    border-bottom-color: var(--color-charcoal-ink);
+    border-bottom-color: var(--color-sky-crayon);
+    color: var(--color-terminal-bg);
     font-weight: 700;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-item-link {
+      transition: color 120ms ease-in-out;
+    }
   }
 
   .nav-item-link:focus-visible,

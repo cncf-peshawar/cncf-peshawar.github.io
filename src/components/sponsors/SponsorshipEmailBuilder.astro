@@ -303,12 +303,15 @@ ${org}`;
 
         try {
           await navigator.clipboard.writeText(fullContent);
-          copyText.textContent = 'Copied to Clipboard! ✓';
+          copyText.textContent = 'Copied ✓';
+          copyBtn.classList.add('is-copied');
           if (validationStatus) validationStatus.textContent = 'Email text copied to clipboard.';
           copyFeedbackTimeout = window.setTimeout(() => {
             if (copyText) copyText.textContent = 'Copy Email Text';
-          }, 2500);
+            copyBtn.classList.remove('is-copied');
+          }, 2000);
         } catch {
+          copyBtn.classList.remove('is-copied');
           if (previewEl) {
             const range = document.createRange();
             range.selectNodeContents(previewEl);
@@ -515,8 +518,8 @@ ${org}`;
   .form-input:focus-visible,
   .form-select:focus-visible,
   .form-textarea:focus-visible {
-    outline: 3px solid var(--color-charcoal-ink);
-    outline-offset: 3px;
+    outline: 2px solid var(--color-charcoal-ink);
+    outline-offset: 2px;
   }
 
   .form-textarea {
@@ -600,6 +603,31 @@ ${org}`;
   .btn:focus-visible {
     outline: 3px solid var(--color-charcoal-ink);
     outline-offset: 3px;
+  }
+
+  #copy-template-btn {
+    transition: transform 120ms ease-in-out, background-color 120ms ease-in-out;
+  }
+
+  #copy-btn-text {
+    display: inline-block;
+    transition: transform 120ms ease-in-out;
+  }
+
+  #copy-template-btn.is-copied {
+    background-color: var(--color-signal-green-subtle);
+  }
+
+  #copy-template-btn.is-copied #copy-btn-text {
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #copy-btn-text,
+    #copy-template-btn.is-copied #copy-btn-text {
+      transform: none;
+      transition: none;
+    }
   }
 
   .btn-sky {

@@ -18,14 +18,28 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <!-- Page Hero -->
   <section class="page-hero">
     <div class="page-hero__inner">
-      <div class="page-hero__eyebrow" data-hero-eyebrow>
-        <span class="badge badge--mint">00 // RECAPS &amp; ARTICLES</span>
-        <span class="eyebrow-text">COMMUNITY PUBLICATIONS</span>
+      <div class="page-hero__copy">
+        <div class="page-hero__eyebrow" data-hero-eyebrow>
+          <span class="badge badge--mint">00 // RECAPS &amp; ARTICLES</span>
+          <span class="eyebrow-text">COMMUNITY PUBLICATIONS</span>
+        </div>
+        <h1 class="page-hero__title">Blog &amp; Community Recaps.</h1>
+        <p class="page-hero__desc" data-hero-lede>
+          Official announcements, workshop recaps, and technical cloud-native tutorials written by CNCF Peshawar organizers and community contributors.
+        </p>
       </div>
-      <h1 class="page-hero__title">Blog &amp; Community Recaps.</h1>
-      <p class="page-hero__desc" data-hero-lede>
-        Official announcements, workshop recaps, and technical cloud-native tutorials written by CNCF Peshawar organizers and community contributors.
-      </p>
+      <div class="blog-hero-doodle" data-hero-doodle aria-hidden="true">
+        <svg viewBox="0 0 156 150" fill="none" aria-hidden="true">
+          <path d="M24 32 C40 22 77 25 92 30 L92 121 C74 115 41 116 24 124 Z" fill="var(--color-frost-white)" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M92 30 C108 23 130 25 140 30 L140 122 C123 116 108 117 92 121 Z" fill="var(--color-notebook-pale)" stroke="var(--color-charcoal-ink)" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M92 31 L92 120" stroke="var(--color-wet-cement)" stroke-width="2" stroke-dasharray="5 4"/>
+          <path d="M35 48 C48 44 64 44 80 48 M35 61 C49 58 66 57 80 60 M35 74 C47 71 64 70 79 74 M104 48 C112 45 123 45 132 48 M104 61 C114 58 123 58 132 61 M104 74 C113 72 124 72 132 74" stroke="var(--color-wet-cement)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M42 96 C53 90 62 89 72 95 C63 103 53 105 42 96 Z" fill="var(--color-canary-banner)" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+          <path d="M106 97 C113 91 123 92 131 98" stroke="var(--color-duck-bill-orange)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M14 20 L9 13 M19 14 L19 6 M139 15 L147 8 M145 24 L152 22" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="121" cy="103" r="3" fill="var(--color-duck-bill-orange)"/>
+        </svg>
+      </div>
     </div>
   </section>
 
@@ -103,6 +117,33 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     max-width: var(--page-max-width);
     margin: 0 auto;
     position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(110px, 156px);
+    align-items: center;
+    gap: clamp(16px, 4vw, 48px);
+  }
+
+  .blog-hero-doodle {
+    width: 100%;
+    pointer-events: none;
+  }
+
+  .blog-hero-doodle svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    .page-hero__inner {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-16, 16px);
+    }
+
+    .blog-hero-doodle {
+      width: 96px;
+      justify-self: end;
+    }
   }
 
   .page-hero__eyebrow {

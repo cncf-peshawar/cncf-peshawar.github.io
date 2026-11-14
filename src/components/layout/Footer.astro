@@ -166,16 +166,24 @@ const currentYear = new Date().getFullYear();
     font-family: var(--font-mono);
     font-size: var(--text-body);
     color: var(--color-charcoal-ink);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 2px;
+    transition: color 120ms ease-in-out, text-decoration-color 120ms ease-in-out;
     display: inline-flex;
     align-items: center;
     min-height: 44px;
   }
 
   .footer-links a:hover {
-    text-decoration: underline;
     text-decoration-color: var(--color-sky-crayon);
-    text-underline-offset: 2px;
+    color: var(--color-terminal-bg);
+  }
+
+  .footer-email:hover,
+  .footer-meta a:hover {
+    color: var(--color-terminal-bg);
+    text-decoration-color: var(--color-charcoal-ink);
   }
 
   .footer-contact-desc {
@@ -197,6 +205,7 @@ const currentYear = new Date().getFullYear();
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+    transition: color 120ms ease-in-out, text-decoration-color 120ms ease-in-out;
   }
 
   .footer-social-row {
@@ -272,6 +281,15 @@ const currentYear = new Date().getFullYear();
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+    transition: color 120ms ease-in-out, text-decoration-color 120ms ease-in-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .footer-links a,
+    .footer-email,
+    .footer-meta a {
+      transition: color 120ms ease-in-out;
+    }
   }
 
   .footer-meta-sep {

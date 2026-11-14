@@ -2,7 +2,7 @@
 
 **Date:** 14 November 2026 (Asia/Karachi)  
 **Branch:** `redesign/ui-motherduck`  
-**Status:** Resumed under CTO Amendment 1; Phases A–E complete. The Phase 0 stop and its evidence remain below as a historical record.
+**Status:** Resumed under CTO Amendment 1; Phases A–F complete. The Phase 0 stop and its evidence remain below as a historical record.
 
 ## Stop condition
 
@@ -191,7 +191,7 @@ After both direct `?tier=Venue%20Host%20Partner#email-builder` load and a settle
 
 ## Remaining work
 
-Phases F–G remain to be executed. The old stop report above describes the pre-amendment state and does not describe the current implementation status.
+Phase G remains to be executed. The old stop report above describes the pre-amendment state and does not describe the current implementation status.
 
 ## Phase E — affordance, structure, contrast, CTAs
 
@@ -213,4 +213,16 @@ Phases F–G remain to be executed. The old stop report above describes the pre-
 
 **K5.** `src/components/layout/Nav.astro`: added the full “Code of Conduct” desktop link as the final item; this component has no client script. “Visible at 1280 and 1024 with no wrap or overflow; mobile drawer and footer unchanged.” Chrome measured all desktop items at y=12px at both widths, with the final link ending at x=957.94/829.94 and document widths exactly 1280/1024. The desktop nav hides at 768; mobile drawer source was untouched. [Nav bounds](../evidence/ux-fix1/phase-e-probe.json) · [1280 screenshot](../evidence/ux-fix1/phase-e-nav-1280.png) · [1024 screenshot](../evidence/ux-fix1/phase-e-nav-1024.png).
 
-**Phase E battery:** [build](../evidence/ux-fix1/phase-e-build.log) 17 pages; [Astro check](../evidence/ux-fix1/phase-e-check.log) 0 errors / 0 warnings / 42 hints; [unsandboxed tests](../evidence/ux-fix1/phase-e-tests.log) 119/119; [links](../evidence/ux-fix1/phase-e-links.log) 715 verified / 0 broken. The +14 links from Phase D are consistent with the new Code of Conduct desktop-nav link on static pages; the crawler output does not give a per-link breakdown. No Phase E test amendment was needed.
+**Phase E battery:** [build](../evidence/ux-fix1/phase-e-build.log) 17 pages; [Astro check](../evidence/ux-fix1/phase-e-check.log) 0 errors / 0 warnings / 42 hints; [unsandboxed tests](../evidence/ux-fix1/phase-e-tests.log) 119/119; [links](../evidence/ux-fix1/phase-e-links.log) 715 verified / 0 broken. The +14 links from Phase D reconcile to the Code of Conduct nav link on 16 HTML pages (+16) and removal of one duplicate CFP link on Home and Events (-2). No Phase E test amendment was needed.
+
+## Phase F — MotherDuck motion polish
+
+**Copy feedback.** `src/components/sponsors/SponsorshipEmailBuilder.astro`: successful copy changes the label to `Copied ✓`, adds a 120ms label lift and color cue, preserves the polite live message, and resets after 2 seconds. A clipboard failure still says “Selected (Press Ctrl+C)” without claiming a copy. “On successful copy, the action's label morphs to a confirmed state … with a 120 ms transition, reverting after ~2 s; the polite live-region message is preserved.” Chrome measured a `0.12s` transition, a -2px settled label lift, the live message `Email text copied to clipboard.`, and a return to `Copy Email Text` after 2.2 seconds. Under reduced motion the label transform is `none`. [Copy probe](../evidence/ux-fix1/phase-f-probe.json) · [settled lift](../evidence/ux-fix1/phase-f-followup.log).
+
+**Text links.** `src/components/layout/Nav.astro`, `src/components/layout/Footer.astro`, `src/styles/base.css`, `src/pages/index.astro`: nav and footer text links transition darkened text and sky underlines; Home inline links transition their underline and existing highlight. “Color + underline transition at 120 ms (color-only under reduced motion).” Chrome measured `0.12s` for the desktop nav and footer links, with charcoal → dark text and transparent → sky underline; the Home inline link's sky underline now also transitions at `0.12s`. The ratified `!important` declaration holds its hover text charcoal, so the inline color value stays charcoal while its underline changes. Reduced-motion styles limit transitions to color. [Final link-state probe](../evidence/ux-fix1/phase-f-link-probe.json).
+
+**Builder focus.** `src/components/sponsors/SponsorshipEmailBuilder.astro`: inputs, selects, and textarea use a consistent charcoal outline. “A consistent tactile focus-visible treatment (2px charcoal offset ring …) on all builder fields.” Chrome measured `2px solid rgb(56,56,56)` with a `2px` offset on the focused email field; the same CSS selector covers all builder field types. [Focus probe](../evidence/ux-fix1/phase-f-probe.json).
+
+**K4 Blog hero doodle.** `src/pages/blog/index.astro`: added a decorative inline hand-drawn open-book SVG using existing charcoal, cement, canary, and orange tokens, with `aria-hidden=true` and the existing `data-hero-doodle` entrance hook. The H1 remains outside the animation selector. “Decorative hand-drawn SVG doodle to the Blog hero matching the Sponsors pencil-doodle pattern (inline SVG, `aria-hidden`, no external assets, stroke style consistent with existing doodles).” Chrome found the SVG and hidden state at 1280/390, with zero horizontal overflow and no H1/doodle overlap. [Bounds](../evidence/ux-fix1/phase-f-probe.json) · [desktop](../evidence/ux-fix1/phase-f-blog-1280.png) · [mobile](../evidence/ux-fix1/phase-f-blog-390.png).
+
+**Phase F battery:** [build](../evidence/ux-fix1/phase-f-build.log) 17 pages; [Astro check](../evidence/ux-fix1/phase-f-check.log) 0 errors / 0 warnings / 42 hints; [unsandboxed tests](../evidence/ux-fix1/phase-f-tests.log) 119/119; [links](../evidence/ux-fix1/phase-f-links.log) 715 verified / 0 broken. No Phase F test amendment was needed.

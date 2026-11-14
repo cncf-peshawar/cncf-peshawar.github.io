@@ -971,12 +971,19 @@ const graph = {
     display: inline-block;
     margin-top: 6px;
     background-color: transparent;
-    transition: background-color 120ms ease-in-out;
+    transition: color 120ms ease-in-out, text-decoration-color 120ms ease-in-out, background-color 120ms ease-in-out;
   }
 
   .past-link:hover {
     background-color: var(--color-canary-banner);
     text-decoration: underline;
+    text-decoration-color: var(--color-sky-crayon);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .past-link {
+      transition: color 120ms ease-in-out;
+    }
   }
 
   .past-link:focus-visible {
