@@ -1,7 +1,7 @@
 ---
 name: "nsave"
 tier: "Event Sponsor"
-website: "https://nsave.com"
+website: "https://www.nsave.com/"
 description: "Proud sponsor of CNCF Peshawar Genesis, providing safe, regulated, and accessible international financial accounts for individuals in distressed economies."
 active: true
 perks:

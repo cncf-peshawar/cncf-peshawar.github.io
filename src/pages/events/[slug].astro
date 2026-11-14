@@ -29,6 +29,7 @@ const eventDate = !isNaN(parsedDate.getTime())
   : (data.date || 'Date TBA');
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const isUpcoming = data.status === 'upcoming' && new Date(`${data.date}T23:59:59+05:00`).getTime() >= Date.now();
 
 const isVirtual = /virtual/i.test(data.venue || '');
 const eventJsonLd = (data.title && data.date) ? {
@@ -75,7 +76,7 @@ const eventJsonLd = (data.title && data.date) ? {
   <header class="event-hero">
     <div class="event-hero-inner">
       <div class="event-hero-eyebrow" data-hero-eyebrow>
-        {data.status === 'upcoming' ? (
+        {isUpcoming ? (
           <span class="badge badge--live badge-canary">Upcoming Meetup</span>
         ) : (
           <span class="badge badge-white">Completed Event</span>
@@ -120,7 +121,7 @@ const eventJsonLd = (data.title && data.date) ? {
         <div class="info-card">
           <div class="info-card-header">
             <span class="badge badge-canary">KEY EVENT DETAILS</span>
-            {data.status === 'upcoming' && (
+            {isUpcoming && (
               <span class="status-live-indicator">
                 <span class="status-pulse-dot" aria-hidden="true"></span>
                 <span>OPEN REGISTRATION</span>
@@ -160,7 +161,7 @@ const eventJsonLd = (data.title && data.date) ? {
           )}
 
           <div class="info-actions">
-            {data.status === 'upcoming' ? (
+            {isUpcoming ? (
               <div class="rsvp-btn-group">
                 {data.rsvpUrl && (
                   <a

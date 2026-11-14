@@ -14,12 +14,19 @@ const getTimestamp = (dateStr: string) => {
   const ts = new Date(dateStr).getTime();
   return isNaN(ts) ? 0 : ts;
 };
+const isScheduledAhead = (dateStr: string) => new Date(`${dateStr}T23:59:59+05:00`).getTime() >= Date.now();
 // Upcoming events sorted chronologically (nearest upcoming first)
 const upcomingEvents = allEvents
-  .filter(e => e.data.status === 'upcoming')
+  .filter(e => e.data.status === 'upcoming' && isScheduledAhead(e.data.date))
   .sort((a, b) => getTimestamp(a.data.date) - getTimestamp(b.data.date));
 
 const nextFeaturedEvent = upcomingEvents.length > 0 ? upcomingEvents[0] : undefined;
+const completedEvents = allEvents
+  .filter(e => e.data.status === 'completed')
+  .sort((a, b) => getTimestamp(b.data.date) - getTimestamp(a.data.date));
+const sponsors = await getCollection('sponsors');
+const nicSponsor = sponsors.find(s => s.slug === 'nic-peshawar')!;
+const nsaveSponsor = sponsors.find(s => s.slug === 'nsave')!;
 
 const graph = {
   '@context': 'https://schema.org',
@@ -246,7 +253,16 @@ const graph = {
   </section>
 
   <section class="featured-section" id="featured-meetup" data-reveal>
-    <GenesisCountdown event={nextFeaturedEvent} />
+    {nextFeaturedEvent ? (
+      <GenesisCountdown event={nextFeaturedEvent} />
+    ) : (
+      <div class="featured-empty-state">
+        <span class="section-eyebrow">00 // SCHEDULE UPDATE</span>
+        <h2 class="section-title">New meetups are on the way.</h2>
+        <p>Catch up on past events below, or propose a talk for a future gathering.</p>
+        <a href={`${base}/events`} class="past-link link-highlight">Browse Event Archive →</a>
+      </div>
+    )}
   </section>
 
   <section class="pillars-section" data-reveal>
@@ -294,24 +310,14 @@ const graph = {
     <span class="section-eyebrow">03 // ARCHIVE & RECAPS</span>
     <h2 class="section-title">Past Meetups & Technical Labs.</h2>
     <div class="past-grid" data-reveal-group>
-      <div class="past-card" data-reveal-item>
-        <span class="past-date">SEP 04, 2026 · INAUGURAL</span>
-        <h3 class="past-name">CNCF Peshawar Genesis</h3>
-        <p class="past-summary">The inaugural chapter gathering introducing cloud native open-source foundations and local community roadmap.</p>
-        <a href={`${base}/events/01-cncf-peshawar-genesis`} class="past-link link-highlight">Read Details →</a>
-      </div>
-      <div class="past-card" data-reveal-item>
-        <span class="past-date">COMING OCT 2026</span>
-        <h3 class="past-name">Container Security & eBPF Deep Dive</h3>
-        <p class="past-summary">Hands-on threat analysis in Kubernetes clusters with Cilium, Tetragon, and runtime security controls.</p>
-        <a href={`${base}/events`} class="past-link link-highlight">View Full Meetup Archive</a>
-      </div>
-      <div class="past-card" data-reveal-item>
-        <span class="past-date">COMING NOV 2026</span>
-        <h3 class="past-name">GitOps at Scale with ArgoCD</h3>
-        <p class="past-summary">Declarative infrastructure patterns, progressive rollouts, and disaster recovery blueprints.</p>
-        <a href={`${base}/events`} class="past-link link-highlight">Explore Meetups</a>
-      </div>
+      {completedEvents.map(event => (
+        <div class="past-card" data-reveal-item>
+          <span class="past-date">{new Date(`${event.data.date}T12:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase()}</span>
+          <h3 class="past-name">{event.data.title}</h3>
+          <p class="past-summary">{event.data.summary}</p>
+          <a href={`${base}/events/${event.slug}`} class="past-link link-highlight">Read Details →</a>
+        </div>
+      ))}
     </div>
   </section>
 
@@ -331,13 +337,13 @@ const graph = {
         <span class="sponsor-type">VENUE PARTNER</span>
         <h3 class="sponsor-name">National Incubation Center (NIC) Peshawar</h3>
         <p class="sponsor-desc">National Incubation Center Peshawar providing world-class gathering space.</p>
-        <a href="https://nicpeshawar.com.pk" target="_blank" rel="noopener noreferrer" class="sponsor-link link-highlight">Visit Website ↗</a>
+        <a href={nicSponsor.data.website} target="_blank" rel="noopener noreferrer" class="sponsor-link link-highlight">Visit Website ↗</a>
       </div>
       <div class="sponsor-card" data-reveal-item>
         <span class="sponsor-type">EVENT SPONSOR PARTNER</span>
         <h3 class="sponsor-name">nsave</h3>
         <p class="sponsor-desc">Fintech engineering team empowering high-performance distributed systems.</p>
-        <a href="https://nsave.com" target="_blank" rel="noopener noreferrer" class="sponsor-link link-highlight">Visit Website ↗</a>
+        <a href={nsaveSponsor.data.website} target="_blank" rel="noopener noreferrer" class="sponsor-link link-highlight">Visit Website ↗</a>
       </div>
     </div>
     <div style="display: flex; gap: 12px; flex-wrap: wrap;">
@@ -810,6 +816,19 @@ const graph = {
     max-width: 1240px;
     margin: 0 auto;
     width: 100%;
+  }
+
+  .featured-empty-state {
+    padding: clamp(24px, 4vw, 36px);
+    background: var(--color-canary-banner);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard);
+  }
+
+  .featured-empty-state p {
+    max-width: 60ch;
+    color: var(--color-charcoal-ink);
   }
 
   /* Pillars */

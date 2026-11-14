@@ -1,7 +1,7 @@
 ---
 name: "National Incubation Center (NIC) Peshawar"
 tier: "Venue"
-website: "https://nicpeshawar.com.pk"
+website: "https://nicpeshawar.pk/"
 description: "Venue host for CNCF Peshawar Genesis, located at South Canal Road, Peshawar, providing auditorium facilities for the community launch."
 active: true
 perks:

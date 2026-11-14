@@ -21,7 +21,7 @@ const eventDate = !isNaN(parsedDate.getTime())
     })
   : (data.date || 'Date TBA');
 
-const isUpcoming = data.status === 'upcoming';
+const isUpcoming = data.status === 'upcoming' && new Date(`${data.date}T23:59:59+05:00`).getTime() >= Date.now();
 ---
 
 <article class:list={['event-card', isUpcoming ? 'event-card--upcoming' : 'event-card--archive', featured && 'event-card--featured']}>

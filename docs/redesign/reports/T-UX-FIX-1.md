@@ -2,7 +2,7 @@
 
 **Date:** 14 November 2026 (Asia/Karachi)  
 **Branch:** `redesign/ui-motherduck`  
-**Status:** Resumed under CTO Amendment 1; Phase A complete. The Phase 0 stop and its evidence remain below as a historical record.
+**Status:** Resumed under CTO Amendment 1; Phases A–B complete. The Phase 0 stop and its evidence remain below as a historical record.
 
 ## Stop condition
 
@@ -93,6 +93,46 @@ Local Chrome on Astro preview at 390px reproduced all three anchors: UX-04 venue
 
 The [hook log](../evidence/ux-fix1/phase-a-hooks.log) records zero occurrences of every one of 14 builder hooks on Home and all 14 on Sponsors, with the canonical element types (`section`, `form`, `input`, `select`, `textarea`, `pre`, `a`, `button`, `span`). Build produced 17 pages; Astro check remained 0/0/42; [build output](../evidence/ux-fix1/phase-a-build.log) · [check output](../evidence/ux-fix1/phase-a-check.log). The [unsandboxed test suite](../evidence/ux-fix1/phase-a-tests.log) printed 119/119 passed. The [link crawl](../evidence/ux-fix1/phase-a-links.log) verified 698 links/assets with 0 broken. [Before](../evidence/ux-fix1/K1-home-390-before.png) · [After 390](../evidence/ux-fix1/K1-home-390-after.png) · [After 1280](../evidence/ux-fix1/K1-home-1280-after.png).
 
+## Phase B — content truth
+
+**UX-01.** Files: `src/content/events/02-the-cloud-native-launchpad-docker-kubernetes-real-deployments.md`, `src/pages/index.astro`, `src/pages/events/index.astro`, `src/pages/events/[slug].astro`, `src/components/events/EventCard.astro`, and the permitted eyebrow in `src/components/GenesisCountdown.astro`. Launchpad status now uses Genesis's `completed` vocabulary. Home and Events filter upcoming records by status **and** schedule date; Home renders a neutral empty state when none remain. Events' featured format wording derives from venue/location. Detail and cards gate RSVP by status and date. The countdown client script is byte-identical to Phase A (`sha256 7578360674c65a408da2c6a970320f69e342c865ac04fc991fbd9a037d3a04d7`).
+
+> “No view anywhere presents the Sept 26 Launchpad as upcoming or open for RSVP; the empty-state path is exercised if no upcoming events remain; the countdown component's script bytes are unchanged.”
+
+The local route probe records Home's empty-state text, Events' empty state and archive, and **0** `OPEN REGISTRATION` or `RSVP on Open Community Groups` labels on Launchpad. [Route probe](../evidence/ux-fix1/phase-b-route-probes.json) · [status logic](../evidence/ux-fix1/phase-b-status-logic.log) · [countdown script comparison](../evidence/ux-fix1/phase-b-countdown-script.log) · [Home before](../evidence/ux-fix1/UX-01-home-390-before.png) / [after](../evidence/ux-fix1/UX-01-home-390-after.png) · [Events before](../evidence/ux-fix1/UX-01-events-390-before.png) / [after](../evidence/ux-fix1/UX-01-events-390-after.png) · [Launchpad before](../evidence/ux-fix1/UX-01-launchpad-390-before.png) / [after](../evidence/ux-fix1/UX-01-launchpad-390-after.png).
+
+**UX-06.** File: `src/pages/index.astro`. Replaced hardcoded future eBPF and GitOps cards with a descending list from `completed` event records.
+
+> “No ‘COMING’ cards remain; every archive card links to a real detail page.”
+
+The Home probe lists two archive links, to Launchpad and Genesis; both returned local HTTP 200. [Route probe](../evidence/ux-fix1/phase-b-route-probes.json) · [HTTP probes](../evidence/ux-fix1/phase-b-archive-links.log) · [Before 1280](../evidence/ux-fix1/UX-06-home-1280-before.png) · [After 1280](../evidence/ux-fix1/UX-06-home-1280-after.png) · [After 390](../evidence/ux-fix1/UX-06-home-390-after.png).
+
+**UX-12.** Files: `src/content/sponsors/nic-peshawar.md`, `src/content/sponsors/nsave.md`, `src/pages/index.astro`. Home now reads the two partner destinations from sponsor records; Sponsors already did.
+
+> “Both partner cards on Home and Sponsors open the verified hosts (HTTP 200 via probe); the content records are the single source of truth.”
+
+The four built hrefs resolve to `https://nicpeshawar.pk/` or `https://www.nsave.com/`. Both hosts returned HTTP 200. [Rendered hrefs and HTTP probes](../evidence/ux-fix1/phase-b-partner-links.log).
+
+**UX-09.** File: `src/content/members/subhan-baig.md`. Removed the broken GitHub avatar and profile URL. The existing initials fallback renders `SB`.
+
+> “No broken link or failing image on Tech Team; the card renders initials; the owner follow-up is listed in the report.”
+
+Chrome found 0 images and 0 old GitHub links in Subhan's card, with visible initials `SB`. [Route probe](../evidence/ux-fix1/phase-b-route-probes.json) · [Before](../evidence/ux-fix1/UX-09-tech-390-before.png) / [after](../evidence/ux-fix1/UX-09-tech-390-after.png). **Owner follow-up:** ask Subhan Baig to confirm a public GitHub handle and avatar URL before restoring either.
+
+**UX-18.** File: `src/content/events/02-the-cloud-native-launchpad-docker-kubernetes-real-deployments.md`. Replaced the run-on body with separate `##` sections and lists; summary is standalone and concise.
+
+> “The detail page and the Events listing excerpt render scannable structure; the heading outline stays hierarchical.”
+
+The rendered outline contains H1 followed by H2 `About This Event`, `What You’ll Learn`, `Live Hands-On Demonstration`, `Who Should Attend`, and `Event Details`; the route probe records it. [Outline](../evidence/ux-fix1/phase-b-route-probes.json) · [Before](../evidence/ux-fix1/UX-01-launchpad-390-before.png) / [after](../evidence/ux-fix1/UX-01-launchpad-390-after.png).
+
+**UX-19.** File: `src/content/blog/announcing-cncf-peshawar.md`. Preserved the original August invitation and appended `Update (November 2026)` in the RSVP area, linking only to the in-repo Genesis detail page.
+
+> “The update note is visible on the article; the original text is preserved; the link resolves.”
+
+Chrome found the update and the Genesis link once each; the detail URL returned local HTTP 200. [Route probe](../evidence/ux-fix1/phase-b-route-probes.json) · [archive/detail HTTP probe](../evidence/ux-fix1/phase-b-archive-links.log) · [Before](../evidence/ux-fix1/UX-19-announcement-390-before.png) / [after](../evidence/ux-fix1/UX-19-announcement-390-after.png).
+
+**Phase B battery:** [build](../evidence/ux-fix1/phase-b-build.log) 17 pages, Astro check 0 errors / 0 warnings / 42 hints; [unsandboxed tests](../evidence/ux-fix1/phase-b-tests.log) 119/119; [links](../evidence/ux-fix1/phase-b-links.log) 700 verified, 0 broken. No Phase B test amendment was needed. The link count rose by 2 from the rebased 698 baseline; the changed Home archive and event-state markup are the relevant source changes, but this count is not attributed to an individual link without a link-checker breakdown.
+
 ## Remaining work
 
-Phases B–G remain to be executed. The old stop report above describes the pre-amendment state and does not describe the current implementation status.
+Phases C–G remain to be executed. The old stop report above describes the pre-amendment state and does not describe the current implementation status.

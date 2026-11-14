@@ -1,0 +1,108 @@
+{
+  "home-390": {
+    "featured": "00 // SCHEDULE UPDATE\nNew meetups are on the way.\n\nCatch up on past events below, or propose a talk for a future gathering.\n\nBrowse Event Archive →",
+    "archiveLinks": [
+      {
+        "text": "Read Details →",
+        "href": "/events/02-the-cloud-native-launchpad-docker-kubernetes-real-deployments"
+      },
+      {
+        "text": "Read Details →",
+        "href": "/events/01-cncf-peshawar-genesis"
+      }
+    ],
+    "sponsorLinks": [
+      "https://github.com/",
+      "https://nicpeshawar.pk/",
+      "https://www.nsave.com/"
+    ]
+  },
+  "home-1280": {
+    "featured": "00 // SCHEDULE UPDATE\nNew meetups are on the way.\n\nCatch up on past events below, or propose a talk for a future gathering.\n\nBrowse Event Archive →",
+    "archiveLinks": [
+      {
+        "text": "Read Details →",
+        "href": "/events/02-the-cloud-native-launchpad-docker-kubernetes-real-deployments"
+      },
+      {
+        "text": "Read Details →",
+        "href": "/events/01-cncf-peshawar-genesis"
+      }
+    ],
+    "sponsorLinks": [
+      "https://github.com/",
+      "https://nicpeshawar.pk/",
+      "https://www.nsave.com/"
+    ]
+  },
+  "events": {
+    "upcoming": "01 // UPCOMING\nUPCOMING MEETUPS.\n\nNew meetups are on the way — catch up on past events below.\n\nNOTICE // SCHEDULE IN PROGRESS\nCOMMUNITY GATHERINGS\nNo Upcoming Meetups Currently Scheduled\n\nNew meetups are on the way — catch up on past events below, or propose a talk for a future gathering.\n\nSUBMIT A TALK (CFP)\nBROWSE PAST ARCHIVES →",
+    "archive": "02 // ARCHIVE\nPAST MEETUP ARCHIVES.\n\nExplore slide decks, video recordings, code repositories, and summaries from our previous sessions.\n\nSep 26, 2026\n·\n07:00 PM - 09:00 PM PKT\nCOMPLETED LAB\nThe Cloud Native Launchpad: Docker, Kubernetes & Real Deployments\n\nVirtual event, Online\n\nAn interactive virtual workshop introducing containers, Docker, Kubernetes, and a live application deployment for students and aspiring cloud native practitioners.\n\n#Genesis\n#OpenSource\n#Community\n#CloudNative\n#Kubernetes\n#AgenticAI\nView Recap →\nSep 4, 2026\n·\n03:00 PM - 07:00 PM PKT\nCOMPLETED LAB\nCNCF Peshawar Genesis\n\nNational Incubation Center (NIC), South Canal Road, Peshawar, KPK, Pakistan\n\nCNCF Peshawar Genesis, proudly sponsored by GitHub and nsave, marks the official launch of the Cloud Native Computing Foundation (CNCF) community in Peshawar, bringing together developers, engineers, students, and open source enthusiasts.\n\n#Genesis\n#OpenSource\n#Community\n#CloudNative\n#Kubernetes\n#AgenticAI\nView Recap →",
+    "archiveLinks": [
+      "/events/02-the-cloud-native-launchpad-docker-kubernetes-real-deployments",
+      "/events/02-the-cloud-native-launchpad-docker-kubernetes-real-deployments",
+      "/events/01-cncf-peshawar-genesis",
+      "/events/01-cncf-peshawar-genesis"
+    ]
+  },
+  "launchpad": {
+    "headings": [
+      {
+        "level": "H1",
+        "text": "The Cloud Native Launchpad: Docker, Kubernetes & Real Deployments"
+      },
+      {
+        "level": "H2",
+        "text": "Featured Speakers & Instructors"
+      },
+      {
+        "level": "H2",
+        "text": "About This Event"
+      },
+      {
+        "level": "H2",
+        "text": "What You’ll Learn"
+      },
+      {
+        "level": "H2",
+        "text": "Live Hands-On Demonstration"
+      },
+      {
+        "level": "H2",
+        "text": "Who Should Attend"
+      },
+      {
+        "level": "H2",
+        "text": "Event Details"
+      },
+      {
+        "level": "H2",
+        "text": "Building Peshawar's Cloud Native Future."
+      },
+      {
+        "level": "H3",
+        "text": "Community"
+      },
+      {
+        "level": "H3",
+        "text": "Community Channels"
+      },
+      {
+        "level": "H3",
+        "text": "Contact & Connect"
+      }
+    ],
+    "openRegistrationCount": 0,
+    "rsvpCount": 0
+  },
+  "subhan": {
+    "text": "SB\nSubhan Baig\n\nTech Team\n\nFAST NUCES\n\nLINKEDIN\nEMAIL",
+    "imageCount": 0,
+    "initials": "SB",
+    "githubLinks": 0
+  },
+  "announcement": {
+    "update": 1,
+    "genesisLink": 1
+  }
+}

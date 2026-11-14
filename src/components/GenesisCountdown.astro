@@ -34,7 +34,7 @@ const effectiveTarget = targetDate || (event?.data.date ? `${event.data.date}T15
       <span class="live-dot" id="cd-live-dot"></span>
       <span class="live-label" id="cd-live-label">COUNTDOWN TO {title.toUpperCase()}</span>
     </div>
-    <span class="section-eyebrow countdown-eyebrow">00 // UPCOMING MEETUP</span>
+    <span class="section-eyebrow countdown-eyebrow">{event?.data.status === 'completed' ? '00 // COMPLETED MEETUP' : '00 // UPCOMING MEETUP'}</span>
     <h2 class="featured-title">{title}</h2>
     <span id="cd-date-display">{dateFormatted} · {timeStr}</span>
   </div>

@@ -1,0 +1,19 @@
+src/components/GenesisCountdown.astro:37:    <span class="section-eyebrow countdown-eyebrow">{event?.data.status === 'completed' ? '00 // COMPLETED MEETUP' : '00 // UPCOMING MEETUP'}</span>
+src/components/events/EventCard.astro:24:const isUpcoming = data.status === 'upcoming' && new Date(`${data.date}T23:59:59+05:00`).getTime() >= Date.now();
+src/components/events/EventCard.astro:27:<article class:list={['event-card', isUpcoming ? 'event-card--upcoming' : 'event-card--archive', featured && 'event-card--featured']}>
+src/components/events/EventCard.astro:37:    {isUpcoming ? (
+src/components/events/EventCard.astro:77:    {isUpcoming ? (
+src/pages/events/[slug].astro:32:const isUpcoming = data.status === 'upcoming' && new Date(`${data.date}T23:59:59+05:00`).getTime() >= Date.now();
+src/pages/events/[slug].astro:79:        {isUpcoming ? (
+src/pages/events/[slug].astro:124:            {isUpcoming && (
+src/pages/events/[slug].astro:164:            {isUpcoming ? (
+src/pages/events/index.astro:15:const isScheduledAhead = (dateStr: string) => new Date(`${dateStr}T23:59:59+05:00`).getTime() >= Date.now();
+src/pages/events/index.astro:16:const upcomingEvents = sortedEvents.filter(e => e.data.status === 'upcoming' && isScheduledAhead(e.data.date));
+src/pages/events/index.astro:17:const pastEvents = sortedEvents.filter(e => e.data.status === 'completed' || !isScheduledAhead(e.data.date));
+src/pages/events/index.astro:18:const nextEventIsVirtual = upcomingEvents.length > 0 && /virtual|online/i.test(`${upcomingEvents[0].data.venue} ${upcomingEvents[0].data.location}`);
+src/pages/events/index.astro:49:      <h2 class="section-headline">{upcomingEvents.length ? `Next ${nextEventIsVirtual ? 'Online' : 'In-Person'} Meetup.` : 'Upcoming Meetups.'}</h2>
+src/pages/events/index.astro:51:        {upcomingEvents.length ? (nextEventIsVirtual ? 'Join the next virtual gathering from wherever you are.' : 'RSVP early to reserve your place at the venue.') : 'New meetups are on the way — catch up on past events below.'}
+src/pages/index.astro:17:const isScheduledAhead = (dateStr: string) => new Date(`${dateStr}T23:59:59+05:00`).getTime() >= Date.now();
+src/pages/index.astro:20:  .filter(e => e.data.status === 'upcoming' && isScheduledAhead(e.data.date))
+src/pages/index.astro:24:const completedEvents = allEvents
+src/pages/index.astro:313:      {completedEvents.map(event => (
