@@ -2,7 +2,7 @@
 
 **Date:** 14 November 2026 (Asia/Karachi)  
 **Branch:** `redesign/ui-motherduck`  
-**Status:** Resumed under CTO Amendment 1; Phases A–F complete. The Phase 0 stop and its evidence remain below as a historical record.
+**Status:** Phases A–G locally complete; final push and deployment verification pending. The Phase 0 stop and its evidence remain below as a historical record.
 
 ## Stop condition
 
@@ -191,7 +191,7 @@ After both direct `?tier=Venue%20Host%20Partner#email-builder` load and a settle
 
 ## Remaining work
 
-Phase G remains to be executed. The old stop report above describes the pre-amendment state and does not describe the current implementation status.
+The old stop report above describes the pre-amendment state and does not describe the current implementation status.
 
 ## Phase E — affordance, structure, contrast, CTAs
 
@@ -226,3 +226,39 @@ Phase G remains to be executed. The old stop report above describes the pre-amen
 **K4 Blog hero doodle.** `src/pages/blog/index.astro`: added a decorative inline hand-drawn open-book SVG using existing charcoal, cement, canary, and orange tokens, with `aria-hidden=true` and the existing `data-hero-doodle` entrance hook. The H1 remains outside the animation selector. “Decorative hand-drawn SVG doodle to the Blog hero matching the Sponsors pencil-doodle pattern (inline SVG, `aria-hidden`, no external assets, stroke style consistent with existing doodles).” Chrome found the SVG and hidden state at 1280/390, with zero horizontal overflow and no H1/doodle overlap. [Bounds](../evidence/ux-fix1/phase-f-probe.json) · [desktop](../evidence/ux-fix1/phase-f-blog-1280.png) · [mobile](../evidence/ux-fix1/phase-f-blog-390.png).
 
 **Phase F battery:** [build](../evidence/ux-fix1/phase-f-build.log) 17 pages; [Astro check](../evidence/ux-fix1/phase-f-check.log) 0 errors / 0 warnings / 42 hints; [unsandboxed tests](../evidence/ux-fix1/phase-f-tests.log) 119/119; [links](../evidence/ux-fix1/phase-f-links.log) 715 verified / 0 broken. No Phase F test amendment was needed.
+
+## Phase G — final battery and scope sweep (15 November 2026)
+
+Commands: `npm run build`, `npm run check`, unsandboxed `npm test` (the sandbox's child-process `EPERM` is documented in Phase 0), `npm run check:links`, and `gzip -c dist/_astro/*.js | wc -c`. The parity, overflow, frozen-hook, and hero probes ran with `node` using the preserved [parity](../evidence/ux-fix1/phase-g-parity.mjs), [overflow](../evidence/ux-fix1/phase-g-overflow.mjs), [freeze](../evidence/ux-fix1/phase-g-freeze.mjs), and [hero](../evidence/ux-fix1/phase-g-hero.mjs) scripts. Lighthouse 13.4.1 used the local preview, mobile default, Chrome headless, and `--only-categories=performance,accessibility` for each of the five routes; the raw JSON includes its full run settings and audit output.
+
+| Battery row | Rebased Phase 0 before | Phase G after | Delta / verdict |
+| --- | --- | --- | --- |
+| Astro check | 0 errors / 0 warnings / 42 hints | 0 / 0 / 42 | No change; [final check](../evidence/ux-fix1/phase-g-check.log). |
+| Static routes | 17 pages | 17 pages | No route count change; [final build](../evidence/ux-fix1/phase-g-build.log). |
+| Tests | 119/119 after Amendment 1 | 119/119 (49/52/12/6) | No regression; [final unsandboxed suite](../evidence/ux-fix1/phase-g-tests.log). Printed counts are authoritative because of K7. |
+| Route parity | Not captured in Phase 0 | 10/10, 0 failures, exit 0 | The final local preview and final built HTML were compared with the repo's `extractParity` over ten representative public routes; this is **preview/build parity**, not a claim of unchanged markup against the pre-redesign baseline. [Parity output](../evidence/ux-fix1/phase-g-parity.json). |
+| Internal links/assets | 698 verified / 0 broken | 715 verified / 0 broken | +17 verified: +2 in B, +1 in D, +14 in E (16 desktop CoC nav links minus 2 duplicate CFP links); [final crawl](../evidence/ux-fix1/phase-g-links.log). |
+| Client JS gzip | 25,992 B | 26,253 B | +261 B (+1.0%), below the +2 KiB flag. The net change is consistent with focus reveal, shared marquee controls, and builder validation/copy logic; bundle-size output alone cannot assign bytes to each change. [Final byte count](../evidence/ux-fix1/phase-g-gzip.log). |
+| Mobile overflow | Phase 0 anchor routes only | 34/34 page-width probes passed | All 17 generated HTML pages at 390 and 360 had scroll width equal to viewport width; [full sweep](../evidence/ux-fix1/phase-g-overflow.json). |
+
+**Lighthouse mobile.** The “before” figures are the UX-AUDIT-1 live Vercel sample on Lighthouse 12.8.2; “after” is the final local production preview on Lighthouse 13.4.1, so performance scores are directional rather than a controlled same-version delta. Every after run clears performance ≥95 and accessibility 100. Label-in-name and color-contrast audits score 1 on each final route. [Before summary](../evidence/ux-fix1/phase-g-lighthouse-before.json) · [after summary](../evidence/ux-fix1/phase-g-lighthouse-after.json) · [Home raw](../evidence/ux-fix1/phase-g-lighthouse-home.json) · [Events raw](../evidence/ux-fix1/phase-g-lighthouse-events.json) · [Sponsors raw](../evidence/ux-fix1/phase-g-lighthouse-sponsors.json) · [Team raw](../evidence/ux-fix1/phase-g-lighthouse-team.json) · [Blog raw](../evidence/ux-fix1/phase-g-lighthouse-blog.json).
+
+| Route | Before perf / a11y | After perf / a11y |
+| --- | --- | --- |
+| Home | 97 / 100 | 97 / 100 |
+| Events | 100 / 96 | 100 / 100 |
+| Sponsors | 100 / 100 | 99 / 100 |
+| Team | 100 / 100 | 100 / 100 |
+| Blog | 100 / 100 | 99 / 100 |
+
+**Scope and interaction proofs.** The final build has zero builder hooks on Home and all 14 canonical hooks, with their original element types, on Sponsors. `package.json` has no diff. GenesisCountdown's client script hashes identically before/after (`7578360674c65a408da2c6a970320f69e342c865ac04fc991fbd9a037d3a04d7`); the desktop Nav has no client script. [Final freeze proof](../evidence/ux-fix1/phase-g-freeze.json). The only added `!important` diff lines are the two existing hero transform declarations moved inside the no-preference media query for UX-22; no new declaration was introduced. [Phase C reduced-motion probe](../evidence/ux-fix1/phase-c-probes.json) and [final 120ms hover / 30ms active snap](../evidence/ux-fix1/phase-g-hero-snap.json) complete the hero timing proof.
+
+**Test amendments.** Amendment 1 repaired only F1.2 in `tests/tier1-feature-coverage.test.mjs`: the old assertion used stale absolute fixture dates and a fallback event; the new assertions require every future (+60d) event to be `upcoming` and every past (-30d) event to be `completed`. The before/after code and the unchanged fixture diff are quoted above. No B1 or D1 assertion amendment and no T-CLEAN test amendment were needed. K7, the runner's exit-code masking, remains a known defect outside this work order.
+
+**Known-item ledger.** K1 resolved in A; K2 closed by CTO as non-reproducible; K3 resolved in D; K4 resolved in F; K5 resolved in E; K6 had landed before this task; K7 remains open (runner can exit 0 despite a failed test).
+
+**Owner follow-ups.** Supply Subhan Baig's verified GitHub handle and avatar source if a profile link is desired; no replacement was invented. The two scoped partner domains returned HTTP 200 during Phase B. Other outbound social/community links were outside the internal link crawler and were not individually reverified in this session.
+
+**Skill use.** No optional skill was applied to a fix. The owner-supplied directive, `md-motion-spec.md`, UX audit, project source, Astro checks, browser probes, and Lighthouse governed the work. The `lint-and-validate` and `reticle` skill files were read before considering them; Reticle was not invoked, and the project has no lint script. Astro check/build and the full E2E suite served as the executable validation gates.
+
+**Push/deployment:** Pending the single authorized `GIT_TERMINAL_PROMPT=0 git push -u origin redesign/ui-motherduck`. A post-push deployment check will be recorded locally after the remote update, because the one-push rule makes it impossible to commit a future deployment result into this already-pushed report.

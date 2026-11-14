@@ -1,0 +1,83 @@
+{
+  "hooks": [
+    {
+      "id": "email-builder",
+      "home": null,
+      "sponsors": "section"
+    },
+    {
+      "id": "tiers",
+      "home": null,
+      "sponsors": "section"
+    },
+    {
+      "id": "sponsor-form",
+      "home": null,
+      "sponsors": "form"
+    },
+    {
+      "id": "org-name",
+      "home": null,
+      "sponsors": "input"
+    },
+    {
+      "id": "contact-name",
+      "home": null,
+      "sponsors": "input"
+    },
+    {
+      "id": "contact-email",
+      "home": null,
+      "sponsors": "input"
+    },
+    {
+      "id": "tier-select",
+      "home": null,
+      "sponsors": "select"
+    },
+    {
+      "id": "timeline-select",
+      "home": null,
+      "sponsors": "select"
+    },
+    {
+      "id": "org-website",
+      "home": null,
+      "sponsors": "input"
+    },
+    {
+      "id": "scope-notes",
+      "home": null,
+      "sponsors": "textarea"
+    },
+    {
+      "id": "email-preview-text",
+      "home": null,
+      "sponsors": "pre"
+    },
+    {
+      "id": "send-mailto-btn",
+      "home": null,
+      "sponsors": "a"
+    },
+    {
+      "id": "copy-template-btn",
+      "home": null,
+      "sponsors": "button"
+    },
+    {
+      "id": "copy-btn-text",
+      "home": null,
+      "sponsors": "span"
+    }
+  ],
+  "allSponsors": true,
+  "noneHome": true,
+  "genesisScript": {
+    "before": "7578360674c65a408da2c6a970320f69e342c865ac04fc991fbd9a037d3a04d7",
+    "after": "7578360674c65a408da2c6a970320f69e342c865ac04fc991fbd9a037d3a04d7",
+    "identical": true
+  },
+  "packageJsonFrozen": true,
+  "navClientScriptCount": 0
+}

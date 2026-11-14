@@ -1,0 +1,47 @@
+[
+  {
+    "route": "home",
+    "version": "13.4.1",
+    "performance": 97,
+    "accessibility": 100,
+    "labelInName": 1,
+    "contrast": 1,
+    "finalUrl": "http://127.0.0.1:4322/"
+  },
+  {
+    "route": "events",
+    "version": "13.4.1",
+    "performance": 100,
+    "accessibility": 100,
+    "labelInName": 1,
+    "contrast": 1,
+    "finalUrl": "http://127.0.0.1:4322/events/"
+  },
+  {
+    "route": "sponsors",
+    "version": "13.4.1",
+    "performance": 99,
+    "accessibility": 100,
+    "labelInName": 1,
+    "contrast": 1,
+    "finalUrl": "http://127.0.0.1:4322/sponsors/"
+  },
+  {
+    "route": "team",
+    "version": "13.4.1",
+    "performance": 100,
+    "accessibility": 100,
+    "labelInName": 1,
+    "contrast": 1,
+    "finalUrl": "http://127.0.0.1:4322/team/"
+  },
+  {
+    "route": "blog",
+    "version": "13.4.1",
+    "performance": 99,
+    "accessibility": 100,
+    "labelInName": 1,
+    "contrast": 1,
+    "finalUrl": "http://127.0.0.1:4322/blog/"
+  }
+]
