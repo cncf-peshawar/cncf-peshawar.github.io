@@ -4,14 +4,11 @@ const events = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    date: z.string().describe('Local calendar date (YYYY-MM-DD) in Asia/Karachi. Authoritative for the rendered lifecycle state.'),
-    time: z.string().describe('Local wall-clock range in Asia/Karachi, e.g. "03:00 PM - 07:00 PM PKT". Authoritative for the rendered lifecycle state.'),
+    date: z.string(),
+    time: z.string(),
     venue: z.string(),
     location: z.string().default('Peshawar, KPK, Pakistan'),
-    // Editorial intent only. The rendered lifecycle state is always derived from
-    // `date` + `time` (see src/lib/event-lifecycle.mjs) so an expired event can never
-    // be promoted as the next meetup while `status` is stale.
-    status: z.enum(['upcoming', 'completed', 'canceled']).default('upcoming'),
+    status: z.enum(['upcoming', 'completed']).default('upcoming'),
     capacity: z.number().optional(),
     rsvpUrl: z.string().url(),
     lumaUrl: z.string().url().optional(),

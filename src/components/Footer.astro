@@ -46,7 +46,6 @@ const currentYear = new Date().getFullYear();
           <li><a href={`${base}/team`}>Organizers & Team</a></li>
           <li><a href={`${base}/blog`}>Blog & Recaps</a></li>
           <li><a href={`${base}/code-of-conduct`}>Code of Conduct</a></li>
-          <li><a href={`${base}/contact`}>Contact Organizers</a></li>
         </ul>
       </div>
 
@@ -220,9 +219,7 @@ const currentYear = new Date().getFullYear();
   }
 
   .footer__email-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
+    display: inline-block;
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
@@ -241,10 +238,6 @@ const currentYear = new Date().getFullYear();
   }
 
   .social-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
     padding: 0.3rem 0.6rem;
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);

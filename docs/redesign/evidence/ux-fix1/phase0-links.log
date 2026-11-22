@@ -1,0 +1,9 @@
+
+> cncf-peshawar.github.io@1.0.0 check:links
+> node scripts/check-links.mjs
+
+🔍 Scanning static build output in "dist" for link & asset integrity...
+📄 Scanned 17 HTML pages.
+🔗 Verified 698 internal links and assets.
+
+✅ 0 broken internal links! Static site integrity successfully verified.

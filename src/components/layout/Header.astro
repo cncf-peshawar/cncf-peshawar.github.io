@@ -1,0 +1,189 @@
+---
+import Nav from './Nav.astro';
+import MobileMenu from './MobileMenu.astro';
+
+interface Props {
+  currentPath?: string;
+}
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { currentPath = Astro.url.pathname } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <!-- Brand Logo -->
+    <a href={`${base}/`} class="brand-logo" aria-label="CNCF Peshawar PK Home">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="var(--color-charcoal-ink)" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M12 22V12" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+        <path d="M22 7L12 12L2 7" stroke="var(--color-charcoal-ink)" stroke-width="2"/>
+        <circle cx="12" cy="12" r="3" fill="var(--color-sky-crayon)"/>
+      </svg>
+      <span class="brand-title">CNCF Peshawar</span>
+      <span class="brand-badge" aria-hidden="true">PK</span>
+    </a>
+
+    <!-- Desktop Nav Component -->
+    <Nav currentPath={currentPath} />
+
+    <!-- Action & Mobile Toggle Group -->
+    <div class="header-actions">
+      <a
+        href="https://ocgroups.dev/cncf/group/6vwk2n4"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="header-action-cta"
+      >
+        Join on OCG
+      </a>
+      <button
+        id="mobile-nav-toggle"
+        class="mobile-nav-toggle"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav-drawer"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Slide-In Drawer -->
+<MobileMenu currentPath={currentPath} />
+
+<style>
+  /* Flat (not sticky), white background, 1px bottom border */
+  .site-header {
+    width: 100%;
+    position: relative;
+    background-color: var(--color-frost-white);
+    border-bottom: 1px solid var(--color-charcoal-ink);
+    padding: 12px 24px;
+    z-index: 1000;
+  }
+
+  .header-inner {
+    max-width: var(--page-max-width, 1200px);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--color-charcoal-ink);
+    min-height: 44px;
+  }
+
+  .brand-logo:focus-visible,
+  .header-action-cta:focus-visible,
+  .mobile-nav-toggle:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+
+  .brand-title {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-ink);
+  }
+
+  .brand-badge {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 2px 6px;
+    background: var(--color-canary-banner);
+    border: 1px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    font-weight: 700;
+    color: var(--color-charcoal-ink);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-action-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--color-charcoal-ink);
+    background-color: var(--color-sky-crayon);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    padding: 8px 16px;
+    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink);
+    transition: transform var(--transition-fast, 0.1s ease), box-shadow var(--transition-fast, 0.1s ease);
+    min-height: 44px;
+  }
+
+  @media (min-width: 900px) {
+    .header-action-cta {
+      display: none; /* Shown inside Nav on desktop */
+    }
+  }
+
+  .header-action-cta:hover {
+    transform: translate(-1px, 1px);
+  }
+
+  .header-action-cta:active {
+    transform: translate(-3px, 3px);
+    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink);
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    background-color: var(--color-frost-white);
+    border: 2px solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    color: var(--color-charcoal-ink);
+    box-shadow: -3px 3px 0px 0px var(--color-charcoal-ink);
+    cursor: pointer;
+    transition: transform var(--transition-fast, 0.1s ease), box-shadow var(--transition-fast, 0.1s ease);
+  }
+
+  @media (min-width: 900px) {
+    .mobile-nav-toggle {
+      display: none;
+    }
+  }
+
+  .mobile-nav-toggle:hover {
+    transform: translate(-1px, 1px);
+  }
+
+  .mobile-nav-toggle:active {
+    transform: translate(-3px, 3px);
+    box-shadow: 0px 0px 0px 0px var(--color-charcoal-ink);
+  }
+</style>

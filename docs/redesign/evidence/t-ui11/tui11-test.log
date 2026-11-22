@@ -1,0 +1,465 @@
+
+> cncf-peshawar.github.io@1.0.0 test
+> node tests/e2e-runner.mjs
+
+
+================================================================================
+🚀 STARTING CLOUD NATIVE PESHAWAR AUTOMATION 4-TIER E2E TEST RUNNER
+================================================================================
+
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/ocg-test-sync-7Ba8GU
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 1 existing event file(s) from /tmp/ocg-test-sync-7Ba8GU.
+[UPDATE] 01-cncf-peshawar-genesis.md
+[CREATE] 02-kubernetes-deep-dive-production-workshop.md
+
+[SUMMARY] Sync Complete: 1 created, 1 updated, 0 unchanged.
+[CFP Triage] Parsed submission for "Syed Hassan Tayyab"
+  - Talk Title: Multi-Agent Systems on K8s
+  - Speaker File: src/content/speakers/syed-hassan-tayyab.md (DRY-RUN)
+  - Event File: src/content/events/draft-multi-agent-systems-on-k8s.md (DRY-RUN)
+  - Branch: cfp/issue-42-syed-hassan-tayyab
+[CFP Triage] Parsed submission for "Syed Hassan Tayyab"
+  - Talk Title: Multi-Agent Systems on K8s
+  - Speaker File: src/content/speakers/syed-hassan-tayyab.md (DRY-RUN)
+  - Event File: src/content/events/draft-multi-agent-systems-on-k8s.md (DRY-RUN)
+  - Branch: cfp/issue-42-syed-hassan-tayyab
+[CFP Triage] Parsed submission for "Syed Hassan Tayyab"
+  - Talk Title: Multi-Agent Systems on K8s
+  - Speaker File: src/content/speakers/syed-hassan-tayyab.md (DRY-RUN)
+  - Event File: src/content/events/draft-multi-agent-systems-on-k8s.md (DRY-RUN)
+  - Branch: cfp/issue-42-syed-hassan-tayyab
+[CFP Triage] Parsed submission for "Zainab Khan"
+  - Talk Title: K8s Pod Lifecycle
+  - Speaker File: src/content/speakers/zainab-khan.md (DRY-RUN)
+  - Event File: src/content/events/draft-k8s-pod-lifecycle.md (DRY-RUN)
+  - Branch: cfp/issue-43-zainab-khan
+[CFP Triage] Parsed submission for "Syed Hassan Tayyab"
+  - Talk Title: Talk
+  - Speaker File: src/content/speakers/syed-hassan-tayyab.md (DRY-RUN)
+  - Event File: src/content/events/draft-talk.md (DRY-RUN)
+  - Branch: cfp/issue-42-syed-hassan-tayyab
+[CFP Triage] Parsed submission for "Dr. Bilal Tariq"
+  - Talk Title: Workshop
+  - Speaker File: src/content/speakers/dr-bilal-tariq.md (DRY-RUN)
+  - Event File: src/content/events/draft-workshop.md (DRY-RUN)
+  - Branch: cfp/issue-44-dr-bilal-tariq
+
+================================================================
+SUITE: Tier 1: Feature Coverage (F1 - F8)
+================================================================
+
+  [Group] F1/F2: OCG Scraper & Non-destructive Sync
+    ✓ [PASS] F1.1: Scrapes basic upcoming event metadata accurately from OCG HTML (35ms)
+    ✓ [PASS] F1.1a: Identifies virtual OCG events without inventing a physical venue (2ms)
+    ✓ [PASS] F1.2: Detects status automatically (upcoming for future, completed for past) (3ms)
+    ✓ [PASS] F1.3: Converts ISO UTC timestamps to PKT (Asia/Karachi) date and time format (0ms)
+    ✓ [PASS] F1.4: Normalizes diverse time range string formats with leading zeros and PKT suffix (0ms)
+    ✓ [PASS] F1.5: Conforms strictly to Astro Event collection Zod schema (4ms)
+    ✓ [PASS] F2.1: Non-destructive sync preserves custom frontmatter fields on existing events (18ms)
+    ✓ [PASS] F1.6: Parses multi-speaker events with structured user-chip data (2ms)
+    ✓ [PASS] F1.7: CLI execution executes with --source and --dry-run flags cleanly (137ms)
+
+  [Group] F3: Event Sync Workflow (.github/workflows/event-sync.yml)
+    ✓ [PASS] F3.1: Workflow file exists and parses as valid YAML (6ms)
+    ✓ [PASS] F3.2: Workflow triggers on schedule (daily cron) and workflow_dispatch (5ms)
+    ✓ [PASS] F3.3: Workflow declares required write permissions (3ms)
+    ✓ [PASS] F3.4: Workflow includes checkout, setup-node, npm ci, sync script, and schema validation (3ms)
+    ✓ [PASS] F3.5: Workflow commits only event content without suppressing deployment CI (0ms)
+    ✓ [PASS] F3.6: Workflow declares concurrency group to prevent overlapping runs (3ms)
+
+  [Group] F4: CFP Issue Parser
+    ✓ [PASS] F4.1: Parses full CFP issue markdown body accurately (5ms)
+    ✓ [PASS] F4.2: Generates speaker markdown file adhering to Zod schema (2ms)
+    ✓ [PASS] F4.3: Generates event draft markdown file adhering to Zod schema (5ms)
+    ✓ [PASS] F4.4: Handles missing optional fields cleanly (no _No response_ or undefined in YAML) (2ms)
+    ✓ [PASS] F4.5: Generates deterministic, URL-safe slugs for filenames and branches (0ms)
+    ✓ [PASS] F4.6: Correctly distinguishes and maps GitHub vs LinkedIn URLs (0ms)
+    ✓ [PASS] F4.7: Maps talk format, technical track, and audience to event tags (1ms)
+    ✓ [PASS] F4.8: CLI outputs valid JSON metadata payload on --output-json flag (55ms)
+    ✓ [PASS] F4.9: Handles role and organization parsing (Company vs University) (1ms)
+    ✓ [PASS] F4.10: Handles missing input or non-existent files with graceful error reporting (63ms)
+
+  [Group] F5: CFP Triage PR Bot Workflow (.github/workflows/cfp-triage.yml)
+    ✓ [PASS] F5.1: Workflow file exists and parses as valid YAML (6ms)
+    ✓ [PASS] F5.2: Workflow triggers on issues: [opened, labeled] (3ms)
+    ✓ [PASS] F5.3: Workflow declares contents: write, pull-requests: write, and issues: write permissions (3ms)
+    ✓ [PASS] F5.4: Workflow steps invoke parse-cfp-issue.mjs and validate schema via astro check (0ms)
+    ✓ [PASS] F5.5: Workflow uses peter-evans/create-pull-request to create draft PR (0ms)
+    ✓ [PASS] F5.6: Workflow posts automated backlink comment to originating issue (0ms)
+
+  [Group] F6/F7: Link Checker & Blog Link Fix
+    ✓ [PASS] F6.1: Link checker passes on clean HTML fixture tree with zero broken links (2ms)
+    ✓ [PASS] F6.2: Link checker detects broken internal page routes in broken fixture tree (0ms)
+    ✓ [PASS] F6.3: Link checker detects missing anchors within destination HTML documents (1ms)
+    ✓ [PASS] F6.4: Link checker detects broken asset references (images, stylesheets) (0ms)
+    ✓ [PASS] F6.5: Link checker handles root-relative paths and relative directory navigation (1ms)
+    ✓ [PASS] F6.6: Link checker ignores external URLs and protocol handlers (https, mailto, tel) (1ms)
+    ✓ [PASS] F7.1: Detects legacy base path prefix (/cncf-peshawar-website/) in HTML fixtures (0ms)
+    ✓ [PASS] F7.2: Blog post markdown in src/content/blog/announcing-cncf-peshawar.md conforms to Blog schema (1ms)
+    ✓ [PASS] F6.7: Link checker CLI returns 0 on clean tree and 1 on broken tree (when script exists) (144ms)
+    ✓ [PASS] F6.8: Link checker handles self-referential "#" and empty anchor tags gracefully (1ms)
+
+  [Group] F8: CI Pull Request Workflow
+    ✓ [PASS] F8.1: Validates CI workflow triggers on push & pull_request to main branch (4ms)
+    ✓ [PASS] F8.2: Package.json contains scripts for check, build, and dev (0ms)
+    ✓ [PASS] F8.3: Project dependencies include Astro and @astrojs/check (0ms)
+    ✓ [PASS] F8.4: Astro check command runs with 0 errors on existing codebase (12169ms)
+    ✓ [PASS] F8.5: Static build output directory is dist/ and contains valid entry point (0ms)
+    ✓ [PASS] F8.6: Typescript configuration tsconfig.json extends astro/tsconfigs/strict (0ms)
+    ✓ [PASS] F8.7: Admin CMS page route exists in src/pages/admin/index.astro and config in public/admin/config.yml (0ms)
+    ✓ [PASS] F8.8: Admin CMS config.yml parses as valid YAML with required collections (43ms)
+
+----------------------------------------------------------------
+Suite Summary: Total: 49 | Passed: 49 | Failed: 0
+----------------------------------------------------------------
+
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/ocg-test-custom-fm-CKjvqk
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 1 existing event file(s) from /tmp/ocg-test-custom-fm-CKjvqk.
+[UPDATE] 01-genesis.md
+[CREATE] 02-kubernetes-deep-dive-production-workshop.md
+
+[SUMMARY] Sync Complete: 1 created, 1 updated, 0 unchanged.
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/ocg-test-body-DaHS4f
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 1 existing event file(s) from /tmp/ocg-test-body-DaHS4f.
+[UPDATE] 01-genesis.md
+[CREATE] 02-kubernetes-deep-dive-production-workshop.md
+
+[SUMMARY] Sync Complete: 1 created, 1 updated, 0 unchanged.
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/ocg-test-overrides-ATEz0m
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 1 existing event file(s) from /tmp/ocg-test-overrides-ATEz0m.
+[UPDATE] 01-genesis.md
+[CREATE] 02-kubernetes-deep-dive-production-workshop.md
+
+[SUMMARY] Sync Complete: 1 created, 1 updated, 0 unchanged.
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/ocg-test-tags-5OcLt8
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 1 existing event file(s) from /tmp/ocg-test-tags-5OcLt8.
+[UPDATE] 01-genesis.md
+[CREATE] 02-kubernetes-deep-dive-production-workshop.md
+
+[SUMMARY] Sync Complete: 1 created, 1 updated, 0 unchanged.
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/ocg-test-minimal-exGZ25
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 1 existing event file(s) from /tmp/ocg-test-minimal-exGZ25.
+[UPDATE] 01-empty.md
+[CREATE] 02-kubernetes-deep-dive-production-workshop.md
+
+[SUMMARY] Sync Complete: 1 created, 1 updated, 0 unchanged.
+[CFP Triage] Parsed submission for "Ahmad Ali"
+  - Talk Title: Production GitOps at Scale
+  - Speaker File: src/content/speakers/ahmad-ali.md (DRY-RUN)
+  - Event File: src/content/events/draft-production-gitops-at-scale.md (DRY-RUN)
+  - Branch: cfp/issue-45-ahmad-ali
+
+================================================================
+SUITE: Tier 2: Boundary & Corner Cases (F1 - F8)
+================================================================
+
+  [Group] F1/F2: Date Boundaries & Timezone Invariants
+    ✓ [PASS] T2.1: Midnight UTC (00:00:00Z) converts to 05:00 AM PKT on same date (0ms)
+    ✓ [PASS] T2.2: Late night UTC (20:00:00Z) overflows date across midnight to next day in PKT (1ms)
+    ✓ [PASS] T2.3: Leap year boundary: Feb 28 20:00 UTC shifts to Feb 29 PKT in leap year 2028 (1ms)
+    ✓ [PASS] T2.4: Year boundary overflow: Dec 31 21:00 UTC advances to Jan 01 next year PKT (1ms)
+    ✓ [PASS] T2.5: Time normalization handles single-digit hour "9:05 AM" with leading zero (0ms)
+    ✓ [PASS] T2.6: Time normalization handles en-dash and hyphens safely (0ms)
+    ✓ [PASS] T2.7: Time normalization handles already-normalized string without duplicating PKT (0ms)
+    ✓ [PASS] T2.8: Invalid or empty ISO strings in convertUtcToPkt return null safely (0ms)
+    ✓ [PASS] T2.9: Event in the distant past is assigned status "completed" (1ms)
+    ✓ [PASS] T2.10: Event far in the future is assigned status "upcoming" (1ms)
+
+  [Group] F1/F2: Malformed HTML, Extremes & Entity Decoding
+    ✓ [PASS] T2.11: HTML entity decoding handles quotes, ampersands, apostrophes, lt, gt, and nbsp (0ms)
+    ✓ [PASS] T2.12: Stripping HTML handles nested tags, multiline breaks, and extra whitespace (2ms)
+    ✓ [PASS] T2.13: Resilient parsing when user-chip contains malformed or non-JSON string (0ms)
+    ✓ [PASS] T2.14: Handles unicode and Urdu/Arabic text in event title, venue, and markdown (3ms)
+    ✓ [PASS] T2.15: Missing capacity or non-numeric capacity string degrades gracefully (1ms)
+    ✓ [PASS] T2.16: Extreme capacity values (0 and 999999) parsed accurately (2ms)
+    ✓ [PASS] T2.17: Canceled event flag data-canceled="true" adds Canceled tag and prefixes summary (1ms)
+    ✓ [PASS] T2.18: Completely empty HTML string returns empty discovered URLs and embedded events (2ms)
+    ✓ [PASS] T2.19: HTML with no matching event cards returns empty without throwing (0ms)
+    ✓ [PASS] T2.20: Deduplication of event URLs in discoveredUrls when duplicate cards appear on page (2ms)
+
+  [Group] F2: Non-Destructive Content Merge Boundaries
+    ✓ [PASS] T2.21: Preserves manual title, venue, and summary overrides across sync runs (6ms)
+    ✓ [PASS] T2.22: Preserves multi-line custom markdown body with code blocks and subheadings (5ms)
+    ✓ [PASS] T2.23: Preserves manual overrides for slidesUrl, recordingUrl, and coverImage (6ms)
+    ✓ [PASS] T2.24: Merges new tags from OCG without removing existing custom tags (7ms)
+    ✓ [PASS] T2.25: Handles merging into empty or minimal existing markdown file (5ms)
+    ✓ [PASS] T2.26: Slugification handles strings with pure symbols, emojis, and consecutive dashes (0ms)
+
+  [Group] F3/F8: Workflow Specs & Config Boundaries
+    ✓ [PASS] T2.27: Event sync workflow specifies step failure propagation and npm ci (4ms)
+    ✓ [PASS] T2.28: CI workflow specifies all required quality gates (check, build, check:links) (3ms)
+    ✓ [PASS] T2.29: CFP triage workflow correctly specifies issue trigger types [opened, labeled] (5ms)
+    ✓ [PASS] T2.30: tsconfig.json has strict compiler options configured (0ms)
+    ✓ [PASS] T2.31: package.json specifies build scripts and dependencies (0ms)
+    ✓ [PASS] T2.32: astro.config.mjs exists and is valid configuration (0ms)
+
+  [Group] F4/F5: CFP Issue Parser Quirks & Missing Fields
+    ✓ [PASS] T2.33: Boilerplate cleanup strips _No response_, None, N/A, n/a, null, undefined (0ms)
+    ✓ [PASS] T2.34: Handles markdown heading variations (## vs ### and bold headers) (2ms)
+    ✓ [PASS] T2.35: Social link parsing extracts GitHub profile from markdown link [GitHub](https://github.com/foo) (0ms)
+    ✓ [PASS] T2.36: Social link parsing extracts LinkedIn profile from mixed text with trailing slashes & query params (0ms)
+    ✓ [PASS] T2.37: Handles missing social links gracefully without creating invalid URLs (0ms)
+    ✓ [PASS] T2.38: Role & Org parser handles "Role at Company" format (0ms)
+    ✓ [PASS] T2.39: Role & Org parser handles "Role @ Company" format (0ms)
+    ✓ [PASS] T2.40: Role & Org parser handles "Role, Company" and "Role - Company" formats (1ms)
+    ✓ [PASS] T2.41: Role & Org parser handles missing role or missing company with sensible defaults (0ms)
+    ✓ [PASS] T2.42: Technical track extraction maps diverse track titles to appropriate tags (0ms)
+
+  [Group] F6/F7: Static Link & Anchor Edge Cases
+    ✓ [PASS] T2.43: Link checker ignores javascript:void(0), data: URIs, mailto:, and tel: links (0ms)
+    ✓ [PASS] T2.44: Link checker ignores self-referencing anchor # and #top gracefully (1ms)
+    ✓ [PASS] T2.45: Link checker verifies valid anchor IDs on destination documents (1ms)
+    ✓ [PASS] T2.46: Link checker detects missing anchor ID when target file exists but anchor does not (1ms)
+    ✓ [PASS] T2.47: Link checker handles query parameters before hash anchors correctly (0ms)
+    ✓ [PASS] T2.48: Link checker detects missing static assets in img src and script src (1ms)
+    ✓ [PASS] T2.49: Link checker resolves relative parent traversal ../../assets/logo.png (1ms)
+    ✓ [PASS] T2.50: Detects legacy repository path /cncf-peshawar-website/ across attributes (0ms)
+    ✓ [PASS] T2.51: Validates blog post schema when optional coverImage and tags are provided or omitted (1ms)
+    ✓ [PASS] T2.52: Link checker returns 0 broken links on directory with no HTML files (0ms)
+
+----------------------------------------------------------------
+Suite Summary: Total: 52 | Passed: 52 | Failed: 0
+----------------------------------------------------------------
+
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/t3-ocg-sync-lZBSTf
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 0 existing event file(s) from /tmp/t3-ocg-sync-lZBSTf.
+[CREATE] 01-cncf-peshawar-genesis.md
+[CREATE] 02-kubernetes-deep-dive-production-workshop.md
+
+[SUMMARY] Sync Complete: 2 created, 0 updated, 0 unchanged.
+[CFP Triage] Parsed submission for "Syed Hassan Tayyab"
+  - Talk Title: Multi-Agent Systems on K8s
+  - Speaker File: src/content/speakers/syed-hassan-tayyab.md (WRITTEN)
+  - Event File: src/content/events/draft-multi-agent-systems-on-k8s.md (WRITTEN)
+  - Branch: cfp/issue-42-syed-hassan-tayyab
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/t3-cfp-ocg-merge-cC7Lu1/events
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 1 existing event file(s) from /tmp/t3-cfp-ocg-merge-cC7Lu1/events.
+[UPDATE] 01-cncf-peshawar-genesis.md
+[CREATE] 02-kubernetes-deep-dive-production-workshop.md
+
+[SUMMARY] Sync Complete: 1 created, 1 updated, 0 unchanged.
+[CFP Triage] Parsed submission for "Syed Hassan Tayyab"
+  - Talk Title: Multi-Agent Systems on K8s
+  - Speaker File: src/content/speakers/syed-hassan-tayyab.md (WRITTEN)
+  - Event File: src/content/events/draft-multi-agent-systems-on-k8s.md (WRITTEN)
+  - Branch: cfp/issue-101-syed-hassan-tayyab
+[CFP Triage] Parsed submission for "Zainab Khan"
+  - Talk Title: K8s Pod Lifecycle
+  - Speaker File: src/content/speakers/zainab-khan.md (WRITTEN)
+  - Event File: src/content/events/draft-k8s-pod-lifecycle.md (WRITTEN)
+  - Branch: cfp/issue-102-zainab-khan
+[CFP Triage] Parsed submission for "Dr. Bilal Tariq"
+  - Talk Title: OpenTelemetry Workshop
+  - Speaker File: src/content/speakers/dr-bilal-tariq.md (WRITTEN)
+  - Event File: src/content/events/draft-opentelemetry-workshop.md (WRITTEN)
+  - Branch: cfp/issue-103-dr-bilal-tariq
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-past.html
+[INFO] Events Directory: /tmp/t3-lifecycle-hjigUF
+[INFO] Discovered 1 event(s) from OCG.
+[INFO] Loaded 1 existing event file(s) from /tmp/t3-lifecycle-hjigUF.
+[UPDATE] 01-kickoff.md
+
+[SUMMARY] Sync Complete: 0 created, 1 updated, 0 unchanged.
+[CFP Triage] Parsed submission for "Syed Hassan Tayyab"
+  - Talk Title: Multi-Agent Systems on K8s
+  - Speaker File: ../../../../../tmp/t3-pipeline-MJbnhb/content/speakers/syed-hassan-tayyab.md (WRITTEN)
+  - Event File: ../../../../../tmp/t3-pipeline-MJbnhb/content/events/draft-multi-agent-systems-on-k8s.md (WRITTEN)
+  - Branch: cfp/issue-42-syed-hassan-tayyab
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/t3-pipeline-MJbnhb/content/events
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 1 existing event file(s) from /tmp/t3-pipeline-MJbnhb/content/events.
+[CREATE] 01-cncf-peshawar-genesis.md
+[CREATE] 02-kubernetes-deep-dive-production-workshop.md
+
+[SUMMARY] Sync Complete: 2 created, 0 updated, 0 unchanged.
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-canceled.html
+[INFO] Events Directory: /tmp/t3-cancel-sync-qy17Iv
+[INFO] Discovered 1 event(s) from OCG.
+[INFO] Loaded 0 existing event file(s) from /tmp/t3-cancel-sync-qy17Iv.
+[CREATE] 01-canceled-peshawar-cloud-native-hackathon.md
+
+[SUMMARY] Sync Complete: 1 created, 0 updated, 0 unchanged.
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-multispeaker.html
+[INFO] Events Directory: /tmp/t3-multispeaker-qjz8Wc
+[INFO] Discovered 1 event(s) from OCG.
+[INFO] Loaded 0 existing event file(s) from /tmp/t3-multispeaker-qjz8Wc.
+[CREATE] 01-cloud-native-ai-the-future-of-distributed-intelligence.md
+
+[SUMMARY] Sync Complete: 1 created, 0 updated, 0 unchanged.
+
+================================================================
+SUITE: Tier 3: Cross-Feature Integration (F1 - F8)
+================================================================
+
+  [Group] Cross-Feature: OCG Sync to Astro Content Collections
+    ✓ [PASS] T3.1: OCG Scraper -> Event Markdown Generation -> Zod Schema Conformance (6ms)
+
+  [Group] Cross-Feature: CFP Parser to Speaker & Event Drafts
+    ✓ [PASS] T3.2: CFP Issue Parser -> Speaker & Draft Event Pair Generation -> Mutual Cross-Referencing (4ms)
+
+  [Group] Cross-Feature: CFP Drafts & OCG Event Sync Interaction
+    ✓ [PASS] T3.3: CFP Speaker & Event Draft -> OCG Event Sync Non-Destructive Enrichment (6ms)
+
+  [Group] Cross-Feature: OCG Sync to Static Site Link Integrity
+    ✓ [PASS] T3.4: OCG Event Sync -> Built HTML Simulation -> Static Link Checker Validation (2ms)
+
+  [Group] Cross-Feature: CFP Parser CLI to PR Bot Automation
+    ✓ [PASS] T3.5: CFP Parser CLI Output -> JSON Payload -> PR Branch & File Target Resolution (91ms)
+
+  [Group] Cross-Feature: Legacy Blog Post & Link Checker
+    ✓ [PASS] T3.6: Legacy Blog Post Fix -> Verifies zero broken legacy base prefix links (1ms)
+
+  [Group] Cross-Feature: Batch CFP Ingestion & Slug Uniqueness
+    ✓ [PASS] T3.7: Batch CFP Ingestion -> Multi-Speaker Content Collection Consistency & Zero Collisions (6ms)
+
+  [Group] Cross-Feature: Event Lifecycle Status Transition
+    ✓ [PASS] T3.8: Event Status Transition: Past vs Future timestamps in OCG Sync updates status reliably (4ms)
+
+  [Group] Cross-Feature: Full Multi-Stage End-to-End Pipeline
+    ✓ [PASS] T3.9: End-to-End Pipeline: Issue Ingestion -> Content Generation -> OCG Sync -> Static Link Scan (7ms)
+
+  [Group] Cross-Feature: Event Cancellation Integration
+    ✓ [PASS] T3.10: Event Cancellation Sync -> Content Schema & Badge Tag Integrity (4ms)
+
+  [Group] Cross-Feature: Multi-Speaker Conference Ingestion
+    ✓ [PASS] T3.11: Multi-Speaker OCG Event -> Individual Speaker Cross-Lookup Contract (5ms)
+
+  [Group] Cross-Feature: Repository-Wide Content Collection Schema Audit
+    ✓ [PASS] T3.12: Astro Schema Validation on Full Live Repository Content Collections (6ms)
+
+----------------------------------------------------------------
+Suite Summary: Total: 12 | Passed: 12 | Failed: 0
+----------------------------------------------------------------
+
+[CFP Triage] Parsed submission for "Syed Hassan Tayyab"
+  - Talk Title: Multi-Agent Systems on K8s
+  - Speaker File: src/content/speakers/syed-hassan-tayyab.md (WRITTEN)
+  - Event File: src/content/events/draft-multi-agent-systems-on-k8s.md (WRITTEN)
+  - Branch: cfp/issue-42-syed-hassan-tayyab
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/s1-cfp-lifecycle-vUuicV/src/content/events
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 1 existing event file(s) from /tmp/s1-cfp-lifecycle-vUuicV/src/content/events.
+[UPDATE] draft-multi-agent-systems-on-k8s.md
+[CREATE] 01-kubernetes-deep-dive-production-workshop.md
+
+[SUMMARY] Sync Complete: 1 created, 1 updated, 0 unchanged.
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-multispeaker.html
+[INFO] Events Directory: /tmp/s2-multispeaker-UIqXMc/src/content/events
+[INFO] Discovered 1 event(s) from OCG.
+[INFO] Loaded 0 existing event file(s) from /tmp/s2-multispeaker-UIqXMc/src/content/events.
+[CREATE] 01-cloud-native-ai-the-future-of-distributed-intelligence.md
+
+[SUMMARY] Sync Complete: 1 created, 0 updated, 0 unchanged.
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/s4-idempotent-sync-6GoYOK/src/content/events
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 0 existing event file(s) from /tmp/s4-idempotent-sync-6GoYOK/src/content/events.
+[CREATE] 01-cncf-peshawar-genesis.md
+[CREATE] 02-kubernetes-deep-dive-production-workshop.md
+
+[SUMMARY] Sync Complete: 2 created, 0 updated, 0 unchanged.
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/s4-idempotent-sync-6GoYOK/src/content/events
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 2 existing event file(s) from /tmp/s4-idempotent-sync-6GoYOK/src/content/events.
+[UPDATE] 01-cncf-peshawar-genesis.md
+[UNCHANGED] 02-kubernetes-deep-dive-production-workshop.md (0 diff)
+
+[SUMMARY] Sync Complete: 0 created, 1 updated, 1 unchanged.
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-upcoming.html
+[INFO] Events Directory: /tmp/s4-idempotent-sync-6GoYOK/src/content/events
+[INFO] Discovered 2 event(s) from OCG.
+[INFO] Loaded 2 existing event file(s) from /tmp/s4-idempotent-sync-6GoYOK/src/content/events.
+[UNCHANGED] 01-cncf-peshawar-genesis.md (0 diff)
+[UNCHANGED] 02-kubernetes-deep-dive-production-workshop.md (0 diff)
+
+[SUMMARY] Sync Complete: 0 created, 0 updated, 2 unchanged.
+[CFP Triage] Parsed submission for "Syed Hassan Tayyab"
+  - Talk Title: Multi-Agent Systems on K8s
+  - Speaker File: src/content/speakers/syed-hassan-tayyab.md (WRITTEN)
+  - Event File: src/content/events/draft-multi-agent-systems-on-k8s.md (WRITTEN)
+  - Branch: cfp/issue-51-syed-hassan-tayyab
+[CFP Triage] Parsed submission for "Zainab Khan"
+  - Talk Title: K8s Pod Lifecycle
+  - Speaker File: src/content/speakers/zainab-khan.md (WRITTEN)
+  - Event File: src/content/events/draft-k8s-pod-lifecycle.md (WRITTEN)
+  - Branch: cfp/issue-52-zainab-khan
+[CFP Triage] Parsed submission for "Dr. Bilal Tariq"
+  - Talk Title: OpenTelemetry Workshop
+  - Speaker File: src/content/speakers/dr-bilal-tariq.md (WRITTEN)
+  - Event File: src/content/events/draft-opentelemetry-workshop.md (WRITTEN)
+  - Branch: cfp/issue-53-dr-bilal-tariq
+[CFP Triage] Parsed submission for "Ahmad Ali"
+  - Talk Title: Production GitOps at Scale
+  - Speaker File: src/content/speakers/ahmad-ali.md (WRITTEN)
+  - Event File: src/content/events/draft-production-gitops-at-scale.md (WRITTEN)
+  - Branch: cfp/issue-54-ahmad-ali
+[INFO] Starting OCG Event Sync from source: tests/fixtures/ocg-portal-canceled.html
+[INFO] Events Directory: /tmp/s6-cancellation-K5psQv/src/content/events
+[INFO] Discovered 1 event(s) from OCG.
+[INFO] Loaded 0 existing event file(s) from /tmp/s6-cancellation-K5psQv/src/content/events.
+[CREATE] 01-canceled-peshawar-cloud-native-hackathon.md
+
+[SUMMARY] Sync Complete: 1 created, 0 updated, 0 unchanged.
+
+================================================================
+SUITE: Tier 4: Real-World Community Lifecycle Scenarios
+================================================================
+
+  [Group] Scenario 1: CFP-to-Event Community Lifecycle
+    ✓ [PASS] S1: Complete Community CFP-to-Event Lifecycle from Issue submission to OCG Portal Enrichment (14ms)
+
+  [Group] Scenario 2: Multi-Speaker Flagship Conference Ingestion
+    ✓ [PASS] S2: Ingests Multi-Speaker Conference with 4 Diverse Speakers and Validates Roster & Slugs (14ms)
+
+  [Group] Scenario 3: Legacy Site Migration & Static Link Integrity
+    ✓ [PASS] S3: Audits and Verifies Link Integrity across Entire Static Site Graph (Home, Events, Speakers, Blog) (7ms)
+
+  [Group] Scenario 4: Idempotent Multi-Pass Continuous Sync
+    ✓ [PASS] S4: Idempotent Continuous Sync across 3 successive passes with organizer manual overrides (29ms)
+
+  [Group] Scenario 5: Batch CFP Triage with Diverse Formats
+    ✓ [PASS] S5: Triages 4 Diverse CFP Submissions in Batch and Validates Schema & Unique Slugs (20ms)
+
+  [Group] Scenario 6: Emergency Event Cancellation Workflow
+    ✓ [PASS] S6: Syncs Canceled Event from OCG Portal, Updates Tags & Summary, and Confirms Schema Conformance (7ms)
+
+----------------------------------------------------------------
+Suite Summary: Total: 6 | Passed: 6 | Failed: 0
+----------------------------------------------------------------
+
+
+================================================================================
+📊 MASTER E2E TEST EXECUTION SUMMARY
+================================================================================
+| Tier                                     | Total | Passed | Failed | Duration |
+|------------------------------------------|-------|--------|--------|----------|
+| Tier 1: Feature Coverage                 |    49 |     49 |      0 |  12737ms |
+| Tier 2: Boundary & Corner Cases          |    52 |     52 |      0 |     73ms |
+| Tier 3: Cross-Feature Integration        |    12 |     12 |      0 |    144ms |
+| Tier 4: Real-World Scenarios             |     6 |      6 |      0 |     96ms |
+|------------------------------------------|-------|--------|--------|----------|
+| TOTAL / OVERALL                          |   119 |    119 |      0 |  13051ms |
+================================================================================
+
+✨ ALL 119 E2E TESTS PASSED SUCCESSFULLY! (100% Pass Rate)
+⏱️ Total Execution Time: 13051ms
+

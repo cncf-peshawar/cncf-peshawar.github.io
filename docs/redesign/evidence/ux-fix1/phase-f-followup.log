@@ -1,0 +1,3 @@
+copy { bg: 'rgb(111, 194, 255)', transform: 'matrix(1, 0, 0, 1, 0, -2)' }
+navbefore { color: 'rgb(56, 56, 56)', border: 'rgba(0, 0, 0, 0)' }
+navafter { color: 'rgb(26, 26, 26)', border: 'rgb(111, 194, 255)' }

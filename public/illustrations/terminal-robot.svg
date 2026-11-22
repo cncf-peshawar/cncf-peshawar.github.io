@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+  <!-- Echo sketch shadow offset behind (Wet Cement blue dashed) -->
+  <path d="M 44 44 C 44 40 114 40 114 44 C 114 61 114 79 114 96 C 114 100 44 100 44 96 Z"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/>
+  
+  <!-- Antenna with spark indicator -->
+  <path d="M 80 38 C 80 31 80 25 80 18"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 74 14 C 74 8 86 8 86 14 C 86 20 74 20 74 14 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 78 14 C 78 11 82 11 82 14 C 82 17 78 17 78 14 Z"
+        fill="#ff9538"/>
+  <path d="M 88 10 C 90 9 92 7 94 6"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 72 10 C 70 9 68 7 66 6"
+        stroke="#ff9538" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Left ear bolt (organic box) -->
+  <path d="M 34 58 C 36 58 38 58 40 58 C 40 63 40 67 40 72 C 38 72 36 72 34 72 C 34 67 34 63 34 58 Z"
+        fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right ear antenna spool -->
+  <path d="M 120 58 C 122 58 124 58 126 58 C 126 63 126 67 126 72 C 124 72 122 72 120 72 C 120 67 120 63 120 58 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Robot Head / CRT Monitor (Outer Frame) -->
+  <path d="M 40 42 C 40 38 44 38 48 38 C 72 37 96 37 112 38 C 116 38 120 38 120 42 C 121 58 121 74 120 90 C 120 94 116 94 112 94 C 96 95 72 95 48 94 C 44 94 40 94 40 90 C 39 74 39 58 40 42 Z"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- CRT Screen (Charcoal Terminal Display) -->
+  <path d="M 48 47 C 48 44 52 44 55 44 C 74 44 93 44 105 44 C 108 44 112 44 112 47 C 112 59 112 71 112 83 C 112 86 108 86 105 86 C 93 86 74 86 55 86 C 52 86 48 86 48 83 C 48 71 48 59 48 47 Z"
+        fill="#383838" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Terminal Face: Smiling terminal prompt eyes and mouth -->
+  <!-- Left Eye: > prompt -->
+  <path d="M 56 56 C 58 57 60 59 62 60 C 60 61 58 63 56 64"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right Eye: > prompt -->
+  <path d="M 94 56 C 96 57 98 59 100 60 C 98 61 96 63 94 64"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Blinking Cursor Nose -->
+  <path d="M 76 58 C 78 58 79 58 81 58 C 81 60 81 62 81 64 C 79 64 78 64 76 64 Z"
+        fill="#ffde00"/>
+  <!-- Happy terminal mouth smile -->
+  <path d="M 68 74 C 74 78 84 78 90 74"
+        stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Neck Joint -->
+  <path d="M 72 92 C 77 92 83 92 88 92 C 88 95 88 97 88 100 C 83 100 77 100 72 100 Z"
+        fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Robot Body / Torso -->
+  <path d="M 48 104 C 48 100 52 100 55 100 C 74 100 93 100 105 100 C 108 100 112 100 112 104 C 112 114 112 124 112 134 C 112 138 108 138 105 138 C 93 138 74 138 55 138 C 52 138 48 138 48 134 C 48 124 48 114 48 104 Z"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Torso Gauge / Meter Display (Canary yellow badge) -->
+  <path d="M 56 108 C 65 107 75 107 84 108 C 85 112 85 116 84 120 C 75 121 65 121 56 120 C 55 116 55 112 56 108 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Gauge pulse line -->
+  <path d="M 60 114 C 63 113 65 111 68 110 C 70 112 72 114 74 116 C 77 114 79 112 82 110"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Torso Buttons (organic hand-drawn closed paths) -->
+  <path d="M 95 111 C 95 108 101 108 101 111 C 101 114 95 114 95 111 Z"
+        fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 95 120 C 95 117 101 117 101 120 C 101 123 95 123 95 120 Z"
+        fill="#54b4de" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Left Arm (Waving hello) -->
+  <path d="M 48 106 C 34 100 24 86 26 72"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left hand clamp -->
+  <path d="M 22 72 C 22 66 32 66 30 72"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Wave motion lines -->
+  <path d="M 16 68 C 14 62 16 56 20 52"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 24 50 C 25 49 27 47 28 46"
+        stroke="#ff9538" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Right Arm (Resting at side) -->
+  <path d="M 112 106 C 122 112 126 120 124 130"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 120 132 C 120 128 128 128 128 132 C 128 136 120 136 120 132 Z"
+        fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Legs / Treads -->
+  <!-- Left Leg & Foot -->
+  <path d="M 62 138 C 62 141 62 145 62 148"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 54 146 C 59 146 65 146 70 146 C 70 149 70 151 70 154 C 65 154 59 154 54 154 Z"
+        fill="#383838"/>
+  <!-- Right Leg & Foot -->
+  <path d="M 98 138 C 98 141 98 145 98 148"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 90 146 C 95 146 101 146 106 146 C 106 149 106 151 106 154 C 101 154 95 154 90 154 Z"
+        fill="#383838"/>
+
+  <!-- Ground sketch baseline -->
+  <path d="M 42 156 C 68 155 112 155 138 156"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 52 158 C 72 159 94 159 106 158"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

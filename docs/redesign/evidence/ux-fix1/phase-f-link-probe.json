@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "before": {
+      "color": "rgb(56, 56, 56)",
+      "underline": "rgb(56, 56, 56)",
+      "border": "rgba(0, 0, 0, 0)",
+      "duration": "0.12s, 0.12s"
+    },
+    "after": {
+      "color": "rgb(26, 26, 26)",
+      "underline": "rgb(26, 26, 26)",
+      "border": "rgb(111, 194, 255)"
+    }
+  },
+  "inline": {
+    "before": {
+      "color": "rgb(56, 56, 56)",
+      "underline": "rgb(56, 56, 56)",
+      "border": "rgb(56, 56, 56)",
+      "duration": "0.12s, 0.12s, 0.12s"
+    },
+    "after": {
+      "color": "rgb(56, 56, 56)",
+      "underline": "rgb(111, 194, 255)",
+      "border": "rgb(56, 56, 56)"
+    }
+  },
+  "footer": {
+    "before": {
+      "color": "rgb(56, 56, 56)",
+      "underline": "rgba(0, 0, 0, 0)",
+      "border": "rgb(56, 56, 56)",
+      "duration": "0.12s, 0.12s"
+    },
+    "after": {
+      "color": "rgb(26, 26, 26)",
+      "underline": "rgb(111, 194, 255)",
+      "border": "rgb(26, 26, 26)"
+    }
+  }
+}

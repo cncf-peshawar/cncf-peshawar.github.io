@@ -9,8 +9,8 @@ capacity: 70
 rsvpUrl: "https://ocgroups.dev/cncf/group/6vwk2n4/event/z7sb6wa"
 lumaUrl: "https://luma.com/shufbsm5"
 speakers:
-  - "syed-hassan-tayyab"
-  - "hamid-naeem"
+  - "Syed Hassan Tayyab (Co Founder & AI Product Developer)"
+  - "Hamid Naeem"
 tags:
   - "Genesis"
   - "OpenSource"

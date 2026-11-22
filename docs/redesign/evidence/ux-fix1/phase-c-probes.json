@@ -1,0 +1,389 @@
+{
+  "drawer": {
+    "role": "dialog",
+    "ariaModal": "true",
+    "inertCount": 7,
+    "forward": [
+      {
+        "id": "close-nav-btn",
+        "text": "",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "01 // Home",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "02 // Events",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "03 // Speak & CFP",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "04 // Sponsors",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "05 // Team",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "06 // Blog",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "07 // Code of Conduct",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "08 // CMS Portal",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "Join on OCG",
+        "inDrawer": true
+      },
+      {
+        "id": "close-nav-btn",
+        "text": "",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "01 // Home",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "02 // Events",
+        "inDrawer": true
+      }
+    ],
+    "backward": [
+      {
+        "id": "",
+        "text": "02 // Events",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "01 // Home",
+        "inDrawer": true
+      },
+      {
+        "id": "close-nav-btn",
+        "text": "",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "Join on OCG",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "08 // CMS Portal",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "07 // Code of Conduct",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "06 // Blog",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "05 // Team",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "04 // Sponsors",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "03 // Speak & CFP",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "02 // Events",
+        "inDrawer": true
+      },
+      {
+        "id": "",
+        "text": "01 // Home",
+        "inDrawer": true
+      },
+      {
+        "id": "close-nav-btn",
+        "text": "",
+        "inDrawer": true
+      }
+    ],
+    "restored": {
+      "id": "mobile-nav-toggle",
+      "text": "",
+      "inDrawer": false
+    }
+  },
+  "brand": {
+    "visibleText": "CNCF Peshawar PK",
+    "accessibleName": "CNCF Peshawar PK Home",
+    "badgeHidden": "true"
+  },
+  "reveal": {
+    "stops": [
+      {
+        "text": "CNCF Peshawar PK",
+        "ancestors": []
+      },
+      {
+        "text": "Join on OCG",
+        "ancestors": []
+      },
+      {
+        "text": "",
+        "ancestors": []
+      },
+      {
+        "text": "Join Chapter on Open Community Groups (OCG)",
+        "ancestors": []
+      },
+      {
+        "text": "Explore Meetups",
+        "ancestors": []
+      },
+      {
+        "text": "Sponsor Us →",
+        "ancestors": []
+      },
+      {
+        "text": "PAUSE",
+        "ancestors": []
+      },
+      {
+        "text": "Explore Lab Repositories",
+        "ancestors": [
+          {
+            "selector": "charter-section is-revealed",
+            "opacity": "1"
+          }
+        ]
+      },
+      {
+        "text": "Browse Event Archive →",
+        "ancestors": [
+          {
+            "selector": "featured-section is-revealed",
+            "opacity": "1"
+          }
+        ]
+      },
+      {
+        "text": "Read Details →",
+        "ancestors": [
+          {
+            "selector": "past-card is-revealed",
+            "opacity": "1"
+          },
+          {
+            "selector": "past-meetups-section is-revealed",
+            "opacity": "1"
+          }
+        ]
+      },
+      {
+        "text": "Read Details →",
+        "ancestors": [
+          {
+            "selector": "past-card is-revealed",
+            "opacity": "1"
+          },
+          {
+            "selector": "past-meetups-section is-revealed",
+            "opacity": "1"
+          }
+        ]
+      },
+      {
+        "text": "Apply to Speak at CNCF Peshawar",
+        "ancestors": [
+          {
+            "selector": "cfp-band is-revealed",
+            "opacity": "1"
+          }
+        ]
+      },
+      {
+        "text": "Submit Talk Proposal",
+        "ancestors": [
+          {
+            "selector": "cfp-band is-revealed",
+            "opacity": "1"
+          }
+        ]
+      },
+      {
+        "text": "Visit Website ↗",
+        "ancestors": [
+          {
+            "selector": "sponsor-card is-revealed",
+            "opacity": "1"
+          },
+          {
+            "selector": "sponsors-section is-revealed",
+            "opacity": "1"
+          }
+        ]
+      },
+      {
+        "text": "Visit Website ↗",
+        "ancestors": [
+          {
+            "selector": "sponsor-card is-revealed",
+            "opacity": "1"
+          },
+          {
+            "selector": "sponsors-section is-revealed",
+            "opacity": "1"
+          }
+        ]
+      },
+      {
+        "text": "Visit Website ↗",
+        "ancestors": [
+          {
+            "selector": "sponsor-card is-revealed",
+            "opacity": "1"
+          },
+          {
+            "selector": "sponsors-section is-revealed",
+            "opacity": "1"
+          }
+        ]
+      },
+      {
+        "text": "Become a Community Sponsor",
+        "ancestors": [
+          {
+            "selector": "sponsors-section is-revealed",
+            "opacity": "1"
+          }
+        ]
+      },
+      {
+        "text": "View Sponsorship Prospectus",
+        "ancestors": [
+          {
+            "selector": "sponsors-section is-revealed",
+            "opacity": "1"
+          }
+        ]
+      },
+      {
+        "text": "Events & Meetups",
+        "ancestors": []
+      },
+      {
+        "text": "Call for Speakers (CFP)",
+        "ancestors": []
+      },
+      {
+        "text": "Sponsorship & Impact",
+        "ancestors": []
+      },
+      {
+        "text": "Organizers & Team",
+        "ancestors": []
+      },
+      {
+        "text": "Blog & Recaps",
+        "ancestors": []
+      },
+      {
+        "text": "Code of Conduct",
+        "ancestors": []
+      },
+      {
+        "text": "Open Community Groups (OCG) ↗",
+        "ancestors": []
+      },
+      {
+        "text": "CNCF Slack (#peshawar) ↗",
+        "ancestors": []
+      },
+      {
+        "text": "Request WhatsApp Group Invite ↗",
+        "ancestors": []
+      },
+      {
+        "text": "GitHub Organization ↗",
+        "ancestors": []
+      },
+      {
+        "text": "LinkedIn Company ↗",
+        "ancestors": []
+      },
+      {
+        "text": "Instagram (@cncfpeshawar) ↗",
+        "ancestors": []
+      },
+      {
+        "text": "cncfpeshawar@gmail.com",
+        "ancestors": []
+      },
+      {
+        "text": "Open Community Groups",
+        "ancestors": []
+      }
+    ],
+    "hiddenFocusedAncestors": []
+  },
+  "hero": [
+    {
+      "reducedMotion": "reduce",
+      "state": "rest",
+      "transform": "none",
+      "background": "rgb(111, 194, 255)",
+      "duration": "0s"
+    },
+    {
+      "reducedMotion": "reduce",
+      "state": "hover",
+      "transform": "none",
+      "background": "rgb(255, 222, 0)",
+      "duration": "0s"
+    },
+    {
+      "reducedMotion": "no-preference",
+      "state": "rest",
+      "transform": "matrix(1, 0, 0, 1, 0, 0)",
+      "background": "rgb(111, 194, 255)",
+      "duration": "0.12s"
+    },
+    {
+      "reducedMotion": "no-preference",
+      "state": "hover",
+      "transform": "matrix(1, 0, 0, 1, 7, -7)",
+      "background": "rgb(255, 222, 0)",
+      "duration": "0.12s"
+    }
+  ]
+}

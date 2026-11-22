@@ -34,6 +34,8 @@ We are hosting our launch gathering: **CNCF Peshawar Genesis**, proudly sponsore
 - **Venue**: National Incubation Center (NIC), South Canal Road, Peshawar
 - **RSVP (Free)**: [Join on Open Community Groups (OCG)](https://ocgroups.dev/cncf/group/6vwk2n4/event/z7sb6wa) or [Luma](https://luma.com/shufbsm5)
 
+**Update (November 2026):** CNCF Peshawar Genesis has concluded. See the [Genesis event details](/events/01-cncf-peshawar-genesis) for the event record.
+
 The event combines expert technical sessions, interactive activities, a rapid-fire panel, technical challenges, Kahoot, and a scavenger hunt to encourage learning, collaboration, networking, and community building.
 
 ---

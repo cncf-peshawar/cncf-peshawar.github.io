@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+  <!-- Sky wind currents (echo curves in wet cement blue) -->
+  <path d="M 18 36 C 42 28 70 34 92 24"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 4"/>
+  <path d="M 104 22 C 122 16 138 22 148 18"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Trailing flying string / manjha looping down-left -->
+  <path d="M 76 96 C 64 114 52 128 38 136 C 28 142 18 138 14 146"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 72 100 C 60 118 48 132 34 140"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+
+  <!-- Tassel Tail Ribbon at bottom vertex -->
+  <path d="M 88 126 C 96 136 108 144 114 154"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Fluttering paper tassels on tail (organic paths instead of polygon/circle) -->
+  <path d="M 94 132 C 97 131 100 130 102 131 C 101 134 99 137 98 138 C 96 136 94 134 94 132 Z"
+        fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 104 142 C 107 141 110 140 112 141 C 111 144 109 147 108 148 C 106 146 104 144 104 142 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 114 153 C 116 151 119 152 119 154 C 118 157 114 156 114 153 Z"
+        fill="#54b4de"/>
+
+  <!-- KITE BODY: Quadrant Diamond panels with organic curves -->
+  <!-- Top Quadrant (Canary yellow) -->
+  <path d="M 76 22 C 93 35 110 49 126 62 C 109 63 93 65 76 66 C 59 65 43 63 26 62 C 43 49 59 35 76 22 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Left Bottom Quadrant (Warm Orange) -->
+  <path d="M 26 62 C 43 63 59 65 76 66 C 80 86 84 106 88 126 C 76 117 64 107 52 98 C 43 86 35 74 26 62 Z"
+        fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Right Bottom Quadrant (Frost White) -->
+  <path d="M 126 62 C 113 83 101 105 88 126 C 84 106 80 86 76 66 C 93 65 109 63 126 62 Z"
+        fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Center Decorative Diamond Crest (organic path) -->
+  <path d="M 76 52 C 80 56 84 60 88 64 C 84 68 80 72 76 76 C 72 72 68 68 64 64 C 68 60 72 56 76 52 Z"
+        fill="#54b4de" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 74 63 C 76 61 78 62 78 64 C 77 67 74 66 74 63 Z"
+        fill="#ffde00"/>
+
+  <!-- Traditional Curved Bamboo Bow (Kaman spar spanning east-west) -->
+  <path d="M 26 62 C 50 48 102 48 126 62"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Center Vertical Bamboo Spine (Tila spar) -->
+  <path d="M 76 22 C 80 56 84 91 88 126"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Bottom Triangular Tail Fin (Patang lower skirt) -->
+  <path d="M 72 118 C 77 121 83 123 88 126 C 92 124 96 122 100 120 C 94 126 82 130 72 118 Z"
+        fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Spark lines and flight accents around kite -->
+  <path d="M 134 54 C 137 53 139 51 142 50"
+        stroke="#ff9538" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 132 68 C 135 69 137 71 140 72"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 138 60 C 140 58 142 59 142 61 C 141 63 138 62 138 60 Z"
+        fill="#ffde00"/>
+  <path d="M 17 59 C 19 57 20 58 20 60 C 19 62 17 61 17 59 Z"
+        fill="#54b4de"/>
+  <path d="M 74 14 C 74 12 74 10 74 8"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

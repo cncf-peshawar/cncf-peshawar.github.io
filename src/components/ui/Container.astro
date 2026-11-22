@@ -1,0 +1,44 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'div'> {
+  as?: 'div' | 'section' | 'main' | 'article' | 'header' | 'footer';
+  size?: 'default' | 'prose' | 'full';
+  class?: string;
+}
+
+const {
+  as: Tag = 'div',
+  size = 'default',
+  class: className = '',
+  ...rest
+} = Astro.props;
+---
+
+<Tag class:list={['container', `container--${size}`, className]} {...rest}>
+  <slot />
+</Tag>
+
+<style>
+  .container {
+    width: 100%;
+    max-width: var(--page-max-width);
+    margin-inline: auto;
+    padding-inline: var(--spacing-24);
+    box-sizing: border-box;
+  }
+
+  .container--prose {
+    max-width: var(--container-prose, 720px);
+  }
+
+  .container--full {
+    max-width: 100%;
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      padding-inline: var(--spacing-16);
+    }
+  }
+</style>

@@ -15,8 +15,10 @@ import {
   TestHarness,
   extractFrontmatter,
   validateEventFrontmatter,
+  validateSpeakerFrontmatter,
   validateBlogFrontmatter,
-  verifyStaticLinks
+  verifyStaticLinks,
+  runCommand
 } from './test-utils.mjs';
 
 import {
@@ -32,11 +34,15 @@ import {
 } from '../scripts/sync-ocg-events.mjs';
 
 import {
+  parseIssueSections,
   slugify as cfpSlugify,
+  isValidUrl,
   cleanValue,
   parseRoleAndOrg,
   extractSocialLinks,
   extractTrackTags,
+  generateSpeakerFrontmatter,
+  generateEventFrontmatter,
   parseCfpIssue
 } from '../scripts/parse-cfp-issue.mjs';
 

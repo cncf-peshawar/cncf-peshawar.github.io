@@ -5,8 +5,14 @@ import YAML from 'yaml';
 import { z } from 'astro/zod';
 import {
   parseOcgEventHtml,
+  parseOcgGroupHtml,
   syncEvents,
-  stringifyFrontmatter
+  stringifyFrontmatter,
+  slugify,
+  convertUtcToPkt,
+  normalizeTimeRange,
+  parseUserChips,
+  loadExistingEvents
 } from '../../scripts/sync-ocg-events.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

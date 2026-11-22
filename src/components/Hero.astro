@@ -16,29 +16,28 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </h1>
 
       <p class="hero__lede">
-        Hands-on Kubernetes, distributed systems, and open-source collaboration for engineers, developers, and students across Khyber Pakhtunkhwa.
+        Empowering local engineers, developers, and students through hands-on Kubernetes, distributed systems, and open-source collaboration in Khyber Pakhtunkhwa.
       </p>
 
-      <!-- Primary Action Buttons: upcoming events lead on every viewport -->
+      <!-- Primary Action Buttons -->
       <div class="hero__actions">
-        <a href={`${base}/events`} class="btn btn--accent hero__action hero__action--primary">
-          <span>Upcoming Events</span>
+        <a 
+          href="https://ocgroups.dev/cncf/group/6vwk2n4" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn--accent"
+        >
+          <span>Join on Open Community Groups</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
         </a>
 
-        <a
-          href="https://ocgroups.dev/cncf/group/6vwk2n4"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn--secondary hero__action"
-        >
-          <span>Join on OCG</span>
-          <span class="sr-only"> (Open Community Groups)</span>
+        <a href={`${base}/events`} class="btn btn--secondary">
+          <span>Explore Meetups</span>
         </a>
 
-        <a href={`${base}/sponsors`} class="btn btn--secondary hero__action">
+        <a href={`${base}/sponsors`} class="btn btn--secondary">
           <span>Sponsor Us</span>
         </a>
       </div>
@@ -71,36 +70,32 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             <span class="charter-label">REGION:</span>
             <span class="charter-val">Peshawar, Khyber Pakhtunkhwa</span>
           </div>
+          <div class="charter-item">
+            <span class="charter-label">PLATFORM:</span>
+            <span class="charter-val">Open Community Groups (OCG)</span>
+          </div>
+          <div class="charter-item">
+            <span class="charter-label">STATUS:</span>
+            <span class="charter-val charter-val--active">
+              <span class="live-dot"></span> Active CNCF Chapter
+            </span>
+          </div>
+          <div class="charter-item">
+            <span class="charter-label">FOUNDED / INAUGURAL:</span>
+            <span class="charter-val">September 2026 · Peshawar</span>
+          </div>
 
-          <!-- Supplementary telemetry: simplified away on narrow viewports -->
-          <div class="charter-telemetry">
-            <div class="charter-item">
-              <span class="charter-label">PLATFORM:</span>
-              <span class="charter-val">Open Community Groups (OCG)</span>
-            </div>
-            <div class="charter-item">
-              <span class="charter-label">STATUS:</span>
-              <span class="charter-val charter-val--active">
-                <span class="live-dot"></span> Active CNCF Chapter
-              </span>
-            </div>
-            <div class="charter-item">
-              <span class="charter-label">FOUNDED / INAUGURAL:</span>
-              <span class="charter-val">September 2026 · Peshawar</span>
-            </div>
+          <div class="terminal-card__divider"></div>
 
-            <div class="terminal-card__divider"></div>
-
-            <h3 class="charter-section-title">CORE TECHNICAL FOCUS</h3>
-            <div class="tech-chips">
-              <span class="tech-chip">Kubernetes</span>
-              <span class="tech-chip">Containers</span>
-              <span class="tech-chip">Microservices</span>
-              <span class="tech-chip">DevOps</span>
-              <span class="tech-chip">MLOps</span>
-              <span class="tech-chip">Agentic AI</span>
-              <span class="tech-chip">Open Source</span>
-            </div>
+          <h3 class="charter-section-title">CORE TECHNICAL FOCUS</h3>
+          <div class="tech-chips">
+            <span class="tech-chip">Kubernetes</span>
+            <span class="tech-chip">Containers</span>
+            <span class="tech-chip">Microservices</span>
+            <span class="tech-chip">DevOps</span>
+            <span class="tech-chip">MLOps</span>
+            <span class="tech-chip">Agentic AI</span>
+            <span class="tech-chip">Open Source</span>
           </div>
         </div>
       </div>
@@ -110,8 +105,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <style>
   .hero {
-    padding-top: clamp(var(--space-lg), 5vw, var(--space-3xl));
-    padding-bottom: clamp(var(--space-xl), 6vw, var(--space-3xl));
+    padding-top: clamp(var(--space-xl), 6vw, var(--space-3xl));
+    padding-bottom: clamp(var(--space-2xl), 8vw, var(--space-3xl));
     position: relative;
   }
 
@@ -119,10 +114,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .hero::before {
     content: '';
     position: absolute;
-    top: -80px;
-    right: -100px;
-    width: 320px;
-    height: 320px;
+    top: -120px;
+    right: -160px;
+    width: 520px;
+    height: 520px;
     border-radius: 50%;
     background: radial-gradient(circle, oklch(0.56 0.18 248 / 0.18), transparent 70%);
     pointer-events: none;
@@ -134,27 +129,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     z-index: 1;
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-xl);
+    gap: var(--space-2xl);
     align-items: center;
-  }
-
-  /* Tablet & desktop keep the roomier presentation */
-  @media (min-width: 768px) {
-    .hero {
-      padding-top: clamp(var(--space-xl), 6vw, var(--space-3xl));
-      padding-bottom: clamp(var(--space-2xl), 8vw, var(--space-3xl));
-    }
-
-    .hero::before {
-      top: -120px;
-      right: -160px;
-      width: 520px;
-      height: 520px;
-    }
-
-    .hero__grid {
-      gap: var(--space-2xl);
-    }
   }
 
   @media (min-width: 992px) {
@@ -168,77 +144,29 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-xs);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
   }
 
   .hero__title {
-    font-size: clamp(1.75rem, 8.5vw, 2.5rem);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    margin-bottom: var(--space-sm);
+    font-size: var(--font-size-5xl);
+    margin-bottom: var(--space-md);
     color: var(--color-ink);
-    max-width: none;
-    overflow-wrap: break-word;
-    word-break: normal;
-    text-wrap: balance;
+    max-width: 16ch;
   }
 
   .hero__lede {
-    font-size: clamp(var(--font-size-base), 4.4vw, var(--font-size-lg));
+    font-size: var(--font-size-lg);
     line-height: var(--line-height-relaxed);
     color: var(--color-ink-muted);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-xl);
     max-width: 55ch;
-    text-wrap: pretty;
   }
 
   .hero__actions {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-2xs);
-    margin-bottom: var(--space-md);
-  }
-
-  /* Comfortable tap targets at every width */
-  .hero__action {
-    width: 100%;
-    min-height: 44px;
-    padding-inline: var(--space-sm);
-    text-align: center;
-    white-space: normal;
-    overflow-wrap: break-word;
-  }
-
-  @media (min-width: 768px) {
-    .hero__badge-row {
-      margin-bottom: var(--space-md);
-    }
-
-    .hero__title {
-      font-size: var(--font-size-5xl);
-      line-height: var(--line-height-tight);
-      letter-spacing: -0.035em;
-      margin-bottom: var(--space-md);
-      max-width: 16ch;
-    }
-
-    .hero__lede {
-      font-size: var(--font-size-lg);
-      margin-bottom: var(--space-xl);
-    }
-
-    .hero__actions {
-      display: flex;
-      flex-wrap: wrap;
-      grid-template-columns: none;
-      gap: var(--space-xs);
-      margin-bottom: var(--space-xl);
-    }
-
-    .hero__action {
-      width: auto;
-      padding-inline: 1.25rem;
-    }
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xl);
   }
 
   .hero__proof {
@@ -249,13 +177,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     background-color: var(--color-paper-subtle);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    width: 100%;
-  }
-
-  @media (min-width: 768px) {
-    .hero__proof {
-      width: fit-content;
-    }
+    width: fit-content;
   }
 
   .hero__proof-dot {
@@ -295,29 +217,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
 
   .terminal-card__title {
-    display: none;
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     color: var(--color-ink-muted);
   }
 
-  @media (min-width: 480px) {
-    .terminal-card__title {
-      display: inline;
-    }
-  }
-
   .terminal-card__body {
-    padding: var(--space-md);
+    padding: var(--space-lg);
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
-  }
-
-  @media (min-width: 768px) {
-    .terminal-card__body {
-      padding: var(--space-lg);
-    }
   }
 
   .charter-item {
@@ -354,19 +263,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     gap: var(--space-2xs);
     color: var(--color-accent);
     font-weight: var(--font-weight-semibold);
-  }
-
-  /* Supplementary telemetry block: keeps desktop rich, drops out on narrow screens */
-  .charter-telemetry {
-    display: none;
-    flex-direction: column;
-    gap: var(--space-xs);
-  }
-
-  @media (min-width: 768px) {
-    .charter-telemetry {
-      display: flex;
-    }
   }
 
   .live-dot {

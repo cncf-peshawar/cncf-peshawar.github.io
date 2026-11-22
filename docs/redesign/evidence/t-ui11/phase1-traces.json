@@ -1,0 +1,495 @@
+{
+  "desktop_1280_pass_a": {
+    "name": "desktop_1280_pass_a",
+    "viewport": "1280x800",
+    "throttle": "4x",
+    "marks": {
+      "S2_ENTRY": 5523536634,
+      "S2_SETTLED": 5526123751,
+      "S3_ENTRY": 5526595065,
+      "S3_SETTLED": 5529155978
+    },
+    "s2Window": {
+      "durationMs": 2587,
+      "imageDecodeMs": 834.28,
+      "imageDecodeCount": 686,
+      "rasterBurstMaxMs": 5.43,
+      "updateStyleAndLayoutMs": 368.19,
+      "updateLayoutTreeMs": 117.53,
+      "traceEventCount": 93742
+    },
+    "s3Window": {
+      "durationMs": 2561,
+      "imageDecodeMs": 592.19,
+      "imageDecodeCount": 354,
+      "rasterBurstMaxMs": 2.8,
+      "updateStyleAndLayoutMs": 391.95,
+      "updateLayoutTreeMs": 115.48,
+      "traceEventCount": 99239
+    },
+    "combinedWindow": {
+      "durationMs": 5619,
+      "imageDecodeMs": 2027.57,
+      "imageDecodeCount": 1106,
+      "rasterBurstMaxMs": 5.43,
+      "updateStyleAndLayoutMs": 906.76,
+      "updateLayoutTreeMs": 258.98,
+      "traceEventCount": 219555
+    },
+    "longtasks": [
+      {
+        "startTime": 6871.700000000186,
+        "duration": 60,
+        "scrollY": 1804
+      },
+      {
+        "startTime": 12818.100000000559,
+        "duration": 61,
+        "scrollY": 3246
+      },
+      {
+        "startTime": 18840.10000000056,
+        "duration": 77,
+        "scrollY": 3246
+      }
+    ],
+    "frameDrops": [
+      {
+        "time": 4864.8,
+        "delta": 33,
+        "scrollY": 1694
+      },
+      {
+        "time": 6848,
+        "delta": 33,
+        "scrollY": 1781
+      },
+      {
+        "time": 6931.3,
+        "delta": 50,
+        "scrollY": 1804
+      },
+      {
+        "time": 12881.1,
+        "delta": 50,
+        "scrollY": 3246
+      },
+      {
+        "time": 18914.1,
+        "delta": 67,
+        "scrollY": 3246
+      }
+    ]
+  },
+  "desktop_1280_pass_b_no_js_motion": {
+    "name": "desktop_1280_pass_b_no_js_motion",
+    "viewport": "1280x800",
+    "throttle": "4x",
+    "marks": {
+      "S2_ENTRY": 5544953986,
+      "S2_SETTLED": 5547606826,
+      "S3_ENTRY": 5548006650,
+      "S3_SETTLED": 5550606962
+    },
+    "s2Window": {
+      "durationMs": 2653,
+      "imageDecodeMs": 202.43,
+      "imageDecodeCount": 230,
+      "rasterBurstMaxMs": 3.87,
+      "updateStyleAndLayoutMs": 417.94,
+      "updateLayoutTreeMs": 118.91,
+      "traceEventCount": 96881
+    },
+    "s3Window": {
+      "durationMs": 2600,
+      "imageDecodeMs": 1.05,
+      "imageDecodeCount": 54,
+      "rasterBurstMaxMs": 3.74,
+      "updateStyleAndLayoutMs": 407.22,
+      "updateLayoutTreeMs": 109.89,
+      "traceEventCount": 94907
+    },
+    "combinedWindow": {
+      "durationMs": 5653,
+      "imageDecodeMs": 204.33,
+      "imageDecodeCount": 338,
+      "rasterBurstMaxMs": 3.87,
+      "updateStyleAndLayoutMs": 952.61,
+      "updateLayoutTreeMs": 261.43,
+      "traceEventCount": 210603
+    },
+    "longtasks": [
+      {
+        "startTime": 6935.200000000186,
+        "duration": 60,
+        "scrollY": 1760
+      },
+      {
+        "startTime": 12910.599999999627,
+        "duration": 81,
+        "scrollY": 3246
+      },
+      {
+        "startTime": 18963.099999999627,
+        "duration": 91,
+        "scrollY": 3246
+      }
+    ],
+    "frameDrops": [
+      {
+        "time": 3122.2,
+        "delta": 50,
+        "scrollY": 341
+      },
+      {
+        "time": 3155.6,
+        "delta": 33,
+        "scrollY": 352
+      },
+      {
+        "time": 3738.9,
+        "delta": 67,
+        "scrollY": 724
+      },
+      {
+        "time": 6922.1,
+        "delta": 33,
+        "scrollY": 1760
+      },
+      {
+        "time": 6988.8,
+        "delta": 50,
+        "scrollY": 1760
+      },
+      {
+        "time": 7488.8,
+        "delta": 33,
+        "scrollY": 2057
+      },
+      {
+        "time": 12988.5,
+        "delta": 67,
+        "scrollY": 3246
+      },
+      {
+        "time": 18954.9,
+        "delta": 33,
+        "scrollY": 3246
+      },
+      {
+        "time": 19054.9,
+        "delta": 83,
+        "scrollY": 3246
+      }
+    ]
+  },
+  "mobile_390_pass_a": {
+    "name": "mobile_390_pass_a",
+    "viewport": "390x844",
+    "throttle": "4x",
+    "marks": {
+      "S2_ENTRY": 5573724922,
+      "S2_SETTLED": 5577172430,
+      "S3_ENTRY": 5580274070,
+      "S3_SETTLED": 5583654911
+    },
+    "s2Window": {
+      "durationMs": 3448,
+      "imageDecodeMs": 53.26,
+      "imageDecodeCount": 416,
+      "rasterBurstMaxMs": 2.03,
+      "updateStyleAndLayoutMs": 584.35,
+      "updateLayoutTreeMs": 159.99,
+      "traceEventCount": 106878
+    },
+    "s3Window": {
+      "durationMs": 3381,
+      "imageDecodeMs": 0.43,
+      "imageDecodeCount": 22,
+      "rasterBurstMaxMs": 2.54,
+      "updateStyleAndLayoutMs": 674.5,
+      "updateLayoutTreeMs": 175.32,
+      "traceEventCount": 111851
+    },
+    "combinedWindow": {
+      "durationMs": 9930,
+      "imageDecodeMs": 2289.95,
+      "imageDecodeCount": 1158,
+      "rasterBurstMaxMs": 9.85,
+      "updateStyleAndLayoutMs": 2013.22,
+      "updateLayoutTreeMs": 508.06,
+      "traceEventCount": 333483
+    },
+    "longtasks": [
+      {
+        "startTime": 6853.9000000003725,
+        "duration": 51,
+        "scrollY": 1520
+      },
+      {
+        "startTime": 6936.299999999814,
+        "duration": 63,
+        "scrollY": 1545
+      },
+      {
+        "startTime": 12910.799999999814,
+        "duration": 69,
+        "scrollY": 3290
+      },
+      {
+        "startTime": 18922.799999999814,
+        "duration": 70,
+        "scrollY": 4863
+      },
+      {
+        "startTime": 24973.60000000056,
+        "duration": 65,
+        "scrollY": 6272
+      },
+      {
+        "startTime": 30882.10000000056,
+        "duration": 67,
+        "scrollY": 6272
+      },
+      {
+        "startTime": 36887.60000000056,
+        "duration": 93,
+        "scrollY": 6272
+      },
+      {
+        "startTime": 42867.40000000037,
+        "duration": 84,
+        "scrollY": 6272
+      }
+    ],
+    "frameDrops": [
+      {
+        "time": 6912.1,
+        "delta": 50,
+        "scrollY": 1520
+      },
+      {
+        "time": 6995.5,
+        "delta": 50,
+        "scrollY": 1542
+      },
+      {
+        "time": 9428.8,
+        "delta": 50,
+        "scrollY": 2389
+      },
+      {
+        "time": 12895.3,
+        "delta": 33,
+        "scrollY": 3290
+      },
+      {
+        "time": 12978.6,
+        "delta": 67,
+        "scrollY": 3290
+      },
+      {
+        "time": 16961.8,
+        "delta": 33,
+        "scrollY": 4325
+      },
+      {
+        "time": 18995,
+        "delta": 67,
+        "scrollY": 4864
+      },
+      {
+        "time": 24928.2,
+        "delta": 33,
+        "scrollY": 6271
+      },
+      {
+        "time": 25044.7,
+        "delta": 67,
+        "scrollY": 6272
+      },
+      {
+        "time": 30944.5,
+        "delta": 50,
+        "scrollY": 6272
+      },
+      {
+        "time": 36977.6,
+        "delta": 83,
+        "scrollY": 6272
+      },
+      {
+        "time": 41144.2,
+        "delta": 33,
+        "scrollY": 6272
+      },
+      {
+        "time": 42944.1,
+        "delta": 67,
+        "scrollY": 6272
+      },
+      {
+        "time": 42977.4,
+        "delta": 33,
+        "scrollY": 6272
+      }
+    ]
+  },
+  "mobile_390_pass_b_no_js_motion": {
+    "name": "mobile_390_pass_b_no_js_motion",
+    "viewport": "390x844",
+    "throttle": "4x",
+    "marks": {
+      "S2_ENTRY": 5619067368,
+      "S2_SETTLED": 5622491545,
+      "S3_ENTRY": 5625502500,
+      "S3_SETTLED": 5628853607
+    },
+    "s2Window": {
+      "durationMs": 3424,
+      "imageDecodeMs": 889.61,
+      "imageDecodeCount": 156,
+      "rasterBurstMaxMs": 2.51,
+      "updateStyleAndLayoutMs": 619.24,
+      "updateLayoutTreeMs": 169.62,
+      "traceEventCount": 104861
+    },
+    "s3Window": {
+      "durationMs": 3351,
+      "imageDecodeMs": 0,
+      "imageDecodeCount": 0,
+      "rasterBurstMaxMs": 4.09,
+      "updateStyleAndLayoutMs": 632.78,
+      "updateLayoutTreeMs": 161.37,
+      "traceEventCount": 110027
+    },
+    "combinedWindow": {
+      "durationMs": 9786,
+      "imageDecodeMs": 2272.78,
+      "imageDecodeCount": 422,
+      "rasterBurstMaxMs": 4.09,
+      "updateStyleAndLayoutMs": 2026.36,
+      "updateLayoutTreeMs": 509.47,
+      "traceEventCount": 326773
+    },
+    "longtasks": [
+      {
+        "startTime": 6903.799999999814,
+        "duration": 73,
+        "scrollY": 1569
+      },
+      {
+        "startTime": 12878.599999999627,
+        "duration": 70,
+        "scrollY": 3290
+      },
+      {
+        "startTime": 18823.700000000186,
+        "duration": 51,
+        "scrollY": 4863
+      },
+      {
+        "startTime": 18890.400000000373,
+        "duration": 74,
+        "scrollY": 4863
+      },
+      {
+        "startTime": 24822.900000000373,
+        "duration": 59,
+        "scrollY": 6271
+      },
+      {
+        "startTime": 24907.099999999627,
+        "duration": 72,
+        "scrollY": 6271
+      },
+      {
+        "startTime": 30850.099999999627,
+        "duration": 60,
+        "scrollY": 6272
+      },
+      {
+        "startTime": 36851.09999999963,
+        "duration": 102,
+        "scrollY": 6272
+      },
+      {
+        "startTime": 42853.700000000186,
+        "duration": 99,
+        "scrollY": 6272
+      }
+    ],
+    "frameDrops": [
+      {
+        "time": 6863,
+        "delta": 33,
+        "scrollY": 1527
+      },
+      {
+        "time": 6979.7,
+        "delta": 67,
+        "scrollY": 1565
+      },
+      {
+        "time": 9096.3,
+        "delta": 50,
+        "scrollY": 2284
+      },
+      {
+        "time": 10146.3,
+        "delta": 33,
+        "scrollY": 2631
+      },
+      {
+        "time": 12862.8,
+        "delta": 33,
+        "scrollY": 3290
+      },
+      {
+        "time": 12946.1,
+        "delta": 67,
+        "scrollY": 3290
+      },
+      {
+        "time": 18879.2,
+        "delta": 50,
+        "scrollY": 4863
+      },
+      {
+        "time": 18962.5,
+        "delta": 67,
+        "scrollY": 4864
+      },
+      {
+        "time": 24879,
+        "delta": 50,
+        "scrollY": 6271
+      },
+      {
+        "time": 24978.9,
+        "delta": 67,
+        "scrollY": 6271
+      },
+      {
+        "time": 30912.1,
+        "delta": 50,
+        "scrollY": 6272
+      },
+      {
+        "time": 36945.2,
+        "delta": 83,
+        "scrollY": 6272
+      },
+      {
+        "time": 36978.5,
+        "delta": 33,
+        "scrollY": 6272
+      },
+      {
+        "time": 42944.9,
+        "delta": 83,
+        "scrollY": 6272
+      }
+    ]
+  }
+}

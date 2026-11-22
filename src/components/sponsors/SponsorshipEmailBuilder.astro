@@ -1,0 +1,666 @@
+---
+// Component: SponsorshipEmailBuilder.astro
+// Restyled interactive sponsorship proposal generator inside MotherDuck Frames
+import Frame from '../ui/Frame.astro';
+---
+
+<div class="builder-anchor">
+<section id="email-builder" class="section-wrap email-builder-section">
+  <div class="section-header-box">
+    <span class="section-eyebrow">02 // INTAKE & CONTACT</span>
+    <h2 class="section-headline">Sponsorship Inquiry Generator.</h2>
+    <p class="section-subtext">
+      Fill out the required fields below to generate a formatted sponsorship proposal for email or copying.
+    </p>
+  </div>
+
+  <div class="builder-grid">
+    <!-- Form Frame (Window Variant) -->
+    <Frame 
+      variant="window" 
+      headerVariant="light" 
+      title="SPONSORSHIP INTAKE FORM" 
+      class="builder-form-frame"
+    >
+      <form id="sponsor-form" class="form-stack" onsubmit="return false;">
+
+        <!-- Group: Organization -->
+        <fieldset class="form-fieldset">
+          <legend class="form-group-label">Organization</legend>
+          <div class="form-group">
+            <label for="org-name" class="form-label">
+              Company Name (required)
+            </label>
+            <input 
+              type="text" 
+              id="org-name" 
+              class="form-input" 
+              required 
+            />
+            <small id="org-name-error" class="field-error" hidden></small>
+          </div>
+          <div class="form-group mt-fieldset">
+            <label for="org-website" class="form-label">
+              Website & Logo URL
+            </label>
+            <input 
+              type="url" 
+              id="org-website" 
+              class="form-input" 
+            />
+          </div>
+        </fieldset>
+
+        <!-- Group: Contact -->
+        <fieldset class="form-fieldset">
+          <legend class="form-group-label">Contact</legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact-name" class="form-label">
+                Name & Role (required)
+              </label>
+              <input 
+                type="text" 
+                id="contact-name" 
+                class="form-input" 
+                required 
+              />
+                <small id="contact-name-error" class="field-error" hidden></small>
+            </div>
+            <div class="form-group">
+              <label for="contact-email" class="form-label">
+                Work Email (required)
+              </label>
+              <input 
+                type="email" 
+                id="contact-email" 
+                class="form-input" 
+                required 
+              />
+                <small id="contact-email-error" class="field-error" hidden></small>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Group: Interest -->
+        <fieldset class="form-fieldset">
+          <legend class="form-group-label">Interest</legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tier-select" class="form-label">
+                Preferred Tier (required)
+              </label>
+              <select id="tier-select" class="form-select" aria-describedby="tier-help" required>
+                <option value="Venue Host Partner (In-Kind / Logistics)">Venue Host Partner</option>
+                <option value="Refreshment Partner (Community Hospitality)" selected>Refreshment Partner</option>
+                <option value="Community Swag Partner (Merchandise / Vouchers)">Community Swag Partner</option>
+                <option value="Annual Ecosystem Partner (Strategic Year-Round)">Annual Ecosystem Partner</option>
+                <option value="Custom In-Kind / Technical Partner">Custom Partner</option>
+              </select>
+              <small id="tier-help" class="form-help">Venue logistics, hospitality, merchandise, annual collaboration, or a custom contribution.</small>
+            </div>
+            <div class="form-group">
+              <label for="timeline-select" class="form-label">
+                Target Timing (required)
+              </label>
+              <select id="timeline-select" class="form-select" required>
+                <option value="Next Upcoming Meetup">Next Upcoming Meetup</option>
+                <option value="Upcoming Meetup Series">Upcoming Meetup Series</option>
+                <option value="Annual Ongoing Partnership">Annual Ongoing Partnership</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group mt-fieldset">
+            <label for="scope-notes" class="form-label">
+              Scope & Special Requests
+            </label>
+            <textarea 
+              id="scope-notes" 
+              rows="3" 
+              class="form-textarea"
+            ></textarea>
+          </div>
+        </fieldset>
+
+      </form>
+    </Frame>
+
+    <!-- Terminal Preview Frame (Terminal Variant) -->
+    <Frame 
+      variant="terminal" 
+      headerVariant="dark" 
+      title="LIVE EMAIL STRUCTURE PREVIEW" 
+      class="builder-terminal-frame"
+    >
+      <div slot="header-action" class="terminal-header-meta">
+        <span class="terminal-recipient">To: cncfpeshawar@gmail.com</span>
+      </div>
+
+      <div class="terminal-content-wrap">
+        <pre id="email-preview-text" class="email-preview-content"></pre>
+      </div>
+
+      <div slot="footer" class="terminal-footer-actions">
+        <p id="builder-validation-status" class="validation-status" role="status" aria-live="polite"></p>
+        <a 
+          id="send-mailto-btn" 
+          href="#email-builder"
+          class="btn btn-sky"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span>Open in Email App</span>
+        </a>
+
+        <button 
+          type="button" 
+          id="copy-template-btn" 
+          class="btn btn-outline"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          <span id="copy-btn-text" aria-live="polite">Copy Email Text</span>
+        </button>
+      </div>
+    </Frame>
+  </div>
+</section>
+</div>
+
+<script>
+  function initEmailBuilder() {
+    const orgInput = document.getElementById('org-name') as HTMLInputElement | null;
+    const contactInput = document.getElementById('contact-name') as HTMLInputElement | null;
+    const emailInput = document.getElementById('contact-email') as HTMLInputElement | null;
+    const tierSelect = document.getElementById('tier-select') as HTMLSelectElement | null;
+    const timelineSelect = document.getElementById('timeline-select') as HTMLSelectElement | null;
+    const websiteInput = document.getElementById('org-website') as HTMLInputElement | null;
+    const notesInput = document.getElementById('scope-notes') as HTMLTextAreaElement | null;
+
+    const previewEl = document.getElementById('email-preview-text');
+    const mailtoBtn = document.getElementById('send-mailto-btn') as HTMLAnchorElement | null;
+    const copyBtn = document.getElementById('copy-template-btn');
+    const copyText = document.getElementById('copy-btn-text');
+    const validationStatus = document.getElementById('builder-validation-status');
+
+    if (!previewEl || !mailtoBtn || !orgInput || !contactInput || !emailInput) return;
+
+    let copyFeedbackTimeout: number | undefined;
+
+    const sanitizeSingleLine = (val: string) => val.replace(/[\r\n]+/g, ' ').trim();
+    const validEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+    const requiredFields = [
+      { input: orgInput, label: 'Company Name', error: 'Enter your company name.' },
+      { input: contactInput, label: 'Name & Role', error: 'Enter your name and role.' },
+      { input: emailInput, label: 'Work Email', error: 'Enter a valid work email address.' }
+    ];
+
+    function hasValidRequiredFields() {
+      return requiredFields.every(({ input }) => input.value.trim() !== '' &&
+        (input !== emailInput || (input.validity.valid && validEmail(input.value))));
+    }
+
+    function validateFields() {
+      let firstInvalid: HTMLInputElement | null = null;
+      let firstMessage = '';
+      for (const { input, label, error } of requiredFields) {
+        const valid = input.value.trim() !== '' &&
+          (input !== emailInput || (input.validity.valid && validEmail(input.value)));
+        const errorEl = document.getElementById(`${input.id}-error`);
+        input.setAttribute('aria-invalid', String(!valid));
+        if (valid) {
+          input.removeAttribute('aria-describedby');
+          if (errorEl) errorEl.hidden = true;
+        } else {
+          input.setAttribute('aria-describedby', `${input.id}-error`);
+          if (errorEl) {
+            errorEl.textContent = error;
+            errorEl.hidden = false;
+          }
+          if (!firstInvalid) {
+            firstInvalid = input;
+            firstMessage = `${label}: ${error}`;
+          }
+        }
+      }
+      if (validationStatus) validationStatus.textContent = firstMessage;
+      firstInvalid?.focus();
+      return !firstInvalid;
+    }
+
+    function buildEmailContent() {
+      const org = sanitizeSingleLine(orgInput?.value || '') || '[Organization / Company Name]';
+      const contact = sanitizeSingleLine(contactInput?.value || '') || '[Contact Person, Role]';
+      const email = sanitizeSingleLine(emailInput?.value || '') || '[Contact Email Address]';
+      const tier = tierSelect?.value || 'Refreshment Partner (Community Hospitality)';
+      const timeline = timelineSelect?.value || 'Next Upcoming Meetup';
+      const website = sanitizeSingleLine(websiteInput?.value || '') || '[Website URL / Logo Asset Link]';
+      const notes = notesInput?.value.trim() || '[Details on venue capacity, refreshment contribution, or swag vouchers]';
+
+      const subject = `CNCF Peshawar Sponsorship Inquiry — ${org}`;
+
+      const body = `Hi Cloud Native Peshawar Organizers,
+
+We would like to explore partnering with CNCF Peshawar to support free, high-quality cloud native and open-source education in Khyber Pakhtunkhwa.
+
+Organization Overview:
+- Organization / Company: ${org}
+- Primary Contact: ${contact}
+- Contact Email: ${email}
+- Website / Logo Link: ${website}
+
+Sponsorship Interest:
+- Proposed Tier: ${tier}
+- Target Event / Timeline: ${timeline}
+- Support Scope / Logistics:
+  ${notes}
+
+We look forward to discussing the next steps and collaborating with the local cloud native community.
+
+Best regards,
+${contact}
+${org}`;
+
+      if (previewEl) {
+        previewEl.textContent = `Subject: ${subject}\n\n${body}`;
+      }
+
+      const mailtoUrl = `mailto:cncfpeshawar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (mailtoBtn) mailtoBtn.href = hasValidRequiredFields() ? mailtoUrl : '#email-builder';
+
+      return { subject, body };
+    }
+
+    // Attach real-time listeners
+    const inputs = [orgInput, contactInput, emailInput, tierSelect, timelineSelect, websiteInput, notesInput];
+    inputs.forEach(input => {
+      if (input) {
+        input.addEventListener('input', buildEmailContent);
+        input.addEventListener('change', buildEmailContent);
+      }
+    });
+
+    mailtoBtn.addEventListener('click', (event) => {
+      if (!validateFields()) {
+        event.preventDefault();
+        return;
+      }
+      buildEmailContent();
+    });
+
+    // Copy to clipboard handler
+    if (copyBtn && copyText) {
+      copyBtn.addEventListener('click', async () => {
+        if (!validateFields()) return;
+        const { subject, body } = buildEmailContent();
+        const fullContent = `To: cncfpeshawar@gmail.com\nSubject: ${subject}\n\n${body}`;
+        
+        if (copyFeedbackTimeout) clearTimeout(copyFeedbackTimeout);
+
+        try {
+          await navigator.clipboard.writeText(fullContent);
+          copyText.textContent = 'Copied ✓';
+          copyBtn.classList.add('is-copied');
+          if (validationStatus) validationStatus.textContent = 'Email text copied to clipboard.';
+          copyFeedbackTimeout = window.setTimeout(() => {
+            if (copyText) copyText.textContent = 'Copy Email Text';
+            copyBtn.classList.remove('is-copied');
+          }, 2000);
+        } catch {
+          copyBtn.classList.remove('is-copied');
+          if (previewEl) {
+            const range = document.createRange();
+            range.selectNodeContents(previewEl);
+            const selection = window.getSelection();
+            selection?.removeAllRanges();
+            selection?.addRange(range);
+          }
+          copyText.textContent = 'Selected (Press Ctrl+C)';
+          copyFeedbackTimeout = window.setTimeout(() => {
+            if (copyText) copyText.textContent = 'Copy Email Text';
+          }, 3000);
+        }
+      });
+    }
+
+    // Check URL parameters (e.g. from tier cards ?tier=...)
+    const params = new URLSearchParams(window.location.search);
+    const tierParam = params.get('tier');
+    if (tierParam && tierSelect) {
+      for (let i = 0; i < tierSelect.options.length; i++) {
+        if (tierSelect.options[i].value.toLowerCase().includes(tierParam.toLowerCase())) {
+          tierSelect.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    // Initial render
+    buildEmailContent();
+  }
+
+  // Support both initial load and Astro page transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEmailBuilder);
+  } else {
+    initEmailBuilder();
+  }
+  document.addEventListener('astro:page-load', initEmailBuilder);
+</script>
+
+<style>
+  .email-builder-section {
+    background-color: var(--color-chalk-gray);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    padding: clamp(36px, 6vw, 64px) clamp(16px, 4vw, 32px);
+    width: 100%;
+    box-sizing: border-box;
+    scroll-margin-top: 24px;
+  }
+
+  .section-header-box {
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    margin-bottom: clamp(24px, 4vw, 36px);
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-text-muted);
+    letter-spacing: var(--letter-spacing-wide, 0.06em);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-6, 6px);
+    display: block;
+  }
+
+  .section-headline {
+    font-family: var(--font-mono);
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: var(--font-weight-bold, 700);
+    letter-spacing: var(--letter-spacing-tight, -0.01em);
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: var(--spacing-10, 10px);
+    color: var(--color-charcoal-ink);
+  }
+
+  .section-subtext {
+    font-family: var(--font-mono);
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: var(--color-text-muted);
+    max-width: 680px;
+    line-height: var(--line-height-relaxed, 1.5);
+    margin: 0;
+  }
+
+  .builder-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 4vw, 36px);
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    align-items: stretch;
+  }
+
+  @media (min-width: 1024px) {
+    .builder-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+  }
+
+  /* Fieldset groups */
+  .form-fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .form-stack > .form-fieldset + .form-fieldset {
+    margin-top: var(--spacing-20, 20px);
+    padding-top: var(--spacing-16, 16px);
+    border-top: 1px solid var(--color-pencil-gray);
+  }
+
+  .form-group-label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide, 0.08em);
+    color: var(--color-text-muted);
+    padding: 0;
+    margin-bottom: var(--spacing-10, 10px);
+    display: block;
+  }
+
+  .mt-fieldset {
+    margin-top: var(--spacing-12, 12px);
+  }
+
+  .form-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6, 6px);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-12, 12px);
+  }
+
+  @media (min-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .form-label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide, 0.05em);
+    color: var(--color-charcoal-ink);
+  }
+
+  .field-error {
+    color: var(--color-charcoal-ink);
+    font-size: var(--font-size-caption, 0.75rem);
+  }
+
+  .form-help {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-caption, 0.75rem);
+    line-height: 1.4;
+  }
+
+  .validation-status {
+    flex-basis: 100%;
+    margin: 0;
+    color: var(--color-chalk-gray);
+    font-size: var(--font-size-caption, 0.75rem);
+    min-height: 1.4em;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    background-color: var(--color-frost-white);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    padding: 10px 14px;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    color: var(--color-charcoal-ink);
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .form-input {
+      min-height: 44px;
+    }
+  }
+
+  .form-input:focus-visible,
+  .form-select:focus-visible,
+  .form-textarea:focus-visible {
+    outline: 2px solid var(--color-charcoal-ink);
+    outline-offset: 2px;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 80px;
+    line-height: var(--line-height-normal, 1.4);
+  }
+
+  /* Terminal Preview Styling */
+  .terminal-recipient {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-medium, 500);
+    color: var(--color-sky-crayon);
+  }
+
+  .terminal-content-wrap {
+    height: 100%;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .email-preview-content {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: var(--line-height-relaxed, 1.55);
+    color: var(--color-chalk-gray);
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 0;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+
+  .terminal-footer-actions {
+    display: flex;
+    gap: var(--spacing-10, 10px);
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  /* Brutalist Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8, 8px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    font-weight: var(--font-weight-medium, 500);
+    line-height: var(--line-height-snug, 1.2);
+    letter-spacing: var(--letter-spacing-normal, 0.02em);
+    padding: 10px 20px;
+    min-height: 44px;
+    border-radius: var(--radius-brutal);
+    border-width: var(--border-width, 2px);
+    border-style: solid;
+    border-color: var(--color-charcoal-ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+    transition: transform 120ms ease-in-out;
+    user-select: none;
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    flex: 1 1 180px;
+  }
+
+  .btn:hover {
+    transform: translate(7px, -7px);
+  }
+
+  .btn:active {
+    transform: none;
+    transition: transform 30ms ease-in-out;
+  }
+
+  .btn:focus-visible {
+    outline: 3px solid var(--color-charcoal-ink);
+    outline-offset: 3px;
+  }
+
+  #copy-template-btn {
+    transition: transform 120ms ease-in-out, background-color 120ms ease-in-out;
+  }
+
+  #copy-btn-text {
+    display: inline-block;
+    transition: transform 120ms ease-in-out;
+  }
+
+  #copy-template-btn.is-copied {
+    background-color: var(--color-signal-green-subtle);
+  }
+
+  #copy-template-btn.is-copied #copy-btn-text {
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #copy-btn-text,
+    #copy-template-btn.is-copied #copy-btn-text {
+      transform: none;
+      transition: none;
+    }
+  }
+
+  .btn-sky {
+    background-color: var(--color-sky-crayon);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-outline {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-ice-wash);
+  }
+
+  @media (max-width: 639px) {
+    .btn {
+      white-space: normal;
+      text-align: center;
+      padding: 10px 14px;
+      flex: 1 1 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn:hover,
+    .btn:active {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>
