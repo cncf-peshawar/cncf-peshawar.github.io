@@ -2,10 +2,11 @@
 name: "Anas Khan"
 role: "Community & Outreach Team Lead"
 bio: "Community & Outreach Team Lead at Cloud Native Peshawar, coordinating campus ambassadors, partnerships, and community engagement across KPK."
-avatar: "/images/team/anas-khan.png"
+avatar: "/images/team/anas-khan.jpg"
 email: "anaskhandev728@gmail.com"
 linkedin: "https://www.linkedin.com/in/anas-khan-7014b536a"
-instagram: "https://www.instagram.com/cncfpeshawar/"
+instagram: "https://www.instagram.com/thedevscript"
+github: "https://github.com/Anas-Khannn"
 isLead: true
 order: 7
 ---
