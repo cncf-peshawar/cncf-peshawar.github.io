@@ -1,0 +1,24 @@
+{
+  "venue": {
+    "text": "Virtual event, Online",
+    "color": "rgb(107, 107, 107)",
+    "background": "rgb(255, 222, 0)"
+  },
+  "select": {
+    "option": "Refreshment Partner (Community Hospitality)",
+    "textWidth": 362.34832763671875,
+    "controlWidth": 314,
+    "paddingLeft": "14px",
+    "paddingRight": "14px"
+  },
+  "heroReduce": {
+    "rest": {
+      "transform": "none",
+      "background": "rgb(111, 194, 255)"
+    },
+    "hover": {
+      "transform": "matrix(1, 0, 0, 1, 7, -7)",
+      "background": "rgb(255, 222, 0)"
+    }
+  }
+}

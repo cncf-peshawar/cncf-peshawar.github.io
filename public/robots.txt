@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /dev-kit/
+Sitemap: https://cncf-peshawar.github.io/sitemap.xml

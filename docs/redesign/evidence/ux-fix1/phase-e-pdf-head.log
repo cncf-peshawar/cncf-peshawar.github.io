@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Vary: Origin
+Content-Length: 1117
+Content-Type: application/pdf
+Last-Modified: Sat, 14 Nov 2026 15:08:11 GMT
+ETag: W/"1117-1794668891163"
+Cache-Control: no-cache
+Date: Sat, 14 Nov 2026 15:09:37 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+

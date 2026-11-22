@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 140" fill="none" aria-hidden="true">
+  <!-- Dynamic hand-drawn sketch loop swirling out from the pencil tip -->
+  <!-- Blue dashed echo swirl -->
+  <path d="M 38 108 C 22 120 18 132 34 134 C 54 136 76 122 68 104 C 62 90 42 94 38 106"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/>
+  <!-- Primary charcoal drawn stroke line -->
+  <path d="M 40 102 C 24 114 20 126 36 128 C 56 130 78 116 70 98 C 64 84 44 88 40 100"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Spark lines and creative doodle marks around pencil point -->
+  <path d="M 28 86 C 26 84 24 82 22 80"
+        stroke="#ff9538" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 18 98 C 15 98 13 98 10 98"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 18 88 C 20 86 22 86 22 88 C 22 90 20 90 18 88 Z"
+        fill="#ffde00"/>
+  <path d="M 80 116 C 82 114 84 114 84 116 C 84 118 81 119 80 116 Z"
+        fill="#ff9538"/>
+  <path d="M 88 108 C 90 109 92 111 94 112"
+        stroke="#54b4de" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- PENCIL BODY (Tilted at ~40-degree drafting angle) -->
+  <g transform="rotate(-40 92 68)">
+    <!-- Eraser (Warm Orange) -->
+    <path d="M 130 60 C 138 60 142 64 142 68 C 142 72 138 76 130 76 Z"
+          fill="#ff9538" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Metal Ferrule Collar (Wet Cement Blue with embossed rings) -->
+    <path d="M 116 60 C 121 60 125 60 130 60 C 130 65 130 71 130 76 C 125 76 121 76 116 76 C 116 71 116 65 116 60 Z"
+          fill="#54b4de" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 121 60 C 121 65 121 71 121 76"
+          stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 125 60 C 125 65 125 71 125 76"
+          stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Main Hexagonal Pencil Shaft (Canary Yellow & White facets) -->
+    <!-- Top facet -->
+    <path d="M 52 60 C 73 60 95 60 116 60 C 116 62 116 63 116 65 C 95 65 73 65 52 65 C 52 63 52 62 52 60 Z"
+          fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Center facet (White highlight streak) -->
+    <path d="M 52 65 C 73 65 95 65 116 65 C 116 67 116 69 116 71 C 95 71 73 71 52 71 C 52 69 52 67 52 65 Z"
+          fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Bottom facet -->
+    <path d="M 52 71 C 73 71 95 71 116 71 C 116 73 116 74 116 76 C 95 76 73 76 52 76 C 52 74 52 73 52 71 Z"
+          fill="#ffde00" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Sharpened Wooden Cone Collar (Frost White) -->
+    <path d="M 52 60 C 45 63 37 65 30 68 C 37 71 45 73 52 76 Z"
+          fill="#ffffff" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Wood grain scallop cut -->
+    <path d="M 52 60 C 48 64 48 68 52 68 C 48 68 48 72 52 76"
+          stroke="#ff9538" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Graphite Lead Tip (Charcoal Ink) -->
+    <path d="M 38 65 C 35 66 33 67 30 68 C 33 69 35 70 38 71 Z"
+          fill="#383838" stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Top star / inspiration sparkle above eraser -->
+  <path d="M 134 22 C 134 19 134 17 134 14"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 130 18 C 133 18 135 18 138 18"
+        stroke="#383838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 144 24 C 146 22 148 23 148 25 C 147 27 144 26 144 24 Z"
+        fill="#ffde00"/>
+  <path d="M 122 30 C 124 28 126 29 126 31 C 125 33 122 32 122 30 Z"
+        fill="#54b4de"/>
+</svg>

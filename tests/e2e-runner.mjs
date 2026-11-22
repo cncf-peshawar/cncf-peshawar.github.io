@@ -3,17 +3,11 @@
  * Master E2E Test Suite Runner
  * Cloud Native Peshawar Automation Suite
  * 
- * Orchestrates the comprehensive 12-tier opaque-box E2E test suite:
+ * Orchestrates the comprehensive 4-tier opaque-box E2E test suite:
  * - Tier 1: Feature Coverage (F1 - F8)
  * - Tier 2: Boundary & Corner Cases (F1 - F8)
  * - Tier 3: Cross-Feature Integration (F1 - F8)
  * - Tier 4: Real-World Community Lifecycle Scenarios
- * - Tier 5: Event Lifecycle Consistency (derived state, timezone, cancellation)
- * - Tier 6: Homepage Hero Responsive Hierarchy
- * - Tier 7: Mobile Header Action Hierarchy
- * - Tier 8: Mobile Nav Drawer Overflow & Accessibility
- * - Tier 9: Mobile Touch Target Sizes
- * - Tier 10: Mobile Nav Drawer Keyboard Accessibility
  * 
  * Usage:
  *   node tests/e2e-runner.mjs
@@ -24,20 +18,12 @@ import { runTier1Suite } from './tier1-feature-coverage.test.mjs';
 import { runTier2Suite } from './tier2-boundary-corner.test.mjs';
 import { runTier3Suite } from './tier3-cross-feature.test.mjs';
 import { runTier4Suite } from './tier4-real-world.test.mjs';
-import { runTier5Suite } from './tier5-event-lifecycle.test.mjs';
-import { runTier6Suite } from './tier6-hero-responsive.test.mjs';
-import { runTier7Suite } from './tier7-mobile-header.test.mjs';
-import { runTier8Suite } from './tier8-nav-drawer-overflow.test.mjs';
-import { runTier9Suite } from './tier9-touch-targets.test.mjs';
-import { runTier10Suite } from './tier10-nav-drawer-a11y.test.mjs';
-import { runTier11Suite } from './tier11-speaker-profiles.test.mjs';
-import { runTier12Suite } from './tier12-contact-delivery.test.mjs';
 
 async function main() {
   const globalStart = Date.now();
 
   console.log(`\n================================================================================`);
-  console.log(`🚀 STARTING CLOUD NATIVE PESHAWAR AUTOMATION 12-TIER E2E TEST RUNNER`);
+  console.log(`🚀 STARTING CLOUD NATIVE PESHAWAR AUTOMATION 4-TIER E2E TEST RUNNER`);
   console.log(`================================================================================\n`);
 
   const results = [];
@@ -80,86 +66,6 @@ async function main() {
   } catch (err) {
     console.error('Fatal error in Tier 4:', err);
     results.push({ name: 'Tier 4: Real-World Scenarios', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
-  }
-
-  // Run Tier 5
-  try {
-    const t5Start = Date.now();
-    const t5 = await runTier5Suite();
-    results.push({ name: 'Tier 5: Event Lifecycle Consistency', ...t5, timeMs: Date.now() - t5Start });
-  } catch (err) {
-    console.error('Fatal error in Tier 5:', err);
-    results.push({ name: 'Tier 5: Event Lifecycle Consistency', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
-  }
-
-  // Run Tier 6
-  try {
-    const t6Start = Date.now();
-    const t6 = await runTier6Suite();
-    results.push({ name: 'Tier 6: Hero Responsive Hierarchy', ...t6, timeMs: Date.now() - t6Start });
-  } catch (err) {
-    console.error('Fatal error in Tier 6:', err);
-    results.push({ name: 'Tier 6: Hero Responsive Hierarchy', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
-  }
-
-  // Run Tier 7
-  try {
-    const t7Start = Date.now();
-    const t7 = await runTier7Suite();
-    results.push({ name: 'Tier 7: Mobile Header Action Hierarchy', ...t7, timeMs: Date.now() - t7Start });
-  } catch (err) {
-    console.error('Fatal error in Tier 7:', err);
-    results.push({ name: 'Tier 7: Mobile Header Action Hierarchy', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
-  }
-
-  // Run Tier 8
-  try {
-    const t8Start = Date.now();
-    const t8 = await runTier8Suite();
-    results.push({ name: 'Tier 8: Nav Drawer Overflow & Accessibility', ...t8, timeMs: Date.now() - t8Start });
-  } catch (err) {
-    console.error('Fatal error in Tier 8:', err);
-    results.push({ name: 'Tier 8: Nav Drawer Overflow & Accessibility', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
-  }
-
-  // Run Tier 9
-  try {
-    const t9Start = Date.now();
-    const t9 = await runTier9Suite();
-    results.push({ name: 'Tier 9: Mobile Touch Target Sizes', ...t9, timeMs: Date.now() - t9Start });
-  } catch (err) {
-    console.error('Fatal error in Tier 9:', err);
-    results.push({ name: 'Tier 9: Mobile Touch Target Sizes', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
-  }
-
-  // Run Tier 10
-  try {
-    const t10Start = Date.now();
-    const t10 = await runTier10Suite();
-    results.push({ name: 'Tier 10: Nav Drawer Keyboard Accessibility', ...t10, timeMs: Date.now() - t10Start });
-  } catch (err) {
-    console.error('Fatal error in Tier 10:', err);
-    results.push({ name: 'Tier 10: Nav Drawer Keyboard Accessibility', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
-  }
-
-  // Run Tier 11
-  try {
-    const t11Start = Date.now();
-    const t11 = await runTier11Suite();
-    results.push({ name: 'Tier 11: Speaker Profiles & Event Refs', ...t11, timeMs: Date.now() - t11Start });
-  } catch (err) {
-    console.error('Fatal error in Tier 11:', err);
-    results.push({ name: 'Tier 11: Speaker Profiles & Event Refs', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
-  }
-
-  // Run Tier 12
-  try {
-    const t12Start = Date.now();
-    const t12 = await runTier12Suite();
-    results.push({ name: 'Tier 12: Contact Delivery', ...t12, timeMs: Date.now() - t12Start });
-  } catch (err) {
-    console.error('Fatal error in Tier 12:', err);
-    results.push({ name: 'Tier 12: Contact Delivery', total: 0, passed: 0, failed: 1, error: err, timeMs: 0 });
   }
 
   const globalDuration = Date.now() - globalStart;

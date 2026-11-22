@@ -1,0 +1,97 @@
+{
+  "focus": {
+    "outline": "rgb(56, 56, 56) solid 2px",
+    "offset": "2px"
+  },
+  "copyNow": {
+    "text": "Copied ✓",
+    "class": "btn btn-outline is-copied",
+    "bg": "rgb(255, 255, 255)",
+    "transition": "0.12s, 0.12s",
+    "spanTransform": "matrix(1, 0, 0, 1, 0, 0)",
+    "live": "Email text copied to clipboard."
+  },
+  "copyLater": {
+    "text": "Copy Email Text",
+    "class": "btn btn-outline"
+  },
+  "reduceCopy": {
+    "text": "Copied ✓",
+    "bg": "rgb(111, 194, 255)",
+    "transform": "none",
+    "transition": "0s"
+  },
+  "blog1280": {
+    "svg": true,
+    "hidden": "true",
+    "rect": {
+      "x": 1084,
+      "y": 179.78125,
+      "width": 156,
+      "height": 150
+    },
+    "h1": {
+      "x": 40,
+      "y": 187,
+      "width": 996,
+      "height": 67.1875
+    },
+    "overflow": 0
+  },
+  "blog390": {
+    "svg": true,
+    "hidden": "true",
+    "rect": {
+      "x": 278,
+      "y": 434.515625,
+      "width": 96,
+      "height": 92.296875
+    },
+    "h1": {
+      "x": 16,
+      "y": 177.75,
+      "width": 358,
+      "height": 76.78125
+    },
+    "overflow": 0
+  },
+  "nav": {
+    "before": {
+      "color": "rgb(26, 26, 26)",
+      "underline": "rgb(26, 26, 26)",
+      "border": "rgb(111, 194, 255)",
+      "transition": "0.12s, 0.12s"
+    },
+    "after": {
+      "color": "rgb(26, 26, 26)",
+      "underline": "rgb(26, 26, 26)",
+      "border": "rgb(111, 194, 255)"
+    }
+  },
+  "footer": {
+    "before": {
+      "color": "rgb(56, 56, 56)",
+      "underline": "rgba(0, 0, 0, 0)",
+      "border": "rgb(56, 56, 56)",
+      "transition": "0.12s, 0.12s"
+    },
+    "after": {
+      "color": "rgb(26, 26, 26)",
+      "underline": "rgb(111, 194, 255)",
+      "border": "rgb(26, 26, 26)"
+    }
+  },
+  "inline": {
+    "before": {
+      "color": "rgb(56, 56, 56)",
+      "underline": "rgb(56, 56, 56)",
+      "border": "rgb(56, 56, 56)",
+      "transition": "0.12s"
+    },
+    "after": {
+      "color": "rgb(56, 56, 56)",
+      "underline": "rgb(56, 56, 56)",
+      "border": "rgb(56, 56, 56)"
+    }
+  }
+}

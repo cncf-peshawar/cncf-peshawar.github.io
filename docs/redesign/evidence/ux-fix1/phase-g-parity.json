@@ -1,0 +1,78 @@
+{
+  "totalRoutesScanned": 10,
+  "successful": 10,
+  "failures": 0,
+  "exitCode": 0,
+  "results": [
+    {
+      "route": "/",
+      "status": 200,
+      "parity": true,
+      "title": "Cloud Native Peshawar — Official CNCF Community Group",
+      "headingCount": 25
+    },
+    {
+      "route": "/events/",
+      "status": 200,
+      "parity": true,
+      "title": "Events & Meetups | CNCF Peshawar",
+      "headingCount": 11
+    },
+    {
+      "route": "/events/01-cncf-peshawar-genesis/",
+      "status": 200,
+      "parity": true,
+      "title": "CNCF Peshawar Genesis | CNCF Peshawar",
+      "headingCount": 9
+    },
+    {
+      "route": "/events/02-the-cloud-native-launchpad-docker-kubernetes-real-deployments/",
+      "status": 200,
+      "parity": true,
+      "title": "The Cloud Native Launchpad: Docker, Kubernetes & Real Deployments | CNCF Peshawar",
+      "headingCount": 11
+    },
+    {
+      "route": "/speak/",
+      "status": 200,
+      "parity": true,
+      "title": "Speaker Hub & Call for Proposals | CNCF Peshawar",
+      "headingCount": 13
+    },
+    {
+      "route": "/sponsors/",
+      "status": 200,
+      "parity": true,
+      "title": "Sponsorship Prospectus | CNCF Peshawar",
+      "headingCount": 24
+    },
+    {
+      "route": "/team/",
+      "status": 200,
+      "parity": true,
+      "title": "Organizers & Team | CNCF Peshawar",
+      "headingCount": 20
+    },
+    {
+      "route": "/blog/",
+      "status": 200,
+      "parity": true,
+      "title": "Blog & Community Recaps | CNCF Peshawar",
+      "headingCount": 6
+    },
+    {
+      "route": "/blog/announcing-cncf-peshawar/",
+      "status": 200,
+      "parity": true,
+      "title": "Launching Cloud Native Peshawar: Democratizing Open Source in KP | CNCF Peshawar",
+      "headingCount": 8
+    },
+    {
+      "route": "/code-of-conduct/",
+      "status": 200,
+      "parity": true,
+      "title": "Code of Conduct | CNCF Peshawar",
+      "headingCount": 9
+    }
+  ]
+}

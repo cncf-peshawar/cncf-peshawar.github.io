@@ -1,0 +1,188 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'span'> {
+  variant?:
+    | 'canary'
+    | 'yellow'
+    | 'mint'
+    | 'orange'
+    | 'charcoal'
+    | 'white'
+    | 'lilac'
+    | 'coral'
+    | 'peach'
+    | 'lime'
+    | 'periwinkle'
+    | 'slate'
+    | 'sky'
+    | 'muted'
+    | 'live';
+  size?: 'sm' | 'md';
+  pulse?: boolean;
+  class?: string;
+}
+
+const {
+  variant = 'canary',
+  size = 'md',
+  pulse = false,
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+// Normalise 'yellow' alias to 'canary'
+const activeVariant = variant === 'yellow' ? 'canary' : variant;
+const showPulse = pulse || activeVariant === 'live';
+---
+
+<span
+  class:list={[
+    'badge',
+    `badge--${activeVariant}`,
+    size === 'sm' && 'badge--sm',
+    className
+  ]}
+  {...rest}
+>
+  {showPulse && <span class="badge__pulse" aria-hidden="true" />}
+  <slot />
+</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-6, 6px);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-semibold, 600);
+    line-height: var(--line-height-tight, 1);
+    letter-spacing: var(--letter-spacing-wide, 0.02em);
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: var(--radius-brutal);
+    border: 1px solid var(--color-charcoal-ink);
+    white-space: nowrap;
+    user-select: none;
+    vertical-align: middle;
+  }
+
+  .badge--sm {
+    font-size: var(--font-size-caption, 0.75rem);
+    padding: 2px 6px;
+    letter-spacing: 0.04em;
+  }
+
+  .badge__pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-mint-sketch);
+    display: inline-block;
+    flex-shrink: 0;
+    animation: livePulse 2s infinite ease-in-out;
+  }
+
+  @keyframes livePulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.3);
+      opacity: 0.6;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .badge__pulse {
+      animation: none !important;
+    }
+  }
+
+  .badge--canary {
+    background-color: var(--color-canary-banner);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--mint {
+    background-color: var(--color-mint-sketch);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--orange {
+    background-color: var(--color-duck-bill-orange);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--charcoal {
+    background-color: var(--color-charcoal-ink);
+    color: var(--color-frost-white);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--white {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--lilac {
+    background-color: var(--color-lilac-sketch);
+    color: var(--color-terminal-bg);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--coral {
+    background-color: var(--color-coral-sketch);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--peach {
+    background-color: var(--color-peach-sketch);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--lime {
+    background-color: var(--color-lime-sketch);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--periwinkle {
+    background-color: var(--color-periwinkle-sketch);
+    color: var(--color-terminal-bg);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--slate {
+    background-color: var(--color-slate-sketch);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--sky {
+    background-color: var(--color-sky-crayon);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--muted {
+    background-color: var(--color-chalk-gray);
+    color: var(--color-text-muted);
+    border-color: var(--color-charcoal-ink);
+  }
+
+  .badge--live {
+    background-color: var(--color-ice-wash);
+    color: var(--color-charcoal-ink);
+    border-color: var(--color-charcoal-ink);
+  }
+</style>

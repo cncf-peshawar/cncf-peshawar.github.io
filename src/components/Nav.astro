@@ -7,7 +7,6 @@ const navLinks = [
   { name: 'Sponsors & Impact', href: `${base}/sponsors` },
   { name: 'Team', href: `${base}/team` },
   { name: 'Blog', href: `${base}/blog` },
-  { name: 'Contact', href: `${base}/contact` },
   { name: 'Code of Conduct', href: `${base}/code-of-conduct` },
 ];
 
@@ -66,7 +65,7 @@ const currentPath = Astro.url.pathname;
       <button 
         id="mobile-nav-toggle" 
         class="nav__toggle" 
-        aria-label="Open navigation menu"
+        aria-label="Toggle navigation menu"
         aria-expanded="false"
         aria-controls="mobile-nav-drawer"
       >
@@ -84,7 +83,7 @@ const currentPath = Astro.url.pathname;
   </nav>
 
   <!-- Mobile Drawer -->
-  <div id="mobile-nav-drawer" class="nav-drawer" aria-hidden="true" inert>
+  <div id="mobile-nav-drawer" class="nav-drawer" aria-hidden="true">
     <ul class="nav-drawer__list" role="list">
       {navLinks.map((link) => {
         const isActive = currentPath === link.href || (link.href !== `${base}/` && currentPath.startsWith(link.href));
@@ -106,6 +105,7 @@ const currentPath = Astro.url.pathname;
           target="_blank" 
           rel="noopener noreferrer" 
           class="btn btn--accent"
+          style="width: 100%;"
         >
           Join Chapter on Open Community Groups (OCG)
         </a>
@@ -121,22 +121,6 @@ const currentPath = Astro.url.pathname;
     z-index: 100;
     padding-inline: clamp(var(--space-sm), 4vw, var(--space-xl));
     margin-bottom: var(--space-lg);
-  }
-
-  /* Page scroll lock while the drawer is open. Locking the root element freezes the
-     document where it stands: the page behind the drawer stops scrolling without
-     being repositioned, which keeps the sticky nav and its toggle on screen. A fixed
-     body was the obvious alternative, but it drags the sticky nav out of the viewport
-     and leaves the drawer with no visible way to close it. */
-  html:has(.nav-drawer.is-open) {
-    overflow: hidden;
-    overscroll-behavior: none;
-  }
-
-  /* The frozen page no longer paints its own scrollbar, so the freed width is
-     returned as body padding to stop the layout shifting sideways. */
-  body:has(.nav-drawer.is-open) {
-    padding-right: var(--nav-scrollbar-gap, 0px);
   }
 
   .nav {
@@ -158,10 +142,6 @@ const currentPath = Astro.url.pathname;
     display: flex;
     align-items: center;
     gap: var(--space-xs);
-    /* The brand must be allowed to give way to the toggle. Without this it keeps its
-       intrinsic width when the text is enlarged, slides over the button, and the
-       menu becomes impossible to open on a narrow screen. */
-    min-width: 0;
     color: var(--color-ink);
   }
 
@@ -169,24 +149,17 @@ const currentPath = Astro.url.pathname;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
     color: var(--color-accent);
   }
 
   .nav__brand-text {
     display: flex;
     align-items: baseline;
-    flex-wrap: wrap;
-    min-width: 0;
     gap: 4px;
     font-family: var(--font-brand);
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-base);
     letter-spacing: -0.02em;
-    /* Words break only when they cannot fit on a line of their own. `anywhere` here
-       would let the wordmark shatter one character per line, which at large text
-       sizes grows the header until the drawer has no room left to open. */
-    overflow-wrap: break-word;
   }
 
   .nav__brand-title {
@@ -235,25 +208,14 @@ const currentPath = Astro.url.pathname;
   .nav__actions {
     display: flex;
     align-items: center;
-    /* The action group holds the only way in and out of the menu on mobile, so it
-       must never be squeezed by a growing brand. */
-    flex-shrink: 0;
     gap: var(--space-xs);
-    margin-left: auto;
   }
 
   .nav__cta {
-    display: none;
     font-size: var(--font-size-xs);
     padding: 0.45rem 0.9rem;
     border-radius: var(--radius-full);
     box-shadow: var(--shadow-glow);
-  }
-
-  @media (min-width: 860px) {
-    .nav__cta {
-      display: inline-flex;
-    }
   }
 
   .nav__cta-dot {
@@ -267,10 +229,9 @@ const currentPath = Astro.url.pathname;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     padding: 0;
-    flex-shrink: 0;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-full);
     background-color: transparent;
@@ -289,38 +250,16 @@ const currentPath = Astro.url.pathname;
   }
 
   .nav-drawer {
-    /* Viewport-aware ceiling. The script writes --nav-drawer-max-height from the
-       measured distance to the bottom of the sticky nav; the calc() values are the
-       pre-script fallback, so the drawer is still bounded before hydration. */
-    --drawer-max-height: calc(100vh - 7rem);
     display: none;
     position: absolute;
     top: calc(100% + var(--space-xs));
     left: clamp(var(--space-sm), 4vw, var(--space-xl));
     right: clamp(var(--space-sm), 4vw, var(--space-xl));
-    max-height: var(--nav-drawer-max-height, var(--drawer-max-height));
-    /* Independent scroll: a landscape phone at 390px tall has less room than the
-       menu needs, so the list scrolls within the drawer instead of overflowing it. */
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-    scroll-padding-block: var(--space-2xs);
     background-color: var(--color-paper-elevated);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--space-md);
-    /* Safe-area insets are 0 on devices that do not expose them, so this adds
-       spacing only where the hardware actually reserves it. */
-    padding-right: calc(var(--space-md) + env(safe-area-inset-right, 0px));
-    padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom, 0px));
-    padding-left: calc(var(--space-md) + env(safe-area-inset-left, 0px));
     box-shadow: var(--shadow-lg);
-  }
-
-  @supports (height: 100dvh) {
-    .nav-drawer {
-      --drawer-max-height: calc(100dvh - 7rem);
-    }
   }
 
   .nav-drawer.is-open {
@@ -349,22 +288,7 @@ const currentPath = Astro.url.pathname;
     font-weight: var(--font-weight-medium);
     color: var(--color-ink);
     border-radius: var(--radius-sm);
-    /* Long labels wrap at large text sizes rather than clipping, and the item keeps
-       a 44px-tall minimum so it stays an easy target in landscape. */
-    min-height: 44px;
-    overflow-wrap: anywhere;
-    scroll-margin-block: var(--space-2xs);
     transition: background-color var(--transition-fast), color var(--transition-fast);
-  }
-
-  /* Focus must stay visible on items that start below the scroll fold, including
-     the focused element scrolled into view by the keyboard. */
-  .nav-drawer__link:focus-visible,
-  .nav-drawer__action a:focus-visible {
-    outline: 2px solid var(--color-focus);
-    outline-offset: -2px;
-    background-color: var(--color-paper-subtle);
-    color: var(--color-accent);
   }
 
   .nav-drawer__link:hover,
@@ -378,11 +302,6 @@ const currentPath = Astro.url.pathname;
     padding-top: var(--space-sm);
     border-top: 1px solid var(--color-border);
   }
-
-  .nav-drawer__action .btn {
-    width: 100%;
-    min-height: 44px;
-  }
 </style>
 
 <script>
@@ -393,97 +312,20 @@ const currentPath = Astro.url.pathname;
 
     if (!toggleBtn || !drawer) return;
 
-    // Astro runs this setup on the initial load and can run it again after
-    // view-transition navigations over the same, preserved header. Every run would
-    // otherwise stack another click/keydown/link listener onto the same nodes: the
-    // toggle would open and close in a single tap, Escape would fire N times over
-    // stale drawer references, and outside clicks would fight each other for focus.
-    // Marking the wired drawer makes the setup idempotent; a hard reload brings
-    // back a fresh drawer and a clean slate, so the guard never goes stale.
-    if (drawer.dataset.navReady === 'true') return;
-    drawer.dataset.navReady = 'true';
-
-    let scrollY = 0;
-
-    // The drawer is anchored below the sticky nav, so the space it may occupy is
-    // whatever remains between the nav's bottom edge and the viewport bottom. Reading
-    // that back from the layout keeps the ceiling correct across rotation, soft
-    // keyboards, and increased text sizes, none of which CSS alone can measure.
-    function updateMaxHeight() {
-      if (!drawer) return;
-      const navBottom = (navWrapper ?? drawer.parentElement)?.getBoundingClientRect().bottom ?? 0;
-      const gap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--space-xs')) || 0;
-      const insetBottom = Number.parseFloat(
-        getComputedStyle(drawer).getPropertyValue('padding-bottom')
-      ) || 0;
-      const available = window.innerHeight - navBottom - gap - insetBottom;
-
-      drawer.style.setProperty('--nav-drawer-max-height', `${Math.max(available, 0)}px`);
-    }
-
-    function closeDrawer({ restoreFocus = false } = {}) {
+    function closeDrawer() {
       if (!toggleBtn || !drawer) return;
       toggleBtn.setAttribute('aria-expanded', 'false');
-      toggleBtn.setAttribute('aria-label', 'Open navigation menu');
       drawer.setAttribute('aria-hidden', 'true');
-      // `inert` keeps the closed drawer out of the tab order and away from
-      // assistive technology, which aria-hidden alone does not guarantee.
-      drawer.setAttribute('inert', '');
-      // Reset the scroll position while the drawer is still rendered: a scrollTop
-      // write on a display:none element is discarded, and the browser would then
-      // restore the old offset the next time the drawer appears.
-      drawer.scrollTop = 0;
       drawer.classList.remove('is-open');
-      drawer.style.removeProperty('--nav-drawer-max-height');
-
-      // The scroll lock is CSS-driven, so releasing it is a matter of dropping the
-      // class and the scrollbar compensation. Some browsers reset the scroll offset
-      // when the root overflow is restored, so the visitor's position is reinstated
-      // on the next frame, once the relaid-out page has settled.
-      document.documentElement.style.removeProperty('--nav-scrollbar-gap');
-      if (scrollY) {
-        // Two things fight a plain scrollTo here: the site scrolls smoothly, so a
-        // restored position would visibly rewind, and handing the scrollbar back
-        // reflows the page wider, which re-anchors the offset underneath us. An
-        // instant jump plus a second-frame reassertion settles it.
-        const restore = () => {
-          if (window.scrollY !== scrollY) {
-            window.scrollTo({ top: scrollY, behavior: 'instant' });
-          }
-        };
-        requestAnimationFrame(() => {
-          restore();
-          requestAnimationFrame(restore);
-        });
-      }
-
-      if (restoreFocus) toggleBtn.focus();
+      document.body.style.overflow = '';
     }
 
     function openDrawer() {
       if (!toggleBtn || !drawer) return;
-      scrollY = window.scrollY;
-
       toggleBtn.setAttribute('aria-expanded', 'true');
-      toggleBtn.setAttribute('aria-label', 'Close navigation menu');
       drawer.setAttribute('aria-hidden', 'false');
-      drawer.removeAttribute('inert');
-      // Freezing the root stops the page behind the drawer from scrolling, and
-      // compensating for the scrollbar width stops a sideways jump on desktop.
-      const scrollbarGap = window.innerWidth - document.documentElement.clientWidth;
-      document.documentElement.style.setProperty('--nav-scrollbar-gap', `${Math.max(scrollbarGap, 0)}px`);
-
-      // Clear any offset left over from a previous open before the drawer is shown.
-      drawer.scrollTop = 0;
-      updateMaxHeight();
       drawer.classList.add('is-open');
-
-      // Opening the drawer passes focus to its first navigation link. Issue #11
-      // requires the open state to start at a clearly defined target inside the
-      // drawer rather than on the toggle behind it; with the focus trap wired up,
-      // Tab then cycles the drawer content until Escape, an outside click, or a
-      // link closes it and returns focus to the toggle.
-      drawer.querySelector<HTMLElement>('.nav-drawer__link')?.focus();
+      document.body.style.overflow = 'hidden';
     }
 
     toggleBtn.addEventListener('click', (e) => {
@@ -496,62 +338,18 @@ const currentPath = Astro.url.pathname;
       }
     });
 
-    // Close on outside click. The click cannot be the toggle or another nav control
-    // (those stopPropagation), so the target is genuinely behind the drawer. Focus
-    // is handed back to the toggle: an Escape-like, predictable location, and the
-    // next Tab restarts the cycle instead of returning to an inert drawer link.
+    // Close on outside click
     document.addEventListener('click', (e) => {
       if (drawer.classList.contains('is-open') && !navWrapper?.contains(e.target as Node)) {
-        closeDrawer({ restoreFocus: true });
+        closeDrawer();
       }
     });
 
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
-        closeDrawer({ restoreFocus: true });
-      }
-    });
-
-    // Re-measure when the viewport changes: rotation, a soft keyboard opening, or a
-    // text-size change all alter the space the drawer may use.
-    const onViewportChange = () => {
-      if (drawer.classList.contains('is-open')) updateMaxHeight();
-    };
-    window.addEventListener('resize', onViewportChange);
-    window.addEventListener('orientationchange', onViewportChange);
-    window.visualViewport?.addEventListener('resize', onViewportChange);
-
-    // Growing past the desktop breakpoint hides the toggle, so an open drawer would
-    // have no way to be dismissed. Close it and hand focus back to the menu.
-    const desktopQuery = window.matchMedia('(min-width: 860px)');
-    const onBreakpointChange = (e: MediaQueryList | MediaQueryListEvent) => {
-      if (e.matches && drawer.classList.contains('is-open')) {
         closeDrawer();
-        document.querySelector<HTMLAnchorElement>('.nav__menu .nav__link')?.focus();
-      }
-    };
-    desktopQuery.addEventListener('change', onBreakpointChange);
-
-    // Trap focus inside the open drawer so tabbing cannot land on the inert page
-    // behind it, and so the toggle is always reachable as the way back out.
-    document.addEventListener('keydown', (e) => {
-      if (e.key !== 'Tab' || !drawer.classList.contains('is-open')) return;
-
-      const focusables = [toggleBtn, ...drawer.querySelectorAll<HTMLElement>('a, button')].filter(
-        el => el.offsetParent !== null
-      );
-      if (focusables.length === 0) return;
-
-      const first = focusables[0];
-      const last = focusables[focusables.length - 1];
-
-      if (e.shiftKey && (document.activeElement === first || document.activeElement === toggleBtn)) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
+        toggleBtn.focus();
       }
     });
 

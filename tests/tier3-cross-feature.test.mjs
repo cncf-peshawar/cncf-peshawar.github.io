@@ -10,6 +10,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import YAML from 'yaml';
 import {
   TestHarness,
   extractFrontmatter,
@@ -21,6 +22,8 @@ import {
 } from './test-utils.mjs';
 
 import {
+  parseOcgEventHtml,
+  parseOcgGroupHtml,
   syncEvents
 } from '../scripts/sync-ocg-events.mjs';
 
@@ -50,7 +53,7 @@ export async function runTier3Suite() {
       for (const fileName of syncRes.created) {
         const filePath = path.join(tempDir, fileName);
         const content = fs.readFileSync(filePath, 'utf-8');
-        const { frontmatter } = extractFrontmatter(content);
+        const { frontmatter, body } = extractFrontmatter(content);
 
         const validation = validateEventFrontmatter(frontmatter);
         assert.ok(validation.success, `Schema validation failed for ${fileName}: ${JSON.stringify(validation.error?.format())}`);
@@ -71,7 +74,7 @@ export async function runTier3Suite() {
     const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 't3-cfp-gen-'));
     try {
       const issueBody = fs.readFileSync('tests/fixtures/cfp-issue-valid-full.md', 'utf-8');
-      await parseCfpIssue({
+      const parsed = await parseCfpIssue({
         issueBody,
         issueTitle: '[CFP] Multi-Agent Systems on K8s',
         issueNumber: '42',

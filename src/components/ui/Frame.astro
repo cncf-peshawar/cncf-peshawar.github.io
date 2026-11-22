@@ -1,0 +1,178 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'div'> {
+  title?: string;
+  variant?: 'terminal' | 'window' | 'default';
+  headerVariant?: 'light' | 'dark';
+  bodyPadding?: 'none' | 'sm' | 'md' | 'lg';
+  showControls?: boolean;
+  class?: string;
+}
+
+const {
+  title = 'terminal',
+  variant = 'terminal',
+  headerVariant = 'light',
+  bodyPadding = 'md',
+  showControls = true,
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const activeVariant = variant === 'default' ? 'terminal' : variant;
+---
+
+<div
+  class:list={[
+    'frame',
+    `frame--${activeVariant}`,
+    className
+  ]}
+  {...rest}
+>
+  <div class:list={['frame__header', `frame__header--${headerVariant}`]}>
+    {showControls && (
+      <div class="frame__controls" aria-hidden="true">
+        <span class="frame__dot frame__dot--close"></span>
+        <span class="frame__dot frame__dot--minimize"></span>
+        <span class="frame__dot frame__dot--expand"></span>
+      </div>
+    )}
+    {title && <span class="frame__title">{title}</span>}
+    <div class="frame__actions">
+      <slot name="header-action" />
+    </div>
+  </div>
+
+  <div class:list={['frame__body', `frame__body--pad-${bodyPadding}`]}>
+    <slot />
+  </div>
+
+  {Astro.slots.has('footer') && (
+    <div class="frame__footer">
+      <slot name="footer" />
+    </div>
+  )}
+</div>
+
+<style>
+  .frame {
+    background-color: var(--color-frost-white);
+    border: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    border-radius: var(--radius-brutal);
+    box-shadow: var(--shadow-hard, -6px 6px 0px 0px var(--color-charcoal-ink));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .frame__header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-12, 12px);
+    padding: var(--spacing-8, 8px) var(--spacing-16, 16px);
+    background-color: var(--color-frost-white);
+    border-bottom: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    min-height: 38px;
+  }
+
+  .frame__header--dark {
+    background-color: var(--color-terminal-bg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .frame__header--dark .frame__title {
+    color: var(--color-frost-white);
+  }
+
+  .frame__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-6, 6px);
+  }
+
+  .frame__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-brutal);
+    border: 1.5px solid var(--color-charcoal-ink);
+    display: inline-block;
+  }
+
+  .frame__dot--close {
+    background-color: var(--color-coral-sketch);
+  }
+
+  .frame__dot--minimize {
+    background-color: var(--color-canary-banner);
+  }
+
+  .frame__dot--expand {
+    background-color: var(--color-mint-sketch);
+  }
+
+  .frame__title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption, 0.75rem);
+    font-weight: var(--font-weight-semibold, 600);
+    letter-spacing: var(--letter-spacing-wide, 0.02em);
+    color: var(--color-charcoal-ink);
+    text-transform: uppercase;
+    flex-grow: 1;
+  }
+
+  .frame__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8, 8px);
+  }
+
+  .frame__body {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body, 0.875rem);
+    line-height: var(--line-height-relaxed, 1.6);
+    overflow-x: auto;
+    flex-grow: 1;
+  }
+
+  .frame--terminal .frame__body {
+    background-color: var(--color-terminal-bg);
+    color: var(--color-frost-white);
+  }
+
+  .frame--window .frame__body {
+    background-color: var(--color-frost-white);
+    color: var(--color-charcoal-ink);
+  }
+
+  .frame__body--pad-none {
+    padding: 0;
+  }
+
+  .frame__body--pad-sm {
+    padding: var(--spacing-12, 12px);
+  }
+
+  .frame__body--pad-md {
+    padding: var(--spacing-20, 20px);
+  }
+
+  .frame__body--pad-lg {
+    padding: var(--card-padding, 40px);
+  }
+
+  .frame__footer {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-12, 12px);
+    padding: var(--spacing-12, 12px) var(--spacing-16, 16px);
+    border-top: var(--border-width, 2px) solid var(--color-charcoal-ink);
+    background-color: var(--color-frost-white);
+  }
+
+  .frame--terminal .frame__footer {
+    background-color: var(--color-terminal-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+</style>

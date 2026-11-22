@@ -1,0 +1,26 @@
+---
+interface Props {
+  size?: number;
+  class?: string;
+}
+
+const { size = 28, class: className = '' } = Astro.props;
+---
+
+<svg 
+  width={size} 
+  height={size} 
+  viewBox="0 0 28 28" 
+  fill="none" 
+  stroke="currentColor" 
+  stroke-width="2" 
+  stroke-linecap="round" 
+  stroke-linejoin="round"
+  class={className} 
+  aria-hidden="true"
+>
+  <!-- Geometric fintech shield and vault path for nsave -->
+  <path d="M14 3L4 7v7c0 6.5 4.3 11 10 12 5.7-1 10-5.5 10-12V7L14 3z" fill="none" />
+  <circle cx="14" cy="13" r="2.5" fill="currentColor" stroke="none" />
+  <path d="M14 15.5v3" />
+</svg>

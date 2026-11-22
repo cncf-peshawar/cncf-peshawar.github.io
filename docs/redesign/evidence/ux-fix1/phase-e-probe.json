@@ -1,0 +1,690 @@
+{
+  "marquees": [
+    {
+      "path": "/",
+      "before": [
+        {
+          "region": "Community Topics Marquee",
+          "button": "PAUSE",
+          "name": "PAUSE Community Topics Marquee",
+          "pressed": "false",
+          "height": 44,
+          "animation": "marquee-scroll"
+        },
+        {
+          "region": "Community Topics Footer Marquee",
+          "button": "PAUSE",
+          "name": "PAUSE Community Topics Footer Marquee",
+          "pressed": "false",
+          "height": 44,
+          "animation": "marquee-scroll"
+        }
+      ],
+      "after": [
+        {
+          "button": "PLAY",
+          "name": "PLAY Community Topics Marquee",
+          "pressed": "true",
+          "paused": "marquee-track is-paused"
+        },
+        {
+          "button": "PLAY",
+          "name": "PLAY Community Topics Footer Marquee",
+          "pressed": "true",
+          "paused": "true"
+        }
+      ]
+    },
+    {
+      "path": "/team",
+      "before": [
+        {
+          "region": "Team Community Topics Marquee",
+          "button": "PAUSE",
+          "name": "PAUSE Team Community Topics Marquee",
+          "pressed": "false",
+          "height": 44,
+          "animation": "marquee-scroll"
+        }
+      ],
+      "after": [
+        {
+          "button": "PLAY",
+          "name": "PLAY Team Community Topics Marquee",
+          "pressed": "true",
+          "paused": "true"
+        }
+      ]
+    },
+    {
+      "path": "/blog",
+      "before": [
+        {
+          "region": "Blog Community Topics Marquee",
+          "button": "PAUSE",
+          "name": "PAUSE Blog Community Topics Marquee",
+          "pressed": "false",
+          "height": 44,
+          "animation": "marquee-scroll"
+        }
+      ],
+      "after": [
+        {
+          "button": "PLAY",
+          "name": "PLAY Blog Community Topics Marquee",
+          "pressed": "true",
+          "paused": "true"
+        }
+      ]
+    },
+    {
+      "path": "/blog/announcing-cncf-peshawar",
+      "before": [
+        {
+          "region": "Article Community Topics Marquee",
+          "button": "PAUSE",
+          "name": "PAUSE Article Community Topics Marquee",
+          "pressed": "false",
+          "height": 44,
+          "animation": "marquee-scroll"
+        }
+      ],
+      "after": [
+        {
+          "button": "PLAY",
+          "name": "PLAY Article Community Topics Marquee",
+          "pressed": "true",
+          "paused": "true"
+        }
+      ]
+    },
+    {
+      "path": "/code-of-conduct",
+      "before": [
+        {
+          "region": "Conduct Community Topics Marquee",
+          "button": "PAUSE",
+          "name": "PAUSE Conduct Community Topics Marquee",
+          "pressed": "false",
+          "height": 44,
+          "animation": "marquee-scroll"
+        }
+      ],
+      "after": [
+        {
+          "button": "PLAY",
+          "name": "PLAY Conduct Community Topics Marquee",
+          "pressed": "true",
+          "paused": "true"
+        }
+      ]
+    },
+    {
+      "path": "/404",
+      "before": [
+        {
+          "region": "Not Found Community Topics Marquee",
+          "button": "PAUSE",
+          "name": "PAUSE Not Found Community Topics Marquee",
+          "pressed": "false",
+          "height": 44,
+          "animation": "marquee-scroll"
+        }
+      ],
+      "after": [
+        {
+          "button": "PLAY",
+          "name": "PLAY Not Found Community Topics Marquee",
+          "pressed": "true",
+          "paused": "true"
+        }
+      ]
+    }
+  ],
+  "reduce": [
+    {
+      "path": "/",
+      "states": [
+        {
+          "name": "Community Topics Marquee",
+          "animation": "none",
+          "controlDisplay": "none"
+        },
+        {
+          "name": "Community Topics Footer Marquee",
+          "animation": "none",
+          "controlDisplay": "none"
+        }
+      ]
+    },
+    {
+      "path": "/team",
+      "states": [
+        {
+          "name": "Team Community Topics Marquee",
+          "animation": "none",
+          "controlDisplay": "none"
+        }
+      ]
+    },
+    {
+      "path": "/blog",
+      "states": [
+        {
+          "name": "Blog Community Topics Marquee",
+          "animation": "none",
+          "controlDisplay": "none"
+        }
+      ]
+    },
+    {
+      "path": "/blog/announcing-cncf-peshawar",
+      "states": [
+        {
+          "name": "Article Community Topics Marquee",
+          "animation": "none",
+          "controlDisplay": "none"
+        }
+      ]
+    },
+    {
+      "path": "/code-of-conduct",
+      "states": [
+        {
+          "name": "Conduct Community Topics Marquee",
+          "animation": "none",
+          "controlDisplay": "none"
+        }
+      ]
+    },
+    {
+      "path": "/404",
+      "states": [
+        {
+          "name": "Not Found Community Topics Marquee",
+          "animation": "none",
+          "controlDisplay": "none"
+        }
+      ]
+    }
+  ],
+  "geometry": [
+    {
+      "width": 390,
+      "path": "/",
+      "scrollWidth": 390,
+      "viewport": 390,
+      "controls": [
+        {
+          "text": "PAUSE",
+          "height": 44,
+          "selector": "marquee-pause-btn"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "path": "/events",
+      "scrollWidth": 390,
+      "viewport": 390,
+      "controls": []
+    },
+    {
+      "width": 390,
+      "path": "/events/genesis-cloud-native-meetup",
+      "scrollWidth": 390,
+      "viewport": 390,
+      "controls": []
+    },
+    {
+      "width": 390,
+      "path": "/sponsors",
+      "scrollWidth": 390,
+      "viewport": 390,
+      "controls": [
+        {
+          "text": "",
+          "height": 44,
+          "selector": "form-input"
+        },
+        {
+          "text": "",
+          "height": 44,
+          "selector": "form-input"
+        },
+        {
+          "text": "",
+          "height": 44,
+          "selector": "form-input"
+        },
+        {
+          "text": "",
+          "height": 44,
+          "selector": "form-input"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "path": "/team",
+      "scrollWidth": 390,
+      "viewport": 390,
+      "controls": []
+    },
+    {
+      "width": 390,
+      "path": "/blog",
+      "scrollWidth": 390,
+      "viewport": 390,
+      "controls": []
+    },
+    {
+      "width": 360,
+      "path": "/",
+      "scrollWidth": 360,
+      "viewport": 360,
+      "controls": [
+        {
+          "text": "PAUSE",
+          "height": 44,
+          "selector": "marquee-pause-btn"
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "path": "/events",
+      "scrollWidth": 360,
+      "viewport": 360,
+      "controls": []
+    },
+    {
+      "width": 360,
+      "path": "/events/genesis-cloud-native-meetup",
+      "scrollWidth": 360,
+      "viewport": 360,
+      "controls": []
+    },
+    {
+      "width": 360,
+      "path": "/sponsors",
+      "scrollWidth": 360,
+      "viewport": 360,
+      "controls": [
+        {
+          "text": "",
+          "height": 44,
+          "selector": "form-input"
+        },
+        {
+          "text": "",
+          "height": 44,
+          "selector": "form-input"
+        },
+        {
+          "text": "",
+          "height": 44,
+          "selector": "form-input"
+        },
+        {
+          "text": "",
+          "height": 44,
+          "selector": "form-input"
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "path": "/team",
+      "scrollWidth": 360,
+      "viewport": 360,
+      "controls": []
+    },
+    {
+      "width": 360,
+      "path": "/blog",
+      "scrollWidth": 360,
+      "viewport": 360,
+      "controls": []
+    }
+  ],
+  "nav": [
+    {
+      "width": 1280,
+      "data": {
+        "display": "flex",
+        "scrollWidth": 1280,
+        "viewport": 1280,
+        "links": [
+          {
+            "text": "Home",
+            "x": 377.984375,
+            "y": 12,
+            "right": 426.34375
+          },
+          {
+            "text": "Events",
+            "x": 442.34375,
+            "y": 12,
+            "right": 506.875
+          },
+          {
+            "text": "Speak",
+            "x": 522.875,
+            "y": 12,
+            "right": 579.296875
+          },
+          {
+            "text": "Sponsors",
+            "x": 595.296875,
+            "y": 12,
+            "right": 676
+          },
+          {
+            "text": "Team",
+            "x": 692,
+            "y": 12,
+            "right": 740.328125
+          },
+          {
+            "text": "Blog",
+            "x": 756.328125,
+            "y": 12,
+            "right": 804.6875
+          },
+          {
+            "text": "Code of Conduct",
+            "x": 820.6875,
+            "y": 12,
+            "right": 957.9375
+          }
+        ],
+        "navRight": 1096
+      }
+    },
+    {
+      "width": 1024,
+      "data": {
+        "display": "flex",
+        "scrollWidth": 1024,
+        "viewport": 1024,
+        "links": [
+          {
+            "text": "Home",
+            "x": 249.984375,
+            "y": 12,
+            "right": 298.34375
+          },
+          {
+            "text": "Events",
+            "x": 314.34375,
+            "y": 12,
+            "right": 378.875
+          },
+          {
+            "text": "Speak",
+            "x": 394.875,
+            "y": 12,
+            "right": 451.296875
+          },
+          {
+            "text": "Sponsors",
+            "x": 467.296875,
+            "y": 12,
+            "right": 548
+          },
+          {
+            "text": "Team",
+            "x": 564,
+            "y": 12,
+            "right": 612.328125
+          },
+          {
+            "text": "Blog",
+            "x": 628.328125,
+            "y": 12,
+            "right": 676.6875
+          },
+          {
+            "text": "Code of Conduct",
+            "x": 692.6875,
+            "y": 12,
+            "right": 829.9375
+          }
+        ],
+        "navRight": 968
+      }
+    },
+    {
+      "width": 768,
+      "data": {
+        "display": "none",
+        "scrollWidth": 768,
+        "viewport": 768,
+        "links": [
+          {
+            "text": "Home",
+            "x": 0,
+            "y": 0,
+            "right": 0
+          },
+          {
+            "text": "Events",
+            "x": 0,
+            "y": 0,
+            "right": 0
+          },
+          {
+            "text": "Speak",
+            "x": 0,
+            "y": 0,
+            "right": 0
+          },
+          {
+            "text": "Sponsors",
+            "x": 0,
+            "y": 0,
+            "right": 0
+          },
+          {
+            "text": "Team",
+            "x": 0,
+            "y": 0,
+            "right": 0
+          },
+          {
+            "text": "Blog",
+            "x": 0,
+            "y": 0,
+            "right": 0
+          },
+          {
+            "text": "Code of Conduct",
+            "x": 0,
+            "y": 0,
+            "right": 0
+          }
+        ],
+        "navRight": 0
+      }
+    }
+  ],
+  "cards": [
+    {
+      "path": "/team",
+      "selector": ".exec-card",
+      "before": {
+        "duration": "0.2s, 0.2s",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "cursor": "auto",
+        "classes": "exec-card brutal-card is-revealed reveal-settled"
+      },
+      "after": {
+        "duration": "0.2s, 0.2s",
+        "transform": "matrix(1, 0, 0, 1, 3, -3)",
+        "cursor": "auto"
+      }
+    },
+    {
+      "path": "/team/tech-team",
+      "selector": ".member-card",
+      "before": {
+        "duration": "0.2s, 0.2s",
+        "transform": "none",
+        "cursor": "auto",
+        "classes": "member-card brutal-card is-revealed reveal-settled"
+      },
+      "after": {
+        "duration": "0.2s, 0.2s",
+        "transform": "matrix(1, 0, 0, 1, 3, -3)",
+        "cursor": "auto"
+      }
+    },
+    {
+      "path": "/blog",
+      "selector": ".post-card",
+      "before": {
+        "duration": "0.2s, 0.2s",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "cursor": "auto",
+        "classes": "post-card brutal-card post-card--coral is-revealed reveal-settled"
+      },
+      "after": {
+        "duration": "0.2s, 0.2s",
+        "transform": "matrix(1, 0, 0, 1, 3, -3)",
+        "cursor": "auto"
+      }
+    },
+    {
+      "path": "/speak",
+      "selector": ".format-card",
+      "before": {
+        "duration": "0s",
+        "transform": "none",
+        "cursor": "auto",
+        "classes": "card card--white card--pad-md card--accent-top-coral format-card"
+      },
+      "after": {
+        "duration": "0s",
+        "transform": "none",
+        "cursor": "auto"
+      }
+    },
+    {
+      "path": "/sponsors",
+      "selector": ".tier-card-wrapper .tier-card",
+      "before": {
+        "duration": "0.2s, 0.2s",
+        "transform": "none",
+        "cursor": "auto",
+        "classes": "card card--white card--pad-md card--accent-top-lilac tier-card"
+      },
+      "after": {
+        "duration": "0.2s, 0.2s",
+        "transform": "none",
+        "cursor": "auto"
+      }
+    }
+  ],
+  "headings": [
+    {
+      "tag": "H1",
+      "text": "Tech Team."
+    },
+    {
+      "tag": "H2",
+      "text": "Meet the Tech Team Volunteers"
+    },
+    {
+      "tag": "H3",
+      "text": "Muhammad Saleh Khattak"
+    },
+    {
+      "tag": "H3",
+      "text": "Hisham Khan"
+    },
+    {
+      "tag": "H3",
+      "text": "Abdul Mueez"
+    },
+    {
+      "tag": "H3",
+      "text": "Malak Saad Khan"
+    },
+    {
+      "tag": "H3",
+      "text": "Muzammal Ali"
+    },
+    {
+      "tag": "H3",
+      "text": "Muhammad Umer Farooq"
+    },
+    {
+      "tag": "H3",
+      "text": "Muhammad Hasnain"
+    },
+    {
+      "tag": "H3",
+      "text": "Waleeja Khan"
+    },
+    {
+      "tag": "H3",
+      "text": "Syeda Areej E Fatima"
+    },
+    {
+      "tag": "H3",
+      "text": "Muhammad Saif"
+    },
+    {
+      "tag": "H3",
+      "text": "Asawir Binte Asif"
+    },
+    {
+      "tag": "H3",
+      "text": "Maryam Sajjad Ahmed Awan"
+    },
+    {
+      "tag": "H3",
+      "text": "Syeda Khadija Naqvi"
+    },
+    {
+      "tag": "H3",
+      "text": "Syeda Javeria Naqvi"
+    },
+    {
+      "tag": "H3",
+      "text": "Muhammad Taha Nasir"
+    },
+    {
+      "tag": "H3",
+      "text": "Bakhtawar Khan"
+    },
+    {
+      "tag": "H3",
+      "text": "Subhan Baig"
+    },
+    {
+      "tag": "H2",
+      "text": "Building Peshawar's Cloud Native Future."
+    },
+    {
+      "tag": "H3",
+      "text": "Community"
+    },
+    {
+      "tag": "H3",
+      "text": "Community Channels"
+    },
+    {
+      "tag": "H3",
+      "text": "Contact & Connect"
+    }
+  ],
+  "links": {
+    "prospectus": "/assets/sponsorship-prospectus.pdf",
+    "download": "CNCF_Peshawar_Sponsorship_Prospectus.pdf",
+    "cfp": [
+      "Apply to Speak at CNCF Peshawar"
+    ]
+  }
+}

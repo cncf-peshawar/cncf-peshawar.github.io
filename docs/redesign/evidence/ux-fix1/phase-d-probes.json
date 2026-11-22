@@ -1,0 +1,258 @@
+{
+  "emptyCopy": {
+    "focusId": "org-name",
+    "copyLabel": "Copy Email Text",
+    "mailtoHref": "#email-builder",
+    "status": "Company Name: Enter your company name.",
+    "errors": [
+      {
+        "id": "org-name",
+        "invalid": "true",
+        "describedBy": "org-name-error",
+        "errorText": "Enter your company name."
+      },
+      {
+        "id": "contact-name",
+        "invalid": "true",
+        "describedBy": "contact-name-error",
+        "errorText": "Enter your name and role."
+      },
+      {
+        "id": "contact-email",
+        "invalid": "true",
+        "describedBy": "contact-email-error",
+        "errorText": "Enter a valid work email address."
+      }
+    ],
+    "clipboard": ""
+  },
+  "emptyMailto": {
+    "focusId": "org-name",
+    "copyLabel": "Copy Email Text",
+    "mailtoHref": "#email-builder",
+    "status": "Company Name: Enter your company name.",
+    "errors": [
+      {
+        "id": "org-name",
+        "invalid": "true",
+        "describedBy": "org-name-error",
+        "errorText": "Enter your company name."
+      },
+      {
+        "id": "contact-name",
+        "invalid": "true",
+        "describedBy": "contact-name-error",
+        "errorText": "Enter your name and role."
+      },
+      {
+        "id": "contact-email",
+        "invalid": "true",
+        "describedBy": "contact-email-error",
+        "errorText": "Enter a valid work email address."
+      }
+    ],
+    "url": "http://127.0.0.1:4322/sponsors/"
+  },
+  "invalidEmailCopy": {
+    "focusId": "contact-email",
+    "copyLabel": "Copy Email Text",
+    "mailtoHref": "#email-builder",
+    "status": "Work Email: Enter a valid work email address.",
+    "errors": [
+      {
+        "id": "org-name",
+        "invalid": "false",
+        "describedBy": null,
+        "errorText": "Enter your company name."
+      },
+      {
+        "id": "contact-name",
+        "invalid": "false",
+        "describedBy": null,
+        "errorText": "Enter your name and role."
+      },
+      {
+        "id": "contact-email",
+        "invalid": "true",
+        "describedBy": "contact-email-error",
+        "errorText": "Enter a valid work email address."
+      }
+    ],
+    "clipboard": ""
+  },
+  "validCopy": {
+    "focusId": "copy-template-btn",
+    "copyLabel": "Copy Email Text",
+    "mailtoHref": "mailto:cncfpeshawar@gmail.com?subject=CNCF%20Peshawar%20Sponsorship%20Inquiry%20%E2%80%94%20Example%20Company&body=Hi%20Cloud%20Native%20Peshawar%20Organizers%2C%0A%0AWe%20would%20like%20to%20explore%20partnering%20with%20CNCF%20Peshawar%20to%20support%20free%2C%20high-quality%20cloud%20native%20and%20open-source%20education%20in%20Khyber%20Pakhtunkhwa.%0A%0AOrganization%20Overview%3A%0A-%20Organization%20%2F%20Company%3A%20Example%20Company%0A-%20Primary%20Contact%3A%20A%20Person%0A-%20Contact%20Email%3A%20person%40example.org%0A-%20Website%20%2F%20Logo%20Link%3A%20%5BWebsite%20URL%20%2F%20Logo%20Asset%20Link%5D%0A%0ASponsorship%20Interest%3A%0A-%20Proposed%20Tier%3A%20Refreshment%20Partner%20(Community%20Hospitality)%0A-%20Target%20Event%20%2F%20Timeline%3A%20Next%20Upcoming%20Meetup%0A-%20Support%20Scope%20%2F%20Logistics%3A%0A%20%20%5BDetails%20on%20venue%20capacity%2C%20refreshment%20contribution%2C%20or%20swag%20vouchers%5D%0A%0AWe%20look%20forward%20to%20discussing%20the%20next%20steps%20and%20collaborating%20with%20the%20local%20cloud%20native%20community.%0A%0ABest%20regards%2C%0AA%20Person%0AExample%20Company",
+    "status": "",
+    "errors": [
+      {
+        "id": "org-name",
+        "invalid": "false",
+        "describedBy": null,
+        "errorText": "Enter your company name."
+      },
+      {
+        "id": "contact-name",
+        "invalid": "false",
+        "describedBy": null,
+        "errorText": "Enter your name and role."
+      },
+      {
+        "id": "contact-email",
+        "invalid": "false",
+        "describedBy": null,
+        "errorText": "Enter a valid work email address."
+      }
+    ],
+    "clipboard": "To: cncfpeshawar@gmail.com\nSubject: CNCF Peshawar Sponsorship Inquiry — Example Company\n\nHi Cloud Native Peshawar Organizers,\n\nWe would like to explore partnering with CNCF Peshawar to support free, high-quality cloud native and open-source education in Khyber Pakhtunkhwa.\n\nOrganization Overview:\n- Organization / Company: Example Company\n- Primary Contact: A Person\n- Contact Email: person@example.org\n- Website / Logo Link: [Website URL / Logo Asset Link]\n\nSponsorship Interest:\n- Proposed Tier: Refreshment Partner (Community Hospitality)\n- Target Event / Timeline: Next Upcoming Meetup\n- Support Scope / Logistics:\n  [Details on venue capacity, refreshment contribution, or swag vouchers]\n\nWe look forward to discussing the next steps and collaborating with the local cloud native community.\n\nBest regards,\nA Person\nExample Company"
+  },
+  "contrast": [
+    {
+      "text": "Provide Meetup Venue",
+      "foreground": "rgb(56, 56, 56)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 11.725786089779096
+    },
+    {
+      "text": "Support Event Refreshments",
+      "foreground": "rgb(56, 56, 56)",
+      "background": "rgb(249, 251, 231)",
+      "ratio": 11.156652078122862
+    },
+    {
+      "text": "Support Swag & Merchandise",
+      "foreground": "rgb(56, 56, 56)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 11.725786089779096
+    },
+    {
+      "text": "Annual Collaboration",
+      "foreground": "rgb(56, 56, 56)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 11.725786089779096
+    }
+  ],
+  "requiredLabels": [
+    {
+      "text": "Company Name (required)",
+      "color": "rgb(56, 56, 56)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 11.725786089779096
+    },
+    {
+      "text": "Name & Role (required)",
+      "color": "rgb(56, 56, 56)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 11.725786089779096
+    },
+    {
+      "text": "Work Email (required)",
+      "color": "rgb(56, 56, 56)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 11.725786089779096
+    },
+    {
+      "text": "Preferred Tier (required)",
+      "color": "rgb(56, 56, 56)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 11.725786089779096
+    },
+    {
+      "text": "Target Timing (required)",
+      "color": "rgb(56, 56, 56)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 11.725786089779096
+    }
+  ],
+  "selectFit": [
+    {
+      "width": 390,
+      "fits": [
+        {
+          "label": "Venue Host Partner",
+          "textWidth": 151.6593017578125,
+          "innerWidth": 266,
+          "fits": true
+        },
+        {
+          "label": "Refreshment Partner",
+          "textWidth": 160.11676025390625,
+          "innerWidth": 266,
+          "fits": true
+        },
+        {
+          "label": "Community Swag Partner",
+          "textWidth": 185.3741455078125,
+          "innerWidth": 266,
+          "fits": true
+        },
+        {
+          "label": "Annual Ecosystem Partner",
+          "textWidth": 202.20281982421875,
+          "innerWidth": 266,
+          "fits": true
+        },
+        {
+          "label": "Custom Partner",
+          "textWidth": 117.97320556640625,
+          "innerWidth": 266,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "fits": [
+        {
+          "label": "Venue Host Partner",
+          "textWidth": 151.6593017578125,
+          "innerWidth": 236,
+          "fits": true
+        },
+        {
+          "label": "Refreshment Partner",
+          "textWidth": 160.11676025390625,
+          "innerWidth": 236,
+          "fits": true
+        },
+        {
+          "label": "Community Swag Partner",
+          "textWidth": 185.3741455078125,
+          "innerWidth": 236,
+          "fits": true
+        },
+        {
+          "label": "Annual Ecosystem Partner",
+          "textWidth": 202.20281982421875,
+          "innerWidth": 236,
+          "fits": true
+        },
+        {
+          "label": "Custom Partner",
+          "textWidth": 117.97320556640625,
+          "innerWidth": 236,
+          "fits": true
+        }
+      ]
+    }
+  ],
+  "anchor": [
+    {
+      "path": "direct",
+      "sectionY": 23.65625,
+      "headingY": 84.84375,
+      "eyebrowY": 59.65625,
+      "hash": "#email-builder",
+      "tier": "Venue Host Partner (In-Kind / Logistics)"
+    },
+    {
+      "path": "cta",
+      "sectionY": 23.65625,
+      "headingY": 84.84375,
+      "eyebrowY": 59.65625,
+      "hash": "#email-builder",
+      "tier": "Venue Host Partner (In-Kind / Logistics)"
+    }
+  ]
+}

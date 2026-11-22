@@ -12,15 +12,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import YAML from 'yaml';
-import { CANCELED, UPCOMING, isEventCanceled, resolveEventStatus } from '../src/lib/event-lifecycle.mjs';
-import { normalizeSpeakerKey } from '../src/lib/speaker-key.mjs';
-
-export { normalizeSpeakerKey };
 
 export const DEFAULT_OCG_GROUP_URL = 'https://ocgroups.dev/cncf/group/6vwk2n4';
 export const DEFAULT_EVENTS_DIR = path.resolve(process.cwd(), 'src/content/events');
 export const DEFAULT_TIMEZONE = 'Asia/Karachi';
-export const CANCELED_TAG = 'Canceled';
 export const USER_AGENT = 'CNCF-Peshawar-SyncBot/1.0 (+https://github.com/cncf-peshawar/cncf-peshawar.github.io)';
 
 /**
@@ -195,10 +190,7 @@ export function parseOcgEventHtml(html, defaultUrl = '') {
   const capacityAttrMatch = html.match(/data-availability-capacity=["'](\d+)["']/i);
   const capacityTagMatch = html.match(/data-availability-capacity[^>]*>\s*(\d+)\s*</i);
 
-  // OCG signals cancellation either with an explicit attribute or with a [CANCELED]
-  // title prefix on the listing card. Honour both so cancellations survive the round trip.
-  const isCanceled =
-    (canceledMatch ? canceledMatch[1].toLowerCase() === 'true' : false) || /^\s*\[CANCELED\]/i.test(title);
+  const isCanceled = canceledMatch ? canceledMatch[1].toLowerCase() === 'true' : false;
   let capacity;
   if (capacityAttrMatch) {
     capacity = parseInt(capacityAttrMatch[1], 10);
@@ -264,17 +256,13 @@ export function parseOcgEventHtml(html, defaultUrl = '') {
   }
 
   // 4. Status determination
-  // Derived from the normalized PKT schedule through the same resolver the site
-  // renders with, so persisted frontmatter never contradicts the rendered
-  // lifecycle state. Explicit cancellations always win over the date rule.
-  const resolvedDate = date || new Intl.DateTimeFormat('en-CA', { timeZone: DEFAULT_TIMEZONE }).format(new Date());
-  const resolvedTime = time || '03:00 PM - 07:00 PM PKT';
-  const status = resolveEventStatus({
-    date: resolvedDate,
-    time: resolvedTime,
-    status: 'upcoming',
-    tags: isCanceled ? [CANCELED_TAG] : []
-  });
+  let status = 'upcoming';
+  if (dateObj) {
+    const now = Date.now();
+    if (now > dateObj.getTime() + 6 * 60 * 60 * 1000) {
+      status = 'completed';
+    }
+  }
 
   // 5. Venue and Location
   let venue = '';
@@ -337,8 +325,8 @@ export function parseOcgEventHtml(html, defaultUrl = '') {
   if (tags.length === 0) {
     tags.push('Genesis', 'OpenSource', 'Community', 'CloudNative', 'Kubernetes', 'AgenticAI');
   }
-  if (isCanceled && !tags.includes(CANCELED_TAG)) {
-    tags.push(CANCELED_TAG);
+  if (isCanceled && !tags.includes('Canceled')) {
+    tags.push('Canceled');
   }
 
   // 9. Summary & Description Body
@@ -369,8 +357,8 @@ export function parseOcgEventHtml(html, defaultUrl = '') {
 
   return {
     title: resolvedTitle,
-    date: resolvedDate,
-    time: resolvedTime,
+    date: date || new Intl.DateTimeFormat('en-CA', { timeZone: DEFAULT_TIMEZONE }).format(new Date()),
+    time: time || '03:00 PM - 07:00 PM PKT',
     venue,
     location,
     status,
@@ -671,16 +659,8 @@ export async function syncEvents(options = {}) {
       const mergedVenue = exFm.venue && exFm.venue.trim() ? exFm.venue : ocgEvent.venue;
       const mergedLocation = exFm.location || ocgEvent.location || 'Peshawar, KPK, Pakistan';
 
-      // 4. Status: derived lifecycle state wins (cancelled / elapsed / still upcoming),
-      // except that an organiser cancellation already recorded in the repository is
-      // authoritative. OCG publishes no update/cancellation policy that could revoke a
-      // local cancellation, so letting a non-cancelled listing win here would silently
-      // reactivate an event whose RSVP buttons the community must not see again.
-      const existingCanceled = isEventCanceled(exFm);
-      const ocgCanceled = ocgEvent.isCanceled === true || ocgEvent.status === CANCELED;
-      const mergedStatus = existingCanceled && !ocgCanceled
-        ? CANCELED
-        : (ocgEvent.status || exFm.status || UPCOMING);
+      // 4. Status: Auto-update to 'completed' if time has elapsed
+      const mergedStatus = ocgEvent.status || exFm.status || 'upcoming';
 
       // 5. Capacity: Update if OCG has capacity or keep existing
       const mergedCapacity = ocgEvent.capacity !== undefined ? ocgEvent.capacity : exFm.capacity;
@@ -694,17 +674,13 @@ export async function syncEvents(options = {}) {
       // 7. Cover Image: STRICTLY PRESERVE manual cover image
       const mergedCoverImage = exFm.coverImage || ocgEvent.coverImage;
 
-      // 8. Speakers: Preserve manual speakers and union with new ones without duplicates
+      // 8. Speakers: Preserve manual speakers and union with new ones
       const existingSpeakers = Array.isArray(exFm.speakers) ? exFm.speakers : [];
       const ocgSpeakers = Array.isArray(ocgEvent.speakers) ? ocgEvent.speakers : [];
       const mergedSpeakers = [...existingSpeakers];
       for (const sp of ocgSpeakers) {
-        const spKey = normalizeSpeakerKey(sp);
-        const exists = existingSpeakers.some(s => {
-          const sKey = normalizeSpeakerKey(s);
-          if (sKey && spKey && sKey === spKey) return true;
-          return s.split('(')[0].trim().toLowerCase() === sp.split('(')[0].trim().toLowerCase();
-        });
+        const spName = sp.split('(')[0].trim().toLowerCase();
+        const exists = existingSpeakers.some(s => s.split('(')[0].trim().toLowerCase() === spName);
         if (!exists) {
           mergedSpeakers.push(sp);
         }
@@ -714,12 +690,6 @@ export async function syncEvents(options = {}) {
       const existingTags = Array.isArray(exFm.tags) ? exFm.tags : [];
       const ocgTags = Array.isArray(ocgEvent.tags) ? ocgEvent.tags : [];
       const mergedTags = Array.from(new Set([...existingTags, ...ocgTags]));
-
-      // A cancelled event must always carry the marker tag, including when the
-      // cancellation was recorded locally and OCG never reported one.
-      if (mergedStatus === CANCELED && !mergedTags.includes(CANCELED_TAG)) {
-        mergedTags.push(CANCELED_TAG);
-      }
 
       // 10. Summary: Preserve manual summary if non-empty
       const mergedSummary = exFm.summary && exFm.summary.trim() ? exFm.summary : ocgEvent.summary;

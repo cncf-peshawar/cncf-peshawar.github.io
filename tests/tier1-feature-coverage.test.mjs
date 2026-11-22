@@ -30,8 +30,15 @@ import {
 } from '../scripts/sync-ocg-events.mjs';
 
 import {
+  parseIssueSections,
   slugify,
   isValidUrl,
+  cleanValue,
+  parseRoleAndOrg,
+  extractSocialLinks,
+  extractTrackTags,
+  generateSpeakerFrontmatter,
+  generateEventFrontmatter,
   parseCfpIssue
 } from '../scripts/parse-cfp-issue.mjs';
 
@@ -83,15 +90,18 @@ export async function runTier1Suite() {
   });
 
   await suite.test('F1.2: Detects status automatically (upcoming for future, completed for past)', async () => {
-    const pastHtml = fs.readFileSync('tests/fixtures/ocg-portal-past.html', 'utf-8');
-    const pastEvents = parseOcgGroupHtml(pastHtml).embeddedEvents;
-    assert.equal(pastEvents.length, 1);
-    assert.equal(pastEvents[0].status, 'completed', 'Past event should automatically have completed status');
+    const fixtureHtml = fs.readFileSync('tests/fixtures/ocg-portal-upcoming.html', 'utf-8');
+    const withStartDate = (daysFromNow) => fixtureHtml.replace(
+      /data-starts="[^"]+"/g,
+      `data-starts="${new Date(Date.now() + daysFromNow * 24 * 60 * 60 * 1000).toISOString()}"`
+    );
+    const futureEvents = parseOcgGroupHtml(withStartDate(60)).embeddedEvents;
+    const pastEvents = parseOcgGroupHtml(withStartDate(-30)).embeddedEvents;
 
-    const upcomingHtml = fs.readFileSync('tests/fixtures/ocg-portal-upcoming.html', 'utf-8');
-    const upcomingEvents = parseOcgGroupHtml(upcomingHtml).embeddedEvents;
-    const futureEvent = upcomingEvents.find(e => new Date(e.date).getTime() > Date.now()) || upcomingEvents[1];
-    assert.equal(futureEvent.status, 'upcoming', 'Future event should have upcoming status');
+    assert.equal(futureEvents.length, 2);
+    assert.equal(pastEvents.length, 2);
+    assert.ok(futureEvents.every(event => event.status === 'upcoming'), 'Future events should automatically have upcoming status');
+    assert.ok(pastEvents.every(event => event.status === 'completed'), 'Past events should automatically have completed status');
   });
 
   await suite.test('F1.3: Converts ISO UTC timestamps to PKT (Asia/Karachi) date and time format', async () => {

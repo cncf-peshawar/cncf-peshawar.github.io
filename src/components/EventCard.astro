@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { formatEventDateLabel, resolveEventStatus, CANCELED, UPCOMING } from '../lib/event-lifecycle.mjs';
 
 interface Props {
   event: CollectionEntry<'events'>;
@@ -10,12 +9,15 @@ const { event } = Astro.props;
 const { data, slug } = event;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-// Lifecycle is derived from the schedule, never read straight from frontmatter.
-const lifecycle = resolveEventStatus(event);
-const isUpcoming = lifecycle === UPCOMING;
-const isCanceled = lifecycle === CANCELED;
-
-const eventDate = formatEventDateLabel(data.date);
+// Format Date safely
+const parsedDate = new Date(data.date);
+const eventDate = !isNaN(parsedDate.getTime())
+  ? parsedDate.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    })
+  : (data.date || 'Date TBA');
 ---
 
 <article class="event-card">
@@ -26,10 +28,8 @@ const eventDate = formatEventDateLabel(data.date);
       <span class="event-card__time">{data.time}</span>
     </div>
     
-    {isUpcoming ? (
+    {data.status === 'upcoming' ? (
       <span class="badge badge--live">Upcoming Meetup {data.capacity ? `(Capacity: ${data.capacity})` : ''}</span>
-    ) : isCanceled ? (
-      <span class="badge">Canceled Event</span>
     ) : (
       <span class="badge">Completed Event</span>
     )}
@@ -60,7 +60,7 @@ const eventDate = formatEventDateLabel(data.date);
 
   <!-- Footer Actions -->
   <div class="event-card__actions">
-    {isUpcoming ? (
+    {data.status === 'upcoming' ? (
       <div class="event-card__rsvp-group">
         <a 
           href={data.rsvpUrl} 
@@ -223,9 +223,6 @@ const eventDate = formatEventDateLabel(data.date);
   }
 
   .event-card__detail-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);
     color: var(--color-accent);

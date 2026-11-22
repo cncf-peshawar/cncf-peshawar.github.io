@@ -1,0 +1,295 @@
+{
+  "1280_Pass_A": {
+    "pass": "Pass_A_Full_Motion",
+    "viewport": "1280x800",
+    "throttle": "4x",
+    "maxScroll": 3361,
+    "longtasks": [],
+    "frameDrops": [
+      {
+        "time": 2606,
+        "delta": 33,
+        "scrollY": 400
+      },
+      {
+        "time": 2706,
+        "delta": 67,
+        "scrollY": 400
+      },
+      {
+        "time": 2823,
+        "delta": 67,
+        "scrollY": 800
+      },
+      {
+        "time": 3089,
+        "delta": 33,
+        "scrollY": 1600
+      },
+      {
+        "time": 3139,
+        "delta": 33,
+        "scrollY": 2000
+      },
+      {
+        "time": 3339,
+        "delta": 33,
+        "scrollY": 2400
+      }
+    ]
+  },
+  "1280_Pass_B": {
+    "pass": "Pass_B_Reduced_Motion",
+    "viewport": "1280x800",
+    "throttle": "4x",
+    "maxScroll": 3361,
+    "longtasks": [
+      {
+        "startTime": 2143,
+        "duration": 170,
+        "name": "self",
+        "scrollY": 0,
+        "attribution": [
+          {
+            "name": "unknown",
+            "containerType": "window",
+            "containerSrc": "",
+            "containerId": "",
+            "containerName": ""
+          }
+        ]
+      }
+    ],
+    "frameDrops": [
+      {
+        "time": 2308,
+        "delta": 167,
+        "scrollY": 0
+      },
+      {
+        "time": 2375,
+        "delta": 67,
+        "scrollY": 0
+      },
+      {
+        "time": 2875,
+        "delta": 33,
+        "scrollY": 800
+      },
+      {
+        "time": 3658,
+        "delta": 33,
+        "scrollY": 3200
+      }
+    ]
+  },
+  "1280_Pass_C": {
+    "pass": "Pass_C_No_JS_Motion",
+    "viewport": "1280x800",
+    "throttle": "4x",
+    "maxScroll": 3361,
+    "longtasks": [
+      {
+        "startTime": 1755,
+        "duration": 118,
+        "name": "self",
+        "scrollY": 0,
+        "attribution": [
+          {
+            "name": "unknown",
+            "containerType": "window",
+            "containerSrc": "",
+            "containerId": "",
+            "containerName": ""
+          }
+        ]
+      }
+    ],
+    "frameDrops": [
+      {
+        "time": 1871,
+        "delta": 117,
+        "scrollY": 0
+      },
+      {
+        "time": 1921,
+        "delta": 50,
+        "scrollY": 0
+      },
+      {
+        "time": 2355,
+        "delta": 33,
+        "scrollY": 400
+      },
+      {
+        "time": 2388,
+        "delta": 33,
+        "scrollY": 400
+      },
+      {
+        "time": 2488,
+        "delta": 67,
+        "scrollY": 800
+      }
+    ]
+  },
+  "390_Pass_A": {
+    "pass": "Pass_A_Full_Motion",
+    "viewport": "390x844",
+    "throttle": "4x",
+    "maxScroll": 5400,
+    "longtasks": [],
+    "frameDrops": [
+      {
+        "time": 2334,
+        "delta": 33,
+        "scrollY": 0
+      },
+      {
+        "time": 4018,
+        "delta": 33,
+        "scrollY": 5200
+      }
+    ]
+  },
+  "390_Pass_B": {
+    "pass": "Pass_B_Reduced_Motion",
+    "viewport": "390x844",
+    "throttle": "4x",
+    "maxScroll": 5542,
+    "longtasks": [
+      {
+        "startTime": 1975,
+        "duration": 146,
+        "name": "self",
+        "scrollY": 0,
+        "attribution": [
+          {
+            "name": "unknown",
+            "containerType": "window",
+            "containerSrc": "",
+            "containerId": "",
+            "containerName": ""
+          }
+        ]
+      }
+    ],
+    "frameDrops": [
+      {
+        "time": 2120,
+        "delta": 150,
+        "scrollY": 0
+      },
+      {
+        "time": 2170,
+        "delta": 50,
+        "scrollY": 0
+      },
+      {
+        "time": 2203,
+        "delta": 33,
+        "scrollY": 0
+      },
+      {
+        "time": 2553,
+        "delta": 33,
+        "scrollY": 400
+      },
+      {
+        "time": 2586,
+        "delta": 33,
+        "scrollY": 400
+      },
+      {
+        "time": 3203,
+        "delta": 50,
+        "scrollY": 2400
+      },
+      {
+        "time": 3320,
+        "delta": 50,
+        "scrollY": 2800
+      },
+      {
+        "time": 3870,
+        "delta": 33,
+        "scrollY": 4400
+      },
+      {
+        "time": 3936,
+        "delta": 33,
+        "scrollY": 4800
+      }
+    ]
+  },
+  "390_Pass_C": {
+    "pass": "Pass_C_No_JS_Motion",
+    "viewport": "390x844",
+    "throttle": "4x",
+    "maxScroll": 5738,
+    "longtasks": [
+      {
+        "startTime": 1719,
+        "duration": 171,
+        "name": "self",
+        "scrollY": 0,
+        "attribution": [
+          {
+            "name": "unknown",
+            "containerType": "window",
+            "containerSrc": "",
+            "containerId": "",
+            "containerName": ""
+          }
+        ]
+      },
+      {
+        "startTime": 1891,
+        "duration": 57,
+        "name": "self",
+        "scrollY": 0,
+        "attribution": [
+          {
+            "name": "unknown",
+            "containerType": "window",
+            "containerSrc": "",
+            "containerId": "",
+            "containerName": ""
+          }
+        ]
+      }
+    ],
+    "frameDrops": [
+      {
+        "time": 1869,
+        "delta": 150,
+        "scrollY": 0
+      },
+      {
+        "time": 1969,
+        "delta": 100,
+        "scrollY": 0
+      },
+      {
+        "time": 2286,
+        "delta": 33,
+        "scrollY": 400
+      },
+      {
+        "time": 2419,
+        "delta": 33,
+        "scrollY": 800
+      },
+      {
+        "time": 2469,
+        "delta": 33,
+        "scrollY": 800
+      },
+      {
+        "time": 4102,
+        "delta": 33,
+        "scrollY": 5738
+      }
+    ]
+  }
+}

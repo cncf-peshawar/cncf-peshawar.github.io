@@ -17,7 +17,12 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  checkLinks
+  checkLinks,
+  parseArgs,
+  extractLinksFromHtml,
+  extractElementIdentifiers,
+  isExternalOrIgnored,
+  resolveTargetFile
 } from '../scripts/check-links.mjs';
 import { syncEvents } from '../scripts/sync-ocg-events.mjs';
 import { parseCfpIssue } from '../scripts/parse-cfp-issue.mjs';

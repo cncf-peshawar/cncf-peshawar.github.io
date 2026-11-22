@@ -3,7 +3,8 @@
  * CNCF Peshawar Automation Suite
  */
 
-import { spawnSync } from 'node:child_process';
+import assert from 'node:assert/strict';
+import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import YAML from 'yaml';
@@ -19,7 +20,7 @@ export const EventSchema = z.object({
   time: z.string().min(1),
   venue: z.string().min(1),
   location: z.string().default('Peshawar, KPK, Pakistan'),
-  status: z.enum(['upcoming', 'completed', 'canceled']).default('upcoming'),
+  status: z.enum(['upcoming', 'completed']).default('upcoming'),
   capacity: z.number().optional(),
   rsvpUrl: z.string().url(),
   lumaUrl: z.string().url().optional(),
@@ -254,15 +255,11 @@ export function verifyStaticLinks(dirPath) {
  * @param {import('node:child_process').SpawnSyncOptions} options 
  */
 export function runCommand(cmd, args = [], options = {}) {
-  const isWindows = process.platform === 'win32';
-  const isNpmOrNpx = cmd === 'npm' || cmd === 'npx';
-  const resolvedCmd = isWindows && isNpmOrNpx ? `${cmd}.cmd` : cmd;
-  const res = spawnSync(resolvedCmd, args, {
+  const res = spawnSync(cmd, args, {
     encoding: 'utf-8',
     cwd: options.cwd || process.cwd(),
     env: { ...process.env, ...options.env },
-    timeout: options.timeout || 120000,
-    shell: options.shell !== undefined ? options.shell : (isWindows && isNpmOrNpx)
+    timeout: options.timeout || 120000
   });
 
   return {
