@@ -1,6 +1,6 @@
 ---
 title: "The Cloud Native Launchpad: Docker, Kubernetes & Real Deployments"
-date: "2026-09-26"
+date: "2026-10-09"
 time: "07:00 PM - 09:00 PM PKT"
 venue: "Virtual event"
 location: "Online"
@@ -59,4 +59,3 @@ The session included a sample application deployment to Kubernetes, covering:
 - **Venue**: Virtual event, Online
 - **Admission**: 100% Free (General Admission)
 - **Official Platforms**: [Open Community Groups (OCG)](https://ocgroups.dev/cncf/group/6vwk2n4/event/wpm4sp7)
-
